@@ -3,36 +3,247 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Life & Skills | Umer Malik</title>
-<link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;600;700;800&display=swap" rel="stylesheet">
+<title>Life Skills | Umer Malik</title>
 <style>
-body{margin:0;font-family:'Segoe UI',sans-serif;background:#eaf2fb;color:#222;}
-header{position:relative;background:linear-gradient(90deg,#0a3d91,#005fa3,#0078D7);color:#fff;padding:20px 30px;border-radius:40px;margin:15px;box-shadow:0 4px 15px rgba(0,0,0,0.25);text-align:center;}
-.nav{position:absolute;bottom:15px;right:30px;display:flex;gap:10px;}
-.nav a{color:#fff;text-decoration:none;font-weight:800;font-size:1rem;padding:8px 20px;border-radius:25px;background:rgba(255,255,255,0.15);transition:all 0.3s ease;}
-.nav a:hover{background:#ffffff;color:#005fa3;transform:scale(1.08);}
-.hero h1{font-size:1.6rem;font-weight:800;letter-spacing:0.5px;margin:0 0 6px 0;}
-.hero p{font-size:0.95rem;opacity:0.95;margin:0;padding-bottom:25px;}
-.container{max-width:800px;margin:60px auto;display:flex;flex-direction:column;align-items:center;gap:18px;}
-a.card{display:block;width:85%;text-align:center;text-decoration:none;background:#ffffff;padding:18px 20px;font-weight:800;font-size:1.05rem;border-radius:18px;box-shadow:0 12px 25px rgba(0,0,0,0.18);transition:all .35s ease;border-left:8px solid #FFD700;border-right:8px solid #FFD700;color:#b8860b;}
-a.card:hover{transform:translateY(-8px) scale(1.03);box-shadow:0 20px 40px rgba(255,215,0,0.45);background:#fffdf2;}
-.footer-container {text-align:center;width:100%;margin:70px 0 30px 0;}
-footer{display:inline-block;text-align:center;border-top:3px solid #FFD700;padding:10px 25px;font-size:0.9rem;font-style:italic;font-weight:600;background:#f4f8fd;color:#444;border-radius:15px;box-shadow:0 4px 15px rgba(0,0,0,0.15);}
+:root{
+  --bg:#eaf4ff;
+  --bg2:#fff7df;
+  --primary:#8f6500;
+  --primary2:#c28a00;
+  --gold:#f4c542;
+  --gold2:#c28a00;
+  --orange:#ffb84d;
+  --text:#172033;
+  --muted:#5f6b7a;
+  --shadow:0 22px 55px rgba(143,101,0,0.18);
+}
+*{box-sizing:border-box;}
+html{
+  scrollbar-width:thin;
+  scrollbar-color:var(--gold2) rgba(143,101,0,0.18);
+}
+body{
+  margin:0;
+  font-family:"Segoe UI",Arial,sans-serif;
+  color:var(--text);
+  min-height:100vh;
+  background:
+    radial-gradient(circle at top left,#dbeafe 0,transparent 32%),
+    radial-gradient(circle at top right,#fff0b8 0,transparent 30%),
+    linear-gradient(135deg,var(--bg),var(--bg2));
+  overflow-x:hidden;
+}
+body::-webkit-scrollbar{width:11px;}
+body::-webkit-scrollbar-track{background:rgba(143,101,0,0.10);border-radius:999px;}
+body::-webkit-scrollbar-thumb{
+  background:linear-gradient(180deg,var(--gold),var(--orange),var(--gold2));
+  border-radius:999px;
+  border:3px solid rgba(255,255,255,0.75);
+}
+.wrapper{
+  width:min(1180px,92%);
+  margin:0 auto;
+  padding:18px 0 28px;
+}
+.top-nav{
+  display:flex;
+  justify-content:flex-end;
+  margin-bottom:6px;
+}
+.home-btn{
+  text-decoration:none;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  background:linear-gradient(135deg,#5b1d91,#7a2bc2);
+  color:#fff;
+  font-weight:800;
+  padding:12px 22px;
+  border-radius:999px;
+  box-shadow:0 14px 32px rgba(91,29,145,0.24);
+  transition:all .25s ease;
+}
+.home-btn:hover{
+  transform:translateY(-3px);
+  box-shadow:0 20px 42px rgba(91,29,145,0.34);
+}
+.hero{
+  text-align:center;
+  padding:0 18px 26px;
+}
+.hero h1{
+  margin:0;
+  font-size:clamp(46px,7vw,78px);
+  line-height:1;
+  color:var(--gold2);
+  font-weight:900;
+  letter-spacing:-1px;
+}
+.hero .cap{
+  font-size:48px;
+  display:inline-block;
+  margin-right:14px;
+  vertical-align:middle;
+}
+.hero p{
+  max-width:850px;
+  margin:28px auto 0;
+  color:#4e5868;
+  font-size:clamp(22px,3vw,38px);
+  line-height:1.35;
+}
+.section-card{
+  background:rgba(255,255,255,0.72);
+  border:1px solid rgba(194,138,0,0.18);
+  border-radius:34px;
+  padding:32px;
+  box-shadow:var(--shadow);
+  backdrop-filter:blur(14px);
+}
+.section-title{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  margin:0 0 26px;
+  color:var(--gold2);
+  font-size:clamp(30px,4vw,48px);
+  font-weight:900;
+  text-align:center;
+}
+.cards{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:22px;
+}
+.card{
+  position:relative;
+  display:flex;
+  align-items:center;
+  gap:18px;
+  text-decoration:none;
+  background:linear-gradient(180deg,#ffffff,#fffdf5);
+  color:var(--primary);
+  border-radius:24px;
+  padding:24px;
+  min-height:120px;
+  box-shadow:0 18px 42px rgba(143,101,0,0.16);
+  border:1px solid rgba(194,138,0,0.22);
+  border-left:8px solid var(--gold2);
+  overflow:hidden;
+  transition:all .25s ease;
+}
+.card::after{
+  content:"";
+  position:absolute;
+  right:-45px;
+  top:-45px;
+  width:120px;
+  height:120px;
+  border-radius:50%;
+  background:rgba(244,197,66,0.20);
+}
+.card:hover{
+  transform:translateY(-7px);
+  box-shadow:0 28px 62px rgba(143,101,0,0.26);
+  border-left-color:var(--gold);
+}
+.icon{
+  width:58px;
+  height:58px;
+  border-radius:18px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex:0 0 auto;
+  font-size:30px;
+  background:linear-gradient(135deg,var(--primary),var(--primary2));
+  color:#fff;
+  box-shadow:0 12px 24px rgba(143,101,0,0.22);
+  position:relative;
+  z-index:1;
+}
+.card-content{
+  position:relative;
+  z-index:1;
+}
+.card h2{
+  margin:0 0 7px;
+  font-size:21px;
+  color:var(--primary);
+}
+.card p{
+  margin:0;
+  color:var(--muted);
+  font-size:15px;
+  line-height:1.55;
+}
+.footer-container{
+  text-align:center;
+  margin:34px 0 0;
+}
+footer{
+  display:inline-block;
+  background:rgba(255,255,255,0.78);
+  border-top:3px solid var(--gold);
+  color:#46505f;
+  padding:12px 24px;
+  border-radius:18px;
+  font-size:14px;
+  font-weight:700;
+  font-style:italic;
+  box-shadow:0 12px 28px rgba(143,101,0,0.14);
+}
+@media(max-width:800px){
+  .cards{grid-template-columns:1fr;}
+  .section-card{padding:22px;}
+  .hero p{font-size:22px;}
+  .card{padding:20px;min-height:auto;}
+}
 </style>
 </head>
 <body>
-<header>
-  <div class="hero">
-    <h1>Life & Skills</h1>
-    <p>Productivity tips, personal development insights, and life skills.</p>
+<div class="wrapper">
+  <div class="top-nav">
+    <a class="home-btn" href="https://umeraio.github.io/home/">Home</a>
   </div>
-  <div class="nav"><a href="https://umeraio.github.io/home/">🏠 Home</a></div>
-</header>
-<div class="container">
-  <a href="https://umeraio.github.io/ramzan/" class="card">UK Ramzan Timetable 2026</a>
-  <a href="https://umeraio.github.io/donner/" class="card">The Ultimate Donner Wrap Secret</a>
-  <a href="https://umeraio.github.io/soup/" class="card">Authentic Desi Yakhni Soup Recipe</a>
+
+  <section class="hero">
+    <h1><span class="cap">🧪</span>Life Skills</h1>
+    <p>Productivity tips, personal development insights, and practical life skills.</p>
+  </section>
+
+  <section class="section-card">
+    <h2 class="section-title">Improve Life Skills</h2>
+
+    <div class="cards">
+      <a href="https://umeraio.github.io/ramzan/" class="card">
+        <span class="icon">🕌</span>
+        <span class="card-content">
+          <h2>UK Ramzan Timetable 2026</h2>
+          <p>A useful timetable resource for Ramzan planning in the UK.</p>
+        </span>
+      </a>
+      <a href="https://umeraio.github.io/donner/" class="card">
+        <span class="icon">🌯</span>
+        <span class="card-content">
+          <h2>The Ultimate Donner Wrap Secret</h2>
+          <p>A practical food guide for making a better donner wrap at home.</p>
+        </span>
+      </a>
+      <a href="https://umeraio.github.io/soup/" class="card">
+        <span class="icon">🍲</span>
+        <span class="card-content">
+          <h2>Authentic Desi Yakhni Soup Recipe</h2>
+          <p>A warm, traditional recipe guide for preparing desi yakhni soup.</p>
+        </span>
+      </a>
+    </div>
+  </section>
+
+  <div class="footer-container">
+    <footer>Crafted Through Research by Umer Malik</footer>
+  </div>
 </div>
-<div class="footer-container"><footer>Crafted Through Research by Umer Malik</footer></div>
 </body>
 </html>
