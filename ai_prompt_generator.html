@@ -1,0 +1,1684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Prompt Generator | Digital Portfolio Workshop</title>
+<style>
+:root{
+  --bg:#061323;
+  --bg2:#0a1f38;
+  --ink:#f7fbff;
+  --muted:#b8c6d9;
+  --gold:#f7c84b;
+  --gold2:#d99b1e;
+  --blue:#22a7ff;
+  --cyan:#66e3ff;
+  --purple:#9b6cff;
+  --green:#58d68d;
+  --red:#ff6b6b;
+  --workshop-blue:#123c8c;
+  --panel:rgba(255,255,255,.085);
+  --panel2:rgba(255,255,255,.13);
+  --line:rgba(255,255,255,.14);
+  --shadow:0 24px 80px rgba(0,0,0,.38);
+  --radius:24px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:"Segoe UI",Arial,sans-serif;
+  color:var(--ink);
+  background:
+    radial-gradient(circle at 10% 5%,rgba(34,167,255,.20),transparent 28%),
+    radial-gradient(circle at 95% 15%,rgba(247,200,75,.16),transparent 26%),
+    radial-gradient(circle at 50% 100%,rgba(155,108,255,.12),transparent 32%),
+    linear-gradient(135deg,var(--bg),var(--bg2));
+  overflow-x:hidden;
+}
+body:before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
+  background-size:42px 42px;
+  pointer-events:none;
+  mask-image:linear-gradient(to bottom,rgba(0,0,0,.85),transparent);
+}
+body::-webkit-scrollbar{width:12px}
+body::-webkit-scrollbar-track{background:#071323}
+body::-webkit-scrollbar-thumb{background:linear-gradient(var(--gold),var(--blue));border-radius:999px;border:3px solid #071323}
+.app{display:grid;grid-template-columns:310px 1fr;min-height:100vh}
+.sidebar{
+  position:sticky;top:0;height:100vh;overflow:auto;
+  background:rgba(2,12,25,.82);
+  border-right:1px solid var(--line);
+  backdrop-filter:blur(18px);
+  padding:20px 16px;
+  z-index:10;
+}
+.brand{
+  padding:18px;
+  border:1px solid rgba(247,200,75,.38);
+  background:linear-gradient(135deg,rgba(247,200,75,.17),rgba(34,167,255,.10));
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+}
+.brand h2{margin:0;font-size:21px;line-height:1.06}
+.brand p{margin:9px 0 0;color:var(--muted);font-size:13px;line-height:1.45}
+.nav{margin-top:18px;display:flex;flex-direction:column;gap:8px}
+.nav a{
+  color:var(--ink);text-decoration:none;
+  padding:12px 14px;border-radius:14px;
+  background:rgba(255,255,255,.055);
+  border:1px solid rgba(255,255,255,.08);
+  font-size:14px;transition:.25s;
+}
+.nav a:hover{background:rgba(34,167,255,.16);border-color:rgba(34,167,255,.5);transform:translateX(4px)}
+.side-note{
+  margin-top:16px;padding:14px;border-radius:16px;
+  color:var(--muted);font-size:12px;line-height:1.45;
+  border:1px solid rgba(255,255,255,.10);background:rgba(255,255,255,.045)
+}
+.main{padding:24px;max-width:1600px;width:100%;margin:0 auto}
+.topbar{
+  position:sticky;top:0;z-index:20;
+  display:flex;align-items:center;justify-content:space-between;gap:14px;
+  padding:12px 16px;margin-bottom:22px;
+  border:1px solid var(--line);border-radius:20px;
+  background:rgba(2,12,25,.86);backdrop-filter:blur(18px);
+  box-shadow:0 12px 32px rgba(0,0,0,.32);
+}
+.back-btn,.small-btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  text-decoration:none;border:0;cursor:pointer;border-radius:999px;
+  font-weight:800;transition:.25s;
+}
+.top-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.back-btn{
+  padding:12px 18px;color:#061323;
+  background:linear-gradient(135deg,var(--gold),var(--gold2));
+  box-shadow:0 10px 25px rgba(247,200,75,.22);
+}
+.small-btn{
+  padding:10px 14px;color:var(--ink);
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.15);
+}
+.back-btn:hover,.small-btn:hover{transform:translateY(-2px)}
+.top-title{font-weight:900;color:var(--gold);letter-spacing:.3px}
+.home-pill{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:44px;height:44px;border-radius:50%;
+  text-decoration:none;background:linear-gradient(135deg,#ffffff,#fff8e1);
+  border:2px solid var(--purple);box-shadow:0 0 0 3px rgba(247,200,75,.35);
+}
+.card{
+  background:linear-gradient(135deg,rgba(255,255,255,.10),rgba(255,255,255,.045));
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  backdrop-filter:blur(18px);
+}
+.hero{
+  min-height:430px;
+  display:grid;grid-template-columns:1.25fr .75fr;gap:22px;
+}
+.hero-main{padding:42px;position:relative;overflow:hidden}
+.hero-main:before{
+  content:"";position:absolute;right:-80px;top:-95px;width:330px;height:330px;
+  background:radial-gradient(circle,rgba(247,200,75,.36),transparent 65%);
+}
+.hero-main:after{
+  content:"";position:absolute;right:70px;bottom:35px;width:180px;height:180px;border-radius:50%;
+  border:1px solid rgba(102,227,255,.30);
+  box-shadow:0 0 70px rgba(34,167,255,.22), inset 0 0 40px rgba(247,200,75,.12);
+}
+.eyebrow{color:var(--gold);text-transform:uppercase;letter-spacing:3px;font-weight:900;font-size:13px}
+h1{font-size:clamp(42px,5vw,66px);line-height:.98;margin:14px 0 18px;letter-spacing:-2.2px}
+h1 span,.gold{color:var(--gold)}
+.hero-main p{font-size:20px;color:var(--muted);line-height:1.65;max-width:900px}
+.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.btn{
+  border:0;border-radius:999px;padding:13px 18px;font-weight:900;cursor:pointer;
+  color:#061323;background:linear-gradient(135deg,var(--gold),var(--gold2));
+  box-shadow:0 10px 25px rgba(247,200,75,.22);
+  transition:.25s;text-decoration:none;display:inline-flex;align-items:center;gap:8px;
+}
+.btn.secondary{background:rgba(255,255,255,.10);color:var(--ink);border:1px solid rgba(255,255,255,.18);box-shadow:none}
+.btn:hover{transform:translateY(-2px)}
+.workflow-strip{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:22px
+}
+.workflow-step{
+  padding:16px;border-radius:18px;background:rgba(255,255,255,.075);
+  border:1px solid rgba(255,255,255,.12)
+}
+.workflow-step strong{display:block;color:var(--gold);margin-bottom:5px}
+.workflow-step span{color:var(--muted);font-size:13px;line-height:1.4}
+.hero-side{padding:24px;display:flex;flex-direction:column;gap:14px}
+.score{
+  display:grid;place-items:center;text-align:center;min-height:205px;
+  background:radial-gradient(circle,rgba(34,167,255,.24),rgba(255,255,255,.055));
+  border-radius:20px;border:1px solid rgba(34,167,255,.28)
+}
+.score .num{font-size:72px;font-weight:1000;color:var(--gold);line-height:1}
+.score .label{color:var(--muted);font-weight:800}
+.progress-list{display:grid;gap:10px}
+.progress-item{display:grid;gap:6px}
+.progress-top{display:flex;justify-content:space-between;font-size:13px;color:var(--muted)}
+.bar{height:9px;background:rgba(255,255,255,.12);border-radius:999px;overflow:hidden}
+.fill{height:100%;background:linear-gradient(90deg,var(--blue),var(--gold));width:0%}
+.section{margin-top:26px;padding:28px;scroll-margin-top:95px}
+.section h2{font-size:34px;margin:0 0 10px}
+.section > p{color:var(--muted);line-height:1.65;margin-top:0}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:18px}
+.grid.two{grid-template-columns:repeat(2,1fr)}
+.grid.four{grid-template-columns:repeat(4,1fr)}
+.mini{
+  padding:20px;border-radius:18px;background:rgba(255,255,255,.07);
+  border:1px solid rgba(255,255,255,.11);
+}
+.mini h3{margin:0 0 8px;color:var(--gold)}
+.mini p,.mini li{color:var(--muted);line-height:1.5}
+.form-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.field{display:flex;flex-direction:column;gap:7px}
+label{font-weight:800;color:#eaf5ff;font-size:13px}
+input,textarea,select{
+  width:100%;border:1px solid rgba(255,255,255,.16);outline:none;
+  background:rgba(2,12,25,.55);color:var(--ink);
+  padding:13px 14px;border-radius:14px;font-family:inherit;font-size:14px;
+}
+textarea{min-height:130px;resize:vertical;line-height:1.5}
+input:focus,textarea:focus,select:focus{border-color:rgba(247,200,75,.7);box-shadow:0 0 0 4px rgba(247,200,75,.08)}
+.upload-box{
+  border:1px dashed rgba(247,200,75,.45);
+  border-radius:16px;padding:14px;background:rgba(247,200,75,.06);
+}
+.upload-box small{display:block;color:var(--muted);margin-top:7px;line-height:1.45}
+.field-note{display:block;font-size:12px;color:var(--muted);line-height:1.4;margin-top:2px;font-weight:600}
+.data-controls{
+  display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;
+  margin:14px 0 18px;padding:14px 16px;border-radius:18px;
+  background:rgba(247,200,75,.07);border:1px solid rgba(247,200,75,.22)
+}
+.data-controls strong{color:var(--gold)}
+.data-controls span{color:var(--muted);font-size:13px}
+.data-control-actions{display:flex;gap:10px;flex-wrap:wrap}
+.visually-hidden-file{display:none}
+.generator-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.prompt-card{
+  margin-top:18px;border-radius:20px;overflow:hidden;
+  border:1px solid rgba(255,255,255,.14);background:rgba(0,0,0,.20)
+}
+.prompt-card.collapsed .prompt-body{display:none}
+.prompt-head{
+  display:flex;justify-content:space-between;gap:12px;align-items:center;
+  padding:16px 18px;
+  background:linear-gradient(90deg,rgba(34,167,255,.22),rgba(247,200,75,.14));
+  border-bottom:1px solid rgba(255,255,255,.12)
+}
+.prompt-head h3{margin:0;font-size:20px}
+.prompt-tools{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.copy{
+  border:1px solid rgba(247,200,75,.65);
+  background:rgba(247,200,75,.16);color:var(--gold);
+  padding:10px 14px;border-radius:999px;font-weight:900;cursor:pointer;white-space:nowrap;
+}
+.collapse{
+  border:1px solid rgba(255,255,255,.18);
+  background:rgba(255,255,255,.08);color:var(--ink);
+  padding:10px 14px;border-radius:999px;font-weight:900;cursor:pointer;white-space:nowrap;
+}
+.copy.copied{background:rgba(87,214,141,.18);border-color:var(--green);color:var(--green)}
+.prompt-body{padding:18px;display:grid;grid-template-columns:1fr;gap:14px}
+.prompt-note{
+  color:var(--muted);line-height:1.55;
+  background:rgba(255,255,255,.055);
+  border:1px solid rgba(255,255,255,.10);
+  border-left:5px solid var(--gold);
+  border-radius:16px;
+  padding:14px 16px;
+}
+pre{
+  margin:0;white-space:pre-wrap;word-break:break-word;
+  background:#06101e;color:#edf5ff;
+  padding:18px;border-radius:16px;border:1px solid rgba(255,255,255,.12);
+  line-height:1.55;font-size:14px;max-height:620px;overflow:auto;
+}
+.how-to-panel{
+  margin-top:26px;padding:28px;
+}
+.how-to-grid{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:16px;
+}
+.how-to-card{
+  padding:20px;border-radius:18px;background:rgba(255,255,255,.07);
+  border:1px solid rgba(255,255,255,.11);
+}
+.how-to-card h3{margin:0 0 10px;color:var(--gold)}
+.how-to-card p,.how-to-card li{color:var(--muted);line-height:1.55}
+.how-to-card ol{margin:12px 0 0;padding-left:20px}
+.output{
+  margin-top:18px;display:none;
+}
+.output.show{display:block}
+.checklist{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:14px}
+.check{
+  display:flex;align-items:center;gap:10px;padding:12px 14px;
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);
+  border-radius:14px;color:var(--muted)
+}
+.check input{accent-color:#f7c84b;transform:scale(1.18);width:auto}
+.table{width:100%;border-collapse:collapse;margin-top:16px;overflow:hidden;border-radius:16px}
+.table th,.table td{padding:14px;border-bottom:1px solid rgba(255,255,255,.1);text-align:left}
+.table th{color:var(--gold);background:rgba(255,255,255,.07)}
+.table td{color:var(--muted)}
+.badges{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+.badge{padding:10px 13px;border-radius:999px;background:rgba(34,167,255,.13);border:1px solid rgba(34,167,255,.25);color:#dff6ff;font-weight:800}
+.footer{text-align:center;color:var(--muted);padding:32px}
+.footer strong{color:var(--gold);font-style:italic}
+.searchbox{
+  width:100%;padding:15px 18px;border-radius:999px;
+  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);
+  color:var(--ink);font-size:16px;outline:none
+}
+.tabs{display:flex;gap:10px;flex-wrap:wrap;margin:16px 0}
+.tab{
+  border:1px solid rgba(255,255,255,.14);
+  background:rgba(255,255,255,.07);color:var(--ink);
+  padding:10px 14px;border-radius:999px;font-weight:800;cursor:pointer;
+}
+.tab.active{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#061323}
+.hidden{display:none}
+.toast{
+  position:fixed;right:22px;bottom:22px;z-index:1000;
+  background:#06101e;color:var(--ink);border:1px solid rgba(247,200,75,.45);
+  padding:12px 16px;border-radius:16px;box-shadow:var(--shadow);display:none;
+}
+.toast.show{display:block}
+@media(max-width:1100px){
+  .app{grid-template-columns:1fr}
+  .sidebar{position:relative;height:auto;max-height:none}
+  .hero,.form-grid{grid-template-columns:1fr}
+  .grid,.grid.two,.grid.four,.workflow-strip,.how-to-grid{grid-template-columns:1fr}
+  .checklist{grid-template-columns:1fr}
+  .topbar{position:relative;flex-direction:column;align-items:flex-start}
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand">
+      <h2>AI Digital Portfolio Builder 3</h2>
+      <p>Career Intelligence Platform for CV tailoring, ATS optimisation, evidence building, interview preparation and portfolio development.</p>
+    </div>
+    <nav class="nav">
+      <a href="#workbench">AI Application Workbench</a>
+      <a href="#overview">Portfolio Overview</a>
+      <a href="#master">Master Prompt</a>
+      <a href="#cv">CV + Cover Letter</a>
+      <a href="#linkedin">LinkedIn Brand</a>
+      <a href="#projects">Projects Portfolio</a>
+      <a href="#github">GitHub Portfolio</a>
+      <a href="#website">Personal Website</a>
+      <a href="#video">3-5 Minute Video</a>
+      <a href="#ats">ATS Scanner</a>
+      <a href="#interview">Interview Intelligence</a>
+      <a href="#varcs">VARCS Evidence Check</a>
+      <a href="#jobs">JOBS Application Check</a>
+      <a href="#content">Content Engine</a>
+      <a href="#checklist">Final Checklist</a>
+    </nav>
+    <div class="side-note">
+      Privacy note: this page generates prompts in your browser. Review all uploaded or pasted text before copying it into any AI system.
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="topbar">
+      <div class="top-actions">
+        <a class="home-pill" href="digital_portfolio_workshop_slides_enhanced.html" title="Back to workshop">🏠</a>
+        <a class="back-btn" href="digital_portfolio_workshop_slides_enhanced.html">Back to Workshop</a>
+      </div>
+      <div class="top-title">Career Intelligence • ATS • Portfolio • Interview</div>
+      <button class="small-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})">Top</button>
+    </div>
+
+    <section class="hero">
+      <div class="hero-main card">
+        <div class="eyebrow">Complete AI Career Workbench</div>
+        <h1>Build, Tailor and Optimise Your <span>Digital Portfolio</span></h1>
+        <p>Paste your CV, cover letter and job description to generate professional AI prompts for CV updates, cover letters, ATS checks, job matching, evidence mapping, interview preparation and portfolio development.</p>
+        <div class="actions">
+          <a class="btn" href="#workbench">Open Workbench</a>
+          <button class="btn secondary" onclick="copyById('masterPrompt')">Copy Master Prompt</button>
+          <a class="btn secondary" href="#checklist">Open Checklist</a>
+        </div>
+        <div class="workflow-strip">
+          <div class="workflow-step"><strong>1. Paste</strong><span>Add your CV, cover letter, job description and evidence.</span></div>
+          <div class="workflow-step"><strong>2. Choose</strong><span>Select the prompt type you need for the task.</span></div>
+          <div class="workflow-step"><strong>3. Generate</strong><span>Create a tailored prompt using your real details.</span></div>
+          <div class="workflow-step"><strong>4. Copy</strong><span>Copy or download the prompt and use it in your AI tool.</span></div>
+        </div>
+      </div>
+      <div class="hero-side card">
+        <div class="score">
+          <div>
+            <div class="num" id="scoreNum">0%</div>
+            <div class="label">Career Readiness Score</div>
+          </div>
+        </div>
+        <div class="progress-list">
+          <div class="progress-item"><div class="progress-top"><span>CV</span><span id="p1">0%</span></div><div class="bar"><div class="fill" id="f1"></div></div></div>
+          <div class="progress-item"><div class="progress-top"><span>LinkedIn</span><span id="p2">0%</span></div><div class="bar"><div class="fill" id="f2"></div></div></div>
+          <div class="progress-item"><div class="progress-top"><span>GitHub</span><span id="p3">0%</span></div><div class="bar"><div class="fill" id="f3"></div></div></div>
+          <div class="progress-item"><div class="progress-top"><span>Website</span><span id="p4">0%</span></div><div class="bar"><div class="fill" id="f4"></div></div></div>
+          <div class="progress-item"><div class="progress-top"><span>Evidence</span><span id="p5">0%</span></div><div class="bar"><div class="fill" id="f5"></div></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="how-to-panel card">
+      <h2>How to Use This Page</h2>
+      <p style="color:var(--muted);line-height:1.65;margin-top:0">You can use this tool in two ways depending on how much detail you already have ready.</p>
+      <div class="how-to-grid">
+        <div class="how-to-card">
+          <h3>Option 1: Dynamic Prompt Generator</h3>
+          <p>Best when you want a prompt tailored to your own CV, cover letter, job description and evidence.</p>
+          <ol>
+            <li>Paste or upload your details in the AI Application Workbench.</li>
+            <li>Choose the prompt type you need from the Generate Prompts menu.</li>
+            <li>Click Generate Prompt.</li>
+            <li>Copy or download the tailored prompt and use it in your AI tool.</li>
+          </ol>
+        </div>
+        <div class="how-to-card">
+          <h3>Option 2: Manual Prompt Library</h3>
+          <p>Best when you want a ready-made prompt without filling in the workbench first.</p>
+          <ol>
+            <li>Scroll to the prompt library sections below.</li>
+            <li>Find the prompt that matches your task.</li>
+            <li>Open or collapse cards as needed.</li>
+            <li>Copy the prompt manually and add your own details before using it.</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <section id="workbench" class="section card">
+      <h2>AI Application Workbench</h2>
+      <p>Paste or upload your CV, cover letter and job description. Then generate a professional prompt pack tailored to the role. For best results, paste clean text from Word/PDF into the boxes below.</p>
+
+      <div class="tabs">
+        <button class="tab active" onclick="showTab('inputs', this)">1. Inputs</button>
+        <button class="tab" onclick="showTab('generate', this)">2. Generate Prompts</button>
+        <button class="tab" onclick="showTab('outputs', this)">3. Output</button>
+      </div>
+
+      <div class="data-controls">
+        <div>
+          <strong>Saved in this browser</strong><br>
+          <span id="saveStatus">Inputs auto-save locally as you type. Nothing is uploaded by this page.</span>
+        </div>
+        <div class="data-control-actions">
+          <button class="small-btn" onclick="exportInputs()">Export Inputs</button>
+          <button class="small-btn" onclick="document.getElementById('importInputsFile').click()">Import Inputs</button>
+          <button class="small-btn" onclick="clearSavedData()">Clear Saved Data</button>
+          <input id="importInputsFile" class="visually-hidden-file" type="file" accept=".json" onchange="importInputs(event)">
+        </div>
+      </div>
+
+      <div id="tab-inputs">
+        <div class="grid two">
+          <div class="mini">
+            <h3>Upload Text Files</h3>
+            <p>Optional: upload .txt versions of your CV, cover letter and job description. Word/PDF users should copy and paste text directly.</p>
+            <div class="upload-box">
+              <label>Upload CV Text File</label>
+              <input type="file" accept=".txt,.md" onchange="loadFileToTextarea(event,'cvText')">
+              <small>Accepted: .txt or .md</small>
+            </div>
+            <br>
+            <div class="upload-box">
+              <label>Upload Cover Letter Text File</label>
+              <input type="file" accept=".txt,.md" onchange="loadFileToTextarea(event,'coverText')">
+              <small>Accepted: .txt or .md</small>
+            </div>
+            <br>
+            <div class="upload-box">
+              <label>Upload Job Description Text File</label>
+              <input type="file" accept=".txt,.md" onchange="loadFileToTextarea(event,'jobText')">
+              <small>Accepted: .txt or .md</small>
+            </div>
+          </div>
+
+          <div class="mini">
+            <h3>User Details</h3>
+            <div class="form-grid">
+              <div class="field"><label>Name <span class="field-note">Required for personalised prompts</span></label><input id="name" placeholder="Your name"></div>
+              <div class="field"><label>Target Role <span class="field-note">Required</span></label><input id="role" placeholder="e.g. Cyber Security Analyst"></div>
+              <div class="field"><label>Industry / Sector <span class="field-note">Helpful</span></label><input id="industry" placeholder="e.g. IT, Education, Healthcare"></div>
+              <div class="field"><label>Company / Organisation</label><input id="company" placeholder="Optional"></div>
+              <div class="field"><label>LinkedIn</label><input id="linkedinUrl" placeholder="Optional link"></div>
+              <div class="field"><label>GitHub / Website</label><input id="portfolioUrl" placeholder="Optional link"></div>
+            </div>
+            <br>
+            <div class="field"><label>Career Goal</label><textarea id="careerGoal" placeholder="Explain your career goal and the type of role you want."></textarea></div>
+          </div>
+        </div>
+
+        <div class="grid two">
+          <div class="field"><label>Current CV Text</label><textarea id="cvText" placeholder="Paste your current CV text here."></textarea></div>
+          <div class="field"><label>Current Cover Letter Text</label><textarea id="coverText" placeholder="Paste your current cover letter here."></textarea></div>
+        </div>
+        <div class="field" style="margin-top:14px"><label>Job Description Text <span class="field-note">Best results: paste the full advert</span></label><textarea id="jobText" placeholder="Paste the full job description here, including essential criteria, responsibilities and person specification."></textarea></div>
+        <div class="field" style="margin-top:14px"><label>Key Achievements, Projects or Evidence <span class="field-note">Use real proof only</span></label><textarea id="evidenceText" placeholder="Paste project details, achievements, certificates, GitHub work, portfolio evidence or measurable results."></textarea></div>
+      </div>
+
+      <div id="tab-generate" class="hidden">
+        <div class="grid two">
+          <div class="mini">
+            <h3>Generate a Tailored Prompt</h3>
+            <p>Select what you want the AI to create from your details.</p>
+            <div class="field">
+              <label>Prompt Type</label>
+              <select id="promptType">
+                <option value="fullpack">Full Application Pack</option>
+                <option value="cvrewrite">Update My CV as per Job Description</option>
+                <option value="coverrewrite">Rewrite My Cover Letter</option>
+                <option value="ats">ATS Match and Keyword Analysis</option>
+                <option value="jdextract">Job Description Extraction</option>
+                <option value="evidence">Evidence Mapping Table</option>
+                <option value="gap">Career Gap Analysis</option>
+                <option value="interview">Interview Intelligence Pack</option>
+                <option value="video">3-5 Minute Video Script</option>
+                <option value="linkedin">LinkedIn Optimisation</option>
+              </select>
+            </div>
+            <div class="generator-actions">
+              <button class="btn" onclick="generateCustomPrompt()">Generate Prompt</button>
+              <button class="btn secondary" onclick="downloadPrompt()">Download TXT</button>
+              <button class="btn secondary" onclick="clearWorkbench()">Clear Workbench</button>
+            </div>
+          </div>
+          <div class="mini">
+            <h3>Professional Rules Used</h3>
+            <ul>
+              <li>No invented experience, qualifications, dates or achievements.</li>
+              <li>Use only the user-provided evidence.</li>
+              <li>Mark missing evidence clearly as a gap.</li>
+              <li>Optimise for ATS while keeping natural professional language.</li>
+              <li>Generate UK-style professional outputs unless the user requests otherwise.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div id="tab-outputs" class="hidden">
+        <div id="customOutput" class="output">
+          <div class="prompt-card">
+            <div class="prompt-head">
+              <h3 id="customTitle">Generated Professional Prompt</h3>
+              <div class="prompt-tools">
+                <button class="collapse" onclick="togglePromptCard(this)">Collapse</button>
+                <button class="copy" onclick="copyById('customPrompt', this)">Copy Prompt</button>
+              </div>
+            </div>
+            <div class="prompt-body">
+              <div class="prompt-note" id="customNote">Your customised prompt will appear here.</div>
+              <pre id="customPrompt"></pre>
+            </div>
+          </div>
+          <div class="data-controls">
+            <div>
+              <strong>Next step</strong><br>
+              <span>Copy this prompt into ChatGPT or another AI tool, review the output carefully, and keep only truthful evidence-based wording.</span>
+            </div>
+            <div class="data-control-actions">
+              <button class="small-btn" onclick="copyById('customPrompt')">Copy Again</button>
+              <button class="small-btn" onclick="downloadPrompt()">Download TXT</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="overview" class="section card">
+      <h2>Portfolio Overview</h2>
+      <p>A strong digital portfolio is not one document. It is a connected professional ecosystem that proves your skills, experience, projects, evidence and professionalism.</p>
+      <input id="search" class="searchbox" placeholder="Search prompts, e.g. CV, LinkedIn, GitHub, video, ATS..." oninput="filterPrompts()">
+      <div class="grid four">
+        <div class="mini"><h3>CV + Cover Letter</h3><p>ATS-friendly documents tailored to each role.</p></div>
+        <div class="mini"><h3>LinkedIn Brand</h3><p>Professional profile, headline, about section and featured work.</p></div>
+        <div class="mini"><h3>Project Evidence</h3><p>Case studies that show what you built, solved and learned.</p></div>
+        <div class="mini"><h3>Website + Video</h3><p>A personal website and 3-5 minute introduction video that tell your story.</p></div>
+      </div>
+    </section>
+
+    <section id="master" class="section card prompt-section">
+      <h2>Master AI Prompt</h2>
+      <p>Use this first. It helps AI understand your full background before creating individual portfolio materials.</p>
+      <div class="prompt-card">
+        <div class="prompt-head"><h3>Complete Digital Portfolio Strategy Prompt</h3><div class="prompt-tools"><button class="collapse" onclick="togglePromptCard(this)">Collapse</button><button class="copy" onclick="copyById('masterPrompt', this)">Copy Prompt</button></div></div>
+        <div class="prompt-body">
+          <div class="prompt-note"><strong>Use when:</strong> starting from scratch or planning your full portfolio.<br><br><strong>Prepare:</strong> qualifications, skills, experience, target role, projects, certificates, LinkedIn/GitHub links.</div>
+          <pre id="masterPrompt">Act as an expert career strategist, digital portfolio consultant, ATS CV writer, LinkedIn branding specialist and employability coach.
+
+I want to build a complete professional digital portfolio that helps me stand out in the job market.
+
+My details:
+Name:
+Target career field:
+Target job roles:
+Current qualifications:
+Certifications:
+Technical skills:
+Transferable skills:
+Work experience:
+Teaching/training/volunteer experience:
+Projects I have completed:
+Tools and technologies I can use:
+Achievements:
+LinkedIn profile link:
+GitHub profile link:
+Personal website link:
+Career goal for the next 12 months:
+
+Please create a complete digital portfolio plan for me.
+
+Include:
+1. My professional positioning statement
+2. Recommended CV structure
+3. Recommended LinkedIn headline and About section direction
+4. 5 project ideas I should showcase
+5. GitHub repository ideas
+6. Personal website structure
+7. A 3-5 minute introduction video structure
+8. Skills I should highlight
+9. Missing evidence I need to collect
+10. A 30-day action plan
+11. A portfolio checklist
+12. Suggestions to make my profile look professional, credible and employer-ready
+
+Write the answer clearly, professionally and step by step.</pre>
+        </div>
+      </div>
+    </section>
+
+    <section id="cv" class="section card prompt-section">
+      <h2>CV + Cover Letter Prompts</h2>
+      <div class="grid two">
+        <div class="prompt-card">
+          <div class="prompt-head"><h3>ATS-Friendly CV Builder</h3><div class="prompt-tools"><button class="collapse" onclick="togglePromptCard(this)">Collapse</button><button class="copy" onclick="copyById('cvPrompt', this)">Copy Prompt</button></div></div>
+          <div class="prompt-body">
+            <div class="prompt-note">Creates a professional CV using your background and target role.</div>
+            <pre id="cvPrompt">Act as an expert ATS CV writer and recruitment consultant.
+
+Create a professional ATS-friendly CV for me using the information below.
+
+My target role:
+Industry:
+Qualifications:
+Certifications:
+Work experience:
+Projects:
+Technical skills:
+Transferable skills:
+Achievements:
+Tools/software:
+Preferred CV style: modern, clear, professional and recruiter-friendly
+
+Requirements:
+1. Create a strong professional profile
+2. Use clear section headings
+3. Add skills matched to my target role
+4. Rewrite experience using achievement-focused bullet points
+5. Quantify impact wherever possible
+6. Include project evidence
+7. Keep it ATS-friendly with no tables or complex graphics
+8. Add keywords recruiters and ATS systems are likely to search for
+9. Make the CV suitable for UK employers
+10. Provide improvement suggestions at the end</pre>
+          </div>
+        </div>
+
+        <div class="prompt-card">
+          <div class="prompt-head"><h3>Tailored Cover Letter</h3><div class="prompt-tools"><button class="collapse" onclick="togglePromptCard(this)">Collapse</button><button class="copy" onclick="copyById('coverPrompt', this)">Copy Prompt</button></div></div>
+          <div class="prompt-body">
+            <div class="prompt-note">Use this after uploading or pasting a job description.</div>
+            <pre id="coverPrompt">Act as a professional cover letter writer.
+
+I will provide my CV details and a job description. Create a tailored cover letter for this specific role.
+
+My CV summary:
+[Paste CV summary here]
+
+Job description:
+[Paste job description here]
+
+Please write a cover letter that:
+1. Opens with a strong and professional introduction
+2. Shows genuine interest in the organisation and role
+3. Matches my experience to the job requirements
+4. Highlights my strongest skills and evidence
+5. Explains why I am suitable for the role
+6. Uses a confident but respectful tone
+7. Avoids generic wording
+8. Is suitable for UK employers
+9. Ends with a professional closing paragraph
+10. Keeps the length to approximately one page</pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="linkedin" class="section card prompt-section">
+      <h2>LinkedIn + Personal Brand Prompts</h2>
+      <div class="grid two">
+        <div class="prompt-card">
+          <div class="prompt-head"><h3>LinkedIn Profile Optimiser</h3><div class="prompt-tools"><button class="collapse" onclick="togglePromptCard(this)">Collapse</button><button class="copy" onclick="copyById('linkedinPrompt', this)">Copy Prompt</button></div></div>
+          <div class="prompt-body">
+            <div class="prompt-note">Improves headline, About, Featured, skills and recruiter visibility.</div>
+            <pre id="linkedinPrompt">Act as a LinkedIn personal branding expert and recruiter.
+
+Improve my LinkedIn profile for my chosen career.
+
+My target roles:
+My current headline:
+My current About section:
+My qualifications:
+My experience:
+My skills:
+My projects:
+My achievements:
+My target audience: recruiters, employers, professional contacts
+
+Please create:
+1. 10 strong LinkedIn headline options
+2. A professional About section
+3. A short first-person profile summary
+4. Featured section recommendations
+5. Skills to add
+6. Keywords to include for recruiter search
+7. Experience bullet points for LinkedIn
+8. A professional banner idea
+9. 10 LinkedIn post ideas to build my personal brand
+10. A weekly LinkedIn activity plan
+
+Make the tone professional, credible, clear and opportunity-focused.</pre>
+          </div>
+        </div>
+        <div class="prompt-card">
+          <div class="prompt-head"><h3>Personal Brand Statement</h3><div class="prompt-tools"><button class="collapse" onclick="togglePromptCard(this)">Collapse</button><button class="copy" onclick="copyById('brandPrompt', this)">Copy Prompt</button></div></div>
+          <div class="prompt-body">
+            <div class="prompt-note">Creates a concise brand message for CV, LinkedIn, website and video.</div>
+            <pre id="brandPrompt">Act as a personal branding strategist.
+
+Create a strong personal brand statement for me.
+
+My field:
+My strongest skills:
+My experience:
+My values:
+My target job roles:
+My key achievements:
+The type of problems I help solve:
+The audience I want to impress:
+
+Please create:
+1. A one-line professional brand statement
+2. A 50-word biography
+3. A 100-word biography
+4. A LinkedIn headline
+5. A website hero headline
+6. A short networking introduction
+7. A confident elevator pitch
+8. A professional tagline
+
+Make it authentic, clear, modern and suitable for a professional digital portfolio.</pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="section card prompt-section">
+      <h2>Projects + Evidence Portfolio Prompts</h2>
+      <p>Use the formula: <strong class="gold">Project Name - Goal - What I Did - Tools Used - Results - Lessons Learned</strong></p>
+      <div class="prompt-card">
+        <div class="prompt-head"><h3>Project Case Study Writer</h3><div class="prompt-tools"><button class="collapse" onclick="togglePromptCard(this)">Collapse</button><button class="copy" onclick="copyById('projectPrompt', this)">Copy Prompt</button></div></div>
+        <div class="prompt-body">
+          <div class="prompt-note">Turns rough project notes into a professional portfolio case study.</div>
+          <pre id="projectPrompt">Act as a professional portfolio case study writer.
+
+Turn my project notes into a strong portfolio case study.
+
+Project name:
+Project type:
+Goal of the project:
+Problem it solved:
+What I did:
+Tools and technologies used:
+Challenges faced:
+How I solved the challenges:
+Results or outcomes:
+Evidence available:
+What I learned:
+How this project relates to my target job:
+
+Please write the case study using this structure:
+1. Project title
+2. Short summary
+3. Problem or context
+4. My role
+5. Tools and technologies used
+6. Process and methodology
+7. Results and impact
+8. Evidence included
+9. Lessons learned
+10. Skills demonstrated
+11. How this project supports my career goal
+
+Make it clear, professional, evidence-based and suitable for a personal website, GitHub README and LinkedIn Featured section.</pre>
+        </div>
+      </div>
+    </section>
+
+    <section id="github" class="section card prompt-section">
+      <h2>GitHub Portfolio Prompts</h2>
+      <div class="grid two">
+        <div class="prompt-card">
+          <div class="prompt-head"><h3>Professional README Generator</h3><div class="prompt-tools"><button class="collapse" onclick="togglePromptCard(this)">Collapse</button><button class="copy" onclick="copyById('readmePrompt', this)">Copy Prompt</button></div></div>
+          <div class="prompt-body">
+            <div class="prompt-note">Creates a clean README that explains your project professionally.</div>
+            <pre id="readmePrompt">Act as a senior software documentation specialist.
+
+Create a professional GitHub README file for my project.
+
+Project name:
+Project summary:
+Problem solved:
+Main features:
+Technologies used:
+Installation steps:
+How to run the project:
+Screenshots or demo link:
+Project structure:
+What I learned:
+Future improvements:
+Licence:
+
+Please create:
+1. A clear project title
+2. Short project description
+3. Features list
+4. Technology stack
+5. Installation instructions
+6. Usage instructions
+7. Project structure
+8. Screenshots/demo section
+9. Learning outcomes
+10. Future improvements
+11. Professional closing note
+
+Make it beginner-friendly, clear, well-structured and employer-ready.</pre>
+          </div>
+        </div>
+        <div class="prompt-card">
+          <div class="prompt-head"><h3>Repository Structure Prompt</h3><div class="prompt-tools"><button class="collapse" onclick="togglePromptCard(this)">Collapse</button><button class="copy" onclick="copyById('repoPrompt', this)">Copy Prompt</button></div></div>
+          <div class="prompt-body">
+            <div class="prompt-note">Helps organise GitHub projects so they look professional.</div>
+            <pre id="repoPrompt">Act as a GitHub portfolio consultant.
+
+Help me structure my GitHub repository professionally.
+
+Project type:
+Programming language:
+Files I currently have:
+Target audience:
+Purpose of the project:
+
+Please recommend:
+1. Folder structure
+2. File names
+3. README sections
+4. Documentation files
+5. Example data folder if needed
+6. Screenshots/demo folder
+7. Licence file
+8. .gitignore suggestions
+9. Commit message examples
+10. How to describe the project on LinkedIn and my CV
+
+Make the repository look clean, professional and suitable for employers to review.</pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="website" class="section card prompt-section">
+      <h2>Personal Website Prompts</h2>
+      <div class="prompt-card">
+        <div class="prompt-head"><h3>Personal Portfolio Website Builder</h3><div class="prompt-tools"><button class="collapse" onclick="togglePromptCard(this)">Collapse</button><button class="copy" onclick="copyById('websitePrompt', this)">Copy Prompt</button></div></div>
+        <div class="prompt-body">
+          <div class="prompt-note">Creates the content structure for a modern personal portfolio website.</div>
+          <pre id="websitePrompt">Act as a professional web designer, UX writer and portfolio consultant.
+
+Create a complete personal portfolio website structure for me.
+
+My name:
+Target role:
+Professional headline:
+Short biography:
+Skills:
+Projects:
+GitHub link:
+LinkedIn link:
+CV download link:
+Certifications:
+Contact details:
+Preferred style: modern, clean, professional, mobile-friendly
+
+Please create:
+1. Homepage structure
+2. Hero headline and subtitle
+3. About section
+4. Skills section
+5. Projects section
+6. Downloads section
+7. Contact section
+8. Suggested navigation menu
+9. Website colour palette
+10. Typography recommendations
+11. Call-to-action buttons
+12. Short content for each section
+13. SEO title and description
+14. Tips to make the website professional and easy to scan
+
+Make it suitable for recruiters, employers and professional networking.</pre>
+        </div>
+      </div>
+    </section>
+
+    <section id="video" class="section card prompt-section">
+      <h2>3-5 Minute Introduction Video Prompt</h2>
+      <p>This section uses a longer video prompt because the final video should be professional, natural and detailed enough for a portfolio, interview preparation or job application.</p>
+      <div class="prompt-card">
+        <div class="prompt-head"><h3>3-5 Minute Professional Introduction Video Script</h3><div class="prompt-tools"><button class="collapse" onclick="togglePromptCard(this)">Collapse</button><button class="copy" onclick="copyById('videoPrompt', this)">Copy Prompt</button></div></div>
+        <div class="prompt-body">
+          <div class="prompt-note"><strong>Minimum length:</strong> 3-5 minutes.<br><br><strong>Purpose:</strong> help employers understand who you are, what you can do, what evidence you have, and what career direction you are pursuing.</div>
+          <pre id="videoPrompt">Act as a professional video scriptwriter, career coach and communication trainer.
+
+Create a natural, confident and professional 3-5 minute introduction video script for my digital portfolio.
+
+My details:
+Name:
+Current role or study area:
+Target career field:
+Target job roles:
+Qualifications:
+Certifications:
+Relevant experience:
+Technical skills:
+Transferable skills:
+Best projects:
+Achievements:
+Career goal:
+Personal strengths:
+Why I am interested in this field:
+What makes me different:
+LinkedIn/GitHub/website links to mention:
+Preferred tone: confident, professional, warm, natural and not robotic
+
+The video must be between 3 and 5 minutes when spoken clearly.
+
+Please structure the script as follows:
+1. Opening greeting - 15 to 20 seconds
+2. Professional background - 35 to 45 seconds
+3. Skills and strengths - 45 to 60 seconds
+4. Project evidence - 60 to 90 seconds
+5. Professional values and working style - 30 to 45 seconds
+6. Career goal and value to employers - 30 to 45 seconds
+7. Closing statement - 20 to 30 seconds
+
+Also include a 90-second version, rehearsal bullets, camera delivery tips, pacing tips, mistakes to avoid, background and lighting advice, and a final recording checklist.</pre>
+        </div>
+      </div>
+    </section>
+
+    <section id="ats" class="section card prompt-section">
+      <h2>ATS Scanner Prompt</h2>
+      <div class="prompt-card">
+        <div class="prompt-head"><h3>CV vs Job Description ATS Match</h3><div class="prompt-tools"><button class="collapse" onclick="togglePromptCard(this)">Collapse</button><button class="copy" onclick="copyById('atsPrompt', this)">Copy Prompt</button></div></div>
+        <div class="prompt-body">
+          <div class="prompt-note">Use this before applying for any role.</div>
+          <pre id="atsPrompt">Act as an ATS scanner and recruitment consultant.
+
+Compare my CV against the job description and give me an ATS match score from 0 to 100.
+
+My CV:
+[Paste CV here]
+
+Job description:
+[Paste job description here]
+
+Please provide:
+1. ATS score out of 100
+2. Missing keywords
+3. Skills matched
+4. Skills missing
+5. Experience gaps
+6. Suggested CV improvements
+7. Suggested professional profile rewrite
+8. Suggested bullet point improvements
+9. Keywords I should naturally add
+10. Final checklist before submitting
+
+Do not invent experience. Only suggest improvements based on my real background.</pre>
+        </div>
+      </div>
+    </section>
+
+    <section id="interview" class="section card prompt-section">
+      <h2>Interview Intelligence Centre</h2>
+      <div class="grid two">
+        <div class="prompt-card">
+          <div class="prompt-head"><h3>Mock Interview Generator</h3><div class="prompt-tools"><button class="collapse" onclick="togglePromptCard(this)">Collapse</button><button class="copy" onclick="copyById('mockPrompt', this)">Copy Prompt</button></div></div>
+          <div class="prompt-body">
+            <div class="prompt-note">Creates realistic interview questions and scoring guidance.</div>
+            <pre id="mockPrompt">Act as a professional interviewer for this role.
+
+Target role:
+Job description:
+My CV:
+My projects:
+My experience level:
+
+Generate:
+1. 20 common interview questions
+2. 20 role-specific technical questions
+3. 10 scenario-based questions
+4. 10 behavioural questions
+5. Strong answer guidance for each question
+6. Weak answer warnings
+7. A scoring rubric from 1 to 5
+8. Follow-up questions an interviewer may ask
+9. Preparation tips
+10. A final mock interview script
+
+Use the STAR method where suitable.</pre>
+          </div>
+        </div>
+        <div class="prompt-card">
+          <div class="prompt-head"><h3>STAR Answer Builder</h3><div class="prompt-tools"><button class="collapse" onclick="togglePromptCard(this)">Collapse</button><button class="copy" onclick="copyById('starPrompt', this)">Copy Prompt</button></div></div>
+          <div class="prompt-body">
+            <div class="prompt-note">Turns your experience into strong interview answers.</div>
+            <pre id="starPrompt">Act as an interview coach.
+
+Create STAR interview answers using my real experience.
+
+Question:
+My situation:
+Task:
+Action I took:
+Result:
+Skills demonstrated:
+What I learned:
+
+Please create:
+1. A concise STAR answer
+2. A stronger detailed STAR answer
+3. A version suitable for senior/professional roles
+4. Possible follow-up questions
+5. Mistakes to avoid when answering
+6. A final polished spoken version
+
+Keep the answer honest, clear and professional.</pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="varcs" class="section card prompt-section">
+      <h2>VARCS Evidence Check</h2>
+      <p>VARCS helps you check whether your portfolio evidence is Valid, Authentic, Reliable, Current and Sufficient.</p>
+      <div class="prompt-card">
+        <div class="prompt-head"><h3>VARCS Portfolio Evidence Review</h3><div class="prompt-tools"><button class="collapse" onclick="togglePromptCard(this)">Collapse</button><button class="copy" onclick="copyById('varcsPrompt', this)">Copy Prompt</button></div></div>
+        <div class="prompt-body">
+          <div class="prompt-note">Use this after building your CV, LinkedIn, GitHub and project evidence.</div>
+          <pre id="varcsPrompt">Act as a portfolio assessor and evidence quality reviewer.
+
+Review my digital portfolio using the VARCS framework.
+
+My target role:
+My CV:
+My LinkedIn profile summary:
+My GitHub/projects:
+My website content:
+My certificates:
+My project evidence:
+
+Assess my evidence against:
+V - Valid: Does the evidence directly relate to my target role?
+A - Authentic: Does the evidence look genuinely mine and clearly show my contribution?
+R - Reliable: Is the evidence consistent, well-documented and credible?
+C - Current: Is the evidence recent and relevant to current job-market expectations?
+S - Sufficient: Is there enough evidence to convince an employer?
+
+Please provide:
+1. A VARCS score for each area
+2. Strengths
+3. Weak evidence
+4. Missing evidence
+5. Recommended improvements
+6. Priority action list
+7. Final employer-readiness judgement</pre>
+        </div>
+      </div>
+    </section>
+
+    <section id="jobs" class="section card prompt-section">
+      <h2>JOBS Application Check</h2>
+      <p>Use JOBS before submitting: Job Match, Optimise, Back It Up, Submit Professionally.</p>
+      <div class="prompt-card">
+        <div class="prompt-head"><h3>JOBS Framework Application Review</h3><div class="prompt-tools"><button class="collapse" onclick="togglePromptCard(this)">Collapse</button><button class="copy" onclick="copyById('jobsPrompt', this)">Copy Prompt</button></div></div>
+        <div class="prompt-body">
+          <div class="prompt-note">Best used for the final review before applying.</div>
+          <pre id="jobsPrompt">Act as a recruitment consultant and application reviewer.
+
+Review my application using the JOBS framework.
+
+Job description:
+My CV:
+My cover letter:
+My LinkedIn profile:
+My project evidence:
+My GitHub/website links:
+
+Use this framework:
+J - Job Match: How well does my application match the specific role and company?
+O - Optimise: Have I used the right keywords, language and structure?
+B - Back It Up: Does every important claim have evidence, project proof, certificate or result?
+S - Submit Professionally: Are my files, formatting, tone, links and final presentation professional?
+
+Please provide:
+1. Score out of 100
+2. Strengths
+3. Weaknesses
+4. Missing keywords
+5. Claims that need evidence
+6. Suggested CV edits
+7. Suggested cover letter edits
+8. Final submission checklist
+9. Whether I should submit now or improve first</pre>
+        </div>
+      </div>
+    </section>
+
+    <section id="content" class="section card prompt-section">
+      <h2>Content Creation Engine</h2>
+      <div class="grid two">
+        <div class="prompt-card">
+          <div class="prompt-head"><h3>LinkedIn Post Generator</h3><div class="prompt-tools"><button class="collapse" onclick="togglePromptCard(this)">Collapse</button><button class="copy" onclick="copyById('postPrompt', this)">Copy Prompt</button></div></div>
+          <div class="prompt-body">
+            <div class="prompt-note">Build visibility by sharing your learning, projects and insights.</div>
+            <pre id="postPrompt">Act as a LinkedIn content strategist.
+
+Create professional LinkedIn posts that build my personal brand.
+
+My field:
+My target audience:
+My recent project:
+My key lesson:
+My professional goal:
+Tone: professional, helpful, reflective and credible
+
+Create:
+1. 10 LinkedIn post ideas
+2. 3 full LinkedIn posts
+3. 1 project announcement post
+4. 1 learning reflection post
+5. 1 career goal post
+6. Suggested hashtags
+7. A weekly posting plan
+
+Avoid exaggeration. Make the posts sound human, professional and authentic.</pre>
+          </div>
+        </div>
+        <div class="prompt-card">
+          <div class="prompt-head"><h3>Professional Article Prompt</h3><div class="prompt-tools"><button class="collapse" onclick="togglePromptCard(this)">Collapse</button><button class="copy" onclick="copyById('articlePrompt', this)">Copy Prompt</button></div></div>
+          <div class="prompt-body">
+            <div class="prompt-note">Use for portfolio articles, blogs and thought leadership.</div>
+            <pre id="articlePrompt">Act as a professional article writer and subject specialist.
+
+Write a clear, high-quality article for my digital portfolio.
+
+Topic:
+Target audience:
+Purpose:
+My viewpoint:
+Examples I want included:
+My experience connected to the topic:
+Preferred length:
+Tone: professional, human, practical and evidence-informed
+
+Structure:
+1. Strong title
+2. Opening hook
+3. Why the topic matters
+4. Main explanation
+5. Real-world examples
+6. Practical recommendations
+7. What I learned
+8. Key takeaway
+9. Closing reflection
+
+Make it suitable for my personal website and LinkedIn.</pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="checklist" class="section card">
+      <h2>Final Digital Portfolio Checklist</h2>
+      <p>Tick each item as you complete it. Your readiness score updates automatically and saves in your browser.</p>
+      <div class="checklist">
+        <label class="check"><input type="checkbox" data-group="1" onchange="updateScore()"> ATS-friendly CV completed</label>
+        <label class="check"><input type="checkbox" data-group="1" onchange="updateScore()"> Tailored cover letter template completed</label>
+        <label class="check"><input type="checkbox" data-group="2" onchange="updateScore()"> LinkedIn photo, headline and About section updated</label>
+        <label class="check"><input type="checkbox" data-group="2" onchange="updateScore()"> Featured section contains best evidence</label>
+        <label class="check"><input type="checkbox" data-group="3" onchange="updateScore()"> GitHub profile updated</label>
+        <label class="check"><input type="checkbox" data-group="3" onchange="updateScore()"> At least 3 repositories documented</label>
+        <label class="check"><input type="checkbox" data-group="4" onchange="updateScore()"> Personal website structure completed</label>
+        <label class="check"><input type="checkbox" data-group="4" onchange="updateScore()"> Contact and download links added</label>
+        <label class="check"><input type="checkbox" data-group="5" onchange="updateScore()"> At least 3 project case studies written</label>
+        <label class="check"><input type="checkbox" data-group="5" onchange="updateScore()"> 3-5 minute introduction video recorded</label>
+        <label class="check"><input type="checkbox" data-group="5" onchange="updateScore()"> VARCS evidence check completed</label>
+        <label class="check"><input type="checkbox" data-group="5" onchange="updateScore()"> JOBS application check completed</label>
+      </div>
+      <div class="badges">
+        <span class="badge">CV Ready</span>
+        <span class="badge">LinkedIn Optimised</span>
+        <span class="badge">GitHub Published</span>
+        <span class="badge">Website Live</span>
+        <span class="badge">Video Recorded</span>
+        <span class="badge">VARCS Approved</span>
+        <span class="badge">JOBS Ready</span>
+      </div>
+    </section>
+
+    <section class="section card">
+      <h2>AI Tool Recommendations</h2>
+      <table class="table">
+        <tr><th>Task</th><th>Recommended AI Tool</th><th>Best Use</th></tr>
+        <tr><td>CV and Cover Letter</td><td>ChatGPT</td><td>Writing, tailoring, restructuring and professional tone.</td></tr>
+        <tr><td>Research</td><td>Perplexity</td><td>Researching companies, roles and industry trends.</td></tr>
+        <tr><td>Coding</td><td>GitHub Copilot</td><td>Code suggestions, documentation and project ideas.</td></tr>
+        <tr><td>Website Content</td><td>ChatGPT</td><td>Website copy, page structure and project case studies.</td></tr>
+        <tr><td>Portfolio Visuals</td><td>ChatGPT Images / Canva</td><td>Images, banners, diagrams and polished presentation visuals.</td></tr>
+      </table>
+    </section>
+
+    <div class="footer">
+      Crafted & Researched by <strong>Umer Malik</strong>
+    </div>
+  </main>
+</div>
+<div class="toast" id="toast">Copied</div>
+
+<script>
+const fieldsToSave=['name','role','industry','company','linkedinUrl','portfolioUrl','careerGoal','cvText','coverText','jobText','evidenceText'];
+function get(id){return document.getElementById(id).value.trim();}
+function safe(value){return value || '[Not provided]';}
+function toast(msg){
+  const t=document.getElementById('toast');
+  t.innerText=msg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),1600);
+}
+function copyById(id, btn){
+  const el=document.getElementById(id);
+  if(!el)return;
+  const text=el.innerText;
+  const markCopied=()=>{
+    if(btn){
+      const old=btn.innerText;
+      btn.innerText='Copied!';
+      btn.classList.add('copied');
+      setTimeout(()=>{btn.innerText=old;btn.classList.remove('copied')},1600);
+    }
+    toast('Prompt copied');
+  };
+  if(navigator.clipboard && window.isSecureContext){
+    navigator.clipboard.writeText(text).then(markCopied).catch(()=>fallbackCopy(text, markCopied));
+  }else{
+    fallbackCopy(text, markCopied);
+  }
+}
+function fallbackCopy(text, callback){
+  const area=document.createElement('textarea');
+  area.value=text;
+  area.setAttribute('readonly','');
+  area.style.position='fixed';
+  area.style.left='-9999px';
+  document.body.appendChild(area);
+  area.select();
+  document.execCommand('copy');
+  area.remove();
+  callback();
+}
+function togglePromptCard(btn){
+  const card=btn.closest('.prompt-card');
+  card.classList.toggle('collapsed');
+  btn.innerText=card.classList.contains('collapsed')?'Expand':'Collapse';
+}
+function showTab(name,btn){
+  ['inputs','generate','outputs'].forEach(x=>document.getElementById('tab-'+x).classList.add('hidden'));
+  document.getElementById('tab-'+name).classList.remove('hidden');
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+}
+function loadFileToTextarea(event,id){
+  const file=event.target.files[0];
+  if(!file)return;
+  const reader=new FileReader();
+  reader.onload=function(e){
+    document.getElementById(id).value=e.target.result;
+    saveWorkbench();
+    toast('File loaded');
+  };
+  reader.readAsText(file);
+}
+function baseContext(){
+  return `USER DETAILS
+Name: ${safe(get('name'))}
+Target role: ${safe(get('role'))}
+Industry or sector: ${safe(get('industry'))}
+Company or organisation: ${safe(get('company'))}
+LinkedIn: ${safe(get('linkedinUrl'))}
+GitHub / website / portfolio: ${safe(get('portfolioUrl'))}
+Career goal: ${safe(get('careerGoal'))}
+
+CURRENT CV
+${safe(get('cvText'))}
+
+CURRENT COVER LETTER
+${safe(get('coverText'))}
+
+JOB DESCRIPTION
+${safe(get('jobText'))}
+
+KEY ACHIEVEMENTS, PROJECTS OR EVIDENCE
+${safe(get('evidenceText'))}
+
+IMPORTANT PROFESSIONAL RULES
+- Do not invent qualifications, employers, dates, certifications, achievements, metrics or experience.
+- Use only the information provided by the user.
+- If evidence is missing, identify it as a gap rather than creating false claims.
+- Improve wording, structure, ATS alignment and professional presentation.
+- Keep the tone professional, credible, clear and suitable for UK job applications unless another country is specified.
+`;
+}
+function promptTemplate(type){
+  const ctx=baseContext();
+  const map={
+    fullpack:`Act as an expert career strategist, ATS CV writer, cover letter specialist, LinkedIn branding consultant, interview coach and digital portfolio assessor.
+
+Using the user details below, create a complete tailored application and portfolio improvement pack.
+
+${ctx}
+
+DELIVER:
+1. Tailored CV improvement plan
+2. Rewritten professional CV profile
+3. Rewritten skills section matched to the job description
+4. Improved achievement-focused CV bullet points
+5. Tailored cover letter
+6. ATS keyword analysis
+7. Job description requirements extraction
+8. Evidence matching table with columns: Job Requirement, My Evidence, CV Section, Strength, Improvement Needed
+9. Career gap analysis
+10. LinkedIn headline and About section updates
+11. GitHub or portfolio evidence recommendations
+12. 10 likely interview questions
+13. 5 STAR answer themes based only on real evidence
+14. 3-5 minute introduction video structure
+15. Final submission checklist
+16. Overall readiness score out of 100
+
+Be professional, honest, detailed and practical.`,
+    cvrewrite:`Act as an expert ATS CV writer and recruitment consultant.
+
+Update and improve my CV for the specific job description below.
+
+${ctx}
+
+TASK:
+1. Analyse the job description and extract key requirements.
+2. Compare my CV against the job description.
+3. Rewrite my professional profile for this exact role.
+4. Rewrite my skills section using relevant ATS keywords.
+5. Rewrite my experience bullets so they are achievement-focused and employer-relevant.
+6. Add project/evidence wording where appropriate.
+7. Remove weak or generic wording.
+8. Suggest what evidence is missing.
+9. Provide a final improved CV draft in a clean ATS-friendly structure.
+10. Provide an ATS match score before and after improvements.
+
+Do not invent experience. If evidence is missing, mark it as a gap.`,
+    coverrewrite:`Act as a professional UK cover letter writer and recruitment consultant.
+
+Rewrite my cover letter for the specific job below.
+
+${ctx}
+
+TASK:
+1. Analyse the job role and company requirements.
+2. Rewrite the cover letter so it is specific, professional and evidence-based.
+3. Match my experience and skills to the employer's needs.
+4. Add a strong opening paragraph.
+5. Add a role-specific middle section.
+6. Add a confident closing paragraph.
+7. Keep it approximately one page.
+8. Avoid generic phrases and exaggerated claims.
+9. Provide a short explanation of what was improved.
+10. Provide a final checklist before submission.
+
+Do not invent evidence or achievements.`,
+    ats:`Act as an ATS scanner and recruitment consultant.
+
+Compare my CV and cover letter against the job description.
+
+${ctx}
+
+PROVIDE:
+1. ATS score out of 100
+2. Skills match score
+3. Experience match score
+4. Qualification match score
+5. Keyword match score
+6. Missing keywords
+7. Strong matching evidence
+8. Weak or missing evidence
+9. Suggested CV edits
+10. Suggested cover letter edits
+11. Claims that need proof
+12. Final submission recommendation: submit now, improve first, or not suitable yet.`,
+    jdextract:`Act as a job description analyst and recruiter.
+
+Analyse the job description below and extract everything I need to target the application.
+
+${ctx}
+
+CREATE:
+1. Essential criteria
+2. Desirable criteria
+3. Main responsibilities
+4. Technical skills
+5. Transferable skills
+6. Leadership or communication requirements
+7. ATS keywords
+8. Hidden employer priorities
+9. Evidence I need to show
+10. Questions I should prepare for interview
+11. CV sections that should be tailored
+12. Cover letter themes I should mention.`,
+    evidence:`Act as a portfolio assessor and evidence mapping specialist.
+
+Map my CV, cover letter and project evidence against the job description.
+
+${ctx}
+
+CREATE A TABLE WITH THESE COLUMNS:
+1. Job Requirement
+2. Evidence From My CV
+3. Evidence From Projects/Achievements
+4. Suggested CV Section
+5. Strength Level: Strong / Medium / Weak / Missing
+6. Improvement Needed
+7. Suggested Wording
+
+Also provide:
+- Top 5 strongest evidence points
+- Top 5 evidence gaps
+- Recommended project evidence to create
+- Final readiness judgement.`,
+    gap:`Act as a career gap analyst and professional development adviser.
+
+Compare my current profile with the target role.
+
+${ctx}
+
+PROVIDE:
+1. Current strengths
+2. Missing skills
+3. Missing certifications or training
+4. Missing project evidence
+5. Missing ATS keywords
+6. Missing industry experience
+7. Risks in my current application
+8. 30-day improvement plan
+9. 90-day development plan
+10. Recommended portfolio projects
+11. Recommended LinkedIn content ideas
+12. Competitiveness score out of 100.`,
+    interview:`Act as a senior interviewer and interview coach.
+
+Create an interview preparation pack for this job.
+
+${ctx}
+
+GENERATE:
+1. 20 common interview questions
+2. 20 role-specific questions
+3. 10 scenario questions
+4. 10 behavioural questions
+5. 10 technical questions where relevant
+6. Strong answer guidance for each category
+7. STAR answer themes based only on my real evidence
+8. Weak answer warnings
+9. Follow-up questions I may be asked
+10. Interview scoring rubric
+11. Final preparation checklist.`,
+    video:`Act as a professional video scriptwriter, communication coach and career adviser.
+
+Create a natural 3-5 minute professional introduction video script for my digital portfolio and job applications.
+
+${ctx}
+
+REQUIREMENTS:
+1. The script must last 3-5 minutes when spoken clearly.
+2. It must sound natural, confident, professional and human.
+3. It must link my background to the target role.
+4. It must include real project or evidence points only.
+5. It must avoid exaggerated claims.
+
+STRUCTURE:
+1. Opening greeting - 15 to 20 seconds
+2. Professional background - 35 to 45 seconds
+3. Skills and strengths - 45 to 60 seconds
+4. Project evidence - 60 to 90 seconds
+5. Professional values and working style - 30 to 45 seconds
+6. Career goal and value to employers - 30 to 45 seconds
+7. Closing statement - 20 to 30 seconds
+
+Also include:
+- 90-second shorter version
+- Rehearsal bullet version
+- Camera delivery tips
+- Voice and pacing tips
+- Mistakes to avoid
+- Recording checklist.`,
+    linkedin:`Act as a LinkedIn personal branding expert and recruiter.
+
+Optimise my LinkedIn profile for the target role.
+
+${ctx}
+
+CREATE:
+1. 10 LinkedIn headline options
+2. A professional About section
+3. Experience section bullet improvements
+4. Featured section recommendations
+5. Skills list matched to the job description
+6. Search keywords recruiters may use
+7. 10 LinkedIn post ideas
+8. Project announcement post
+9. Career goal post
+10. Recruiter first-impression review.`
+  };
+  return map[type] || map.fullpack;
+}
+function generateCustomPrompt(){
+  const type=document.getElementById('promptType').value;
+  const titleMap={
+    fullpack:'Full Application Pack Prompt',
+    cvrewrite:'CV Update Prompt - Tailored to Job Description',
+    coverrewrite:'Cover Letter Rewrite Prompt',
+    ats:'ATS Match and Keyword Analysis Prompt',
+    jdextract:'Job Description Extraction Prompt',
+    evidence:'Evidence Mapping Table Prompt',
+    gap:'Career Gap Analysis Prompt',
+    interview:'Interview Intelligence Pack Prompt',
+    video:'3-5 Minute Video Script Prompt',
+    linkedin:'LinkedIn Optimisation Prompt'
+  };
+  const noteMap={
+    fullpack:'Generates CV, cover letter, ATS, evidence, LinkedIn, interview and video guidance from one input set.',
+    cvrewrite:'Use this to ask AI to update your CV based on the job description.',
+    coverrewrite:'Use this to tailor your cover letter professionally.',
+    ats:'Use this before applying to check keyword and requirement alignment.',
+    jdextract:'Use this to understand what the employer is really asking for.',
+    evidence:'Use this to map your evidence against the job requirements.',
+    gap:'Use this to identify what is missing from your profile.',
+    interview:'Use this to prepare for interviews using your own CV and the job description.',
+    video:'Use this to generate a 3-5 minute professional introduction video script.',
+    linkedin:'Use this to align your LinkedIn profile with your target role.'
+  };
+  document.getElementById('customTitle').innerText=titleMap[type];
+  document.getElementById('customNote').innerText=noteMap[type];
+  document.getElementById('customPrompt').innerText=promptTemplate(type);
+  document.getElementById('customOutput').classList.add('show');
+  showTab('outputs', document.querySelectorAll('.tab')[2]);
+  saveWorkbench();
+  toast('Prompt generated');
+}
+function downloadPrompt(){
+  const text=document.getElementById('customPrompt').innerText || promptTemplate(document.getElementById('promptType').value);
+  const blob=new Blob([text],{type:'text/plain;charset=utf-8'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='AI_Digital_Portfolio_Custom_Prompt.txt';
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(a.href);
+}
+function clearWorkbench(){
+  if(!confirm('Clear all workbench fields?'))return;
+  fieldsToSave.forEach(id=>document.getElementById(id).value='');
+  localStorage.removeItem('portfolioWorkbenchV3');
+  const status=document.getElementById('saveStatus');
+  if(status)status.innerText='Saved inputs cleared from this browser.';
+  toast('Workbench cleared');
+}
+function saveWorkbench(){
+  const data={};
+  fieldsToSave.forEach(id=>data[id]=document.getElementById(id).value);
+  localStorage.setItem('portfolioWorkbenchV3',JSON.stringify(data));
+  const status=document.getElementById('saveStatus');
+  if(status)status.innerText='Saved locally in this browser just now.';
+}
+function loadWorkbench(){
+  try{
+    const data=JSON.parse(localStorage.getItem('portfolioWorkbenchV3')||'{}');
+    fieldsToSave.forEach(id=>{
+      if(data[id])document.getElementById(id).value=data[id];
+      const el=document.getElementById(id);
+      if(el)el.addEventListener('input',saveWorkbench);
+    });
+    if(Object.keys(data).length){
+      const status=document.getElementById('saveStatus');
+      if(status)status.innerText='Saved inputs restored from this browser.';
+    }
+  }catch(e){}
+}
+function exportInputs(){
+  const data={};
+  fieldsToSave.forEach(id=>data[id]=document.getElementById(id).value);
+  const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='ai-prompt-generator-inputs.json';
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(a.href);
+  toast('Inputs exported');
+}
+function importInputs(event){
+  const file=event.target.files[0];
+  if(!file)return;
+  const reader=new FileReader();
+  reader.onload=()=>{
+    try{
+      const data=JSON.parse(reader.result);
+      fieldsToSave.forEach(id=>{
+        if(typeof data[id]==='string')document.getElementById(id).value=data[id];
+      });
+      saveWorkbench();
+      toast('Inputs imported');
+    }catch(e){
+      toast('Import failed');
+    }
+    event.target.value='';
+  };
+  reader.readAsText(file);
+}
+function clearSavedData(){
+  localStorage.removeItem('portfolioWorkbenchV3');
+  localStorage.removeItem('portfolioChecklistV3');
+  document.querySelectorAll('.check input').forEach(box=>box.checked=false);
+  updateScore();
+  const status=document.getElementById('saveStatus');
+  if(status)status.innerText='Saved browser data cleared. Current text remains until you clear the workbench.';
+  toast('Saved data cleared');
+}
+function updateScore(){
+  const boxes=[...document.querySelectorAll('.check input')];
+  const checked=boxes.filter(b=>b.checked).length;
+  const total=boxes.length;
+  const score=Math.round((checked/total)*100);
+  document.getElementById('scoreNum').innerText=score+'%';
+  for(let i=1;i<=5;i++){
+    const group=boxes.filter(b=>b.dataset.group==i);
+    const done=group.filter(b=>b.checked).length;
+    const pct=group.length?Math.round((done/group.length)*100):0;
+    document.getElementById('p'+i).innerText=pct+'%';
+    document.getElementById('f'+i).style.width=pct+'%';
+  }
+  localStorage.setItem('portfolioChecklistV3',JSON.stringify(boxes.map(b=>b.checked)));
+}
+function loadChecklist(){
+  try{
+    const saved=JSON.parse(localStorage.getItem('portfolioChecklistV3')||'[]');
+    document.querySelectorAll('.check input').forEach((b,i)=>b.checked=!!saved[i]);
+  }catch(e){}
+}
+function filterPrompts(){
+  const q=document.getElementById('search').value.toLowerCase().trim();
+  document.querySelectorAll('.prompt-section').forEach(sec=>{
+    const text=sec.innerText.toLowerCase();
+    sec.style.display=(!q || text.includes(q))?'block':'none';
+  });
+}
+loadWorkbench();
+loadChecklist();
+updateScore();
+</script>
+</body>
+</html>
