@@ -1,9 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="en-GB">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Careers Fair Digital Portfolio Workshop - Digital Portfolio Presentation</title>
+    <title>Professional Digital Portfolio Workshop | Careers Fair Slide Deck</title>
     <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -315,15 +316,67 @@
             line-height: 1.65;
         }
 
-        .prompt-container::before {
-            content: "💡 AI GENERATOR PROMPT";
-            display: block;
-            color: #94A3B8;
-            font-family: sans-serif;
-            font-size: 0.75rem;
-            font-weight: 700;
-            margin-bottom: 8px;
-            letter-spacing: 0.5px;
+        .prompt-card .prompt-container {
+            margin: 0;
+        }
+
+        .prompt-card {
+            background: linear-gradient(135deg, #FFFFFF 0%, #F6F9FF 100%);
+            border: 1px solid rgba(37, 99, 235, 0.16);
+            border-radius: 20px;
+            padding: 18px;
+            margin: 22px 0;
+            box-shadow: 0 14px 32px rgba(7, 26, 61, 0.10);
+        }
+
+        .prompt-card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 14px;
+            margin-bottom: 12px;
+        }
+
+        .prompt-card-header h4 {
+            color: var(--primary-blue);
+            font-size: 1.05rem;
+            margin: 0;
+            line-height: 1.35;
+        }
+
+        .copy-prompt-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border: 0;
+            border-radius: 999px;
+            background: var(--accent-gold);
+            color: var(--primary-blue);
+            padding: 8px 13px;
+            cursor: pointer;
+            font-weight: 800;
+            white-space: nowrap;
+            box-shadow: 0 10px 22px rgba(246, 195, 67, 0.22);
+        }
+
+        .copy-prompt-btn:hover,
+        .copy-prompt-btn:focus-visible {
+            background: var(--primary-blue);
+            color: #FFFFFF;
+        }
+
+        .info-card {
+            background: linear-gradient(135deg, #FFF8E5 0%, #FFFFFF 100%);
+            border: 1px solid rgba(246, 195, 67, 0.45);
+            border-left: 8px solid var(--accent-gold);
+            border-radius: 18px;
+            padding: 18px 20px;
+            margin: 18px 0;
+            box-shadow: 0 12px 26px rgba(7, 26, 61, 0.10);
+        }
+
+        .info-card strong {
+            color: var(--primary-blue);
         }
 
         /* --- EXAMPLE WORK COMPARISONS --- */
@@ -447,6 +500,365 @@
             box-shadow:0 0 0 6px rgba(244,197,66,0.65),0 22px 48px rgba(124,77,255,0.35);
         }
 
+        .hero-actions {
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+            flex-wrap: wrap;
+            margin-top: 24px;
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--accent-gold);
+            color: var(--primary-blue);
+            padding: 12px 18px;
+            border-radius: 999px;
+            text-decoration: none;
+            font-weight: 800;
+            box-shadow: 0 14px 30px rgba(246, 195, 67, 0.24);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .hero-cta.secondary {
+            background: rgba(255, 255, 255, 0.12);
+            color: #FFFFFF;
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            box-shadow: none;
+        }
+
+        .hero-cta:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 42px rgba(246, 195, 67, 0.30);
+        }
+
+        .outcome-strip {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 16px;
+            margin: 0 0 34px;
+        }
+
+        .outcome-card {
+            background: linear-gradient(135deg, #FFFFFF 0%, #F3F7FF 100%);
+            border: 1px solid rgba(37, 99, 235, 0.16);
+            border-radius: 18px;
+            padding: 18px;
+            box-shadow: 0 12px 26px rgba(7, 26, 61, 0.10);
+        }
+
+        .outcome-card i {
+            color: var(--electric-blue);
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+        }
+
+        .outcome-card strong {
+            display: block;
+            color: var(--primary-blue);
+            font-size: 1rem;
+            margin-bottom: 4px;
+        }
+
+        .outcome-card span {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .slide-deck-panel {
+            background: linear-gradient(135deg, #071A3D 0%, #102A5F 54%, #071A3D 100%);
+            border-radius: 26px;
+            padding: 36px;
+            margin-bottom: 44px;
+            color: #FFFFFF;
+            box-shadow: var(--card-shadow-strong);
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            scroll-margin-top: 20px;
+        }
+
+        .deck-preview-panel {
+            background: linear-gradient(135deg, #071A3D 0%, #102A5F 100%);
+            border-radius: 24px;
+            padding: 28px;
+            margin-bottom: 44px;
+            color: #FFFFFF;
+            box-shadow: var(--card-shadow);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            scroll-margin-top: 20px;
+        }
+
+        .deck-preview-panel h2 {
+            font-size: 1.65rem;
+            margin-bottom: 8px;
+        }
+
+        .deck-preview-panel p {
+            color: #D9E6FF;
+            max-width: 720px;
+        }
+
+        .deck-toggle-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            border: 0;
+            border-radius: 999px;
+            background: var(--accent-gold);
+            color: var(--primary-blue);
+            padding: 12px 18px;
+            font-weight: 800;
+            cursor: pointer;
+            white-space: nowrap;
+            box-shadow: 0 14px 30px rgba(246, 195, 67, 0.24);
+        }
+
+        .deck-toggle-btn:hover,
+        .deck-toggle-btn:focus-visible {
+            background: #FFFFFF;
+        }
+
+        .slide-deck-panel.is-hidden {
+            display: none;
+        }
+
+        .slide-deck-intro {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            gap: 24px;
+            margin-bottom: 24px;
+        }
+
+        .slide-deck-intro h2 {
+            font-size: 2rem;
+            line-height: 1.15;
+            margin-bottom: 10px;
+        }
+
+        .slide-deck-intro p {
+            color: #D9E6FF;
+            max-width: 760px;
+        }
+
+        .deck-count {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(246, 195, 67, 0.16);
+            color: var(--accent-gold);
+            border: 1px solid rgba(246, 195, 67, 0.35);
+            border-radius: 999px;
+            padding: 9px 14px;
+            font-weight: 800;
+            white-space: nowrap;
+        }
+
+        .slide-gallery {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 22px;
+        }
+
+        .slide-card {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 18px 44px rgba(0, 0, 0, 0.24);
+        }
+
+        .slide-card button {
+            width: 100%;
+            display: block;
+            border: 0;
+            padding: 0;
+            background: #020B1D;
+            cursor: zoom-in;
+            position: relative;
+        }
+
+        .slide-card button::after {
+            content: "Click to enlarge";
+            position: absolute;
+            right: 14px;
+            bottom: 14px;
+            background: rgba(7, 26, 61, 0.86);
+            color: #FFFFFF;
+            border: 1px solid rgba(255, 255, 255, 0.20);
+            padding: 7px 11px;
+            border-radius: 999px;
+            font-size: 0.78rem;
+            font-weight: 800;
+            opacity: 0;
+            transform: translateY(6px);
+            transition: opacity 0.2s ease, transform 0.2s ease;
+        }
+
+        .slide-card button:hover::after,
+        .slide-card button:focus-visible::after {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .slide-card img {
+            width: 100%;
+            display: block;
+            aspect-ratio: 1672 / 941;
+            object-fit: cover;
+            transition: transform 0.25s ease, filter 0.25s ease;
+        }
+
+        .slide-card button:hover img,
+        .slide-card button:focus-visible img {
+            transform: scale(1.018);
+            filter: brightness(1.04);
+        }
+
+        .slide-caption {
+            padding: 14px 16px 16px;
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .slide-caption strong {
+            color: #FFFFFF;
+            line-height: 1.3;
+        }
+
+        .slide-caption span {
+            color: var(--accent-gold);
+            font-size: 0.82rem;
+            font-weight: 800;
+            white-space: nowrap;
+        }
+
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(1, 6, 18, 0.94);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 76px 22px 28px;
+            z-index: 5000;
+        }
+
+        .lightbox.is-open {
+            display: flex;
+        }
+
+        .lightbox img {
+            max-width: min(96vw, 1600px);
+            max-height: calc(100vh - 122px);
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            border-radius: 10px;
+            box-shadow: 0 28px 80px rgba(0, 0, 0, 0.58);
+            background: #071A3D;
+        }
+
+        .lightbox-title {
+            position: absolute;
+            left: 24px;
+            top: 20px;
+            color: #FFFFFF;
+            font-weight: 800;
+            max-width: calc(100% - 190px);
+            line-height: 1.35;
+        }
+
+        .lightbox-controls {
+            position: absolute;
+            top: 16px;
+            right: 18px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .lightbox-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.26);
+            background: rgba(255, 255, 255, 0.11);
+            color: #FFFFFF;
+            cursor: pointer;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox-btn:hover,
+        .lightbox-btn:focus-visible {
+            background: var(--accent-gold);
+            color: var(--primary-blue);
+        }
+
+        body.lightbox-locked {
+            overflow: hidden;
+        }
+
+        @media (max-width: 900px) {
+            .outcome-strip,
+            .slide-gallery {
+                grid-template-columns: 1fr;
+            }
+
+            .slide-deck-intro,
+            .deck-preview-panel {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 640px) {
+            header h1 {
+                font-size: 2rem;
+            }
+
+            .container {
+                margin: 24px auto;
+                padding: 0 14px;
+            }
+
+            .index-panel,
+            .slide-section,
+            .slide-deck-panel {
+                border-radius: 18px;
+                padding: 22px;
+            }
+
+            .slide-header {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .slide-title,
+            .slide-deck-intro h2 {
+                font-size: 1.45rem;
+            }
+
+            .lightbox {
+                padding: 82px 10px 20px;
+            }
+
+            .lightbox img {
+                max-height: calc(100vh - 112px);
+            }
+        }
+
 </style>
 </head>
 <body>
@@ -457,16 +869,57 @@
 
         <span class="event-badge">Careers Fair Digital Portfolio Workshop</span>
         <h1>Building Your Professional Digital Portfolio</h1>
-        <p>A Step-by-Step Guide to Standing Out in Today's Job Market. Learn how to transform standard applications into a high-impact, AI-ready digital identity.</p>
+        <p>Build a professional digital presence that helps employers see your skills, evidence, projects, confidence and career direction before the interview starts.</p>
+        <div class="hero-actions">
+            <button type="button" class="hero-cta deck-toggle-btn" data-deck-toggle><i class="fa-solid fa-images"></i> View Slide Deck</button>
+            <a class="hero-cta secondary" href="#dashboard-index"><i class="fa-solid fa-list-check"></i> Workshop Toolkit</a>
+        </div>
     </header>
 
     <div class="container">
 
+        <section class="outcome-strip" aria-label="Workshop outcomes">
+            <div class="outcome-card">
+                <i class="fa-solid fa-file-signature"></i>
+                <strong>Application Assets</strong>
+                <span>Improve your CV, cover letter and profile wording so they match real roles.</span>
+            </div>
+            <div class="outcome-card">
+                <i class="fa-solid fa-diagram-project"></i>
+                <strong>Evidence Portfolio</strong>
+                <span>Turn projects, certificates and experience into visible proof of ability.</span>
+            </div>
+            <div class="outcome-card">
+                <i class="fa-brands fa-linkedin"></i>
+                <strong>Professional Brand</strong>
+                <span>Align LinkedIn, GitHub, website and public search results into one story.</span>
+            </div>
+            <div class="outcome-card">
+                <i class="fa-solid fa-rocket"></i>
+                <strong>Action Plan</strong>
+                <span>Leave with practical next steps you can start building today.</span>
+            </div>
+        </section>
+
         <section class="index-panel" id="dashboard-index">
             <h2><i class="fa-solid fa-bars-staggered"></i> Presentation Index Modules</h2>
-            <p>Click any button below to jump directly to that section of the presentation toolkit:</p>
+            <p>Use the slide deck for the full visual presentation, then jump into the toolkit sections for prompts, checklists and practical build steps.</p>
             
             <div class="grid-menu">
+                <a href="#slide-deck-preview" class="menu-btn" data-deck-toggle-link>
+                    <i class="fa-solid fa-images"></i>
+                    <div>
+                        <span class="btn-title">Complete Slide Deck</span>
+                        <span class="btn-subtitle">All 14 readable workshop slides</span>
+                    </div>
+                </a>
+                <a href="#job-market-reality" class="menu-btn">
+                    <i class="fa-solid fa-chart-line"></i>
+                    <div>
+                        <span class="btn-title">Today's Job Market</span>
+                        <span class="btn-subtitle">Why a CV alone is no longer enough</span>
+                    </div>
+                </a>
                 <a href="#pre-requisites" class="menu-btn">
                     <i class="fa-solid fa-clipboard-list"></i>
                     <div>
@@ -477,8 +930,8 @@
                 <a href="#varcs-framework" class="menu-btn">
                     <i class="fa-solid fa-shield-halved"></i>
                     <div>
-                        <span class="btn-title">VARCS + AI Framework</span>
-                        <span class="btn-subtitle">Application quality criteria</span>
+                        <span class="btn-title">VARCS + JOBS Framework</span>
+                        <span class="btn-subtitle">Tell your story and align with employers</span>
                     </div>
                 </a>
                 <a href="#pillar-1-cv" class="menu-btn">
@@ -537,6 +990,13 @@
                         <span class="btn-subtitle">For technical and IT fields</span>
                     </div>
                 </a>
+                <a href="#ai-tools" class="menu-btn">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    <div>
+                        <span class="btn-title">AI Tools + Productivity</span>
+                        <span class="btn-subtitle">Use AI to enhance, not replace, your work</span>
+                    </div>
+                </a>
                 <a href="#pillar-9-brand" class="menu-btn">
                     <i class="fa-solid fa-id-card"></i>
                     <div>
@@ -551,7 +1011,150 @@
                         <span class="btn-subtitle">Final validation step</span>
                     </div>
                 </a>
+                <a href="#action-plan" class="menu-btn">
+                    <i class="fa-solid fa-rocket"></i>
+                    <div>
+                        <span class="btn-title">5-Step Action Plan</span>
+                        <span class="btn-subtitle">What to build first after the workshop</span>
+                    </div>
+                </a>
             </div>
+        </section>
+
+        <section class="deck-preview-panel" id="slide-deck-preview">
+            <div>
+                <h2><i class="fa-solid fa-images"></i> Complete Slide Deck Hidden</h2>
+                <p>The main page stays focused and easy to scan. Click the button to show all 14 slides, then click any slide to zoom and read it clearly.</p>
+            </div>
+            <button type="button" class="deck-toggle-btn" data-deck-toggle><i class="fa-solid fa-eye"></i> Show Complete Slide Deck</button>
+        </section>
+
+        <section class="slide-deck-panel is-hidden" id="full-slide-deck" aria-hidden="true">
+            <div class="slide-deck-intro">
+                <div>
+                    <h2><i class="fa-solid fa-images"></i> Complete Visual Slide Deck</h2>
+                    <p>Click any slide to open it in a full-screen reader view. Use the arrow buttons or keyboard arrows to move through the deck.</p>
+                </div>
+                <button type="button" class="deck-toggle-btn" data-deck-toggle><i class="fa-solid fa-eye-slash"></i> Hide Slide Deck</button>
+            </div>
+
+            <div class="slide-gallery" aria-label="Professional digital portfolio slide gallery">
+                <article class="slide-card">
+                    <button type="button" class="slide-zoom" data-slide-index="0" aria-label="Enlarge slide 1: Building Your Professional Digital Portfolio">
+                        <img src="slide 1.png" alt="Slide 1: Building Your Professional Digital Portfolio" loading="eager">
+                    </button>
+                    <div class="slide-caption"><strong>Building Your Professional Digital Portfolio</strong><span>Slide 01</span></div>
+                </article>
+                <article class="slide-card">
+                    <button type="button" class="slide-zoom" data-slide-index="1" aria-label="Enlarge slide 2: The Reality of Today's Job Market">
+                        <img src="slide 2.png" alt="Slide 2: The Reality of Today's Job Market" loading="lazy">
+                    </button>
+                    <div class="slide-caption"><strong>The Reality of Today's Job Market</strong><span>Slide 02</span></div>
+                </article>
+                <article class="slide-card">
+                    <button type="button" class="slide-zoom" data-slide-index="2" aria-label="Enlarge slide 3: Professional CV plus Cover Letter">
+                        <img src="slide 3.png" alt="Slide 3: Professional CV plus Cover Letter" loading="lazy">
+                    </button>
+                    <div class="slide-caption"><strong>Professional CV + Cover Letter</strong><span>Slide 03</span></div>
+                </article>
+                <article class="slide-card">
+                    <button type="button" class="slide-zoom" data-slide-index="3" aria-label="Enlarge slide 4: LinkedIn plus Personal Brand">
+                        <img src="slide 4.png" alt="Slide 4: LinkedIn plus Personal Brand" loading="lazy">
+                    </button>
+                    <div class="slide-caption"><strong>LinkedIn + Personal Brand</strong><span>Slide 04</span></div>
+                </article>
+                <article class="slide-card">
+                    <button type="button" class="slide-zoom" data-slide-index="4" aria-label="Enlarge slide 5: Projects plus Evidence Portfolio">
+                        <img src="slide 5.png" alt="Slide 5: Projects plus Evidence Portfolio" loading="lazy">
+                    </button>
+                    <div class="slide-caption"><strong>Projects + Evidence Portfolio</strong><span>Slide 05</span></div>
+                </article>
+                <article class="slide-card">
+                    <button type="button" class="slide-zoom" data-slide-index="5" aria-label="Enlarge slide 6: Introduction Video plus Personal Website">
+                        <img src="slide 6.png" alt="Slide 6: Introduction Video plus Personal Website" loading="lazy">
+                    </button>
+                    <div class="slide-caption"><strong>Introduction Video + Personal Website</strong><span>Slide 06</span></div>
+                </article>
+                <article class="slide-card">
+                    <button type="button" class="slide-zoom" data-slide-index="6" aria-label="Enlarge slide 7: GitHub plus Documentation Portfolio">
+                        <img src="slide 7.png" alt="Slide 7: GitHub plus Documentation Portfolio" loading="lazy">
+                    </button>
+                    <div class="slide-caption"><strong>GitHub + Documentation Portfolio</strong><span>Slide 07</span></div>
+                </article>
+                <article class="slide-card">
+                    <button type="button" class="slide-zoom" data-slide-index="7" aria-label="Enlarge slide 8: AI Tools plus Productivity Accelerators">
+                        <img src="slide 8.png" alt="Slide 8: AI Tools plus Productivity Accelerators" loading="lazy">
+                    </button>
+                    <div class="slide-caption"><strong>AI Tools + Productivity Accelerators</strong><span>Slide 08</span></div>
+                </article>
+                <article class="slide-card">
+                    <button type="button" class="slide-zoom" data-slide-index="8" aria-label="Enlarge slide 9: Your Digital Portfolio equals Career Advantage">
+                        <img src="slide 9.png" alt="Slide 9: Your Digital Portfolio equals Career Advantage" loading="lazy">
+                    </button>
+                    <div class="slide-caption"><strong>Your Digital Portfolio = Career Advantage</strong><span>Slide 09</span></div>
+                </article>
+                <article class="slide-card">
+                    <button type="button" class="slide-zoom" data-slide-index="9" aria-label="Enlarge slide 10: LinkedIn Profile Optimisation">
+                        <img src="slide 10.png" alt="Slide 10: LinkedIn Profile Optimisation" loading="lazy">
+                    </button>
+                    <div class="slide-caption"><strong>LinkedIn Profile Optimisation</strong><span>Slide 10</span></div>
+                </article>
+                <article class="slide-card">
+                    <button type="button" class="slide-zoom" data-slide-index="10" aria-label="Enlarge slide 11: GitHub plus AI Tools equals Smarter Portfolio">
+                        <img src="slide 11.png" alt="Slide 11: GitHub plus AI Tools equals Smarter Portfolio" loading="lazy">
+                    </button>
+                    <div class="slide-caption"><strong>GitHub + AI Tools = Smarter Portfolio</strong><span>Slide 11</span></div>
+                </article>
+                <article class="slide-card">
+                    <button type="button" class="slide-zoom" data-slide-index="11" aria-label="Enlarge slide 12: VARCS plus JOBS Framework">
+                        <img src="slide 12.png" alt="Slide 12: VARCS plus JOBS Framework" loading="lazy">
+                    </button>
+                    <div class="slide-caption"><strong>VARCS + JOBS Framework</strong><span>Slide 12</span></div>
+                </article>
+                <article class="slide-card">
+                    <button type="button" class="slide-zoom" data-slide-index="12" aria-label="Enlarge slide 13: Your Action Plan">
+                        <img src="slide 13.png" alt="Slide 13: Your Action Plan" loading="lazy">
+                    </button>
+                    <div class="slide-caption"><strong>Your Action Plan</strong><span>Slide 13</span></div>
+                </article>
+                <article class="slide-card">
+                    <button type="button" class="slide-zoom" data-slide-index="13" aria-label="Enlarge slide 14: Your Digital Portfolio equals Your Future">
+                        <img src="slide 14.png" alt="Slide 14: Your Digital Portfolio equals Your Future" loading="lazy">
+                    </button>
+                    <div class="slide-caption"><strong>Your Digital Portfolio = Your Future</strong><span>Slide 14</span></div>
+                </article>
+            </div>
+        </section>
+
+        <section class="slide-section" id="job-market-reality">
+            <div class="slide-header">
+                <h3 class="slide-title"><i class="fa-solid fa-chart-line"></i> The Reality of Today's Job Market</h3>
+                <span class="slide-badge">Why It Matters</span>
+            </div>
+            <p>A CV on its own is rarely enough. Employers often receive high volumes of applications, spend only a short time on first review, and look for clear evidence before deciding who to shortlist.</p>
+            <div class="varcs-grid">
+                <div class="varcs-card">
+                    <div class="varcs-letter">Skills</div>
+                    <p>Show the practical skills you can use, not just the tools you have heard of.</p>
+                </div>
+                <div class="varcs-card">
+                    <div class="varcs-letter">Experience</div>
+                    <p>Explain where you applied those skills through jobs, projects, volunteering, study or personal work.</p>
+                </div>
+                <div class="varcs-card">
+                    <div class="varcs-letter">Projects</div>
+                    <p>Use project examples to prove you can solve real problems and finish useful work.</p>
+                </div>
+                <div class="varcs-card">
+                    <div class="varcs-letter">Evidence</div>
+                    <p>Support your claims with documents, links, screenshots, repositories, metrics and certificates.</p>
+                </div>
+                <div class="varcs-card">
+                    <div class="varcs-letter">Professionalism</div>
+                    <p>Make your digital presence clear, consistent and ready for employers to inspect.</p>
+                </div>
+            </div>
+            <a href="#dashboard-index" class="back-to-top"><i class="fa-solid fa-arrow-up"></i> Index</a>
         </section>
 
         <section class="slide-section" id="pre-requisites">
@@ -570,49 +1173,82 @@
 
         <section class="slide-section" id="varcs-framework">
             <div class="slide-header">
-                <h3 class="slide-title"><i class="fa-solid fa-shield-halved"></i> The VARCS + AI Employability Framework</h3>
+                <h3 class="slide-title"><i class="fa-solid fa-shield-halved"></i> VARCS + JOBS Framework: Stand Out & Get Hired</h3>
                 <span class="slide-badge">Core Engine</span>
             </div>
-            <p>Employers receive thousands of applications. To survive manual filtering and automated tracking platforms, your structural approach must respect the core validation principles:</p>
+            <p>Use VARCS to tell your story powerfully, then use JOBS to align your portfolio with what employers are trying to accomplish.</p>
             
             <div class="varcs-grid">
                 <div class="varcs-card">
-                    <div class="varcs-letter">V - Valid</div>
-                    <p>Does your application target the job specification? Do not use generic configurations.</p>
+                    <div class="varcs-letter">V - Value</div>
+                    <p><strong>Value you delivered:</strong> What value did you provide, and who did it help?</p>
                 </div>
                 <div class="varcs-card">
-                    <div class="varcs-letter">A - Authentic</div>
-                    <p>Can you defend every point? If an interviewer challenges a line for 10 minutes, you must detail it seamlessly.</p>
+                    <div class="varcs-letter">A - Action</div>
+                    <p><strong>Actions you took:</strong> What practical steps did you take to deliver that value?</p>
                 </div>
                 <div class="varcs-card">
-                    <div class="varcs-letter">R - Reliable</div>
-                    <p>Does your public profile tell a single, coherent narrative across your CV, LinkedIn, and cover letter?</p>
+                    <div class="varcs-letter">R - Result</div>
+                    <p><strong>Results you achieved:</strong> What changed because of your work? Use numbers where possible.</p>
                 </div>
                 <div class="varcs-card">
-                    <div class="varcs-letter">C - Current</div>
-                    <p>Are your skills relevant today? Emphasise modern cloud architectures and active frameworks.</p>
+                    <div class="varcs-letter">C - Competencies</div>
+                    <p><strong>Competencies you used:</strong> Which skills, tools, technologies or behaviours did the work demonstrate?</p>
                 </div>
                 <div class="varcs-card">
-                    <div class="varcs-letter">S - Sufficient</div>
-                    <p>Have you provided enough empirical evidence, metrics, or data to substantiate your performance claims?</p>
+                    <div class="varcs-letter">S - Supporting Evidence</div>
+                    <p><strong>Proof of impact:</strong> Link to evidence such as a GitHub repo, project demo, certificate, testimonial, screenshot or metric.</p>
                 </div>
                 <div class="varcs-card ai-p">
-                    <div class="varcs-letter">AI - Aware</div>
-                    <p>Can you explain technical implementations smoothly without needing an AI interface to prompt for you?</p>
+                    <div class="varcs-letter">JOBS</div>
+                    <p><strong>Job to be done, Outcomes, Buying criteria, Solution you provide:</strong> position your portfolio around what employers value.</p>
                 </div>
             </div>
+
+            <h4 style="margin-top:25px; margin-bottom:10px;">JOBS Framework: Align With What Employers Value</h4>
+            <table style="margin-top:15px;">
+                <thead>
+                    <tr>
+                        <th style="width: 20%;">Letter</th>
+                        <th>Meaning</th>
+                        <th>Portfolio Question</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>J - Job To Be Done</strong></td>
+                        <td>The real problem the employer needs solved.</td>
+                        <td>What core challenge does this role or organisation need help with?</td>
+                    </tr>
+                    <tr>
+                        <td><strong>O - Outcomes</strong></td>
+                        <td>The result that matters most to the employer.</td>
+                        <td>How do your projects show faster, safer, clearer, better or more reliable outcomes?</td>
+                    </tr>
+                    <tr>
+                        <td><strong>B - Buying Criteria</strong></td>
+                        <td>The standards employers use to decide who is credible.</td>
+                        <td>Which skills, experience, communication and evidence prove you meet the criteria?</td>
+                    </tr>
+                    <tr>
+                        <td><strong>S - Solution You Provide</strong></td>
+                        <td>Your skills, projects and portfolio as the answer.</td>
+                        <td>How do your CV, LinkedIn, GitHub and project evidence show you are the solution?</td>
+                    </tr>
+                </tbody>
+            </table>
 
             <h4 style="margin-top:25px; margin-bottom:10px;">Real-Life Statement Calibration</h4>
             <div class="example-block">
                 <div class="ex-card poor">
                     <div class="ex-title"><i class="fa-solid fa-circle-xmark" style="color:var(--alert-red);"></i> Weak Strategy</div>
-                    <p><em>"I have strong leadership skills and years of general management experience."</em></p>
-                    <p style="font-size:0.85rem; color:var(--text-muted); margin-top:10px;"><strong>Issue:</strong> Completely lacks sufficiency and verifiable data.</p>
+                    <p><em>"Built a web app. Used Python and Django. Worked on a team project. Deployed on AWS."</em></p>
+                    <p style="font-size:0.85rem; color:var(--text-muted); margin-top:10px;"><strong>Issue:</strong> Lists activity, but does not explain value, action, result, competencies or evidence.</p>
                 </div>
                 <div class="ex-card strong">
-                    <div class="ex-title"><i class="fa-solid fa-circle-check" style="color:var(--success-green);"></i> Validated Strategy</div>
-                    <p><em>"Managed a team of 12 teaching and support staff across vocational programmes, achieving 98% learner completion rates."</em></p>
-                    <p style="font-size:0.85rem; color:var(--text-muted); margin-top:10px;"><strong>Benefit:</strong> Provable, direct, metric-driven, and structurally robust.</p>
+                    <div class="ex-title"><i class="fa-solid fa-circle-check" style="color:var(--success-green);"></i> VARCS + JOBS Strategy</div>
+                    <p><em>"Built a full-stack task-management app with secure authentication, reducing user engagement drop-off by 40% and helping 5,000+ users manage tasks more efficiently."</em></p>
+                    <p style="font-size:0.85rem; color:var(--text-muted); margin-top:10px;"><strong>Benefit:</strong> Shows value, action, measurable result, competencies and supporting evidence.</p>
                 </div>
             </div>
             <a href="#dashboard-index" class="back-to-top"><i class="fa-solid fa-arrow-up"></i> Index</a>
@@ -624,6 +1260,10 @@
                 <span class="slide-badge">Pillar 1</span>
             </div>
             <p>Your CV serves as your initial technical introduction to the employer. It must remain accurate, clean, up-to-date, and completely aligned with target constraints.</p>
+            <div class="info-card">
+                <strong>What does ATS mean?</strong>
+                ATS stands for <strong>Applicant Tracking System</strong>. It is software many employers use to scan, sort and filter CVs before a human recruiter reads them. An ATS-friendly CV uses clear headings, relevant job keywords, simple formatting and truthful evidence that matches the job description.
+            </div>
             
             <h4 style="margin-top:15px;">Target Information Gathering Check:</h4>
             <ul class="action-list">
@@ -639,11 +1279,21 @@
                 <p>If you are applying for a different job, update your CV to match that job. Read the job description carefully and make sure your skills, experience, projects and keywords match the role.</p>
             </div>
 
-            <div class="prompt-container">
-Act as a professional CV writer. Using my provided technical qualifications, professional milestones, and career histories, create a modern, ATS-friendly CV template. Ensure it integrates an explicit professional summary, a structured skills inventory, comprehensive education records, employment experience, verified project highlights, and relevant professional certifications.</div>
+            <div class="prompt-card">
+                <div class="prompt-card-header">
+                    <h4>Build a clean ATS-friendly CV from your background</h4>
+                    <button type="button" class="copy-prompt-btn"><i class="fa-solid fa-copy"></i> Copy prompt</button>
+                </div>
+                <div class="prompt-container">Act as a professional CV writer. Using my provided technical qualifications, professional milestones, and career histories, create a modern, ATS-friendly CV template. Ensure it integrates an explicit professional summary, a structured skills inventory, comprehensive education records, employment experience, verified project highlights, and relevant professional certifications.</div>
+            </div>
 
-            <div class="prompt-container">
-I have uploaded my current CV and a new job description. Please update my CV so it matches this job role. Keep it truthful and professional. Improve the professional summary, skills, experience, projects and keywords so they clearly match the job requirements. Do not invent experience. Use simple English and make the CV ATS-friendly.</div>
+            <div class="prompt-card">
+                <div class="prompt-card-header">
+                    <h4>Tailor an existing CV to a specific job description</h4>
+                    <button type="button" class="copy-prompt-btn"><i class="fa-solid fa-copy"></i> Copy prompt</button>
+                </div>
+                <div class="prompt-container">I have uploaded my current CV and a new job description. Please update my CV so it matches this job role. Keep it truthful and professional. Improve the professional summary, skills, experience, projects and keywords so they clearly match the job requirements. Do not invent experience. Use simple English and make the CV ATS-friendly.</div>
+            </div>
 
             <a href="#dashboard-index" class="back-to-top"><i class="fa-solid fa-arrow-up"></i> Index</a>
         </section>
@@ -661,11 +1311,21 @@ I have uploaded my current CV and a new job description. Please update my CV so 
                 <p>Do not use the same cover letter for every job. Upload your CV and the new job description, then create a fresh cover letter that matches the employer's requirements.</p>
             </div>
 
-            <div class="prompt-container">
-Using my professional CV alongside the target job description attached, write a highly tailored cover letter. Explicitly highlight my matching technical competencies, target milestone achievements, and career motivations, while framing everything in an engaging, human voice.</div>
+            <div class="prompt-card">
+                <div class="prompt-card-header">
+                    <h4>Write a tailored cover letter from your CV and target role</h4>
+                    <button type="button" class="copy-prompt-btn"><i class="fa-solid fa-copy"></i> Copy prompt</button>
+                </div>
+                <div class="prompt-container">Using my professional CV alongside the target job description attached, write a highly tailored cover letter. Explicitly highlight my matching technical competencies, target milestone achievements, and career motivations, while framing everything in an engaging, human voice.</div>
+            </div>
 
-            <div class="prompt-container">
-I have uploaded my current CV and a new job description. Please create a new tailored cover letter for this role. Match my skills, experience, education and projects to the job requirements. Keep it natural, confident and professional. Do not exaggerate or invent anything. Make the letter ready to send to the employer.</div>
+            <div class="prompt-card">
+                <div class="prompt-card-header">
+                    <h4>Create a ready-to-send cover letter without exaggeration</h4>
+                    <button type="button" class="copy-prompt-btn"><i class="fa-solid fa-copy"></i> Copy prompt</button>
+                </div>
+                <div class="prompt-container">I have uploaded my current CV and a new job description. Please create a new tailored cover letter for this role. Match my skills, experience, education and projects to the job requirements. Keep it natural, confident and professional. Do not exaggerate or invent anything. Make the letter ready to send to the employer.</div>
+            </div>
 
             <a href="#dashboard-index" class="back-to-top"><i class="fa-solid fa-arrow-up"></i> Index</a>
         </section>
@@ -704,8 +1364,13 @@ I have uploaded my current CV and a new job description. Please create a new tai
                 </tbody>
             </table>
 
-            <div class="prompt-container">
-Act as an expert corporate LinkedIn profile optimizer. Review my professional background and refine my digital footprint. Optimise my profile headline, write an engaging 'About Me' executive narrative, categorize my skills index, and configure layout advice for my Featured content section.</div>
+            <div class="prompt-card">
+                <div class="prompt-card-header">
+                    <h4>Optimise your LinkedIn headline, About section and featured profile content</h4>
+                    <button type="button" class="copy-prompt-btn"><i class="fa-solid fa-copy"></i> Copy prompt</button>
+                </div>
+                <div class="prompt-container">Act as an expert corporate LinkedIn profile optimizer. Review my professional background and refine my digital footprint. Optimise my profile headline, write an engaging 'About Me' executive narrative, categorize my skills index, and configure layout advice for my Featured content section.</div>
+            </div>
             <a href="#dashboard-index" class="back-to-top"><i class="fa-solid fa-arrow-up"></i> Index</a>
         </section>
 
@@ -732,8 +1397,13 @@ Act as an expert corporate LinkedIn profile optimizer. Review my professional ba
                 </div>
             </div>
 
-            <div class="prompt-container">
-Using my raw project logs, technical implementation files, and task briefs, build a professional project case study portfolio. Structure each entry with an explicit Title, Project Objective, Operational Description, Core Tools Used, Key Results Achieved, and Key Lessons Learned.</div>
+            <div class="prompt-card">
+                <div class="prompt-card-header">
+                    <h4>Turn raw project evidence into professional case studies</h4>
+                    <button type="button" class="copy-prompt-btn"><i class="fa-solid fa-copy"></i> Copy prompt</button>
+                </div>
+                <div class="prompt-container">Using my raw project logs, technical implementation files, and task briefs, build a professional project case study portfolio. Structure each entry with an explicit Title, Project Objective, Operational Description, Core Tools Used, Key Results Achieved, and Key Lessons Learned.</div>
+            </div>
             <a href="#dashboard-index" class="back-to-top"><i class="fa-solid fa-arrow-up"></i> Index</a>
         </section>
 
@@ -759,8 +1429,13 @@ Using my raw project logs, technical implementation files, and task briefs, buil
                 </div>
             </div>
 
-            <div class="prompt-container">
-Act as an expert career coach and presentation scriptwriter. Review my core professional background and write three distinct presentation video scripts: a 30-second summary, a 60-second professional summary, and a 3-minute comprehensive review. Ensure each outlines my background, skills, and qualifications while maintaining an authentic, human tone.</div>
+            <div class="prompt-card">
+                <div class="prompt-card-header">
+                    <h4>Create 30-second, 60-second and 3-minute introduction video scripts</h4>
+                    <button type="button" class="copy-prompt-btn"><i class="fa-solid fa-copy"></i> Copy prompt</button>
+                </div>
+                <div class="prompt-container">Act as an expert career coach and presentation scriptwriter. Review my core professional background and write three distinct presentation video scripts: a 30-second summary, a 60-second professional summary, and a 3-minute comprehensive review. Ensure each outlines my background, skills, and qualifications while maintaining an authentic, human tone.</div>
+            </div>
             <a href="#dashboard-index" class="back-to-top"><i class="fa-solid fa-arrow-up"></i> Index</a>
         </section>
 
@@ -774,8 +1449,13 @@ Act as an expert career coach and presentation scriptwriter. Review my core prof
             <h4 style="margin-top:20px; margin-bottom:10px;">Recommended Wireframe & Core Section Map:</h4>
             <p style="font-size:0.95rem; color:var(--text-muted); margin-bottom:15px;"><code>[Home / Bio] ➔ [Detailed Skills Matrix] ➔ [Project Case Study Hub] ➔ [Video Pitch Embeds] ➔ [Asset Vault Downloads]</code></p>
 
-            <div class="prompt-container">
-Act as an expert front-end developer and web designer. Create a responsive, fast-loading, single-page HTML5 portfolio website template that follows a modern corporate style guide. Use clean CSS layout styles with inline variables, and include placeholders for my CV summary, skills matrix, portfolio projects, introductory video section, and download forms.</div>
+            <div class="prompt-card">
+                <div class="prompt-card-header">
+                    <h4>Generate a single-page personal portfolio website structure</h4>
+                    <button type="button" class="copy-prompt-btn"><i class="fa-solid fa-copy"></i> Copy prompt</button>
+                </div>
+                <div class="prompt-container">Act as an expert front-end developer and web designer. Create a responsive, fast-loading, single-page HTML5 portfolio website template that follows a modern corporate style guide. Use clean CSS layout styles with inline variables, and include placeholders for my CV summary, skills matrix, portfolio projects, introductory video section, and download forms.</div>
+            </div>
             <a href="#dashboard-index" class="back-to-top"><i class="fa-solid fa-arrow-up"></i> Index</a>
         </section>
 
@@ -806,7 +1486,7 @@ Act as an expert front-end developer and web designer. Create a responsive, fast
 
         <section class="slide-section" id="pillar-8-github">
             <div class="slide-header">
-                <h3 class="slide-title"><i class="fa-brands fa-github"></i> Pillar 8: GitHub Repository Optimisation</h3>
+                <h3 class="slide-title"><i class="fa-brands fa-github"></i> Pillar 8: GitHub + Documentation Portfolio</h3>
                 <span class="slide-badge">Pillar 8</span>
             </div>
             <p>Essential for technical fields like IT, cybersecurity, systems administration, development, and data analysis. Use clear documentation rather than just uploading raw, unorganised code scripts.</p>
@@ -816,8 +1496,46 @@ Act as an expert front-end developer and web designer. Create a responsive, fast
                 <li><i class="fa-solid fa-code-branch"></i> <strong>README.md Standardisation:</strong> Every repository needs a README file detailing prerequisites, system architecture blueprints, and explicit usage guidelines.</li>
             </ul>
 
-            <div class="prompt-container">
-Act as an expert technical documentation writer. Help me organise and document my GitHub software and systems administration repositories professionally. Write a clear, comprehensive README.md file template that outlines project objectives, architectural designs, installation processes, dependencies, configuration variables, and operational examples.</div>
+            <div class="prompt-card">
+                <div class="prompt-card-header">
+                    <h4>Create a professional GitHub README and documentation structure</h4>
+                    <button type="button" class="copy-prompt-btn"><i class="fa-solid fa-copy"></i> Copy prompt</button>
+                </div>
+                <div class="prompt-container">Act as an expert technical documentation writer. Help me organise and document my GitHub software and systems administration repositories professionally. Write a clear, comprehensive README.md file template that outlines project objectives, architectural designs, installation processes, dependencies, configuration variables, and operational examples.</div>
+            </div>
+            <a href="#dashboard-index" class="back-to-top"><i class="fa-solid fa-arrow-up"></i> Index</a>
+        </section>
+
+        <section class="slide-section" id="ai-tools">
+            <div class="slide-header">
+                <h3 class="slide-title"><i class="fa-solid fa-wand-magic-sparkles"></i> AI Tools + Productivity Accelerators</h3>
+                <span class="slide-badge">Productivity</span>
+            </div>
+            <p>AI tools can help you draft, organise, review and improve your portfolio faster. The key rule is simple: use AI to enhance your own work, not to invent experience or replace your judgement.</p>
+
+            <div class="varcs-grid">
+                <div class="varcs-card">
+                    <div class="varcs-letter">Draft</div>
+                    <p>Use AI to create first drafts of CV summaries, LinkedIn text, project descriptions and video scripts.</p>
+                </div>
+                <div class="varcs-card">
+                    <div class="varcs-letter">Improve</div>
+                    <p>Ask AI to make wording clearer, more specific, more concise and better aligned to the job description.</p>
+                </div>
+                <div class="varcs-card">
+                    <div class="varcs-letter">Check</div>
+                    <p>Use AI to review gaps, missing evidence, weak claims, spelling, tone and ATS keyword alignment.</p>
+                </div>
+            </div>
+
+            <div class="prompt-card">
+                <div class="prompt-card-header">
+                    <h4>Use AI as a portfolio reviewer and improvement coach</h4>
+                    <button type="button" class="copy-prompt-btn"><i class="fa-solid fa-copy"></i> Copy prompt</button>
+                </div>
+                <div class="prompt-container">Act as a professional portfolio reviewer. Review my CV, LinkedIn summary, project evidence and GitHub documentation. Identify weak claims, missing evidence, unclear wording, ATS keyword gaps and opportunities to make my portfolio more relevant to the target job. Do not invent experience. Give me a practical improvement checklist ordered by priority.</div>
+            </div>
+
             <a href="#dashboard-index" class="back-to-top"><i class="fa-solid fa-arrow-up"></i> Index</a>
         </section>
 
@@ -843,8 +1561,13 @@ Act as an expert technical documentation writer. Help me organise and document m
                 </div>
             </div>
 
-            <div class="prompt-container">
-Act as a personal branding expert. Analyse my targeted career path and outline a comprehensive, long-term personal branding strategy. Provide content creation ideas, networking frameworks, and profile alignment guidelines to ensure a highly professional online presence across search engines.</div>
+            <div class="prompt-card">
+                <div class="prompt-card-header">
+                    <h4>Plan a professional public brand across LinkedIn, GitHub and search results</h4>
+                    <button type="button" class="copy-prompt-btn"><i class="fa-solid fa-copy"></i> Copy prompt</button>
+                </div>
+                <div class="prompt-container">Act as a personal branding expert. Analyse my targeted career path and outline a comprehensive, long-term personal branding strategy. Provide content creation ideas, networking frameworks, and profile alignment guidelines to ensure a highly professional online presence across search engines.</div>
+            </div>
             <a href="#dashboard-index" class="back-to-top"><i class="fa-solid fa-arrow-up"></i> Index</a>
         </section>
 
@@ -889,11 +1612,167 @@ Act as a personal branding expert. Analyse my targeted career path and outline a
             <a href="#dashboard-index" class="back-to-top"><i class="fa-solid fa-arrow-up"></i> Index</a>
         </section>
 
+        <section class="slide-section" id="action-plan">
+            <div class="slide-header">
+                <h3 class="slide-title"><i class="fa-solid fa-rocket"></i> Your Action Plan: 5 Steps to Get Started Today</h3>
+                <span class="slide-badge">Next Steps</span>
+            </div>
+            <p>Build your portfolio step by step. Do not wait until everything is perfect; start with the core assets and improve them as you collect stronger evidence.</p>
+
+            <div class="varcs-grid">
+                <div class="varcs-card"><div class="varcs-letter">1. Assess</div><p>Review what you already have: CV, certificates, projects, LinkedIn, GitHub and examples of work.</p></div>
+                <div class="varcs-card"><div class="varcs-letter">2. Build</div><p>Create or improve your CV, LinkedIn profile and project evidence using the VARCS structure.</p></div>
+                <div class="varcs-card"><div class="varcs-letter">3. Showcase</div><p>Publish your best evidence through LinkedIn, GitHub, a simple website or a shareable portfolio folder.</p></div>
+                <div class="varcs-card"><div class="varcs-letter">4. Document</div><p>Keep a clean evidence vault with certificates, screenshots, project notes, references and achievements.</p></div>
+                <div class="varcs-card"><div class="varcs-letter">5. Share</div><p>Apply, network, send links professionally and update your portfolio after every meaningful project.</p></div>
+            </div>
+
+            <div class="prompt-card">
+                <div class="prompt-card-header">
+                    <h4>Create a personal 7-day digital portfolio action plan</h4>
+                    <button type="button" class="copy-prompt-btn"><i class="fa-solid fa-copy"></i> Copy prompt</button>
+                </div>
+                <div class="prompt-container">Act as a career development coach. Create a realistic 7-day action plan to help me build a professional digital portfolio. Include daily tasks for improving my CV, LinkedIn profile, project evidence, GitHub documentation, personal website or portfolio folder, and final quality checks. Keep the plan practical, beginner-friendly and focused on evidence employers can verify.</div>
+            </div>
+
+            <a href="#dashboard-index" class="back-to-top"><i class="fa-solid fa-arrow-up"></i> Index</a>
+        </section>
+
+    </div>
+
+    <div class="lightbox" id="slide-lightbox" role="dialog" aria-modal="true" aria-label="Enlarged slide viewer">
+        <div class="lightbox-title" id="lightbox-title">Slide preview</div>
+        <div class="lightbox-controls">
+            <button type="button" class="lightbox-btn" id="lightbox-prev" aria-label="Previous slide"><i class="fa-solid fa-chevron-left"></i></button>
+            <button type="button" class="lightbox-btn" id="lightbox-next" aria-label="Next slide"><i class="fa-solid fa-chevron-right"></i></button>
+            <button type="button" class="lightbox-btn" id="lightbox-close" aria-label="Close slide viewer"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <img id="lightbox-image" src="slide 1.png" alt="Slide preview">
     </div>
 
     <footer>
         <p class="footer-text">Crafted & Researched by Umer Malik</p>
     </footer>
+
+    <script>
+        const slideData = [
+            { src: 'slide 1.png', title: 'Slide 01: Building Your Professional Digital Portfolio' },
+            { src: 'slide 2.png', title: "Slide 02: The Reality of Today's Job Market" },
+            { src: 'slide 3.png', title: 'Slide 03: Professional CV + Cover Letter' },
+            { src: 'slide 4.png', title: 'Slide 04: LinkedIn + Personal Brand' },
+            { src: 'slide 5.png', title: 'Slide 05: Projects + Evidence Portfolio' },
+            { src: 'slide 6.png', title: 'Slide 06: Introduction Video + Personal Website' },
+            { src: 'slide 7.png', title: 'Slide 07: GitHub + Documentation Portfolio' },
+            { src: 'slide 8.png', title: 'Slide 08: AI Tools + Productivity Accelerators' },
+            { src: 'slide 9.png', title: 'Slide 09: Your Digital Portfolio = Career Advantage' },
+            { src: 'slide 10.png', title: 'Slide 10: LinkedIn Profile Optimisation' },
+            { src: 'slide 11.png', title: 'Slide 11: GitHub + AI Tools = Smarter Portfolio' },
+            { src: 'slide 12.png', title: 'Slide 12: VARCS + JOBS Framework' },
+            { src: 'slide 13.png', title: 'Slide 13: Your Action Plan' },
+            { src: 'slide 14.png', title: 'Slide 14: Your Digital Portfolio = Your Future' }
+        ];
+
+        const lightbox = document.getElementById('slide-lightbox');
+        const lightboxImage = document.getElementById('lightbox-image');
+        const lightboxTitle = document.getElementById('lightbox-title');
+        const closeButton = document.getElementById('lightbox-close');
+        const prevButton = document.getElementById('lightbox-prev');
+        const nextButton = document.getElementById('lightbox-next');
+        const slideDeckPanel = document.getElementById('full-slide-deck');
+        const slideDeckPreview = document.getElementById('slide-deck-preview');
+        let activeSlideIndex = 0;
+
+        function setSlideDeckVisibility(isVisible, shouldScroll = true) {
+            slideDeckPanel.classList.toggle('is-hidden', !isVisible);
+            slideDeckPanel.setAttribute('aria-hidden', String(!isVisible));
+            document.querySelectorAll('[data-deck-toggle]').forEach((button) => {
+                button.innerHTML = isVisible
+                    ? '<i class="fa-solid fa-eye-slash"></i> Hide Slide Deck'
+                    : '<i class="fa-solid fa-eye"></i> Show Complete Slide Deck';
+            });
+            if (shouldScroll) {
+                (isVisible ? slideDeckPanel : slideDeckPreview).scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
+        function showSlide(index) {
+            activeSlideIndex = (index + slideData.length) % slideData.length;
+            const slide = slideData[activeSlideIndex];
+            lightboxImage.src = slide.src;
+            lightboxImage.alt = slide.title;
+            lightboxTitle.textContent = slide.title;
+        }
+
+        function openLightbox(index) {
+            showSlide(index);
+            lightbox.classList.add('is-open');
+            document.body.classList.add('lightbox-locked');
+            closeButton.focus();
+        }
+
+        function closeLightbox() {
+            lightbox.classList.remove('is-open');
+            document.body.classList.remove('lightbox-locked');
+        }
+
+        document.querySelectorAll('.slide-zoom').forEach((button) => {
+            button.addEventListener('click', () => {
+                openLightbox(Number(button.dataset.slideIndex));
+            });
+        });
+
+        document.querySelectorAll('[data-deck-toggle]').forEach((button) => {
+            button.addEventListener('click', () => {
+                setSlideDeckVisibility(slideDeckPanel.classList.contains('is-hidden'));
+            });
+        });
+
+        document.querySelectorAll('[data-deck-toggle-link]').forEach((link) => {
+            link.addEventListener('click', (event) => {
+                event.preventDefault();
+                setSlideDeckVisibility(true);
+            });
+        });
+
+        document.querySelectorAll('.copy-prompt-btn').forEach((button) => {
+            button.addEventListener('click', async () => {
+                const promptText = button.closest('.prompt-card').querySelector('.prompt-container').innerText.trim();
+                const originalText = button.innerHTML;
+                try {
+                    await navigator.clipboard.writeText(promptText);
+                    button.innerHTML = '<i class="fa-solid fa-check"></i> Copied';
+                } catch (error) {
+                    const fallback = document.createElement('textarea');
+                    fallback.value = promptText;
+                    document.body.appendChild(fallback);
+                    fallback.select();
+                    document.execCommand('copy');
+                    fallback.remove();
+                    button.innerHTML = '<i class="fa-solid fa-check"></i> Copied';
+                }
+                setTimeout(() => {
+                    button.innerHTML = originalText;
+                }, 1800);
+            });
+        });
+
+        prevButton.addEventListener('click', () => showSlide(activeSlideIndex - 1));
+        nextButton.addEventListener('click', () => showSlide(activeSlideIndex + 1));
+        closeButton.addEventListener('click', closeLightbox);
+
+        lightbox.addEventListener('click', (event) => {
+            if (event.target === lightbox) {
+                closeLightbox();
+            }
+        });
+
+        document.addEventListener('keydown', (event) => {
+            if (!lightbox.classList.contains('is-open')) return;
+            if (event.key === 'Escape') closeLightbox();
+            if (event.key === 'ArrowLeft') showSlide(activeSlideIndex - 1);
+            if (event.key === 'ArrowRight') showSlide(activeSlideIndex + 1);
+        });
+    </script>
 
 </body>
 </html>
