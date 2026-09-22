@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Phishing and Scams</title>
+<style>
+:root{--n:#071a3d;--b:#123c8c;--g:#f6c343;--t:#102033;--m:#455a73}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Segoe UI,Arial,sans-serif;background:radial-gradient(circle at top left,#f5f9ff,#d7e5f8 60%,#c2d6ef);color:var(--t);line-height:1.6}
+header{position:relative;text-align:center;overflow:hidden;color:#fff;padding:36px 20px 30px;background:radial-gradient(circle at 12% 0%,#2e68e8,#123c8c 30%,#071a3d 70%)}
+header:before{content:"";position:absolute;width:270px;height:270px;left:-115px;top:-150px;border:1px solid #ffffff33;border-radius:50%;box-shadow:0 0 0 34px #ffffff0b}
+h1,header p{position:relative;z-index:1}
+h1{margin:0;font-size:clamp(2rem,5vw,3.6rem)}
+header p{max-width:760px;margin:12px auto;color:#e0ebff}
+.home{position:absolute;right:24px;top:20px;z-index:3;padding:9px 15px;border:2px solid var(--g);border-radius:999px;background:#fff;color:var(--n);font-weight:800;text-decoration:none}
+.quick{position:sticky;top:0;z-index:4;padding:8px 14px;background:linear-gradient(90deg,#071a3d,#123c8c,#071a3d);border-bottom:3px solid var(--g);display:flex;flex-direction:column;gap:6px;align-items:center}
+.quick-row{display:flex;flex-wrap:wrap;justify-content:center;gap:6px}
+.quick a{display:inline-block;padding:5px 12px;border:1px solid #cfe1ff55;border-radius:999px;color:#fff;text-decoration:none;font-size:.82rem;font-weight:800;white-space:nowrap}
+.quick a:hover{background:var(--g);color:var(--n)}
+main{width:min(1050px,92%);margin:24px auto}
+.section{padding:30px;margin-bottom:28px;border-top:7px solid var(--g);border-radius:24px;background:#eaf3ff;box-shadow:0 18px 42px #071a3d25;scroll-margin-top:95px}
+.section h2{margin-top:0;color:var(--n)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;margin:18px 0}
+.card{padding:20px;border:1px solid #2563eb55;border-radius:18px;background:#fff;box-shadow:0 8px 20px #071a3d12}
+.card svg{width:34px;height:34px;margin-bottom:8px}
+.card h3{margin:6px 0;color:var(--n);font-size:1.15rem}
+.card p{margin:0;font-size:.95rem;color:var(--m);line-height:1.5}
+.flow{display:flex;gap:12px;align-items:stretch;flex-wrap:wrap;margin:18px 0}
+.flow div{flex:1 1 180px;padding:18px;text-align:center;border:1px solid #2563eb55;border-radius:16px;background:#fff;display:flex;flex-direction:column;justify-content:center}
+.flow svg{width:36px;height:36px;margin:0 auto 10px}
+.flow b{display:block;color:var(--n);margin-bottom:6px;font-size:1.05rem}
+.arrow{font-size:1.5rem;color:var(--b);display:flex;align-items:center;justify-content:center}
+.route{margin:22px 0;padding:25px;border-right:8px solid var(--g);border-radius:19px;background:linear-gradient(135deg,#071a3d,#123c8c);color:#eef6ff;scroll-margin-top:100px}
+.badge{display:inline-block;padding:5px 13px;border-radius:999px;background:var(--g);color:var(--n);font-size:.78rem;font-weight:900;letter-spacing:0.5px}
+.route h3{margin:12px 0 8px;font-size:1.45rem;display:flex;align-items:center;gap:10px}
+.route h3 svg{width:26px;height:26px;fill:currentColor}
+.route p{color:#dce9ff}
+.route strong{color:#ffe190}
+.path{margin:15px 0;padding:12px;border:1px solid #f6c343aa;border-radius:9px;background:#020b1d;color:#afffe2;font-family:Consolas,monospace;font-size:.9rem}
+.route ol{padding-left:22px;margin:16px 0}
+.route li{margin-bottom:14px;line-height:1.6}
+.finish{margin-top:14px;padding:12px 14px;border-left:5px solid #55d77a;border-radius:8px;background:#15803d66;font-weight:700}
+.warn{padding:17px;border-left:8px solid #b91c1c;background:#fff2ef;color:#7f1d1d;border-radius:14px;line-height:1.5}
+.ok{padding:17px;border-left:8px solid #15803d;background:#effdf4;color:#14532d;border-radius:14px;line-height:1.5}
+.check{padding:22px;border-radius:17px;background:linear-gradient(135deg,#071a3d,#123c8c);color:#fff;margin-top:18px}
+.check h3{color:var(--g);margin-top:0}
+.check ul{padding-left:20px;margin:10px 0}
+.check li{margin-bottom:8px}
+.choice-note{margin:16px 0;padding:15px;border-left:7px solid #f6c343;border-radius:13px;background:#fff8e3;color:#4a3b00}
+.compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:18px 0}
+.compare-card{padding:20px;border:1px solid #2563eb55;border-radius:18px;background:#fff;box-shadow:0 8px 20px #071a3d15}
+.compare-card h3{margin-top:0;color:var(--n);display:flex;align-items:center;gap:10px}
+.compare-card svg{width:26px;height:26px;flex-shrink:0}
+.compare-card p{margin:8px 0}
+footer{text-align:center;margin-top:36px;padding:22px;border-top:4px solid var(--g);background:var(--n);color:#e0eaff;font-weight:700;font-style:italic}
+.back{display:inline-block;margin-left:12px;padding:7px 13px;border-radius:7px;background:var(--b);color:#fff;text-decoration:none;font-style:normal}
+@media(max-width:700px){
+  header{padding:70px 14px 26px}
+  .home{top:14px;right:14px}
+  .section,.route{padding:20px}
+  .compare-grid{grid-template-columns:1fr}
+  .arrow{transform:rotate(90deg);margin:4px auto}
+}
+</style>
+<style id="security-shared-style">
+/* Unified Digital Security Centre header and navigation */
+body > header, body > header.top {
+  position:relative; display:flex; flex-direction:column; justify-content:center;
+  min-height:0; padding:18px 90px; align-items:center; text-align:center; color:#fff;
+  background:radial-gradient(ellipse at 15% 0%,#2457ac,transparent 55%),linear-gradient(120deg,#102d63,#071a3d);
+}
+body > header h1, body > header.top h1 {max-width:960px; width:100%; margin:4px auto 6px; font-family:"Segoe UI",Arial,sans-serif; font-size:clamp(1.8rem,4.2vw,3.4rem); line-height:1.14; letter-spacing:-.025em; text-align:center; text-wrap:balance;}
+body > header p, body > header.top p {max-width:760px; margin:0 auto; font-size:1.05rem; line-height:1.6; text-align:center; color:#dfeaff;}
+body > header p.ey, body > header.top p.ey {margin:0 auto 3px; color:#f6c343; font-size:.75rem; letter-spacing:.14em; font-weight:800;}
+body > header::before,body > header::after {pointer-events:none;}
+body > header a.home {position:absolute; right:24px; top:50%; transform:translateY(-50%); width:46px; height:46px; padding:0; display:grid; place-items:center; border:1px solid #f6c343; border-radius:14px; background:#f6c343; color:#071a3d; box-shadow:0 6px 18px #0003; z-index:3; transition:background .18s,box-shadow .18s;}
+body > header a.home svg {width:24px; height:24px; fill:currentColor;}
+body > header a.home:hover {background:#ffda75; box-shadow:0 8px 24px #0005;}
+body > nav.quick {position:sticky; top:0; z-index:10; display:flex; flex-direction:column; align-items:center; gap:5px; padding:7px 16px; overflow:visible; white-space:normal; background:#091f46; border-top:2px solid #f6c343; border-bottom:2px solid #f6c343; box-shadow:0 5px 18px #071a3d20;}
+body > nav.quick .quick-label {color:#f6c343; font:800 .68rem/1.3 "Segoe UI",Arial,sans-serif; letter-spacing:.16em;}
+body > nav.quick .quick-links {display:flex; flex-wrap:wrap; justify-content:center; align-items:center; gap:5px; width:100%; max-width:1180px; margin:0 auto; padding:0;}
+body > nav.quick a {display:inline-flex; align-items:center; justify-content:center; min-height:36px; max-width:100%; margin:0; padding:6px 12px; border:1px solid #7796c266; border-radius:10px; background:#ffffff08; color:#eef4ff; font:600 .83rem/1.35 "Segoe UI",Arial,sans-serif; text-align:center; text-decoration:none; white-space:normal; transition:background .18s,border-color .18s;}
+body > nav.quick a:hover,body > nav.quick a[aria-current="location"] {background:#f6c343; color:#071a3d; border-color:#f6c343; transform:none;}
+body > header a.home:focus-visible,body > nav.quick a:focus-visible {outline:3px solid #fff; outline-offset:4px;}
+body main [id] {scroll-margin-top:calc(var(--quick-height,160px) + 20px);}
+@media(max-width:600px) {
+  body > header,body > header.top {min-height:0; padding:14px 66px;}
+  body > header h1, body > header.top h1 {font-size:clamp(1.55rem,6vw,2.25rem); overflow-wrap:anywhere;}
+  body > header p, body > header.top p {font-size:.94rem;}
+  body > header a.home {right:12px; width:44px; height:44px; border-radius:12px;}
+  body > nav.quick {position:relative; padding:7px 10px;}
+  body > nav.quick a {min-height:44px; padding:8px 11px; font-size:.8rem;}
+  body main [id] {scroll-margin-top:20px;}
+}
+@media(prefers-reduced-motion:reduce) {html {scroll-behavior:auto;} body > nav.quick a,body > header a.home {transition:none;}}
+</style>
+<style id="yellow-home-image">
+/* Yellow house image, centred vertically on the right of every header. */
+body > header a.home {
+  inset:auto 24px auto auto; top:50%; transform:translateY(-50%);
+  display:grid; place-items:center; width:48px; height:48px; padding:0;
+  background:#071a3d; border:1px solid #f6c343; border-radius:12px;
+  box-shadow:0 4px 14px #0003;
+}
+body > header a.home img {display:block; width:28px; height:28px; margin:0;}
+body > header a.home:hover {background:#17376a; border-color:#ffe49b;}
+@media(max-width:600px) {
+  body > header a.home {right:12px; width:44px; height:44px;}
+}
+</style>
+</head>
+<body>
+<header id="top">
+  <a class="home" href="digital-security-centre.html" aria-label="Home: Digital Security Centre" title="Home: Digital Security Centre"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSIjZjZjMzQzIiBkPSJNMTIgMi41IDEuNSAxMS40bDEuOSAyLjJMNSAxMi4yVjIxaDV2LTZoNHY2aDV2LTguOGwxLjYgMS40IDEuOS0yLjJMMTIgMi41WiIvPjwvc3ZnPg==" width="28" height="28" alt="" aria-hidden="true"></a>
+  <h1>Phishing and Scams</h1>
+  <p>Learn how online criminals try to trick you with realistic messages, and how to protect your accounts, money, and personal data.</p>
+</header>
+
+<nav class="quick" aria-label="Quick navigation"><span class="quick-label">ON THIS PAGE</span><div class="quick-links"><a href="#what-is">What is Phishing?</a><a href="#spot">Common Scam Types</a><a href="#method">Stop, Check, Protect</a><a href="#calls">Fake Phone Calls</a><a href="#after">Emergency Recovery Steps</a><a href="#rules">Never Share Rules</a></div></nav>
+
+<main>
+  <section class="section" id="what-is">
+    <h2>What is phishing? (Explained simply)</h2>
+    <p>Imagine someone dressing up as a postman, knocking on your front door, and asking you to hand over your house keys. That is exactly what a <strong>phishing scam</strong> is on the internet.</p>
+    
+    <div class="choice-note">
+      <strong>The Big Secret:</strong> Criminals do not hack past complex computer firewalls with movie-style coding. Instead, they send you a fake message that looks identical to a company you trust (like Netflix, Amazon, Apple, Roblox, or your bank). They trick you into typing your own password or sending them money voluntarily.
+    </div>
+
+    <div class="flow">
+      <div>
+        <svg viewBox="0 0 24 24" fill="#b91c1c"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+        <b>1. The Bait</b>
+        You receive an unexpected text, email, or direct message claiming an urgent problem.
+      </div>
+      <span class="arrow">→</span>
+      <div>
+        <svg viewBox="0 0 24 24" fill="#b91c1c"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+        <b>2. The Panic</b>
+        The scammer tells you your account will be deleted or your money is in danger.
+      </div>
+      <span class="arrow">→</span>
+      <div>
+        <svg viewBox="0 0 24 24" fill="#15803d"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+        <b>3. The Shield</b>
+        You stop, refuse to click their link, and check directly through the official app.
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="spot">
+    <h2>4 common scam traps you will see</h2>
+    <div class="grid">
+      <article class="card">
+        <svg viewBox="0 0 24 24" fill="#123c8c"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+        <h3>1. Fake Email (Phishing)</h3>
+        <p>Claims your subscription expired, an invoice needs paying, or someone tried to sign in. The email button leads to a fake login clone.</p>
+      </article>
+
+      <article class="card">
+        <svg viewBox="0 0 24 24" fill="#123c8c"><path d="M17 1.01L7 1c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-1.99-2-1.99zM17 19H7V5h10v14zm-5-3c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3z"/></svg>
+        <h3>2. Fake SMS (Smishing)</h3>
+        <p>A text saying: <em>"Evri: Your parcel has a £1.45 unpaid delivery fee. Click here to reschedule"</em>. The link steals credit card details.</p>
+      </article>
+
+      <article class="card">
+        <svg viewBox="0 0 24 24" fill="#123c8c"><path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 00-1.01.24l-1.57 1.97c-2.83-1.44-5.15-3.75-6.59-6.59l1.97-1.57c.28-.28.36-.67.25-1.02A11.36 11.36 0 018.62 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-.02z"/></svg>
+        <h3>3. Fake Call (Vishing)</h3>
+        <p>A caller pretending to be from your bank, the police, or Microsoft support, warning you to move your money immediately.</p>
+      </article>
+
+      <article class="card">
+        <svg viewBox="0 0 24 24" fill="#123c8c"><path d="M3 11h8V3H3v8zm2-6h4v4H5V5zm8-2v8h8V3h-8zm6 6h-4V5h4v4zM3 21h8v-8H3v8zm2-6h4v4H5v-4zm13-2h-2v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg>
+        <h3>4. Fake QR Codes (Quishing)</h3>
+        <p>Scam stickers placed over legitimate parking meters, posters, or restaurant menus that send your phone to a counterfeit payment page.</p>
+      </article>
+    </div>
+
+    <div class="warn">
+      <strong>Red Flag Warning Signs:</strong> Artificial urgency ("Act within 15 minutes!"), threats of legal trouble or account closures, unexpected free gift cards, slight spelling blunders in the address bar, or any message asking for a code sent to your phone.
+    </div>
+  </section>
+
+  <section class="section" id="method">
+    <h2>The 3-step defense: Stop, Check, Protect</h2>
+    <div class="flow">
+      <div>
+        <svg viewBox="0 0 24 24" fill="#b91c1c"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11H7v-2h10v2z"/></svg>
+        <b>1. STOP</b>
+        Take a breath. Never click links, download attached files, make payments, or read codes aloud under pressure.
+      </div>
+      <span class="arrow">→</span>
+      <div>
+        <svg viewBox="0 0 24 24" fill="#123c8c"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+        <b>2. CHECK</b>
+        Verify independently. Open the official app directly or type the company's verified address into your browser.
+      </div>
+      <span class="arrow">→</span>
+      <div>
+        <svg viewBox="0 0 24 24" fill="#15803d"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+        <b>3. PROTECT</b>
+        Block the scammer, report the text or email, and share what happened with a trusted adult or family member.
+      </div>
+    </div>
+
+    <div class="ok">
+      <strong>Remember:</strong> A genuine bank, school, government service, or company will never disappear because you took 5 minutes to verify. Scammers need you to rush because panic stops you from thinking clearly.
+    </div>
+  </section>
+
+  <!-- PHONE CALLS WALKTHROUGH -->
+  <section class="section" id="calls">
+    <article class="route">
+      <span class="badge">PHONE CALL DEFENSE</span>
+      <h3>
+        <svg viewBox="0 0 24 24"><path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 00-1.01.24l-1.57 1.97c-2.83-1.44-5.15-3.75-6.59-6.59l1.97-1.57c.28-.28.36-.67.25-1.02A11.36 11.36 0 018.62 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-.02z"/></svg>
+        What to do if you receive an unexpected call
+      </h3>
+      <p>Scammers can use computer tools to disguise their caller ID so that your phone screen displays the name of your real bank or local police station.</p>
+      
+      <div class="path">Incoming Call → Do Not Trust Display → Hang Up → Wait 5 Minutes → Call Official Number</div>
+
+      <ol>
+        <li>
+          <strong>Never trust the name on your phone screen:</strong> Criminals spoof telephone numbers easily. Just because the screen says "Barclays", "Santander", or "Apple" does not prove it is them.
+        </li>
+        <li>
+          <strong>Do not answer security questions:</strong> If the caller says, <em>"To verify your identity, tell me your mother's maiden name or passcode"</em>, stop immediately. They called you; you do not have to prove anything to them.
+        </li>
+        <li>
+          <strong>Hang up firmly:</strong> Say: <em>"I will hang up and call back through the official customer number."</em> Do not worry about being impolite. Genuine staff will completely understand and encourage this.
+        </li>
+        <li>
+          <strong>Never use a phone number given by the caller:</strong> Never call back numbers recited by the person on the line or sent via text. Look at the back of your physical plastic bank card or the official app for the real customer care number.
+        </li>
+        <li>
+          <strong>The "Safe Account" trap:</strong> A bank will <strong>never</strong> ask you to move your savings into a "safe account" or "holding vault" because of fraud. If anyone tells you this, it is 100% a scam.
+        </li>
+        <li>
+          <strong>Refuse remote-control software:</strong> Never download apps like AnyDesk, TeamViewer, or QuickSupport because a caller asks you to. This gives them complete remote control over your mouse, screen, and banking logins.
+        </li>
+      </ol>
+      <div class="finish">✓ Safe Rule: Hang up, wait 5 minutes (or use a different phone so the line is completely clear), and dial the number on your card.</div>
+    </article>
+  </section>
+
+  <!-- IF YOU GOT CAUGHT -->
+  <section class="section" id="after">
+    <h2>What to do if you clicked, paid, or entered details</h2>
+    <p>If you realize you made a mistake and typed your password or card details into a scam site, <strong>do not panic and do not feel ashamed</strong>. Even cybersecurity professionals encounter sophisticated traps. Taking rapid action makes all the difference:</p>
+
+    <div class="flow">
+      <div>
+        <b>Step 1: Sever Contact</b>
+        Hang up the phone, close the scam webpage, and block the telephone number or sender immediately.
+      </div>
+      <span class="arrow">→</span>
+      <div>
+        <b>Step 2: Alert Your Bank</b>
+        If bank details or card numbers were entered, call your bank using the phone number on the back of your card straight away.
+      </div>
+      <span class="arrow">→</span>
+      <div>
+        <b>Step 3: Reset Passwords</b>
+        Change the password on the affected account and your primary Gmail/email account from a trusted device.
+      </div>
+      <span class="arrow">→</span>
+      <div>
+        <b>Step 4: Tell an Adult</b>
+        Inform a parent, teacher, or trusted family member. Fast communication helps freeze fraudulent charges in time.
+      </div>
+    </div>
+
+    <ol>
+      <li><strong>Freeze your payment cards:</strong> Open your banking app on your phone. Most banking apps have a button under "Cards" to instantly freeze your card so no unauthorized transactions go through.</li>
+      <li><strong>Secure your email first:</strong> Your email address is the master key to your digital identity. If scammers get into your email, they can reset passwords on every other service you use. Reset your email password first and ensure 2FA is active.</li>
+      <li><strong>Terminate active sessions:</strong> In your Google, Apple, or Microsoft security settings, look for <strong>Devices</strong> or <strong>Active Sessions</strong> and click <strong>Log out of all other sessions</strong> to kick the scammer off your account.</li>
+      <li><strong>Collect the evidence:</strong> Take quick screenshots of the fake text message, scam website URL, or email header before deleting them. This helps your bank and the police investigate.</li>
+    </ol>
+  </section>
+
+  <!-- RULES NEVER TO SHARE -->
+  <section class="section" id="rules">
+    <div class="warn">
+      <strong>The Absolute "Never Share" List:</strong> No genuine company representative, bank manager, police officer, or game moderator will ever ask you for:
+      <ul style="margin:10px 0 0 0;padding-left:20px">
+        <li>Your master passwords or device screen PINs</li>
+        <li>Temporary 6-digit authenticator or SMS verification codes</li>
+        <li>Your emergency offline backup recovery codes</li>
+        <li>Your Bitwarden, Google, or Apple master account passwords</li>
+      </ul>
+    </div>
+
+    <div class="check">
+      <h3>Essential scam defense checklist</h3>
+      <ul>
+        <li>Treat all unexpected urgent texts, calls, and emails with healthy suspicion.</li>
+        <li>Never click links inside SMS messages regarding missed deliveries or account warnings.</li>
+        <li>Check website URLs from right to left before typing any username or password.</li>
+        <li>Always use official smartphone apps or saved browser bookmarks to log in.</li>
+        <li>Ensure two-factor authentication (passkey or authenticator app) is active on every account.</li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<footer>
+  ***Umer Malik: Where Craft Meets Research*** <a class="back" href="#top">↑ Back to top</a>
+</footer>
+<script id="security-navigation">
+(() => {
+  const nav = document.querySelector('nav.quick');
+  const links = [...nav.querySelectorAll('a[href^="#"]')];
+  const sections = links.map(a => document.getElementById(a.hash.slice(1)));
+  const mark = index => links.forEach((a,i) => i === index ? a.setAttribute('aria-current','location') : a.removeAttribute('aria-current'));
+  let pending = false;
+  const update = () => {
+    const sticky = getComputedStyle(nav).position === 'sticky';
+    const offset = sticky ? nav.offsetHeight + 24 : 24;
+    document.documentElement.style.setProperty('--quick-height',nav.offsetHeight+'px');
+    let index = -1;
+    sections.forEach((section,i) => { if(section && section.getBoundingClientRect().top <= offset) index=i; });
+    mark(index); pending=false;
+  };
+  const schedule = () => { if(!pending) {pending=true; requestAnimationFrame(update);} };
+  addEventListener('scroll',schedule,{passive:true});
+  addEventListener('resize',schedule);
+  addEventListener('hashchange',schedule);
+  if(window.ResizeObserver) new ResizeObserver(schedule).observe(nav);
+  update();
+})();
+</script>
+</body>
+</html>

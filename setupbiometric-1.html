@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>How to Set Up Biometric Security</title>
+<style>
+:root{--n:#071a3d;--b:#123c8c;--g:#f6c343;--t:#102033;--m:#455a73}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Segoe UI,Arial,sans-serif;background:radial-gradient(circle at top left,#f5f9ff,#d7e5f8 60%,#c2d6ef);color:var(--t);line-height:1.6}
+header{position:relative;text-align:center;overflow:hidden;color:#fff;padding:36px 20px 30px;background:radial-gradient(circle at 12% 0%,#2e68e8,#123c8c 30%,#071a3d 70%)}
+header:before{content:"";position:absolute;width:270px;height:270px;left:-115px;top:-150px;border:1px solid #ffffff33;border-radius:50%;box-shadow:0 0 0 34px #ffffff0b}
+h1,header p{position:relative;z-index:1}
+h1{margin:0;font-size:clamp(2rem,5vw,3.6rem)}
+header p{max-width:760px;margin:12px auto;color:#e0ebff}
+.home{position:absolute;right:24px;top:20px;z-index:3;padding:9px 15px;border:2px solid var(--g);border-radius:999px;background:#fff;color:var(--n);font-weight:800;text-decoration:none}
+.quick{position:sticky;top:0;z-index:4;padding:8px 14px;background:linear-gradient(90deg,#071a3d,#123c8c,#071a3d);border-bottom:3px solid var(--g);display:flex;flex-direction:column;gap:6px;align-items:center}
+.quick-row{display:flex;flex-wrap:wrap;justify-content:center;gap:6px}
+.quick a{display:inline-block;padding:5px 12px;border:1px solid #cfe1ff55;border-radius:999px;color:#fff;text-decoration:none;font-size:.82rem;font-weight:800;white-space:nowrap}
+.quick a:hover{background:var(--g);color:var(--n)}
+main{width:min(1050px,92%);margin:24px auto}
+.section{padding:30px;margin-bottom:28px;border-top:7px solid var(--g);border-radius:24px;background:#eaf3ff;box-shadow:0 18px 42px #071a3d25;scroll-margin-top:95px}
+.section h2{margin-top:0;color:var(--n)}
+.choice{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.choice a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:18px;border:1px solid #2563eb55;border-radius:17px;background:linear-gradient(135deg,#fff,#f4f8fd);color:var(--n);text-align:center;text-decoration:none;font-weight:800;box-shadow:0 10px 22px #071a3d20}
+.choice a:hover{transform:translateY(-4px);border-color:var(--g)}
+.choice svg{width:32px;height:32px;fill:currentColor}
+.flow{display:flex;gap:12px;align-items:stretch;flex-wrap:wrap;margin:18px 0}
+.flow div{flex:1 1 200px;padding:16px;text-align:center;border:1px solid #2563eb55;border-radius:16px;background:#fff;display:flex;flex-direction:column;justify-content:center}
+.flow svg{width:36px;height:36px;margin:0 auto 10px}
+.flow b{display:block;color:var(--n);margin-bottom:6px;font-size:1.05rem}
+.arrow{font-size:1.5rem;color:var(--b);display:flex;align-items:center;justify-content:center}
+.route{margin:22px 0;padding:25px;border-right:8px solid var(--g);border-radius:19px;background:linear-gradient(135deg,#071a3d,#123c8c);color:#eef6ff;scroll-margin-top:100px}
+.badge{display:inline-block;padding:5px 13px;border-radius:999px;background:var(--g);color:var(--n);font-size:.78rem;font-weight:900;letter-spacing:0.5px}
+.route h3{margin:12px 0 8px;font-size:1.45rem;display:flex;align-items:center;gap:10px}
+.route h3 svg{width:26px;height:26px;fill:currentColor}
+.route p{color:#dce9ff}
+.route strong{color:#ffe190}
+.path{margin:15px 0;padding:12px;border:1px solid #f6c343aa;border-radius:9px;background:#020b1d;color:#afffe2;font-family:Consolas,monospace;font-size:.9rem}
+.route ol{padding-left:22px;margin:16px 0}
+.route li{margin-bottom:16px;line-height:1.6}
+.finish{margin-top:14px;padding:12px 14px;border-left:5px solid #55d77a;border-radius:8px;background:#15803d66;font-weight:700}
+.warn{padding:17px;border-left:8px solid #b91c1c;background:#fff2ef;color:#7f1d1d;border-radius:14px;line-height:1.5}
+.check{padding:22px;border-radius:17px;background:linear-gradient(135deg,#071a3d,#123c8c);color:#fff;margin-top:18px}
+.check h3{color:var(--g);margin-top:0}
+.check ul{padding-left:20px;margin:10px 0}
+.check li{margin-bottom:8px}
+footer{text-align:center;margin-top:36px;padding:22px;border-top:4px solid var(--g);background:var(--n);color:#e0eaff;font-weight:700;font-style:italic}
+.back{display:inline-block;margin-left:12px;padding:7px 13px;border-radius:7px;background:var(--b);color:#fff;text-decoration:none;font-style:normal}
+.choice-note{margin:16px 0;padding:15px;border-left:7px solid #f6c343;border-radius:13px;background:#fff8e3;color:#4a3b00}
+.tip-box{margin:14px 0;padding:14px;border-left:6px solid #22c55e;border-radius:12px;background:#0f3020;color:#cbfdd9}
+.tip-box strong{color:#86efac}
+.setup-card{background:#ffffff;border:1px solid #2563eb44;border-radius:18px;padding:20px;margin:16px 0;box-shadow:0 8px 20px #071a3d10}
+.setup-card h3{margin-top:0;color:var(--n);display:flex;align-items:center;gap:10px}
+.setup-card ol{padding-left:20px;margin:12px 0}
+.setup-card li{margin-bottom:10px;line-height:1.55}
+@media(max-width:700px){
+  header{padding:70px 14px 26px}
+  .home{top:14px;right:14px}
+  .choice{grid-template-columns:1fr}
+  .section,.route{padding:20px}
+  .arrow{transform:rotate(90deg);margin:4px auto}
+}
+</style>
+<style id="security-shared-style">
+/* Unified Digital Security Centre header and navigation */
+body > header, body > header.top {
+  position:relative; display:flex; flex-direction:column; justify-content:center;
+  min-height:0; padding:18px 90px; align-items:center; text-align:center; color:#fff;
+  background:radial-gradient(ellipse at 15% 0%,#2457ac,transparent 55%),linear-gradient(120deg,#102d63,#071a3d);
+}
+body > header h1, body > header.top h1 {max-width:960px; width:100%; margin:4px auto 6px; font-family:"Segoe UI",Arial,sans-serif; font-size:clamp(1.8rem,4.2vw,3.4rem); line-height:1.14; letter-spacing:-.025em; text-align:center; text-wrap:balance;}
+body > header p, body > header.top p {max-width:760px; margin:0 auto; font-size:1.05rem; line-height:1.6; text-align:center; color:#dfeaff;}
+body > header p.ey, body > header.top p.ey {margin:0 auto 3px; color:#f6c343; font-size:.75rem; letter-spacing:.14em; font-weight:800;}
+body > header::before,body > header::after {pointer-events:none;}
+body > header a.home {position:absolute; right:24px; top:50%; transform:translateY(-50%); width:46px; height:46px; padding:0; display:grid; place-items:center; border:1px solid #f6c343; border-radius:14px; background:#f6c343; color:#071a3d; box-shadow:0 6px 18px #0003; z-index:3; transition:background .18s,box-shadow .18s;}
+body > header a.home svg {width:24px; height:24px; fill:currentColor;}
+body > header a.home:hover {background:#ffda75; box-shadow:0 8px 24px #0005;}
+body > nav.quick {position:sticky; top:0; z-index:10; display:flex; flex-direction:column; align-items:center; gap:5px; padding:7px 16px; overflow:visible; white-space:normal; background:#091f46; border-top:2px solid #f6c343; border-bottom:2px solid #f6c343; box-shadow:0 5px 18px #071a3d20;}
+body > nav.quick .quick-label {color:#f6c343; font:800 .68rem/1.3 "Segoe UI",Arial,sans-serif; letter-spacing:.16em;}
+body > nav.quick .quick-links {display:flex; flex-wrap:wrap; justify-content:center; align-items:center; gap:5px; width:100%; max-width:1180px; margin:0 auto; padding:0;}
+body > nav.quick a {display:inline-flex; align-items:center; justify-content:center; min-height:36px; max-width:100%; margin:0; padding:6px 12px; border:1px solid #7796c266; border-radius:10px; background:#ffffff08; color:#eef4ff; font:600 .83rem/1.35 "Segoe UI",Arial,sans-serif; text-align:center; text-decoration:none; white-space:normal; transition:background .18s,border-color .18s;}
+body > nav.quick a:hover,body > nav.quick a[aria-current="location"] {background:#f6c343; color:#071a3d; border-color:#f6c343; transform:none;}
+body > header a.home:focus-visible,body > nav.quick a:focus-visible {outline:3px solid #fff; outline-offset:4px;}
+body main [id] {scroll-margin-top:calc(var(--quick-height,160px) + 20px);}
+@media(max-width:600px) {
+  body > header,body > header.top {min-height:0; padding:14px 66px;}
+  body > header h1, body > header.top h1 {font-size:clamp(1.55rem,6vw,2.25rem); overflow-wrap:anywhere;}
+  body > header p, body > header.top p {font-size:.94rem;}
+  body > header a.home {right:12px; width:44px; height:44px; border-radius:12px;}
+  body > nav.quick {position:relative; padding:7px 10px;}
+  body > nav.quick a {min-height:44px; padding:8px 11px; font-size:.8rem;}
+  body main [id] {scroll-margin-top:20px;}
+}
+@media(prefers-reduced-motion:reduce) {html {scroll-behavior:auto;} body > nav.quick a,body > header a.home {transition:none;}}
+</style>
+<style id="yellow-home-image">
+/* Yellow house image, centred vertically on the right of every header. */
+body > header a.home {
+  inset:auto 24px auto auto; top:50%; transform:translateY(-50%);
+  display:grid; place-items:center; width:48px; height:48px; padding:0;
+  background:#071a3d; border:1px solid #f6c343; border-radius:12px;
+  box-shadow:0 4px 14px #0003;
+}
+body > header a.home img {display:block; width:28px; height:28px; margin:0;}
+body > header a.home:hover {background:#17376a; border-color:#ffe49b;}
+@media(max-width:600px) {
+  body > header a.home {right:12px; width:44px; height:44px;}
+}
+</style>
+</head>
+<body>
+<header id="top">
+  <a class="home" href="digital-security-centre.html" aria-label="Home: Digital Security Centre" title="Home: Digital Security Centre"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSIjZjZjMzQzIiBkPSJNMTIgMi41IDEuNSAxMS40bDEuOSAyLjJMNSAxMi4yVjIxaDV2LTZoNHY2aDV2LTguOGwxLjYgMS40IDEuOS0yLjJMMTIgMi41WiIvPjwvc3ZnPg==" width="28" height="28" alt="" aria-hidden="true"></a>
+  <h1>How to Set Up Biometric Security</h1>
+  <p>Protect your smartphone with 3 fortified defense layers: your lock screen credential, multi-fingerprint enrollment, and facial recognition.</p>
+</header>
+
+<nav class="quick" aria-label="Quick navigation"><span class="quick-label">ON THIS PAGE</span><div class="quick-links"><a href="#layers">The 3 Defense Layers</a><a href="#vaults">Android Vault Setup</a><a href="#trick">The 4-Finger Scanner Trick</a><a href="#android">1. Android &amp; Samsung Setup</a><a href="#apple">2. Apple iPhone &amp; iPad Setup</a><a href="#safe">Biometric Safety Rules</a></div></nav>
+
+<main>
+  <section class="section" id="layers">
+    <h2>The 3 layers of smartphone defense</h2>
+    <p>Modern mobile security works best when built in three distinct layers. If one method cannot read you (such as wearing gloves or holding your phone in the dark), the next layer takes over seamlessly.</p>
+    
+    <div class="flow">
+      <div>
+        <svg viewBox="0 0 24 24" fill="#123c8c"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+        <b>Layer 1: Pattern, PIN, or Password</b>
+        The master foundation. If your phone restarts or biometrics fail, this secret unlocks everything.
+      </div>
+      <span class="arrow">+</span>
+      <div>
+        <svg viewBox="0 0 24 24" fill="#123c8c"><path d="M17.81 4.47c-.08 0-.16-.02-.23-.06C15.66 3.42 14 3 12.01 3c-1.98 0-3.86.47-5.57 1.41-.24.13-.54.04-.68-.2-.13-.24-.04-.55.2-.68C7.82 2.52 9.86 2 12.01 2c2.13 0 3.99.47 6.03 1.52.25.13.34.43.21.67-.09.18-.26.28-.44.28zM3.5 9.72c-.1 0-.2-.03-.29-.09-.23-.16-.28-.47-.12-.7.99-1.4 2.25-2.5 3.75-3.27.24-.12.54-.03.67.21.12.24.03.54-.21.67-1.39.72-2.56 1.73-3.49 3.03-.08.1-.2.15-.31.15zm16.99 0c-.11 0-.23-.05-.31-.15-.93-1.3-2.1-2.31-3.49-3.03-.24-.13-.33-.43-.21-.67.13-.24.43-.33.67-.21 1.5.77 2.76 1.87 3.75 3.27.16.23.11.54-.12.7-.09.06-.19.09-.29.09zM12 7.75c-3.72 0-6.75 3.03-6.75 6.75 0 2.27 1.13 4.29 2.87 5.51.21.15.26.45.11.66-.15.21-.45.26-.66.11-2.01-1.42-3.32-3.76-3.32-6.28 0-4.27 3.48-7.75 7.75-7.75s7.75 3.48 7.75 7.75c0 2.52-1.31 4.86-3.32 6.28-.21.15-.51.1-.66-.11-.15-.21-.1-.51.11-.66 1.74-1.22 2.87-3.24 2.87-5.51 0-3.72-3.03-6.75-6.75-6.75z"/></svg>
+        <b>Layer 2: Fingerprint Scanner</b>
+        Instant, secure physical access. Place your registered thumbs or index fingers on the sensor.
+      </div>
+      <span class="arrow">+</span>
+      <div>
+        <svg viewBox="0 0 24 24" fill="#15803d"><path d="M9 11.75c-.69 0-1.25.56-1.25 1.25s.56 1.25 1.25 1.25 1.25-.56 1.25-1.25-.56-1.25-1.25-1.25zm6 0c-.69 0-1.25.56-1.25 1.25s.56 1.25 1.25 1.25 1.25-.56 1.25-1.25-.56-1.25-1.25-1.25zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8 0-.29.02-.58.05-.86 2.36-1.05 4.23-2.98 5.21-5.37C11.07 8.33 14.05 10 17.42 10c.78 0 1.53-.09 2.25-.26.21.71.33 1.47.33 2.26 0 4.41-3.59 8-8 8z"/></svg>
+        <b>Layer 3: Face Recognition</b>
+        Glance at your phone screen for touch-free verification in bright daylight or everyday tasks.
+      </div>
+    </div>
+  </section>
+
+  <!-- ANDROID MANDATORY VAULT SETUP -->
+  <section class="section" id="vaults">
+    <h2>Mandatory: Connect your Android security vault</h2>
+    <p>On Android, your biometrics work hand-in-hand with an encrypted digital vault to autofill your passwords and store passkeys. You must be signed in with your <strong>primary Google Account</strong> so your credentials stay backed up.</p>
+
+    <div class="setup-card">
+      <h3>
+        <svg viewBox="0 0 24 24" width="26" height="26"><path fill="#EA4335" d="M12 5c1.55 0 2.95.55 4.04 1.45l3.03-3.03C17.24 1.7 14.77 1 12 1 7.42 1 3.53 3.61 1.63 7.37l3.68 2.85C6.19 7.41 8.87 5 12 5z"/><path fill="#4285F4" d="M23.49 12.28c0-.79-.07-1.54-.19-2.28H12v4.51h6.47c-.29 1.48-1.14 2.73-2.4 3.58l3.7 2.87c2.16-2 3.72-4.94 3.72-8.68z"/><path fill="#FBBC05" d="M5.31 14.78a7.06 7.06 0 010-4.56L1.63 7.37a11.97 11.97 0 000 9.26l3.68-2.85z"/><path fill="#34A853" d="M12 23c3.24 0 5.95-1.08 7.93-2.91l-3.7-2.87c-1.08.72-2.45 1.16-4.23 1.16-3.13 0-5.81-2.41-6.69-5.22L1.63 16.01C3.53 19.79 7.42 23 12 23z"/></svg>
+        Option A: Google Password Manager (Default on all Android phones)
+      </h3>
+      <ol>
+        <li>Open phone <strong>Settings</strong> and tap on <strong>Google</strong>.</li>
+        <li>Check the top of the screen to confirm your <strong>primary Gmail address</strong> is shown. (Do not use a secondary or throwaway email).</li>
+        <li>Tap <strong>All Services</strong>, then select <strong>Password Manager</strong>.</li>
+        <li>Tap the <strong>Settings gear icon</strong> in the upper corner and make sure <strong>Offer to save passwords</strong> and <strong>Biometric authentication for autofill</strong> are toggled <strong>ON</strong>.</li>
+      </ol>
+      <div class="finish">✓ Connected: Your primary Google Account is now authorized to guard your credentials with your biometrics.</div>
+    </div>
+
+    <div class="setup-card">
+      <h3>
+        <svg viewBox="0 0 24 24" width="26" height="26" fill="#0c4da2"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/></svg>
+        Option B: Samsung Wallet / Samsung Pass (For Samsung Galaxy users)
+      </h3>
+      <ol>
+        <li>Open phone <strong>Settings &gt; Accounts and backup &gt; Manage accounts</strong>. Ensure your <strong>primary Google account</strong> and your <strong>Samsung account</strong> are both logged in.</li>
+        <li>Open the <strong>Galaxy Store</strong> app, search for <strong>Samsung Wallet</strong>, and make sure it is updated to the latest version.</li>
+        <li>Open Samsung Wallet, tap the <strong>Menu</strong> tab, and tap <strong>Settings &gt; Verification method</strong>.</li>
+        <li>Switch on <strong>Fingerprints</strong> and confirm with your device PIN.</li>
+      </ol>
+      <div class="finish">✓ Connected: Samsung Knox hardware security is locked to your biometrics and primary accounts.</div>
+    </div>
+  </section>
+
+  <!-- SCANNER TRICK SECTION -->
+  <section class="section" id="trick">
+    <h2>The 4-finger scan trick: 100% reliable unlocks</h2>
+    <p>Most phones allow you to save up to 4 fingerprint profiles. If you register only 1 finger in each slot, unlocking can fail if your finger is slightly damp, angled strangely, or cold.</p>
+    
+    <div class="choice-note">
+      <strong>Pro Tip — The Dual-Finger Technique:</strong> Instead of dedicating a whole slot to a single finger, you can scan <strong>two fingers alternately into the same slot</strong>! By registering your two main fingers (e.g. Left Thumb and Right Thumb) twice across two slots, your phone learns every millimeter, tip, side edge, and angle of both fingers.
+    </div>
+
+    <div class="flow">
+      <div>
+        <b>Slot 1: Both Thumbs</b>
+        Tap Left Thumb, then Right Thumb, alternating back and forth until the progress circle hits 100%.
+      </div>
+      <span class="arrow">→</span>
+      <div>
+        <b>Slot 2: Both Index Fingers</b>
+        Tap Left Index, then Right Index alternately until the meter fills. Great for when the phone is flat on a desk.
+      </div>
+      <span class="arrow">→</span>
+      <div>
+        <b>Slots 3 &amp; 4: The Doubled Angles</b>
+        Repeat the process for edge angles, knuckle sides, and diagonal presses. Your phone now has massive data on your primary digits!
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <!-- ANDROID GUIDE -->
+    <article class="route" id="android">
+      <span class="badge">ANDROID &amp; SAMSUNG STEP-BY-STEP</span>
+      <h3>
+        <svg viewBox="0 0 24 24"><path d="M17.6 9.48l1.84-3.18a.5.5 0 00-.86-.5l-1.87 3.24a11.45 11.45 0 00-9.42 0L5.42 5.8a.5.5 0 00-.86.5l1.84 3.18A10.8 10.8 0 002 18h20a10.8 10.8 0 00-4.4-8.52zM7 14.5a1.25 1.25 0 111.25-1.25A1.25 1.25 0 017 14.5zm10 0a1.25 1.25 0 111.25-1.25 1.25 1.25 0 01-1.25 1.25z"/></svg>
+        How to Set Up Full Biometric Security on Android
+      </h3>
+      <p>Follow these steps in exact order to build your 3 layers of phone security:</p>
+      <div class="path">Settings → Security &amp; Privacy → Screen Lock → Fingerprints → Face Recognition</div>
+
+      <ol>
+        <li>
+          <strong>Layer 1 — Create your Screen Lock (Password or Pattern):</strong><br>
+          • Open your phone <strong>Settings</strong> and tap <strong>Security &amp; privacy</strong>.<br>
+          • Tap <strong>Device unlock &gt; Screen lock</strong> (or <strong>Lock screen</strong> on Samsung).<br>
+          • Choose either a strong <strong>6-digit PIN</strong>, a complex <strong>Alphanumeric Password</strong>, or a <strong>Pattern Puzzle</strong>.<br>
+          • Draw or type your code, tap <strong>Confirm</strong>, and enter it once more to verify. <em>Never forget this code, as biometrics cannot function without it!</em>
+        </li>
+        <li>
+          <strong>Layer 2 — Register your Fingerprints (Add up to 4 slots):</strong><br>
+          • Return to <strong>Security &amp; privacy &gt; Biometrics &gt; Fingerprints</strong>.<br>
+          • Type the PIN or draw the Pattern you created in Layer 1.<br>
+          • Tap <strong>Add Fingerprint</strong>.<br>
+          • Place your finger on the sensor. Lift and press repeatedly when you feel a buzz.<br>
+          • <em>Use the trick:</em> Alternate between your <strong>Left Thumb</strong> and <strong>Right Thumb</strong> on the same registration until the bar reaches 100%.<br>
+          • Tap <strong>Add</strong> again to create <strong>Fingerprint 2</strong>. Alternate your <strong>Left Index</strong> and <strong>Right Index</strong> fingers.<br>
+          • Repeat for Fingerprint slots 3 and 4 to capture tricky side angles and edges.
+        </li>
+        <li>
+          <strong>Layer 3 — Register your Face Recognition:</strong><br>
+          • Under the <strong>Biometrics</strong> menu, tap <strong>Face Recognition</strong> (or <strong>Face Unlock</strong>).<br>
+          • Enter your device PIN or password again.<br>
+          • Hold the phone 20–30 centimetres away from your face in a well-lit room.<br>
+          • Look directly into the front camera circle and hold still until the scan completes.<br>
+          • <em>Important Security Toggles:</em> Turn <strong>Require eyes to be open</strong> to <strong>ON</strong> (so nobody can unlock your phone while you are asleep), and toggle <strong>Stay on Lock screen until swipe</strong> to <strong>OFF</strong> if you want instant desktop access.
+        </li>
+      </ol>
+
+      <div class="tip-box">
+        <strong>Touch Sensitivity Note:</strong> If you use a tempered glass screen protector on a Samsung or Pixel phone, open <strong>Settings &gt; Display</strong> and turn on <strong>Touch sensitivity</strong> to make in-display fingerprint scanning lightning-fast.
+      </div>
+
+      <div class="finish">✓ Finished: Your Android device is defended by all 3 security layers.</div>
+    </article>
+
+    <!-- APPLE GUIDE -->
+    <article class="route" id="apple">
+      <span class="badge">APPLE IPHONE &amp; IPAD STEP-BY-STEP</span>
+      <h3>
+        <svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.62-.75 1.04-1.8 1.01-2.87-.9.04-2 .6-2.65 1.34-.56.64-1.06 1.7-1.01 2.76 1.01.08 2.03-.49 2.65-1.23z"/></svg>
+        How to Set Up Biometric Security on iPhone &amp; iPad
+      </h3>
+      <p>Apple hardware uses either <strong>Face ID</strong> (modern iPhones) or <strong>Touch ID</strong> (iPad models &amp; iPhone SE), backed by your master Passcode.</p>
+      <div class="path">Settings → Face ID &amp; Passcode (or Touch ID &amp; Passcode) → Add Biometrics</div>
+
+      <ol>
+        <li>
+          <strong>Layer 1 — Create your Master Device Passcode:</strong><br>
+          • Open iPhone <strong>Settings</strong>, scroll down, and tap <strong>Face ID &amp; Passcode</strong> (or <strong>Touch ID &amp; Passcode</strong>).<br>
+          • Tap <strong>Turn Passcode On</strong>.<br>
+          • Enter a strong 6-digit number (or tap <em>Passcode Options</em> to create a custom alphanumeric password). Re-enter to confirm.
+        </li>
+        <li>
+          <strong>Layer 2 — Register Touch ID (For models with home buttons or top power buttons):</strong><br>
+          • In the passcode menu, tap <strong>Add a Fingerprint</strong>.<br>
+          • Rest your finger on the sensor without pressing. Lift and touch when it vibrates.<br>
+          • <em>Use the trick:</em> Alternate between your <strong>Left Thumb</strong> and <strong>Right Thumb</strong> during the initial scan. When it asks to adjust your grip, capture the edges and tips.<br>
+          • Tap <strong>Add a Fingerprint</strong> again to create a second profile alternating your <strong>Left and Right Index fingers</strong>. You can register up to 5 fingerprint slots on iOS.
+        </li>
+        <li>
+          <strong>Layer 3 — Register Face ID (For all modern notch/Dynamic Island iPhones):</strong><br>
+          • In the same menu, tap <strong>Set Up Face ID</strong>, then tap <strong>Get Started</strong>.<br>
+          • Position your face inside the circle frame and slowly roll your head in a full circle to map your contours.<br>
+          • Complete the second scan when prompted.<br>
+          • <em>Bonus Appearance:</em> Tap <strong>Set Up an Alternative Appearance</strong> to scan your face with glasses, a hat, or a different daily look so it never fails.<br>
+          • Ensure <strong>Require Attention for Face ID</strong> is turned <strong>ON</strong> so the sensor confirms your eyes are open before unlocking.
+        </li>
+      </ol>
+
+      <div class="finish">✓ Finished: Your Apple device is protected by the Secure Enclave hardware vault.</div>
+    </article>
+  </section>
+
+  <section class="section" id="safe">
+    <div class="warn">
+      <strong>Zero-Trust Biometric Warning:</strong> Never let friends, colleagues, or strangers register their fingers or faces on your phone "just to try it out." Adding their biometrics gives them full master authorization to view all your stored passwords, banking apps, and personal messages!
+    </div>
+
+    <div class="check">
+      <h3>Essential biometric safety checklist</h3>
+      <ul>
+        <li>Never choose simple lock codes like 000000, 123456, or your birth year.</li>
+        <li>Clean your screen and home button sensor regularly with a dry cloth to prevent reading errors.</li>
+        <li>Always turn on "Require eyes to be open" for facial recognition.</li>
+        <li>Ensure your primary Google or Apple account is signed in with two-factor authentication.</li>
+        <li>If your finger gets injured or won't scan, use your Layer 1 PIN or pattern to access your phone.</li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<footer>
+  ***Umer Malik: Where Craft Meets Research*** <a class="back" href="#top">↑ Back to top</a>
+</footer>
+<script id="security-navigation">
+(() => {
+  const nav = document.querySelector('nav.quick');
+  const links = [...nav.querySelectorAll('a[href^="#"]')];
+  const sections = links.map(a => document.getElementById(a.hash.slice(1)));
+  const mark = index => links.forEach((a,i) => i === index ? a.setAttribute('aria-current','location') : a.removeAttribute('aria-current'));
+  let pending = false;
+  const update = () => {
+    const sticky = getComputedStyle(nav).position === 'sticky';
+    const offset = sticky ? nav.offsetHeight + 24 : 24;
+    document.documentElement.style.setProperty('--quick-height',nav.offsetHeight+'px');
+    let index = -1;
+    sections.forEach((section,i) => { if(section && section.getBoundingClientRect().top <= offset) index=i; });
+    mark(index); pending=false;
+  };
+  const schedule = () => { if(!pending) {pending=true; requestAnimationFrame(update);} };
+  addEventListener('scroll',schedule,{passive:true});
+  addEventListener('resize',schedule);
+  addEventListener('hashchange',schedule);
+  if(window.ResizeObserver) new ResizeObserver(schedule).observe(nav);
+  update();
+})();
+</script>
+</body>
+</html>

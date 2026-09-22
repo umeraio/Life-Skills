@@ -1,0 +1,412 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>How to Set Up 2FA</title>
+<style>
+:root{--n:#071a3d;--b:#123c8c;--g:#f6c343;--t:#102033;--m:#455a73}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Segoe UI,Arial,sans-serif;background:radial-gradient(circle at top left,#f5f9ff,#d7e5f8 60%,#c2d6ef);color:var(--t);line-height:1.6}
+header{position:relative;overflow:hidden;text-align:center;color:#fff;padding:36px 20px 30px;background:radial-gradient(circle at 12% 0%,#2e68e8,#123c8c 30%,#071a3d 70%)}
+header:before{content:"";position:absolute;width:270px;height:270px;left:-115px;top:-150px;border:1px solid #ffffff33;border-radius:50%;box-shadow:0 0 0 34px #ffffff0b}
+h1,header p{position:relative;z-index:1}
+h1{margin:0;font-size:clamp(2rem,5vw,3.6rem)}
+header p{max-width:760px;margin:12px auto;color:#e0ebff}
+.home{position:absolute;right:24px;top:20px;z-index:3;padding:9px 15px;border:2px solid var(--g);border-radius:999px;background:#fff;color:var(--n);font-weight:800;text-decoration:none}
+.quick{position:sticky;top:0;z-index:4;overflow:auto;white-space:nowrap;padding:8px 18px;text-align:center;background:linear-gradient(90deg,#071a3d,#123c8c,#071a3d);border-bottom:3px solid var(--g)}
+.quick a{display:inline-block;margin:0 3px;padding:6px 10px;border:1px solid #cfe1ff55;border-radius:999px;color:#fff;text-decoration:none;font-size:.82rem;font-weight:800}
+.quick a:hover{background:var(--g);color:var(--n)}
+main{width:min(1050px,92%);margin:24px auto}
+.section{padding:30px;margin-bottom:28px;border-top:7px solid var(--g);border-radius:24px;background:#eaf3ff;box-shadow:0 18px 42px #071a3d25;scroll-margin-top:55px}
+.section h2{margin-top:0;color:var(--n)}
+.choice{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.choice a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:18px;border:1px solid #2563eb55;border-radius:17px;background:linear-gradient(135deg,#fff,#f4f8fd);color:var(--n);text-align:center;text-decoration:none;font-weight:800;box-shadow:0 10px 22px #071a3d20}
+.choice a:hover{transform:translateY(-4px);border-color:var(--g)}
+.choice svg{width:32px;height:32px;fill:currentColor}
+.flow{display:flex;gap:12px;align-items:stretch;flex-wrap:wrap;margin:18px 0}
+.flow div{flex:1 1 180px;padding:16px;text-align:center;border:1px solid #2563eb55;border-radius:16px;background:#fff;display:flex;flex-direction:column;justify-content:center}
+.flow svg{width:36px;height:36px;margin:0 auto 10px}
+.flow b{display:block;color:var(--n);margin-bottom:6px;font-size:1.05rem}
+.arrow{font-size:1.5rem;color:var(--b);display:flex;align-items:center;justify-content:center}
+.route{margin:22px 0;padding:25px;border-right:8px solid var(--g);border-radius:19px;background:linear-gradient(135deg,#071a3d,#123c8c);color:#eef6ff;scroll-margin-top:60px}
+.badge{display:inline-block;padding:5px 13px;border-radius:999px;background:var(--g);color:var(--n);font-size:.78rem;font-weight:900;letter-spacing:0.5px}
+.route h3{margin:12px 0 8px;font-size:1.45rem;display:flex;align-items:center;gap:10px}
+.route h3 svg{width:26px;height:26px;fill:currentColor}
+.route p{color:#dce9ff}
+.route strong{color:#ffe190}
+.path{margin:15px 0;padding:12px;border:1px solid #f6c343aa;border-radius:9px;background:#020b1d;color:#afffe2;font-family:Consolas,monospace;font-size:.9rem}
+.route ol{padding-left:22px;margin:16px 0}
+.route li{margin-bottom:14px;line-height:1.6}
+.finish{margin-top:14px;padding:12px 14px;border-left:5px solid #55d77a;border-radius:8px;background:#15803d66;font-weight:700}
+.warn{padding:17px;border-left:8px solid #b91c1c;background:#fff2ef;color:#7f1d1d;border-radius:14px;line-height:1.5}
+.check{padding:22px;border-radius:17px;background:linear-gradient(135deg,#071a3d,#123c8c);color:#fff;margin-top:18px}
+.check h3{color:var(--g);margin-top:0}
+.check ul{padding-left:20px;margin:10px 0}
+.check li{margin-bottom:8px}
+footer{text-align:center;margin-top:36px;padding:22px;border-top:4px solid var(--g);background:var(--n);color:#e0eaff;font-weight:700;font-style:italic}
+.back{display:inline-block;margin-left:12px;padding:7px 13px;border-radius:7px;background:var(--b);color:#fff;text-decoration:none;font-style:normal}
+.install-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.phone-demo{padding:20px;border:1px solid #2563eb55;border-radius:20px;background:linear-gradient(135deg,#fff,#f4f8fd);box-shadow:0 12px 24px #071a3d20}
+.phone{max-width:280px;margin:14px auto;padding:16px;border:8px solid #071a3d;border-radius:32px;background:#eaf3ff}
+.notch{width:82px;height:10px;margin:-16px auto 14px;border-radius:0 0 9px 9px;background:#071a3d}
+.app-row{display:flex;align-items:center;padding:10px;border-radius:12px;background:#fff;box-shadow:0 4px 12px #071a3d20;font-weight:800;color:var(--n);margin-bottom:8px}
+.app-row svg{width:28px;height:28px;margin-right:10px;flex-shrink:0}
+.store-path{padding:10px;border-radius:9px;background:#071a3d;color:#afffe2;font-family:Consolas,monospace;font-size:.85rem;text-align:center}
+.choice-note{margin:16px 0;padding:15px;border-left:7px solid #f6c343;border-radius:13px;background:#fff8e3;color:#4a3b00}
+@media(max-width:700px){
+  header{padding:70px 14px 26px}
+  .home{top:14px;right:14px}
+  .choice{grid-template-columns:repeat(2,1fr)}
+  .section,.route{padding:20px}
+  .install-grid{grid-template-columns:1fr}
+  .arrow{transform:rotate(90deg);margin:4px auto}
+}
+</style>
+<style id="security-shared-style">
+/* Unified Digital Security Centre header and navigation */
+body > header, body > header.top {
+  position:relative; display:flex; flex-direction:column; justify-content:center;
+  min-height:0; padding:18px 90px; align-items:center; text-align:center; color:#fff;
+  background:radial-gradient(ellipse at 15% 0%,#2457ac,transparent 55%),linear-gradient(120deg,#102d63,#071a3d);
+}
+body > header h1, body > header.top h1 {max-width:960px; width:100%; margin:4px auto 6px; font-family:"Segoe UI",Arial,sans-serif; font-size:clamp(1.8rem,4.2vw,3.4rem); line-height:1.14; letter-spacing:-.025em; text-align:center; text-wrap:balance;}
+body > header p, body > header.top p {max-width:760px; margin:0 auto; font-size:1.05rem; line-height:1.6; text-align:center; color:#dfeaff;}
+body > header p.ey, body > header.top p.ey {margin:0 auto 3px; color:#f6c343; font-size:.75rem; letter-spacing:.14em; font-weight:800;}
+body > header::before,body > header::after {pointer-events:none;}
+body > header a.home {position:absolute; right:24px; top:50%; transform:translateY(-50%); width:46px; height:46px; padding:0; display:grid; place-items:center; border:1px solid #f6c343; border-radius:14px; background:#f6c343; color:#071a3d; box-shadow:0 6px 18px #0003; z-index:3; transition:background .18s,box-shadow .18s;}
+body > header a.home svg {width:24px; height:24px; fill:currentColor;}
+body > header a.home:hover {background:#ffda75; box-shadow:0 8px 24px #0005;}
+body > nav.quick {position:sticky; top:0; z-index:10; display:flex; flex-direction:column; align-items:center; gap:5px; padding:7px 16px; overflow:visible; white-space:normal; background:#091f46; border-top:2px solid #f6c343; border-bottom:2px solid #f6c343; box-shadow:0 5px 18px #071a3d20;}
+body > nav.quick .quick-label {color:#f6c343; font:800 .68rem/1.3 "Segoe UI",Arial,sans-serif; letter-spacing:.16em;}
+body > nav.quick .quick-links {display:flex; flex-wrap:wrap; justify-content:center; align-items:center; gap:5px; width:100%; max-width:1180px; margin:0 auto; padding:0;}
+body > nav.quick a {display:inline-flex; align-items:center; justify-content:center; min-height:36px; max-width:100%; margin:0; padding:6px 12px; border:1px solid #7796c266; border-radius:10px; background:#ffffff08; color:#eef4ff; font:600 .83rem/1.35 "Segoe UI",Arial,sans-serif; text-align:center; text-decoration:none; white-space:normal; transition:background .18s,border-color .18s;}
+body > nav.quick a:hover,body > nav.quick a[aria-current="location"] {background:#f6c343; color:#071a3d; border-color:#f6c343; transform:none;}
+body > header a.home:focus-visible,body > nav.quick a:focus-visible {outline:3px solid #fff; outline-offset:4px;}
+body main [id] {scroll-margin-top:calc(var(--quick-height,160px) + 20px);}
+@media(max-width:600px) {
+  body > header,body > header.top {min-height:0; padding:14px 66px;}
+  body > header h1, body > header.top h1 {font-size:clamp(1.55rem,6vw,2.25rem); overflow-wrap:anywhere;}
+  body > header p, body > header.top p {font-size:.94rem;}
+  body > header a.home {right:12px; width:44px; height:44px; border-radius:12px;}
+  body > nav.quick {position:relative; padding:7px 10px;}
+  body > nav.quick a {min-height:44px; padding:8px 11px; font-size:.8rem;}
+  body main [id] {scroll-margin-top:20px;}
+}
+@media(prefers-reduced-motion:reduce) {html {scroll-behavior:auto;} body > nav.quick a,body > header a.home {transition:none;}}
+</style>
+<style id="yellow-home-image">
+/* Yellow house image, centred vertically on the right of every header. */
+body > header a.home {
+  inset:auto 24px auto auto; top:50%; transform:translateY(-50%);
+  display:grid; place-items:center; width:48px; height:48px; padding:0;
+  background:#071a3d; border:1px solid #f6c343; border-radius:12px;
+  box-shadow:0 4px 14px #0003;
+}
+body > header a.home img {display:block; width:28px; height:28px; margin:0;}
+body > header a.home:hover {background:#17376a; border-color:#ffe49b;}
+@media(max-width:600px) {
+  body > header a.home {right:12px; width:44px; height:44px;}
+}
+</style>
+</head>
+<body>
+<header id="top">
+  <a class="home" href="digital-security-centre.html" aria-label="Home: Digital Security Centre" title="Home: Digital Security Centre"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSIjZjZjMzQzIiBkPSJNMTIgMi41IDEuNSAxMS40bDEuOSAyLjJMNSAxMi4yVjIxaDV2LTZoNHY2aDV2LTguOGwxLjYgMS40IDEuOS0yLjJMMTIgMi41WiIvPjwvc3ZnPg==" width="28" height="28" alt="" aria-hidden="true"></a>
+  <h1>How to Set Up 2FA</h1>
+  <p>Protect your critical online accounts with two-factor authentication so nobody can break in, even if they guess your password.</p>
+</header>
+
+<nav class="quick" aria-label="Quick navigation"><span class="quick-label">ON THIS PAGE</span><div class="quick-links"><a href="#choose">Choose Device</a><a href="#install">Install &amp; Sync</a><a href="#android">Android &amp; Laptop (Gmail)</a><a href="#iphone">iPhone / iPad</a><a href="#windows">Windows PC</a><a href="#mac">Mac</a><a href="#login-routine">How to Log In Later</a><a href="#safe">Stay Safe</a></div></nav>
+
+<main>
+  <section class="section" id="choose">
+    <h2>Choose one route only</h2>
+    <p>For the easiest experience, <strong>use a laptop and a phone together</strong>. You open your account on the laptop screen and use your phone to scan the square barcode in seconds.</p>
+    <div class="choice">
+      <a href="#android">
+        <svg viewBox="0 0 24 24"><path d="M17.6 9.48l1.84-3.18a.5.5 0 00-.86-.5l-1.87 3.24a11.45 11.45 0 00-9.42 0L5.42 5.8a.5.5 0 00-.86.5l1.84 3.18A10.8 10.8 0 002 18h20a10.8 10.8 0 00-4.4-8.52zM7 14.5a1.25 1.25 0 111.25-1.25A1.25 1.25 0 017 14.5zm10 0a1.25 1.25 0 111.25-1.25 1.25 1.25 0 01-1.25 1.25z"/></svg>
+        Android
+      </a>
+      <a href="#iphone">
+        <svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.62-.75 1.04-1.8 1.01-2.87-.9.04-2 .6-2.65 1.34-.56.64-1.06 1.7-1.01 2.76 1.01.08 2.03-.49 2.65-1.23z"/></svg>
+        iPhone / iPad
+      </a>
+      <a href="#windows">
+        <svg viewBox="0 0 24 24"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.551H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-13.051-1.849"/></svg>
+        Windows PC
+      </a>
+      <a href="#mac">
+        <svg viewBox="0 0 24 24"><path d="M20 18c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2H0v2h24v-2h-4zM4 6h16v10H4V6z"/></svg>
+        Mac
+      </a>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>What 2FA does</h2>
+    <div class="flow">
+      <div>
+        <svg viewBox="0 0 24 24" fill="#123c8c"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+        <b>1. Password First</b>
+        You type in your normal email address and password.
+      </div>
+      <span class="arrow">→</span>
+      <div>
+        <svg viewBox="0 0 24 24" fill="#123c8c"><path d="M17 1.01L7 1c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-1.99-2-1.99zM17 19H7V5h10v14zm-5-3c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3z"/></svg>
+        <b>2. Live Code from Phone</b>
+        You read a 6-digit rolling code generated on your phone screen.
+      </div>
+      <span class="arrow">→</span>
+      <div>
+        <svg viewBox="0 0 24 24" fill="#15803d"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+        <b>3. Account Opens</b>
+        Even if a thief steals your password, they are blocked without your phone.
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="install">
+    <h2>Install an authenticator app first</h2>
+    <p>Before turning on two-step verification, install <strong>Google Authenticator</strong> or <strong>Microsoft Authenticator</strong> on your phone. The app creates a fresh 6-digit code every thirty seconds, even if your phone has no internet, Wi-Fi, or mobile signal.</p>
+
+    <div class="choice-note">
+      <strong>Crucial Step — Sign In &amp; Cloud Sync:</strong> Immediately after downloading Google Authenticator, sign in with your main Gmail account. This backs up all your secret 2FA keys to Google Cloud. If you ever drop, break, or lose your phone, simply installing Google Authenticator on your new phone and signing into that same Gmail will bring all your codes back instantly!
+    </div>
+
+    <div class="install-grid">
+      <article class="phone-demo">
+        <h3>🤖 Android phone</h3>
+        <div class="phone">
+          <div class="notch"></div>
+          <div class="store-path">Google Play Store</div>
+          <p>Search for:</p>
+          <div class="app-row">
+            <svg viewBox="0 0 24 24"><path fill="#EA4335" d="M12 5c1.55 0 2.95.55 4.04 1.45l3.03-3.03C17.24 1.7 14.77 1 12 1 7.42 1 3.53 3.61 1.63 7.37l3.68 2.85C6.19 7.41 8.87 5 12 5z"/><path fill="#4285F4" d="M23.49 12.28c0-.79-.07-1.54-.19-2.28H12v4.51h6.47c-.29 1.48-1.14 2.73-2.4 3.58l3.7 2.87c2.16-2 3.72-4.94 3.72-8.68z"/><path fill="#FBBC05" d="M5.31 14.78a7.06 7.06 0 010-4.56L1.63 7.37a11.97 11.97 0 000 9.26l3.68-2.85z"/><path fill="#34A853" d="M12 23c3.24 0 5.95-1.08 7.93-2.91l-3.7-2.87c-1.08.72-2.45 1.16-4.23 1.16-3.13 0-5.81-2.41-6.69-5.22L1.63 16.01C3.53 19.79 7.42 23 12 23z"/></svg>
+            Google Authenticator
+          </div>
+          <p>or</p>
+          <div class="app-row">
+            <svg viewBox="0 0 24 24"><path fill="#00A4EF" d="M11.4 24H0V12.6h11.4V24z"/><path fill="#FFB900" d="M24 24H12.6V12.6H24V24z"/><path fill="#F25022" d="M11.4 11.4H0V0h11.4v11.4z"/><path fill="#7FBA00" d="M24 11.4H12.6V0H24v11.4z"/></svg>
+            Microsoft Authenticator
+          </div>
+          <p>Tap <strong>Install</strong>. Open the app, sign in with your main Gmail account, and allow camera access when it asks so it can scan QR barcodes.</p>
+        </div>
+      </article>
+
+      <article class="phone-demo">
+        <h3>🍎 iPhone or iPad</h3>
+        <div class="phone">
+          <div class="notch"></div>
+          <div class="store-path">Apple App Store</div>
+          <p>Search for:</p>
+          <div class="app-row">
+            <svg viewBox="0 0 24 24"><path fill="#EA4335" d="M12 5c1.55 0 2.95.55 4.04 1.45l3.03-3.03C17.24 1.7 14.77 1 12 1 7.42 1 3.53 3.61 1.63 7.37l3.68 2.85C6.19 7.41 8.87 5 12 5z"/><path fill="#4285F4" d="M23.49 12.28c0-.79-.07-1.54-.19-2.28H12v4.51h6.47c-.29 1.48-1.14 2.73-2.4 3.58l3.7 2.87c2.16-2 3.72-4.94 3.72-8.68z"/><path fill="#FBBC05" d="M5.31 14.78a7.06 7.06 0 010-4.56L1.63 7.37a11.97 11.97 0 000 9.26l3.68-2.85z"/><path fill="#34A853" d="M12 23c3.24 0 5.95-1.08 7.93-2.91l-3.7-2.87c-1.08.72-2.45 1.16-4.23 1.16-3.13 0-5.81-2.41-6.69-5.22L1.63 16.01C3.53 19.79 7.42 23 12 23z"/></svg>
+            Google Authenticator
+          </div>
+          <p>or</p>
+          <div class="app-row">
+            <svg viewBox="0 0 24 24"><path fill="#00A4EF" d="M11.4 24H0V12.6h11.4V24z"/><path fill="#FFB900" d="M24 24H12.6V12.6H24V24z"/><path fill="#F25022" d="M11.4 11.4H0V0h11.4v11.4z"/><path fill="#7FBA00" d="M24 11.4H12.6V0H24v11.4z"/></svg>
+            Microsoft Authenticator
+          </div>
+          <p>Tap <strong>Get</strong>, confirm installation, open the app, and connect your Google account so codes are stored safely in cloud sync.</p>
+        </div>
+      </article>
+    </div>
+
+    <div class="flow">
+      <div><b>1. Install &amp; Sync</b>Install Google Authenticator and log into your main Gmail account.</div>
+      <span class="arrow">→</span>
+      <div><b>2. Laptop Ready</b>Open your account on a laptop and open Security settings.</div>
+      <span class="arrow">→</span>
+      <div><b>3. Point &amp; Scan</b>Point your phone camera at the square barcode on screen.</div>
+      <span class="arrow">→</span>
+      <div><b>4. Verify &amp; Save</b>Type the 6 numbers on your laptop and write down recovery keys.</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <article class="route" id="android">
+      <span class="badge">ANDROID + LAPTOP ROUTE (GMAIL EXAMPLE)</span>
+      <h3>
+        <svg viewBox="0 0 24 24"><path d="M17.6 9.48l1.84-3.18a.5.5 0 00-.86-.5l-1.87 3.24a11.45 11.45 0 00-9.42 0L5.42 5.8a.5.5 0 00-.86.5l1.84 3.18A10.8 10.8 0 002 18h20a10.8 10.8 0 00-4.4-8.52zM7 14.5a1.25 1.25 0 111.25-1.25A1.25 1.25 0 017 14.5zm10 0a1.25 1.25 0 111.25-1.25 1.25 1.25 0 01-1.25 1.25z"/></svg>
+        Step-by-Step: Setting Up 2FA for Google Gmail
+      </h3>
+      <p>Follow these detailed steps using your laptop and your Android phone together. This makes the setup straightforward because your phone can scan the barcode directly off your laptop screen.</p>
+      
+      <div class="path">Phone: Play Store → Install Authenticator → Sign into Gmail (Cloud Sync) | Laptop: gmail.com → Security → 2-Step Verification</div>
+
+      <ol>
+        <li>
+          <strong>Install Google Authenticator on your phone:</strong> Open the <strong>Google Play Store</strong>. Search for <strong>Google Authenticator</strong> published by Google LLC. Tap <strong>Install</strong>. When finished, tap <strong>Open</strong>. When prompted for camera permission, tap <strong>While using the app</strong> or <strong>Allow</strong> so it can scan QR barcodes.
+        </li>
+        <li>
+          <strong>Sign in to your main Gmail account in the app (Enable Cloud Sync):</strong>
+          When you first launch Google Authenticator, it asks you to sign in. 
+          <ul>
+            <li>Tap <strong>Continue as [Your Name]</strong> or choose your <strong>main Gmail address</strong> from the list.</li>
+            <li>Look at the top right corner of the Authenticator screen. You should see your profile picture or initial with a <strong>small green cloud icon with a checkmark</strong>.</li>
+            <li><em>Why this matters:</em> This syncs your authentication codes to your Google Account. If you ever lose your phone, drop it in water, or get a new mobile, simply installing Authenticator on that new phone and logging into your Gmail account will automatically bring all your 2FA codes back!</li>
+          </ul>
+        </li>
+        <li>
+          <strong>Open your Google account on your laptop:</strong> On your laptop, open your web browser (Chrome, Edge, or Firefox) and go to <strong>gmail.com</strong>. Sign in with your normal email address and password.
+        </li>
+        <li>
+          <strong>Open your account security dashboard:</strong> Click on your <strong>profile picture or initials icon</strong> in the top right corner of the laptop screen. Click the blue button that says <strong>Manage your Google Account</strong>. On the left side menu, click the <strong>Security</strong> tab.
+        </li>
+        <li>
+          <strong>Open Two-Step Verification:</strong> Scroll down to the section named <strong>How you sign in to Google</strong> and click on <strong>2-Step Verification</strong>. Google will ask you to enter your password once again to verify your identity. Enter it and click <strong>Next</strong>.
+        </li>
+        <li>
+          <strong>Choose Authenticator app:</strong> Scroll down the page until you find <strong>Authenticator app</strong> and click it. Then click the button that says <strong>+ Set up authenticator</strong>. A square black-and-white QR barcode will pop up on your laptop screen. Leave it open.
+        </li>
+        <li>
+          <strong>Scan the barcode with your phone:</strong> Pick up your Android phone, open <strong>Google Authenticator</strong>, and tap the colourful plus button (<strong>+</strong>) in the bottom right corner. Select <strong>Scan a QR code</strong>. Point your phone camera at your laptop screen so the barcode fits inside the lines. It scans instantly without taking a photo.
+        </li>
+        <li>
+          <strong>Verify the live code:</strong> A row labeled <strong>Google</strong> with your email address will now appear in your phone app showing six numbers and a small blue timer circle. On your laptop, click <strong>Next</strong>. Type those exact six numbers into the box on your laptop screen and click <strong>Verify</strong>.
+        </li>
+        <li>
+          <strong>Write down your backup codes:</strong> On the laptop security page, look for <strong>Backup codes</strong> and click <strong>Get backup codes</strong>. Write down the 10 emergency numbers with a pen in a private notebook. Keep this safe as an ultimate fallback.
+        </li>
+      </ol>
+      <div class="finish">✓ Finished: Google Authenticator is now safely linked, synced to your Google Account, and protecting your Gmail.</div>
+    </article>
+
+    <article class="route" id="iphone">
+      <span class="badge">IPHONE / IPAD ROUTE</span>
+      <h3>
+        <svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.62-.75 1.04-1.8 1.01-2.87-.9.04-2 .6-2.65 1.34-.56.64-1.06 1.7-1.01 2.76 1.01.08 2.03-.49 2.65-1.23z"/></svg>
+        Complete Walkthrough for iPhone or iPad
+      </h3>
+      <p>Use your computer screen alongside your iPhone or iPad for the easiest scan.</p>
+      <div class="path">App Store → Google Authenticator → Sign into Google Account → Security → Scan QR</div>
+      <ol>
+        <li><strong>Install the Authenticator:</strong> Open the official <strong>Apple App Store</strong>, search for <strong>Google Authenticator</strong>, tap <strong>Get</strong>, and open the app.</li>
+        <li><strong>Sign in to Sync Codes:</strong> Tap to sign in with your main Google account so that all generated verification codes are backed up securely to your account.</li>
+        <li><strong>Open Account Settings on your computer:</strong> Log in to your target account (e.g. Gmail, Apple ID, Amazon) on your laptop browser and navigate to <strong>Security</strong>.</li>
+        <li><strong>Select Authenticator App:</strong> Choose <strong>Two-Step Verification</strong>, click <strong>Authenticator App</strong>, and make sure the QR barcode appears clearly on your screen.</li>
+        <li><strong>Scan with iPhone:</strong> Open Google Authenticator on your iPhone, tap <strong>+</strong> in the corner, choose <strong>Scan a QR code</strong>, and point the camera at your computer screen.</li>
+        <li><strong>Type the confirmation code:</strong> Read the six digits displayed next to your account on the phone and enter them into the computer prompt before the circle timer resets.</li>
+        <li><strong>Secure your recovery codes:</strong> Write down your emergency backup numbers on paper and store them safely.</li>
+      </ol>
+      <div class="finish">✓ Finished: Your Apple device is now configured and codes are safely cloud-synced.</div>
+    </article>
+
+    <article class="route" id="windows">
+      <span class="badge">WINDOWS PC ROUTE</span>
+      <h3>
+        <svg viewBox="0 0 24 24"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.551H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-13.051-1.849"/></svg>
+        Complete Walkthrough for Windows PC
+      </h3>
+      <p>Open the website in your Windows browser, then use your phone to link the code.</p>
+      <div class="path">Windows Browser → Account Security → Authenticator Setup → Phone Camera Scan</div>
+      <ol>
+        <li><strong>Launch your browser:</strong> Open Edge, Chrome, or Firefox and go to the official service website.</li>
+        <li><strong>Enter Security Options:</strong> Click your profile icon, open <strong>Account Settings</strong>, and navigate to <strong>Security &gt; Two-Factor Verification</strong>.</li>
+        <li><strong>Generate QR Code:</strong> Select <strong>Authenticator App</strong> so the black-and-white QR box displays on your Windows screen.</li>
+        <li><strong>Scan with Phone:</strong> Open Google Authenticator on your mobile phone (ensuring your Gmail cloud sync is active), tap <strong>+</strong>, choose <strong>Scan a QR code</strong>, and point the lens at your laptop monitor.</li>
+        <li><strong>Verify on Windows:</strong> Type the six numbers from your phone into the input field on your Windows computer and click <strong>Verify</strong>.</li>
+        <li><strong>Store Backup Codes:</strong> Copy and safely store your offline recovery numbers.</li>
+      </ol>
+      <div class="finish">✓ Finished: The Windows browser verifies your identity and your phone holds the keys.</div>
+    </article>
+
+    <article class="route" id="mac">
+      <span class="badge">MAC ROUTE</span>
+      <h3>
+        <svg viewBox="0 0 24 24"><path d="M20 18c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2H0v2h24v-2h-4zM4 6h16v10H4V6z"/></svg>
+        Complete Walkthrough for Mac (macOS)
+      </h3>
+      <p>Use Safari or Chrome on your Mac alongside your phone to register your account.</p>
+      <div class="path">Safari → Account Page → Security → Authenticator QR → Mobile App Scan</div>
+      <ol>
+        <li><strong>Open your Mac browser:</strong> Launch Safari and sign in to your target account (e.g. Gmail, Apple ID at appleid.apple.com).</li>
+        <li><strong>Navigate to Security:</strong> Open <strong>Sign-in &amp; Security</strong> and select <strong>Two-Step Verification</strong>.</li>
+        <li><strong>Show the QR Code:</strong> Click <strong>Set up Authenticator</strong> so the QR image is clearly visible on your Mac screen.</li>
+        <li><strong>Scan using Phone:</strong> Open Google Authenticator on your mobile (verified with cloud sync), tap <strong>+</strong>, select <strong>Scan a QR code</strong>, and frame the code shown on your Mac monitor.</li>
+        <li><strong>Confirm code in Safari:</strong> Enter the dynamic 6-digit code shown in your phone app into Safari to confirm the connection.</li>
+        <li><strong>Keep Backup Codes:</strong> Store the emergency backup codes in a safe, physical notebook or encrypted password manager.</li>
+      </ol>
+      <div class="finish">✓ Finished: Your Mac session is confirmed and future sign-ins are shielded.</div>
+    </article>
+  </section>
+
+  <section class="section" id="login-routine">
+    <h2>What happens when logging in after 2FA?</h2>
+    <p>Whenever you log in to your account from a new computer, a school laptop, or an unfamiliar browser, follow this exact routine:</p>
+    
+    <div class="flow">
+      <div>
+        <svg viewBox="0 0 24 24" fill="#123c8c"><path d="M20 18c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2H0v2h24v-2h-4zM4 6h16v10H4V6z"/></svg>
+        <b>Step 1: Sign In</b>
+        Type your regular email and password into the login page.
+      </div>
+      <span class="arrow">→</span>
+      <div>
+        <svg viewBox="0 0 24 24" fill="#123c8c"><path d="M17 1.01L7 1c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-1.99-2-1.99zM17 19H7V5h10v14zm-5-3c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3z"/></svg>
+        <b>Step 2: Open App on Phone</b>
+        Open Google Authenticator and locate the row matching your account.
+      </div>
+      <span class="arrow">→</span>
+      <div>
+        <svg viewBox="0 0 24 24" fill="#15803d"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+        <b>Step 3: Enter Rolling Code</b>
+        Check that the timer circle has time left, type the six numbers, and enter.
+      </div>
+    </div>
+
+    <div class="choice-note">
+      <strong>Important Reminder:</strong> If the circular timer next to the 6-digit code is almost gone, wait two seconds for the fresh numbers to appear before typing.
+    </div>
+  </section>
+
+  <section class="section" id="safe">
+    <div class="warn">
+      <strong>Never share your 2FA codes:</strong> Legitimate representatives from Google, Apple, Microsoft, banks, and schools will <strong>never</strong> ask you to read your 6-digit code aloud, forward it by text, or enter it into an unexpected link.
+    </div>
+
+    <div class="check">
+      <h3>Essential security checklist</h3>
+      <ul>
+        <li>Ensure your Google Authenticator shows the green cloud sync icon linked to your main Gmail.</li>
+        <li>Use an authenticator app rather than SMS text messages whenever possible.</li>
+        <li>Write down your emergency backup recovery codes on paper and keep them in a safe place.</li>
+        <li>Keep your mobile phone locked with a secure PIN, fingerprint, or Face ID.</li>
+        <li>Regularly review active devices in your account settings and log out of unrecognized machines.</li>
+        <li>Use a strong, unique password alongside two-step verification.</li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<footer>
+  ***Umer Malik: Where Craft Meets Research*** <a class="back" href="#top">↑ Back to top</a>
+</footer>
+<script id="security-navigation">
+(() => {
+  const nav = document.querySelector('nav.quick');
+  const links = [...nav.querySelectorAll('a[href^="#"]')];
+  const sections = links.map(a => document.getElementById(a.hash.slice(1)));
+  const mark = index => links.forEach((a,i) => i === index ? a.setAttribute('aria-current','location') : a.removeAttribute('aria-current'));
+  let pending = false;
+  const update = () => {
+    const sticky = getComputedStyle(nav).position === 'sticky';
+    const offset = sticky ? nav.offsetHeight + 24 : 24;
+    document.documentElement.style.setProperty('--quick-height',nav.offsetHeight+'px');
+    let index = -1;
+    sections.forEach((section,i) => { if(section && section.getBoundingClientRect().top <= offset) index=i; });
+    mark(index); pending=false;
+  };
+  const schedule = () => { if(!pending) {pending=true; requestAnimationFrame(update);} };
+  addEventListener('scroll',schedule,{passive:true});
+  addEventListener('resize',schedule);
+  addEventListener('hashchange',schedule);
+  if(window.ResizeObserver) new ResizeObserver(schedule).observe(nav);
+  update();
+})();
+</script>
+</body>
+</html>

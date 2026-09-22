@@ -1,0 +1,407 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mac Security and Care | Digital Security Centre</title>
+<style>
+:root{--navy:#071d45;--navy2:#102d63;--blue:#2864e8;--pale:#eaf2ff;--paper:#f3f7ff;--gold:#ffc83d;--ink:#10264e;--muted:#456188;--red:#bd2944;--green:#087a55}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:linear-gradient(135deg,#dce9fb,#f4f7fc 42%,#d6e5fb);color:var(--ink);font:18px/1.6 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+.top{background:radial-gradient(circle at 15% 0,#244f9a 0,transparent 32%),linear-gradient(120deg,var(--navy2),var(--navy));color:#fff;padding:28px max(5vw,24px) 22px;position:relative;overflow:hidden}
+.top:after{content:"";position:absolute;right:-90px;bottom:-100px;width:360px;height:220px;border:34px solid #ffffff12;border-radius:50%}
+.home{position:absolute;right:max(5vw,24px);top:28px;z-index:2;color:var(--navy);background:var(--gold);font-weight:800;padding:10px 17px;border-radius:99px;text-decoration:none;box-shadow:0 6px 18px #0004}
+.eyebrow{color:var(--gold);font-weight:900;letter-spacing:.12em;font-size:.8rem;margin:0}
+.top h1{font-size:clamp(2rem,5vw,4.3rem);line-height:1;margin:10px 0 12px;letter-spacing:-.05em}
+.top p{font-size:1.05rem;max-width:650px;margin:0;color:#dbe8ff}
+.quick{background:#0a2048;color:#fff;padding:10px max(3vw,16px);display:flex;flex-direction:column;gap:6px;align-items:center;box-shadow:0 8px 20px #0b234123;position:sticky;top:0;z-index:5}
+.quick-row{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;align-items:center}
+.quick strong{color:var(--gold);font-size:.82rem;letter-spacing:.08em;margin-right:4px}
+.quick a{color:#fff;text-decoration:none;border:1px solid #59729f;border-radius:99px;padding:5px 12px;font-weight:750;font-size:.85rem;white-space:nowrap;transition:.2s}
+.quick a:hover,.quick a:focus{background:var(--blue);border-color:#8bb2ff;transform:translateY(-2px)}
+main{max-width:1200px;margin:auto;padding:42px 24px 64px}
+.crumb{font-weight:750;font-size:.92rem;color:#315fbc}
+.crumb a{color:#244fa9}
+.hero,.section{background:#f8fbff;border:1px solid #b8d1ff;border-radius:28px;box-shadow:0 16px 34px #183d7d1a;padding:clamp(24px,4vw,46px);margin-bottom:28px;scroll-margin-top:110px}
+.hero{border-left:13px solid var(--gold);display:grid;grid-template-columns:1.2fr .8fr;gap:28px;align-items:center}
+.hero h2,.section h2{font-size:clamp(1.6rem,3vw,2.5rem);line-height:1.1;margin:0 0 14px;letter-spacing:-.035em}
+.lead{font-size:1.13rem;color:#314f79}
+.device{background:linear-gradient(135deg,#173f91,#2864e8);border-radius:24px;padding:25px;color:#fff;box-shadow:0 12px 26px #1a50aa4a}
+.device .emoji{font-size:3rem}
+.device b{display:block;font-size:1.2rem;margin:8px 0}
+.notice{background:#fff5d9;border-left:7px solid var(--gold);border-radius:12px;padding:15px 18px;margin-top:18px}
+.danger{background:#fff0f2;border-left-color:var(--red)}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.card{background:#eaf2ff;border:1px solid #a9c6ff;border-radius:20px;padding:22px;box-shadow:0 7px 18px #183d7d12}
+.card h3{margin:0 0 8px;font-size:1.28rem;line-height:1.2}
+.num{display:inline-grid;place-items:center;background:var(--blue);color:#fff;border-radius:50%;width:34px;height:34px;font-size:.92rem;margin-right:8px;vertical-align:middle}
+.path{display:block;background:#0a214a;color:#afffe2;border-radius:12px;padding:12px 14px;font-family:Consolas,monospace;font-size:.9rem;font-weight:700;margin:13px 0}
+.path b{color:var(--gold)}
+ol{padding-left:1.35em}
+li{margin:10px 0;line-height:1.6}
+strong{color:#092457}
+.flow{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:22px 0}
+.flow div{position:relative;background:#e8f1ff;border:1px solid #aac8ff;border-radius:16px;padding:15px;text-align:center;font-weight:800}
+.flow div:not(:last-child):after{content:"→";position:absolute;right:-10px;top:50%;transform:translateY(-50%);color:var(--blue);font-size:1.5rem;z-index:1}
+.check{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.check div{background:#e5f7f0;border:1px solid #97dfc4;border-radius:12px;padding:12px 14px}
+.check div:before{content:"✓";font-weight:900;color:var(--green);padding-right:9px}
+.schedule{overflow:auto;margin-top:20px}
+.schedule table{width:100%;border-collapse:separate;border-spacing:0;background:#fff;border:1px solid #b8cdf1;border-radius:16px;overflow:hidden}
+.schedule th{background:#091f48;color:#fff;text-align:left;padding:14px}
+.schedule td{padding:14px;border-top:1px solid #d9e3f3;vertical-align:top}
+.schedule tr:nth-child(even) td{background:#f1f6ff}
+.schedule td:last-child{font-weight:800;color:#123d94}
+details{background:#edf4ff;border:1px solid #b6d0ff;border-radius:15px;padding:14px 17px;margin:14px 0}
+summary{font-weight:850;cursor:pointer}
+footer{background:#061a3d;color:#e9f1ff;border-top:4px solid var(--gold);padding:26px max(5vw,24px);text-align:center}
+footer a{color:#fff;background:#1d4da9;border-radius:99px;padding:9px 15px;text-decoration:none;font-weight:800;margin-left:10px}
+@media(max-width:760px){
+  .home{top:19px}
+  .top{padding-top:82px}
+  .hero{grid-template-columns:1fr}
+  .grid,.check{grid-template-columns:1fr}
+  .flow{grid-template-columns:1fr}
+  .flow div:not(:last-child):after{content:"↓";right:50%;top:auto;bottom:-17px;transform:translateX(50%)}
+  .flow{gap:20px}
+  .quick{align-items:flex-start}
+}
+</style>
+<style id="security-shared-style">
+/* Unified Digital Security Centre header and navigation */
+body > header, body > header.top {
+  position:relative; display:flex; flex-direction:column; justify-content:center;
+  min-height:0; padding:18px 90px; align-items:center; text-align:center; color:#fff;
+  background:radial-gradient(ellipse at 15% 0%,#2457ac,transparent 55%),linear-gradient(120deg,#102d63,#071a3d);
+}
+body > header h1, body > header.top h1 {max-width:960px; width:100%; margin:4px auto 6px; font-family:"Segoe UI",Arial,sans-serif; font-size:clamp(1.8rem,4.2vw,3.4rem); line-height:1.14; letter-spacing:-.025em; text-align:center; text-wrap:balance;}
+body > header p, body > header.top p {max-width:760px; margin:0 auto; font-size:1.05rem; line-height:1.6; text-align:center; color:#dfeaff;}
+body > header p.ey, body > header.top p.ey {margin:0 auto 3px; color:#f6c343; font-size:.75rem; letter-spacing:.14em; font-weight:800;}
+body > header::before,body > header::after {pointer-events:none;}
+body > header a.home {position:absolute; right:24px; top:50%; transform:translateY(-50%); width:46px; height:46px; padding:0; display:grid; place-items:center; border:1px solid #f6c343; border-radius:14px; background:#f6c343; color:#071a3d; box-shadow:0 6px 18px #0003; z-index:3; transition:background .18s,box-shadow .18s;}
+body > header a.home svg {width:24px; height:24px; fill:currentColor;}
+body > header a.home:hover {background:#ffda75; box-shadow:0 8px 24px #0005;}
+body > nav.quick {position:sticky; top:0; z-index:10; display:flex; flex-direction:column; align-items:center; gap:5px; padding:7px 16px; overflow:visible; white-space:normal; background:#091f46; border-top:2px solid #f6c343; border-bottom:2px solid #f6c343; box-shadow:0 5px 18px #071a3d20;}
+body > nav.quick .quick-label {color:#f6c343; font:800 .68rem/1.3 "Segoe UI",Arial,sans-serif; letter-spacing:.16em;}
+body > nav.quick .quick-links {display:flex; flex-wrap:wrap; justify-content:center; align-items:center; gap:5px; width:100%; max-width:1180px; margin:0 auto; padding:0;}
+body > nav.quick a {display:inline-flex; align-items:center; justify-content:center; min-height:36px; max-width:100%; margin:0; padding:6px 12px; border:1px solid #7796c266; border-radius:10px; background:#ffffff08; color:#eef4ff; font:600 .83rem/1.35 "Segoe UI",Arial,sans-serif; text-align:center; text-decoration:none; white-space:normal; transition:background .18s,border-color .18s;}
+body > nav.quick a:hover,body > nav.quick a[aria-current="location"] {background:#f6c343; color:#071a3d; border-color:#f6c343; transform:none;}
+body > header a.home:focus-visible,body > nav.quick a:focus-visible {outline:3px solid #fff; outline-offset:4px;}
+body main [id] {scroll-margin-top:calc(var(--quick-height,160px) + 20px);}
+@media(max-width:600px) {
+  body > header,body > header.top {min-height:0; padding:14px 66px;}
+  body > header h1, body > header.top h1 {font-size:clamp(1.55rem,6vw,2.25rem); overflow-wrap:anywhere;}
+  body > header p, body > header.top p {font-size:.94rem;}
+  body > header a.home {right:12px; width:44px; height:44px; border-radius:12px;}
+  body > nav.quick {position:relative; padding:7px 10px;}
+  body > nav.quick a {min-height:44px; padding:8px 11px; font-size:.8rem;}
+  body main [id] {scroll-margin-top:20px;}
+}
+@media(prefers-reduced-motion:reduce) {html {scroll-behavior:auto;} body > nav.quick a,body > header a.home {transition:none;}}
+</style>
+<style id="yellow-home-image">
+/* Yellow house image, centred vertically on the right of every header. */
+body > header a.home {
+  inset:auto 24px auto auto; top:50%; transform:translateY(-50%);
+  display:grid; place-items:center; width:48px; height:48px; padding:0;
+  background:#071a3d; border:1px solid #f6c343; border-radius:12px;
+  box-shadow:0 4px 14px #0003;
+}
+body > header a.home img {display:block; width:28px; height:28px; margin:0;}
+body > header a.home:hover {background:#17376a; border-color:#ffe49b;}
+@media(max-width:600px) {
+  body > header a.home {right:12px; width:44px; height:44px;}
+}
+</style>
+</head>
+<body>
+
+<header class="top" id="top">
+  <a class="home" href="digital-security-centre.html" aria-label="Home: Digital Security Centre" title="Home: Digital Security Centre"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSIjZjZjMzQzIiBkPSJNMTIgMi41IDEuNSAxMS40bDEuOSAyLjJMNSAxMi4yVjIxaDV2LTZoNHY2aDV2LTguOGwxLjYgMS40IDEuOS0yLjJMMTIgMi41WiIvPjwvc3ZnPg==" width="28" height="28" alt="" aria-hidden="true"></a>
+  <p class="eyebrow">DIGITAL SECURITY CENTRE</p>
+  <h1>Mac Security &amp; Care</h1>
+  <p>A complete, step-by-step security routine for your MacBook, iMac, or Mac mini using built-in macOS defenses.</p>
+</header>
+
+<nav class="quick" aria-label="Quick navigation"><span class="quick-label">ON THIS PAGE</span><div class="quick-links"><a href="digital-security-centre.html">Security Centre</a><a href="#layers">5 Layers</a><a href="#updates">1. Updates</a><a href="#lock">2. Lock &amp; FileVault</a><a href="#apps">3. Trusted Apps</a><a href="#privacy">4. Privacy Permissions</a><a href="#care">5. Tidy Storage</a><a href="#backup">6. Backups</a><a href="#checklist">Checklist</a></div></nav>
+
+<main>
+  <p class="crumb"><a href="digital-security-centre.html">Digital Security Centre</a> / Mac Security and Care</p>
+
+  <section class="hero">
+    <div>
+      <h2>Follow this Mac route only</h2>
+      <p class="lead">These steps are designed specifically for Apple Mac computers running modern versions of macOS. You do not need any third-party antivirus subscriptions. Keep your Mac plugged into its power charger before starting and save any open schoolwork or documents.</p>
+      <div class="notice">
+        <strong>Menu check:</strong> In the very top-left corner of your screen, click the small Apple icon (<strong></strong>). On modern Macs you will click <strong>System Settings</strong>. On older models, this same menu is named <strong>System Preferences</strong>. Both contain the exact same security protections.
+      </div>
+    </div>
+    <aside class="device">
+      <div class="emoji">🍎🔒</div>
+      <b>Your safe-Mac routine</b>
+      <span>Update software → lock the screen → turn on FileVault encryption → use verified apps → back up files regularly.</span>
+    </aside>
+  </section>
+
+  <section class="section" id="layers">
+    <h2>Your protection in five layers</h2>
+    <div class="flow">
+      <div>🔄<br><b>1. Updates</b><br>Fixes system bugs</div>
+      <div>🔑<br><b>2. Screen Lock</b><br>Stops snooping</div>
+      <div>🔐<br><b>3. Encryption</b><br>Scrambles hard drive</div>
+      <div>📦<br><b>4. App Safety</b><br>Blocks fake software</div>
+      <div>🗂️<br><b>5. Backups</b><br>Saves all documents</div>
+    </div>
+    <p>Each layer guards against a different danger. Together, they protect you if your Mac is ever misplaced, stolen, or exposed to a dangerous download.</p>
+  </section>
+
+  <!-- 1. UPDATES -->
+  <section class="section" id="updates">
+    <h2><span class="num">1</span>Keep macOS and apps updated</h2>
+    <p>Updates are like free armor shields released by Apple engineers. They plug security holes so hackers cannot slip past your defenses. Running updates regularly is the single most important task for computer health.</p>
+
+    <span class="path"><b>Apple menu </b> → <b>System Settings</b> → <b>General</b> → <b>Software Update</b></span>
+
+    <ol>
+      <li><strong>Click the Apple logo:</strong> Click the small Apple icon (<strong></strong>) in the very top-left corner of your desktop, then click <strong>System Settings</strong>.</li>
+      <li><strong>Open Software Update:</strong> On the left side menu, click <strong>General</strong>, then click <strong>Software Update</strong> on the right. Your Mac will spin a small circle while checking Apple servers.</li>
+      <li><strong>Install available updates:</strong> If an update appears, click the blue button that says <strong>Update Now</strong> or <strong>Upgrade Now</strong>.</li>
+      <li><strong>Save your open files:</strong> If the update requires restarting, save your school projects and open browser tabs, then click <strong>Restart Now</strong>.</li>
+      <li><strong>Turn on automatic protection:</strong> Next to <strong>Automatic Updates</strong>, click the small information button (<strong>ℹ</strong>) and turn every toggle switch to <strong>ON</strong>. Especially ensure <em>"Install Security Responses and system files"</em> is active so Apple can patch emergency bugs automatically in the background.</li>
+    </ol>
+
+    <div class="notice">
+      <strong>How to update your App Store applications:</strong> Open your Mac's <strong>App Store</strong> from the Dock. Click <strong>Updates</strong> in the left sidebar, then click the blue <strong>Update All</strong> button at the top right.
+    </div>
+  </section>
+
+  <!-- 2. LOCK & FILEVAULT -->
+  <section class="section" id="lock">
+    <h2><span class="num">2</span>Lock your Mac and turn on FileVault</h2>
+    <p>A computer left open on a desk is an open book. Locking the display stops anyone from reading your messages, while FileVault scrambles your hard drive files so they cannot be extracted even if the computer is dismantled.</p>
+
+    <div class="grid">
+      <article class="card">
+        <h3>A. Fast screen lock</h3>
+        <span class="path"><b>Apple menu </b> → <b>System Settings</b> → <b>Lock Screen</b></span>
+        <ol>
+          <li>Find the setting that says <strong>"Require password after screen saver begins or display is turned off"</strong>.</li>
+          <li>Click the dropdown menu and set it to <strong>Immediately</strong>.</li>
+          <li>Set <strong>"Turn display off when inactive"</strong> to <strong>5 Minutes</strong> on battery power.</li>
+          <li><strong>Keyboard Shortcut:</strong> Press <strong>Control + Command + Q</strong> together whenever you stand up to walk away. This locks your screen in one second.</li>
+        </ol>
+      </article>
+
+      <article class="card">
+        <h3>B. Set up Touch ID</h3>
+        <span class="path"><b>Apple menu </b> → <b>System Settings</b> → <b>Touch ID &amp; Password</b></span>
+        <ol>
+          <li>Click <strong>Add Fingerprint</strong> (type your Mac password when prompted).</li>
+          <li>Rest your index finger or thumb lightly on the round top-right keyboard button. Lift and rest it repeatedly as the fingerprint diagram fills with red color.</li>
+          <li>Turn <strong>ON</strong> the toggles for <strong>"Unlocking your Mac"</strong> and <strong>"Password Autofill"</strong>.</li>
+          <li>Never share your Mac master password; Touch ID is for quick unlocking, but your written password remains your primary recovery key.</li>
+        </ol>
+      </article>
+    </div>
+
+    <h3 style="margin-top:24px">C. Turn on FileVault disk encryption</h3>
+    <span class="path"><b>Apple menu </b> → <b>System Settings</b> → <b>Privacy &amp; Security</b> → <b>FileVault</b></span>
+
+    <ol>
+      <li>Scroll down the <strong>Privacy &amp; Security</strong> page until you locate the <strong>FileVault</strong> section.</li>
+      <li>Click the button that says <strong>Turn On</strong> next to FileVault.</li>
+      <li>You will be asked how to unlock your disk if you forget your password. Choose <strong>"Allow my iCloud account to unlock my disk"</strong> if you have a verified Apple ID with two-factor authentication, or choose <strong>"Create a recovery key"</strong>.</li>
+      <li>If you choose a recovery key, a long string of letters and numbers will appear. <strong>Write this down carefully on paper</strong> and store it in a private drawer. Never store it inside a text document on the same Mac!</li>
+      <li>Keep your Mac connected to its charger while FileVault completes encryption in the background. You can continue doing your normal homework and browsing while it works.</li>
+    </ol>
+
+    <div class="notice">
+      <strong>Why FileVault matters:</strong> If a thief steals your laptop, they could plug it into another computer to copy your photos, documents, and browser histories. FileVault turns all your data into scrambled code that is impossible to read without your login password.
+    </div>
+  </section>
+
+  <!-- 3. APPS -->
+  <section class="section" id="apps">
+    <h2><span class="num">3</span>Use trusted apps — and add an app lock when available</h2>
+    <p>Only install software from the official <strong>Mac App Store</strong> or directly from the real manufacturer website. Beware of fake internet adverts promising to "speed up your Mac", "clean junk files", or "remove 3 viruses found now".</p>
+
+    <div class="grid">
+      <article class="card">
+        <h3>Safe download rules</h3>
+        <ol>
+          <li>Whenever possible, open the blue <strong>App Store</strong> icon on your Mac to download apps because Apple inspects every single item first.</li>
+          <li>If downloading from the web (such as Google Chrome, Zoom, or Minecraft), type the official address yourself. Double check the address bar before clicking download.</li>
+          <li>Never double-click an installation file ending in <code>.dmg</code> or <code>.pkg</code> that arrived inside an unexpected email or message.</li>
+          <li>Open Safari, click <strong>Safari &gt; Settings &gt; Extensions</strong>, and delete any extensions you did not personally install.</li>
+        </ol>
+      </article>
+
+      <article class="card">
+        <h3>Verify app permissions in Gatekeeper</h3>
+        <span class="path"><b>Apple menu </b> → <b>System Settings</b> → <b>Privacy &amp; Security</b></span>
+        <ol>
+          <li>Scroll down to the <strong>Security</strong> section.</li>
+          <li>Under <strong>"Allow applications downloaded from"</strong>, ensure <strong>App Store and identified developers</strong> is selected.</li>
+          <li>If macOS blocks an unknown file with a yellow warning triangle, <strong>do not click Open Anyway</strong> unless a parent or IT teacher confirms it is genuine.</li>
+        </ol>
+      </article>
+    </div>
+
+    <div class="notice">
+      <strong>Important note regarding app locks:</strong> macOS provides system-level screen locks and Touch ID, but third-party desktop apps (like WhatsApp, Outlook, or banking portals) must provide their own separate app locks. Whenever available, open the individual app's settings and turn on <em>"Require Touch ID / Password on launch"</em>.
+    </div>
+
+    <details>
+      <summary>How do I find an app's own lock setting?</summary>
+      <p>Open the app on your Mac. Click the app's name in the very top-left menu bar (next to the Apple icon) and select <strong>Settings</strong> or <strong>Preferences</strong>. Look under <strong>Privacy</strong>, <strong>Security</strong>, or <strong>Account</strong>. Toggle on options like <em>"Screen Lock"</em> or <em>"Require Touch ID after 1 minute"</em>. If the app does not have this setting, simply lock your Mac with <strong>Control + Command + Q</strong> whenever you step away.</p>
+    </details>
+  </section>
+
+  <!-- 4. PRIVACY -->
+  <section class="section" id="privacy">
+    <h2><span class="num">4</span>Review privacy permissions</h2>
+    <p>Just like apps on your smartphone, desktop Mac programs must ask for your permission before turning on your camera, listening to your microphone, or reading your private files. Periodically audit these permissions to keep rogue software out.</p>
+
+    <span class="path"><b>Apple menu </b> → <b>System Settings</b> → <b>Privacy &amp; Security</b></span>
+
+    <ol>
+      <li><strong>Check Camera access:</strong> Click <strong>Camera</strong> in the list. Review the apps shown on screen. If you see a game, utility tool, or unfamiliar program with permission turned ON, toggle the switch <strong>OFF</strong>. Only video-calling apps like FaceTime or Zoom should have camera access.</li>
+      <li><strong>Check Microphone access:</strong> Click <strong>Microphone</strong> and switch off access for any app that does not strictly require voice recording.</li>
+      <li><strong>Check Location Services:</strong> Click <strong>Location Services</strong>. Turn off access for any program that does not need your physical geographical position.</li>
+      <li><strong>Check Full Disk Access:</strong> Click <strong>Full Disk Access</strong>. This powerful permission should only belong to trusted backup tools like Time Machine. Remove unknown programs from this list.</li>
+    </ol>
+
+    <div class="notice">
+      <strong>Signing into websites on your Mac:</strong> Always keep your registered mobile phone nearby on your desk. When a site asks for 2FA, open <strong>Google Authenticator</strong> or <strong>Microsoft Authenticator</strong> on your phone, read the rolling six-digit code, and type it into the browser window you opened yourself. Never read these codes aloud to anyone on a phone call.
+    </div>
+  </section>
+
+  <!-- 5. MAC CARE -->
+  <section class="section" id="care">
+    <h2><span class="num">5</span>Keep your Mac tidy without risky cleaner apps</h2>
+    <p>Many internet ads claim your Mac is full of junk and urge you to install "free cleanup tools". <strong>Never install these apps!</strong> They frequently install adware, steal system data, and slow down your computer. Your Mac already has an official, safe storage cleanup tool built right into macOS.</p>
+
+    <span class="path"><b>Apple menu </b> → <b>System Settings</b> → <b>General</b> → <b>Storage</b></span>
+
+    <ol>
+      <li>Click <strong>Storage</strong> and wait a few seconds while the colored bar measures your internal drive.</li>
+      <li>Under <strong>Applications</strong>, click the small information button (<strong>ℹ</strong>). Look through the list and select apps you have not used in months, then click <strong>Delete</strong>.</li>
+      <li>Under <strong>Documents</strong>, click the information button (<strong>ℹ</strong>) and review the <strong>Large Files</strong> tab. Delete old movie files or downloaded video projects you no longer need.</li>
+      <li>Open your <strong>Downloads</strong> folder in Finder. Delete old installers, duplicate school worksheets, and temporary setup files.</li>
+      <li>Right-click the <strong>Bin</strong> icon in your Dock and select <strong>Empty Bin</strong> to permanently reclaim your free space.</li>
+    </ol>
+
+    <div class="notice danger">
+      <strong>Beware fake virus pop-ups:</strong> If a webpage suddenly beeps and shows a message saying <em>"Apple Security Alert: 3 Viruses Detected on your Mac! Call 0800-XXX-XXXX"</em>, <strong>it is a complete lie</strong>. Websites cannot scan your computer drive. Close the tab immediately. If it will not close, press <strong>Command + Option + Escape</strong>, click your browser, and click <strong>Force Quit</strong>.
+    </div>
+  </section>
+
+  <!-- 6. BACKUPS -->
+  <section class="section" id="backup">
+    <h2><span class="num">6</span>Back up with Time Machine and iCloud</h2>
+    <p>A backup is an exact safety duplicate of all your documents, pictures, and coursework. If you accidentally delete an important presentation or spill water across your keyboard, a backup ensures not a single file is lost.</p>
+
+    <div class="grid">
+      <article class="card">
+        <h3>A. Time Machine (External hard drive)</h3>
+        <span class="path"><b>Apple menu </b> → <b>System Settings</b> → <b>General</b> → <b>Time Machine</b></span>
+        <ol>
+          <li>Plug an external USB portable hard drive into your Mac.</li>
+          <li>Click <strong>Add Backup Disk</strong>.</li>
+          <li>Click the name of your external drive and click <strong>Set Up Disk</strong>.</li>
+          <li>Choose <strong>Encrypt Backup</strong> and create a password for the drive.</li>
+          <li>Time Machine will now take automatic hourly backups whenever the drive is connected. Leave it plugged in during your homework sessions.</li>
+        </ol>
+      </article>
+
+      <article class="card">
+        <h3>B. iCloud Drive (Cloud sync)</h3>
+        <span class="path"><b>Apple menu </b> → <b>System Settings</b> → <b>[Your Name]</b> → <b>iCloud</b></span>
+        <ol>
+          <li>Click on <strong>iCloud</strong>, then click on <strong>iCloud Drive</strong>.</li>
+          <li>Turn <strong>ON</strong> the option for <strong>Desktop &amp; Documents Folders</strong>.</li>
+          <li>Every document placed on your Mac desktop will automatically synchronize with your Apple ID so you can view it from an iPhone or iPad as well.</li>
+          <li>Always test your backup by opening a file from your external drive or iCloud to ensure it opens properly.</li>
+        </ol>
+      </article>
+    </div>
+
+    <div class="notice">
+      <strong>The 3-2-1 backup principle:</strong> Keep your files in 3 places: on your Mac, on an external Time Machine hard drive, and in the cloud with iCloud. This guarantees total peace of mind.
+    </div>
+  </section>
+
+  <!-- CHECKLIST -->
+  <section class="section" id="checklist">
+    <h2>Your easy Mac checklist</h2>
+    <div class="check">
+      <div><strong>Every week:</strong> Check for macOS updates and App Store patches.</div>
+      <div><strong>Every time you walk away:</strong> Press <strong>Control + Command + Q</strong> to lock.</div>
+      <div><strong>Once today:</strong> Turn on FileVault and store your recovery key safely.</div>
+      <div><strong>Before downloading:</strong> Stick to the App Store or official company sites.</div>
+      <div><strong>Every term:</strong> Audit Privacy permissions for Camera and Microphone.</div>
+      <div><strong>Regularly:</strong> Plug in your Time Machine drive to make a backup.</div>
+    </div>
+
+    <div class="schedule">
+      <table>
+        <thead>
+          <tr>
+            <th>Situation</th>
+            <th>Do this first</th>
+            <th>Never do this</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Loud web popup says "Mac infected!"</td>
+            <td><strong>Force quit browser (Command + Option + Esc)</strong></td>
+            <td>Never call the phone number or pay for their cleaner</td>
+          </tr>
+          <tr>
+            <td>Leaving your desk at school or library</td>
+            <td><strong>Press Control + Command + Q to lock immediately</strong></td>
+            <td>Never leave your laptop screen open and unattended</td>
+          </tr>
+          <tr>
+            <td>Unexpected 2FA prompt appears on phone</td>
+            <td><strong>Tap Deny / Reject immediately</strong></td>
+            <td>Never approve an alert you did not initiate yourself</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <em>Umer Malik: Where Craft Meets Research</em>
+  <a href="#top" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">↑ Back to top</a>
+</footer>
+
+<script id="security-navigation">
+(() => {
+  const nav = document.querySelector('nav.quick');
+  const links = [...nav.querySelectorAll('a[href^="#"]')];
+  const sections = links.map(a => document.getElementById(a.hash.slice(1)));
+  const mark = index => links.forEach((a,i) => i === index ? a.setAttribute('aria-current','location') : a.removeAttribute('aria-current'));
+  let pending = false;
+  const update = () => {
+    const sticky = getComputedStyle(nav).position === 'sticky';
+    const offset = sticky ? nav.offsetHeight + 24 : 24;
+    document.documentElement.style.setProperty('--quick-height',nav.offsetHeight+'px');
+    let index = -1;
+    sections.forEach((section,i) => { if(section && section.getBoundingClientRect().top <= offset) index=i; });
+    mark(index); pending=false;
+  };
+  const schedule = () => { if(!pending) {pending=true; requestAnimationFrame(update);} };
+  addEventListener('scroll',schedule,{passive:true});
+  addEventListener('resize',schedule);
+  addEventListener('hashchange',schedule);
+  if(window.ResizeObserver) new ResizeObserver(schedule).observe(nav);
+  update();
+})();
+</script>
+</body>
+</html>

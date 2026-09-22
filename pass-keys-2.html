@@ -1,0 +1,439 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>How to Set Up Passkeys</title>
+<style>
+:root{--n:#071a3d;--b:#123c8c;--g:#f6c343;--t:#102033;--m:#455a73}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Segoe UI,Arial,sans-serif;background:radial-gradient(circle at top left,#f5f9ff,#d7e5f8 60%,#c2d6ef);color:var(--t);line-height:1.6}
+header{position:relative;text-align:center;overflow:hidden;color:#fff;padding:36px 20px 30px;background:radial-gradient(circle at 12% 0%,#2e68e8,#123c8c 30%,#071a3d 70%)}
+header:before{content:"";position:absolute;width:270px;height:270px;left:-115px;top:-150px;border:1px solid #ffffff33;border-radius:50%;box-shadow:0 0 0 34px #ffffff0b}
+h1,header p{position:relative;z-index:1}
+h1{margin:0;font-size:clamp(2rem,5vw,3.6rem)}
+header p{max-width:760px;margin:12px auto;color:#e0ebff}
+.home{position:absolute;right:24px;top:20px;z-index:3;padding:9px 15px;border:2px solid var(--g);border-radius:999px;background:#fff;color:var(--n);font-weight:800;text-decoration:none}
+.quick{position:sticky;top:0;z-index:4;padding:8px 14px;background:linear-gradient(90deg,#071a3d,#123c8c,#071a3d);border-bottom:3px solid var(--g);display:flex;flex-direction:column;gap:6px;align-items:center}
+.quick-row{display:flex;flex-wrap:wrap;justify-content:center;gap:6px}
+.quick a{display:inline-block;padding:5px 12px;border:1px solid #cfe1ff55;border-radius:999px;color:#fff;text-decoration:none;font-size:.82rem;font-weight:800;white-space:nowrap}
+.quick a:hover{background:var(--g);color:var(--n)}
+main{width:min(1050px,92%);margin:24px auto}
+.section{padding:30px;margin-bottom:28px;border-top:7px solid var(--g);border-radius:24px;background:#eaf3ff;box-shadow:0 18px 42px #071a3d25;scroll-margin-top:95px}
+.section h2{margin-top:0;color:var(--n)}
+.choice{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.choice a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:18px;border:1px solid #2563eb55;border-radius:17px;background:linear-gradient(135deg,#fff,#f4f8fd);color:var(--n);text-align:center;text-decoration:none;font-weight:800;box-shadow:0 10px 22px #071a3d20}
+.choice a:hover{transform:translateY(-4px);border-color:var(--g)}
+.choice svg{width:32px;height:32px;fill:currentColor}
+.flow{display:flex;gap:12px;align-items:stretch;flex-wrap:wrap;margin:18px 0}
+.flow div{flex:1 1 180px;padding:16px;text-align:center;border:1px solid #2563eb55;border-radius:16px;background:#fff;display:flex;flex-direction:column;justify-content:center}
+.flow svg{width:36px;height:36px;margin:0 auto 10px}
+.flow b{display:block;color:var(--n);margin-bottom:6px;font-size:1.05rem}
+.arrow{font-size:1.5rem;color:var(--b);display:flex;align-items:center;justify-content:center}
+.route{margin:22px 0;padding:25px;border-right:8px solid var(--g);border-radius:19px;background:linear-gradient(135deg,#071a3d,#123c8c);color:#eef6ff;scroll-margin-top:100px}
+.badge{display:inline-block;padding:5px 13px;border-radius:999px;background:var(--g);color:var(--n);font-size:.78rem;font-weight:900;letter-spacing:0.5px}
+.route h3{margin:12px 0 8px;font-size:1.45rem;display:flex;align-items:center;gap:10px}
+.route h3 svg{width:26px;height:26px;fill:currentColor}
+.route p{color:#dce9ff}
+.route strong{color:#ffe190}
+.path{margin:15px 0;padding:12px;border:1px solid #f6c343aa;border-radius:9px;background:#020b1d;color:#afffe2;font-family:Consolas,monospace;font-size:.9rem}
+.route ol{padding-left:22px;margin:16px 0}
+.route li{margin-bottom:16px;line-height:1.6}
+.finish{margin-top:14px;padding:12px 14px;border-left:5px solid #55d77a;border-radius:8px;background:#15803d66;font-weight:700}
+.warn{padding:17px;border-left:8px solid #b91c1c;background:#fff2ef;color:#7f1d1d;border-radius:14px;line-height:1.5}
+.check{padding:22px;border-radius:17px;background:linear-gradient(135deg,#071a3d,#123c8c);color:#fff;margin-top:18px}
+.check h3{color:var(--g);margin-top:0}
+.check ul{padding-left:20px;margin:10px 0}
+.check li{margin-bottom:8px}
+footer{text-align:center;margin-top:36px;padding:22px;border-top:4px solid var(--g);background:var(--n);color:#e0eaff;font-weight:700;font-style:italic}
+.back{display:inline-block;margin-left:12px;padding:7px 13px;border-radius:7px;background:var(--b);color:#fff;text-decoration:none;font-style:normal}
+.choice-note{margin:16px 0;padding:15px;border-left:7px solid #f6c343;border-radius:13px;background:#fff8e3;color:#4a3b00}
+.compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:18px 0}
+.compare-card{padding:20px;border:1px solid #2563eb55;border-radius:18px;background:#fff;box-shadow:0 8px 20px #071a3d15}
+.compare-card h3{margin-top:0;color:var(--n);display:flex;align-items:center;gap:10px}
+.compare-card svg{width:26px;height:26px;flex-shrink:0}
+.compare-card p{margin:8px 0}
+.setup-card{background:#ffffff;border:1px solid #2563eb44;border-radius:18px;padding:20px;margin:16px 0;box-shadow:0 8px 20px #071a3d10}
+.setup-card h3{margin-top:0;color:var(--n);display:flex;align-items:center;gap:10px}
+.setup-card ol{padding-left:20px;margin:12px 0}
+.setup-card li{margin-bottom:10px;line-height:1.55}
+@media(max-width:700px){
+  header{padding:70px 14px 26px}
+  .home{top:14px;right:14px}
+  .choice{grid-template-columns:repeat(2,1fr)}
+  .section,.route{padding:20px}
+  .compare-grid{grid-template-columns:1fr}
+  .arrow{transform:rotate(90deg);margin:4px auto}
+}
+</style>
+<style id="security-shared-style">
+/* Unified Digital Security Centre header and navigation */
+body > header, body > header.top {
+  position:relative; display:flex; flex-direction:column; justify-content:center;
+  min-height:0; padding:18px 90px; align-items:center; text-align:center; color:#fff;
+  background:radial-gradient(ellipse at 15% 0%,#2457ac,transparent 55%),linear-gradient(120deg,#102d63,#071a3d);
+}
+body > header h1, body > header.top h1 {max-width:960px; width:100%; margin:4px auto 6px; font-family:"Segoe UI",Arial,sans-serif; font-size:clamp(1.8rem,4.2vw,3.4rem); line-height:1.14; letter-spacing:-.025em; text-align:center; text-wrap:balance;}
+body > header p, body > header.top p {max-width:760px; margin:0 auto; font-size:1.05rem; line-height:1.6; text-align:center; color:#dfeaff;}
+body > header p.ey, body > header.top p.ey {margin:0 auto 3px; color:#f6c343; font-size:.75rem; letter-spacing:.14em; font-weight:800;}
+body > header::before,body > header::after {pointer-events:none;}
+body > header a.home {position:absolute; right:24px; top:50%; transform:translateY(-50%); width:46px; height:46px; padding:0; display:grid; place-items:center; border:1px solid #f6c343; border-radius:14px; background:#f6c343; color:#071a3d; box-shadow:0 6px 18px #0003; z-index:3; transition:background .18s,box-shadow .18s;}
+body > header a.home svg {width:24px; height:24px; fill:currentColor;}
+body > header a.home:hover {background:#ffda75; box-shadow:0 8px 24px #0005;}
+body > nav.quick {position:sticky; top:0; z-index:10; display:flex; flex-direction:column; align-items:center; gap:5px; padding:7px 16px; overflow:visible; white-space:normal; background:#091f46; border-top:2px solid #f6c343; border-bottom:2px solid #f6c343; box-shadow:0 5px 18px #071a3d20;}
+body > nav.quick .quick-label {color:#f6c343; font:800 .68rem/1.3 "Segoe UI",Arial,sans-serif; letter-spacing:.16em;}
+body > nav.quick .quick-links {display:flex; flex-wrap:wrap; justify-content:center; align-items:center; gap:5px; width:100%; max-width:1180px; margin:0 auto; padding:0;}
+body > nav.quick a {display:inline-flex; align-items:center; justify-content:center; min-height:36px; max-width:100%; margin:0; padding:6px 12px; border:1px solid #7796c266; border-radius:10px; background:#ffffff08; color:#eef4ff; font:600 .83rem/1.35 "Segoe UI",Arial,sans-serif; text-align:center; text-decoration:none; white-space:normal; transition:background .18s,border-color .18s;}
+body > nav.quick a:hover,body > nav.quick a[aria-current="location"] {background:#f6c343; color:#071a3d; border-color:#f6c343; transform:none;}
+body > header a.home:focus-visible,body > nav.quick a:focus-visible {outline:3px solid #fff; outline-offset:4px;}
+body main [id] {scroll-margin-top:calc(var(--quick-height,160px) + 20px);}
+@media(max-width:600px) {
+  body > header,body > header.top {min-height:0; padding:14px 66px;}
+  body > header h1, body > header.top h1 {font-size:clamp(1.55rem,6vw,2.25rem); overflow-wrap:anywhere;}
+  body > header p, body > header.top p {font-size:.94rem;}
+  body > header a.home {right:12px; width:44px; height:44px; border-radius:12px;}
+  body > nav.quick {position:relative; padding:7px 10px;}
+  body > nav.quick a {min-height:44px; padding:8px 11px; font-size:.8rem;}
+  body main [id] {scroll-margin-top:20px;}
+}
+@media(prefers-reduced-motion:reduce) {html {scroll-behavior:auto;} body > nav.quick a,body > header a.home {transition:none;}}
+</style>
+<style id="yellow-home-image">
+/* Yellow house image, centred vertically on the right of every header. */
+body > header a.home {
+  inset:auto 24px auto auto; top:50%; transform:translateY(-50%);
+  display:grid; place-items:center; width:48px; height:48px; padding:0;
+  background:#071a3d; border:1px solid #f6c343; border-radius:12px;
+  box-shadow:0 4px 14px #0003;
+}
+body > header a.home img {display:block; width:28px; height:28px; margin:0;}
+body > header a.home:hover {background:#17376a; border-color:#ffe49b;}
+@media(max-width:600px) {
+  body > header a.home {right:12px; width:44px; height:44px;}
+}
+</style>
+</head>
+<body>
+<header id="top">
+  <a class="home" href="digital-security-centre.html" aria-label="Home: Digital Security Centre" title="Home: Digital Security Centre"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSIjZjZjMzQzIiBkPSJNMTIgMi41IDEuNSAxMS40bDEuOSAyLjJMNSAxMi4yVjIxaDV2LTZoNHY2aDV2LTguOGwxLjYgMS40IDEuOS0yLjJMMTIgMi41WiIvPjwvc3ZnPg==" width="28" height="28" alt="" aria-hidden="true"></a>
+  <h1>How to Set Up Passkeys</h1>
+  <p>Use your device fingerprint, Face ID, or screen lock PIN to sign in safely without ever typing or remembering a password.</p>
+</header>
+
+<nav class="quick" aria-label="Quick navigation"><span class="quick-label">ON THIS PAGE</span><div class="quick-links"><a href="#prep">Equipment Needed</a><a href="#compare">Passkey vs Authenticator</a><a href="#strength">Which Method is Stronger?</a><a href="#android-managers">Setup Android Managers</a><a href="#android">1. Android &amp; Samsung</a><a href="#iphone">2. Apple iPhone / iPad</a><a href="#windows">3. Windows PC</a><a href="#mac">4. Mac</a><a href="#lost-phone">Lost Phone Recovery</a><a href="#recovery">Safety Checklist</a></div></nav>
+
+<main>
+  <section class="section" id="prep">
+    <h2>What you need before you start</h2>
+    <p>To make setup simple and avoid switching screens back and forth on one tiny display, <strong>use a laptop or tablet together with your mobile phone</strong>:</p>
+    <div class="choice-note">
+      <strong>Setup Recommendation:</strong> Open your account website on your <strong>laptop, PC, or tablet</strong> while holding your <strong>mobile phone</strong> in your hand. This allows your laptop to display the secure linking code while your phone captures it instantly using its camera and biometrics.
+    </div>
+    <div class="flow">
+      <div>
+        <svg viewBox="0 0 24 24" fill="#123c8c"><path d="M20 18c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2H0v2h24v-2h-4zM4 6h16v10H4V6z"/></svg>
+        <b>1. Laptop or Tablet</b>
+        Sign in to your account portal and open the security dashboard.
+      </div>
+      <span class="arrow">+</span>
+      <div>
+        <svg viewBox="0 0 24 24" fill="#123c8c"><path d="M17 1.01L7 1c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-1.99-2-1.99zM17 19H7V5h10v14zm-5-3c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3z"/></svg>
+        <b>2. Mobile Phone</b>
+        Scan the screen code and confirm with your fingerprint or face.
+      </div>
+      <span class="arrow">→</span>
+      <div>
+        <svg viewBox="0 0 24 24" fill="#15803d"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+        <b>3. Verified Instantly</b>
+        Your secure cryptographic passkey is created and ready for sign-in.
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="compare">
+    <h2>Passkeys vs Authenticator apps: What is the difference?</h2>
+    <p>Both options improve your account safety beyond a standard password, but they work quite differently:</p>
+
+    <div class="compare-grid">
+      <div class="compare-card">
+        <h3>
+          <svg viewBox="0 0 24 24" fill="#123c8c"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+          Authenticator Apps
+        </h3>
+        <p><strong>How they work:</strong> You must still remember and type your regular text password. Next, you unlock your phone, open an app like Google Authenticator, read a 6-digit number, and quickly type it before the timer expires.</p>
+        <p><strong>The weakness:</strong> If a criminal tricks you with a fake link, you might accidentally type both your password and your 6-digit code into their fake website.</p>
+      </div>
+
+      <div class="compare-card">
+        <h3>
+          <svg viewBox="0 0 24 24" fill="#15803d"><path d="M7 14c-1.66 0-3 1.34-3 3 0 1.31.84 2.41 2 2.83V21c0 .55.45 1 1 1s1-.45 1-1v-1.17c1.16-.42 2-1.52 2-2.83 0-1.66-1.34-3-3-3zm13-9h-4.18C15.4 3.84 14.3 3 13 3c-1.3 0-2.4.84-2.82 2H2c-.55 0-1 .45-1 1s.45 1 1 1h1v11c0 1.1.9 2 2 2h2v-2H5V7h14v10h-2v2h2c1.1 0 2-.9 2-2V7h1c.55 0 1-.45 1-1s-.45-1-1-1z"/></svg>
+          Passkeys (The Modern Standard)
+        </h3>
+        <p><strong>How they work:</strong> Passwords and temporary numbers are replaced completely. You click sign in and simply touch your fingerprint scanner, face unlock, or enter your device screen PIN.</p>
+        <p><strong>The superpower:</strong> Passkeys cannot be phished. The underlying cryptography verifies that the website address is genuine before approving access. A fake website cannot intercept your passkey.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="strength">
+    <h2>Which method of adding a passkey is better and stronger?</h2>
+    <p>When you create a passkey, you will often see choices for where to store it. Here is how they compare:</p>
+    <div class="flow">
+      <div>
+        <b>1. Synced Cloud Passkeys</b>
+        <em>(Google Password Manager, Apple iCloud Keychain, Samsung Pass)</em>
+        <br><br>
+        <strong>Verdict: Best balance of security and convenience.</strong> The keys are protected by your device screen lock and backed up across your connected devices using end-to-end encryption. If you lose your phone, you do not get locked out.
+      </div>
+      <div>
+        <b>2. Physical FIDO2 Hardware Keys</b>
+        <em>(YubiKey or USB / NFC Security Keys)</em>
+        <br><br>
+        <strong>Verdict: Highest possible security.</strong> The private key never leaves the physical USB token. However, if you lose the key and have no backup key configured, recovery can be difficult.
+      </div>
+      <div>
+        <b>3. Device-Bound Local Keys</b>
+        <em>(Single PC or Mac hardware module)</em>
+        <br><br>
+        <strong>Verdict: Strong, but localized.</strong> The key stays exclusively inside that specific machine. You must create an additional passkey if you intend to sign in from your mobile phone.
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW TO SET UP PASSKEY MANAGERS ON ANDROID & SAMSUNG -->
+  <section class="section" id="android-managers">
+    <h2>Setting up your passkey manager on Android &amp; Samsung</h2>
+    <p>Before you create your first passkey, your Android or Samsung phone must have a safe vault ready to store it. On Android, passkeys are stored in <strong>Google Password Manager</strong> or <strong>Samsung Pass / Samsung Wallet</strong>. Follow the setup below for the service you prefer:</p>
+
+    <!-- Google Password Manager Setup -->
+    <div class="setup-card">
+      <h3>
+        <svg viewBox="0 0 24 24" width="24" height="24"><path fill="#EA4335" d="M12 5c1.55 0 2.95.55 4.04 1.45l3.03-3.03C17.24 1.7 14.77 1 12 1 7.42 1 3.53 3.61 1.63 7.37l3.68 2.85C6.19 7.41 8.87 5 12 5z"/><path fill="#4285F4" d="M23.49 12.28c0-.79-.07-1.54-.19-2.28H12v4.51h6.47c-.29 1.48-1.14 2.73-2.4 3.58l3.7 2.87c2.16-2 3.72-4.94 3.72-8.68z"/><path fill="#FBBC05" d="M5.31 14.78a7.06 7.06 0 010-4.56L1.63 7.37a11.97 11.97 0 000 9.26l3.68-2.85z"/><path fill="#34A853" d="M12 23c3.24 0 5.95-1.08 7.93-2.91l-3.7-2.87c-1.08.72-2.45 1.16-4.23 1.16-3.13 0-5.81-2.41-6.69-5.22L1.63 16.01C3.53 19.79 7.42 23 12 23z"/></svg>
+        Option A: Google Password Manager (Recommended for all Android phones)
+      </h3>
+      <p>Google Password Manager is built directly into Android Google Play Services. It requires no extra downloads and automatically synchronizes across all your devices signed in with your Google Account.</p>
+      <ol>
+        <li><strong>Open Android Settings:</strong> On your Android phone, tap the gear icon to open <strong>Settings</strong>.</li>
+        <li><strong>Find Google Settings:</strong> Scroll down and tap on <strong>Google</strong> (or <strong>Google Services</strong>).</li>
+        <li><strong>Open Password Manager:</strong> Tap on the <strong>All Services</strong> tab (if shown), then tap <strong>Password Manager</strong>.</li>
+        <li><strong>Confirm Your Google Account:</strong> Ensure your main Gmail address is displayed at the top. If not, tap your profile picture and switch to your primary account.</li>
+        <li><strong>Add a Home Screen Shortcut (Optional but helpful):</strong> Tap the gear icon in the top right corner of Password Manager and select <strong>Add shortcut to your home screen</strong> so you can open it like any normal app.</li>
+        <li><strong>Set as Default Autofill Provider:</strong> Go back to phone <strong>Settings &gt; System &gt; Languages &amp; input</strong> (or <strong>General Management &gt; Passwords and autofill</strong> on Samsung) and confirm that <strong>Google</strong> is selected as your default autofill service.</li>
+      </ol>
+      <div class="finish">✓ Ready: Any passkey you save will now be backed up to your encrypted Google Password Manager.</div>
+    </div>
+
+    <!-- Samsung Wallet / Samsung Pass Setup -->
+    <div class="setup-card">
+      <h3>
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="#0c4da2"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/></svg>
+        Option B: Samsung Pass &amp; Samsung Wallet (For Samsung Galaxy users)
+      </h3>
+      <p>If you prefer keeping passkeys in Samsung Knox secure storage, you can use Samsung Pass built into Samsung Wallet.</p>
+      <ol>
+        <li><strong>Create or Sign in to a Samsung Account:</strong> Open your Galaxy phone <strong>Settings</strong>. Look at the very top: if your name is not there, tap <strong>Samsung account</strong>. Tap <strong>Create account</strong> (or sign in with your email/Google account) and agree to the terms.</li>
+        <li><strong>Install or Open Samsung Wallet:</strong> Open the <strong>Galaxy Store</strong> app on your Samsung phone. Search for <strong>Samsung Wallet</strong> (which includes Samsung Pass) and tap <strong>Install</strong> or <strong>Update</strong>.</li>
+        <li><strong>Complete Initial Setup:</strong> Open Samsung Wallet. Tap <strong>Continue</strong>, accept permissions, and register your fingerprint when prompted. This ties your biometric security to your Samsung Pass vault.</li>
+        <li><strong>Set Samsung Pass as Default:</strong> Open phone <strong>Settings &gt; General Management &gt; Passwords, passkeys and autofill</strong>. Under the Autofill service heading, select <strong>Samsung Pass</strong>.</li>
+      </ol>
+      <div class="finish">✓ Ready: Your Samsung Pass vault is configured to store passkeys protected by Samsung Knox hardware security.</div>
+    </div>
+  </section>
+
+  <section class="section" id="choose">
+    <h2>Choose your device walkthrough</h2>
+    <p>Follow the specific walkthrough for your hardware platform:</p>
+    <div class="choice">
+      <a href="#android">
+        <svg viewBox="0 0 24 24"><path d="M17.6 9.48l1.84-3.18a.5.5 0 00-.86-.5l-1.87 3.24a11.45 11.45 0 00-9.42 0L5.42 5.8a.5.5 0 00-.86.5l1.84 3.18A10.8 10.8 0 002 18h20a10.8 10.8 0 00-4.4-8.52zM7 14.5a1.25 1.25 0 111.25-1.25A1.25 1.25 0 017 14.5zm10 0a1.25 1.25 0 111.25-1.25 1.25 1.25 0 01-1.25 1.25z"/></svg>
+        1. Android &amp; Samsung
+      </a>
+      <a href="#iphone">
+        <svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.62-.75 1.04-1.8 1.01-2.87-.9.04-2 .6-2.65 1.34-.56.64-1.06 1.7-1.01 2.76 1.01.08 2.03-.49 2.65-1.23z"/></svg>
+        2. Apple iPhone / iPad
+      </a>
+      <a href="#windows">
+        <svg viewBox="0 0 24 24"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.551H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-13.051-1.849"/></svg>
+        3. Windows PC
+      </a>
+      <a href="#mac">
+        <svg viewBox="0 0 24 24"><path d="M20 18c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2H0v2h24v-2h-4zM4 6h16v10H4V6z"/></svg>
+        4. Mac
+      </a>
+    </div>
+  </section>
+
+  <section class="section">
+    <!-- 1. ANDROID & SAMSUNG ROUTE -->
+    <article class="route" id="android">
+      <span class="badge">1. ANDROID &amp; SAMSUNG GUIDE</span>
+      <h3>
+        <svg viewBox="0 0 24 24"><path d="M17.6 9.48l1.84-3.18a.5.5 0 00-.86-.5l-1.87 3.24a11.45 11.45 0 00-9.42 0L5.42 5.8a.5.5 0 00-.86.5l1.84 3.18A10.8 10.8 0 002 18h20a10.8 10.8 0 00-4.4-8.52zM7 14.5a1.25 1.25 0 111.25-1.25A1.25 1.25 0 017 14.5zm10 0a1.25 1.25 0 111.25-1.25 1.25 1.25 0 01-1.25 1.25z"/></svg>
+        Create a Passkey on Android &amp; Samsung Devices
+      </h3>
+      <p>Follow these exact steps using your laptop browser and your Android phone together to link and save your passkey:</p>
+      <div class="path">Laptop Browser → myaccount.google.com → Security → Passkeys → Phone Camera Scan → Biometric Confirm</div>
+      <ol>
+        <li>
+          <strong>Ensure your phone screen lock is active:</strong><br>
+          • <em>On stock Android (Google Pixel, Motorola, Xiaomi):</em> Open <strong>Settings &gt; Security &amp; privacy &gt; Device unlock &gt; Screen lock</strong>. Set a secure <strong>PIN</strong>, and register your <strong>Fingerprint Unlock</strong> or <strong>Face Unlock</strong>.<br>
+          • <em>On Samsung Galaxy:</em> Open <strong>Settings &gt; Security and privacy &gt; Lock screen</strong> (set a PIN), then tap <strong>Biometrics</strong> to add your <strong>Fingerprints</strong>.
+        </li>
+        <li>
+          <strong>Confirm your autofill and passkey provider:</strong><br>
+          • <em>On Samsung Galaxy:</em> Open <strong>Settings &gt; General Management &gt; Passwords, passkeys and autofill</strong>. Under the <strong>Autofill service</strong> section, tap the radio button next to <strong>Google</strong> (recommended for syncing with non-Samsung PCs) or <strong>Samsung Pass</strong>.<br>
+          • <em>On other Android phones:</em> Open <strong>Settings &gt; Google &gt; Autofill &gt; Autofill with Google</strong> and ensure the main toggle switch is turned <strong>ON</strong>.
+        </li>
+        <li>
+          <strong>Open your account security dashboard on your laptop:</strong><br>
+          On your laptop or desktop computer, open your browser (Chrome, Edge, or Firefox) and navigate to your account portal (for example, go directly to <strong>myaccount.google.com</strong>). Sign in with your email and password if asked.
+        </li>
+        <li>
+          <strong>Locate the passkey settings menu:</strong><br>
+          In the left-hand navigation menu of your Google Account page, click the <strong>Security</strong> tab. Scroll down to the section titled <strong>How you sign in to Google</strong>. Click directly on the row labeled <strong>Passkeys and security keys</strong>. (You will be prompted to type your account password one last time to confirm your identity).
+        </li>
+        <li>
+          <strong>Initiate passkey creation:</strong><br>
+          On the Passkeys page, look for the blue button that says <strong>+ Create a passkey</strong> (or <strong>Add passkey</strong>) and click it.
+        </li>
+        <li>
+          <strong>Direct the passkey to your mobile phone:</strong><br>
+          Your laptop browser will show a prompt asking: <em>"Where do you want to save this passkey?"</em> Click on <strong>Use another device</strong>, and then select <strong>Phone or tablet</strong> (or <strong>Android device</strong>). A square, black-and-white QR barcode will immediately display on your laptop monitor.
+        </li>
+        <li>
+          <strong>Scan the laptop screen with your phone camera:</strong><br>
+          Pick up your Android or Samsung phone and open the built-in <strong>Camera</strong> app. Point the phone camera at the QR code on your laptop display. A yellow or white banner will pop up on your phone screen saying <strong>Use passkey</strong> (or <strong>Save a passkey</strong>). Tap this banner immediately.
+        </li>
+        <li>
+          <strong>Authorize with your fingerprint or PIN:</strong><br>
+          A prompt from Google Play Services (or Samsung Pass) will appear on your phone asking you to verify. Touch your registered <strong>fingerprint</strong> on the phone sensor or type your <strong>device PIN</strong>. Your laptop screen will instantly refresh and show a green checkmark saying: <em>"Passkey saved"</em>.
+        </li>
+      </ol>
+      <div class="finish">✓ Done: The passkey is permanently bound to your phone's biometric vault and backed up to your cloud account.</div>
+    </article>
+
+    <!-- 2. IPHONE / IPAD ROUTE -->
+    <article class="route" id="iphone">
+      <span class="badge">2. APPLE IPHONE / IPAD GUIDE</span>
+      <h3>
+        <svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.62-.75 1.04-1.8 1.01-2.87-.9.04-2 .6-2.65 1.34-.56.64-1.06 1.7-1.01 2.76 1.01.08 2.03-.49 2.65-1.23z"/></svg>
+        Create a Passkey on Apple iPhone &amp; iPad
+      </h3>
+      <p>Apple automatically saves passkeys inside your end-to-end encrypted <strong>iCloud Keychain</strong>.</p>
+      <div class="path">iPhone Settings → Apple Account → iCloud → Passwords &amp; Keychain (ON) → Safari / Laptop</div>
+      <ol>
+        <li><strong>Turn on iCloud Keychain:</strong> On your iPhone, open <strong>Settings &gt; tap your Name at the top &gt; iCloud &gt; Passwords and Keychain</strong>. Ensure the toggle switch is turned <strong>ON</strong>.</li>
+        <li><strong>Open the website security page:</strong> On your laptop or directly inside Safari on your iPhone, sign in to the website you want to protect and open <strong>Security Settings</strong>.</li>
+        <li><strong>Select Passkeys:</strong> Tap or click on <strong>Passkeys</strong> or <strong>Two-Step Verification</strong>, then select <strong>+ Add a Passkey</strong>.</li>
+        <li><strong>Trigger Apple verification:</strong> A card will appear from the bottom of your screen saying: <em>"Do you want to save a passkey for [account]?"</em></li>
+        <li><strong>Confirm with Face ID or Touch ID:</strong> Tap <strong>Continue</strong>. Glancing at your screen with Face ID or touching Touch ID stores the passkey immediately.</li>
+      </ol>
+      <div class="finish">✓ Done: The passkey is instantly synced across your iPhone, iPad, and Mac signed in to your Apple ID.</div>
+    </article>
+
+    <!-- 3. WINDOWS PC ROUTE -->
+    <article class="route" id="windows">
+      <span class="badge">3. WINDOWS PC GUIDE</span>
+      <h3>
+        <svg viewBox="0 0 24 24"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.551H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-13.051-1.849"/></svg>
+        Create a Passkey on Windows 10 &amp; 11
+      </h3>
+      <p>Windows computers can save passkeys locally using <strong>Windows Hello</strong> or connect to your phone.</p>
+      <div class="path">Windows Settings → Accounts → Sign-in options (Hello PIN) → Edge/Chrome → Security</div>
+      <ol>
+        <li><strong>Configure Windows Hello:</strong> Go to <strong>Start &gt; Settings &gt; Accounts &gt; Sign-in options</strong>. Ensure you have a <strong>Windows Hello PIN</strong>, fingerprint, or facial recognition set up.</li>
+        <li><strong>Open your web browser:</strong> Open Edge or Chrome and sign in to the target service website.</li>
+        <li><strong>Navigate to Passkeys:</strong> Go to <strong>Account Settings &gt; Security &gt; Passkeys</strong> and click <strong>Create a passkey</strong>.</li>
+        <li><strong>Select Windows Hello:</strong> When the blue Windows system prompt appears, choose <strong>Windows Hello or external security key</strong>.</li>
+        <li><strong>Authorize the key:</strong> Type your computer PIN or touch the laptop fingerprint scanner to finish.</li>
+      </ol>
+      <div class="finish">✓ Done: Your Windows computer can now log you into this account using just your Windows Hello PIN or biometrics.</div>
+    </article>
+
+    <!-- 4. MAC ROUTE -->
+    <article class="route" id="mac">
+      <span class="badge">4. MAC (MACOS) GUIDE</span>
+      <h3>
+        <svg viewBox="0 0 24 24"><path d="M20 18c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2H0v2h24v-2h-4zM4 6h16v10H4V6z"/></svg>
+        Create a Passkey on Mac (macOS)
+      </h3>
+      <p>Use Safari and Touch ID to save hardware-backed passkeys directly on your Mac.</p>
+      <div class="path">Safari → Target Service → Account Security → Passkeys → Touch ID Prompt</div>
+      <ol>
+        <li><strong>Verify Touch ID or password:</strong> Ensure your Mac has Touch ID configured under <strong>System Settings &gt; Touch ID &amp; Password</strong>.</li>
+        <li><strong>Visit the website in Safari:</strong> Go to the website, sign in, and open the <strong>Security</strong> settings panel.</li>
+        <li><strong>Select Add Passkey:</strong> Click <strong>Create Passkey</strong>. Safari will drop down a prompt: <em>"Do you want to save a passkey for this account?"</em></li>
+        <li><strong>Touch the fingerprint sensor:</strong> Tap your finger on the keyboard Touch ID button or type your Mac login password to confirm.</li>
+      </ol>
+      <div class="finish">✓ Done: Next time Safari shows this login, touching the fingerprint scanner logs you in immediately.</div>
+    </article>
+  </section>
+
+  <!-- LOST PHONE RECOVERY -->
+  <section class="section" id="lost-phone">
+    <h2>If you lose your phone: How to recover all your passkeys</h2>
+    <p>A common concern is: <em>"What happens if my phone is lost, stolen, or drops in water?"</em> Because modern passkeys are backed up to your encrypted cloud account, recovery is simple:</p>
+
+    <div class="flow">
+      <div>
+        <b>1. For Android &amp; Samsung</b>
+        Get your replacement Android or Samsung phone. Sign in with the exact same <strong>Google Account</strong> (or Samsung account). Google Password Manager downloads your encrypted passkeys automatically. Confirm your screen lock to unlock them.
+      </div>
+      <div>
+        <b>2. For iPhone &amp; iPad</b>
+        Turn on your new Apple device and sign in with your <strong>Apple ID</strong>. Complete the two-factor check and enable <strong>iCloud Keychain</strong>. Every passkey synchronizes to your new device right away.
+      </div>
+      <div>
+        <b>3. Immediate Security Step</b>
+        Open your account security dashboard from your laptop. Under <strong>Passkeys and devices</strong>, find the old lost phone and click <strong>Remove</strong> or <strong>Revoke</strong> so it can never be used again.
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="recovery">
+    <div class="warn">
+      <strong>Essential Account Protection:</strong> Before removing old passwords or relying only on passkeys, make sure your backup recovery email, phone number, and emergency backup codes are fully verified and up to date.
+    </div>
+
+    <div class="check">
+      <h3>Essential passkey safety checklist</h3>
+      <ul>
+        <li>Keep your mobile phone protected with a strong screen lock PIN or biometric scan.</li>
+        <li>Ensure cloud sync is active (Google Password Manager, iCloud Keychain, or Samsung Pass).</li>
+        <li>Never set up a passkey on a public, school, or shared library computer.</li>
+        <li>Keep an alternate sign-in method active on important accounts as a safety fallback.</li>
+        <li>If a device goes missing, revoke its access immediately from your laptop browser.</li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<footer>
+  ***Umer Malik: Where Craft Meets Research*** <a class="back" href="#top">↑ Back to top</a>
+</footer>
+<script id="security-navigation">
+(() => {
+  const nav = document.querySelector('nav.quick');
+  const links = [...nav.querySelectorAll('a[href^="#"]')];
+  const sections = links.map(a => document.getElementById(a.hash.slice(1)));
+  const mark = index => links.forEach((a,i) => i === index ? a.setAttribute('aria-current','location') : a.removeAttribute('aria-current'));
+  let pending = false;
+  const update = () => {
+    const sticky = getComputedStyle(nav).position === 'sticky';
+    const offset = sticky ? nav.offsetHeight + 24 : 24;
+    document.documentElement.style.setProperty('--quick-height',nav.offsetHeight+'px');
+    let index = -1;
+    sections.forEach((section,i) => { if(section && section.getBoundingClientRect().top <= offset) index=i; });
+    mark(index); pending=false;
+  };
+  const schedule = () => { if(!pending) {pending=true; requestAnimationFrame(update);} };
+  addEventListener('scroll',schedule,{passive:true});
+  addEventListener('resize',schedule);
+  addEventListener('hashchange',schedule);
+  if(window.ResizeObserver) new ResizeObserver(schedule).observe(nav);
+  update();
+})();
+</script>
+</body>
+</html>
