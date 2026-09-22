@@ -1,0 +1,389 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>What To Do If Your Account Is Hacked | Digital Security Centre</title>
+<style>
+:root{--n:#071d45;--n2:#102d63;--b:#2864e8;--p:#eaf2ff;--g:#ffc83d;--i:#10264e;--r:#bd2944;--ok:#087a55}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:linear-gradient(135deg,#dce9fb,#f4f7fc 42%,#d6e5fb);color:var(--i);font:18px/1.6 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+.top{background:radial-gradient(circle at 15% 0,#244f9a 0,transparent 32%),linear-gradient(120deg,var(--n2),var(--n));color:#fff;padding:28px max(5vw,24px) 22px;position:relative;overflow:hidden}
+.top:after{content:"";position:absolute;right:-90px;bottom:-100px;width:360px;height:220px;border:34px solid #ffffff12;border-radius:50%}
+.home{position:absolute;right:max(5vw,24px);top:28px;z-index:2;color:var(--n);background:var(--g);font-weight:800;padding:10px 17px;border-radius:99px;text-decoration:none;box-shadow:0 6px 18px #0004}
+.ey{color:var(--g);font-weight:900;letter-spacing:.12em;font-size:.8rem;margin:0}
+.top h1{font-size:clamp(2rem,5vw,4.3rem);line-height:1;margin:10px 0 12px;letter-spacing:-.05em}
+.top p{font-size:1.05rem;max-width:670px;margin:0;color:#dbe8ff}
+.quick{background:#0a2048;color:#fff;padding:10px max(3vw,16px);display:flex;flex-direction:column;gap:6px;align-items:center;box-shadow:0 8px 20px #0b234123;position:sticky;top:0;z-index:5}
+.quick-row{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;align-items:center}
+.quick strong{color:var(--g);font-size:.82rem;letter-spacing:.08em;margin-right:4px}
+.quick a{color:#fff;text-decoration:none;border:1px solid #59729f;border-radius:99px;padding:5px 12px;font-weight:750;font-size:.85rem;white-space:nowrap;transition:.2s}
+.quick a:hover,.quick a:focus{background:var(--b);border-color:#8bb2ff;transform:translateY(-2px)}
+main{max-width:1200px;margin:auto;padding:42px 24px 64px}
+.crumb{font-weight:750;font-size:.92rem;color:#315fbc}
+.crumb a{color:#244fa9}
+.hero,.sec{background:#f8fbff;border:1px solid #b8d1ff;border-radius:28px;box-shadow:0 16px 34px #183d7d1a;padding:clamp(24px,4vw,46px);margin-bottom:28px;scroll-margin-top:110px}
+.hero{border-left:13px solid var(--r);display:grid;grid-template-columns:1.2fr .8fr;gap:28px;align-items:center}
+h2{font-size:clamp(1.6rem,3vw,2.5rem);line-height:1.1;margin:0 0 14px;letter-spacing:-.035em}
+.lead{font-size:1.13rem;color:#314f79}
+.device{background:linear-gradient(135deg,#a51f3c,#e24560);border-radius:24px;padding:25px;color:#fff;box-shadow:0 12px 26px #a51f3c4a}
+.device .e{font-size:3rem}
+.device b{display:block;font-size:1.2rem;margin:8px 0}
+.note{background:#fff5d9;border-left:7px solid var(--g);border-radius:12px;padding:15px 18px;margin-top:18px}
+.danger{background:#fff0f2;border-left-color:var(--r)}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.card{background:var(--p);border:1px solid #a9c6ff;border-radius:20px;padding:22px;box-shadow:0 7px 18px #183d7d12}
+.card h3{margin:0 0 8px;font-size:1.28rem;line-height:1.2}
+.num{display:inline-grid;place-items:center;background:var(--b);color:#fff;border-radius:50%;width:34px;height:34px;font-size:.92rem;margin-right:8px;vertical-align:middle}
+.path{display:block;background:#0a214a;color:#afffe2;border-radius:12px;padding:12px 14px;font-family:Consolas,monospace;font-size:.9rem;font-weight:700;margin:13px 0}
+.path b{color:var(--g)}
+ol{padding-left:1.35em}
+li{margin:10px 0;line-height:1.6}
+strong{color:#092457}
+.flow{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:22px 0}
+.flow div{position:relative;background:#fff0f2;border:1px solid #f1a4b2;border-radius:16px;padding:15px;text-align:center;font-weight:800}
+.flow div:not(:last-child):after{content:"→";position:absolute;right:-10px;top:50%;transform:translateY(-50%);color:var(--r);font-size:1.5rem;z-index:1}
+.check{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.check div{background:#e5f7f0;border:1px solid #97dfc4;border-radius:12px;padding:12px 14px}
+.check div:before{content:"✓";font-weight:900;color:var(--ok);padding-right:9px}
+.table{overflow:auto;margin-top:20px}
+.table table{width:100%;border-collapse:separate;border-spacing:0;background:#fff;border:1px solid #b8cdf1;border-radius:16px;overflow:hidden}
+.table th{background:#091f48;color:#fff;text-align:left;padding:14px}
+.table td{padding:14px;border-top:1px solid #d9e3f3;vertical-align:top}
+.table tr:nth-child(even) td{background:#f1f6ff}
+.table td:last-child{font-weight:800;color:#123d94}
+footer{background:#061a3d;color:#e9f1ff;border-top:4px solid var(--g);padding:26px max(5vw,24px);text-align:center}
+footer a{color:#fff;background:#1d4da9;border-radius:99px;padding:9px 15px;text-decoration:none;font-weight:800;margin-left:10px}
+@media(max-width:760px){
+  .home{top:19px}
+  .top{padding-top:82px}
+  .hero{grid-template-columns:1fr}
+  .grid,.check{grid-template-columns:1fr}
+  .flow{grid-template-columns:1fr;gap:20px}
+  .flow div:not(:last-child):after{content:"↓";right:50%;top:auto;bottom:-17px;transform:translateX(50%)}
+  .quick{align-items:flex-start}
+}
+</style>
+<style id="security-shared-style">
+/* Unified Digital Security Centre header and navigation */
+body > header, body > header.top {
+  position:relative; display:flex; flex-direction:column; justify-content:center;
+  min-height:0; padding:18px 90px; align-items:center; text-align:center; color:#fff;
+  background:radial-gradient(ellipse at 15% 0%,#2457ac,transparent 55%),linear-gradient(120deg,#102d63,#071a3d);
+}
+body > header h1, body > header.top h1 {max-width:960px; width:100%; margin:4px auto 6px; font-family:"Segoe UI",Arial,sans-serif; font-size:clamp(1.8rem,4.2vw,3.4rem); line-height:1.14; letter-spacing:-.025em; text-align:center; text-wrap:balance;}
+body > header p, body > header.top p {max-width:760px; margin:0 auto; font-size:1.05rem; line-height:1.6; text-align:center; color:#dfeaff;}
+body > header p.ey, body > header.top p.ey {margin:0 auto 3px; color:#f6c343; font-size:.75rem; letter-spacing:.14em; font-weight:800;}
+body > header::before,body > header::after {pointer-events:none;}
+body > header a.home {position:absolute; right:24px; top:50%; transform:translateY(-50%); width:46px; height:46px; padding:0; display:grid; place-items:center; border:1px solid #f6c343; border-radius:14px; background:#f6c343; color:#071a3d; box-shadow:0 6px 18px #0003; z-index:3; transition:background .18s,box-shadow .18s;}
+body > header a.home svg {width:24px; height:24px; fill:currentColor;}
+body > header a.home:hover {background:#ffda75; box-shadow:0 8px 24px #0005;}
+body > nav.quick {position:sticky; top:0; z-index:10; display:flex; flex-direction:column; align-items:center; gap:5px; padding:7px 16px; overflow:visible; white-space:normal; background:#091f46; border-top:2px solid #f6c343; border-bottom:2px solid #f6c343; box-shadow:0 5px 18px #071a3d20;}
+body > nav.quick .quick-label {color:#f6c343; font:800 .68rem/1.3 "Segoe UI",Arial,sans-serif; letter-spacing:.16em;}
+body > nav.quick .quick-links {display:flex; flex-wrap:wrap; justify-content:center; align-items:center; gap:5px; width:100%; max-width:1180px; margin:0 auto; padding:0;}
+body > nav.quick a {display:inline-flex; align-items:center; justify-content:center; min-height:36px; max-width:100%; margin:0; padding:6px 12px; border:1px solid #7796c266; border-radius:10px; background:#ffffff08; color:#eef4ff; font:600 .83rem/1.35 "Segoe UI",Arial,sans-serif; text-align:center; text-decoration:none; white-space:normal; transition:background .18s,border-color .18s;}
+body > nav.quick a:hover,body > nav.quick a[aria-current="location"] {background:#f6c343; color:#071a3d; border-color:#f6c343; transform:none;}
+body > header a.home:focus-visible,body > nav.quick a:focus-visible {outline:3px solid #fff; outline-offset:4px;}
+body main [id] {scroll-margin-top:calc(var(--quick-height,160px) + 20px);}
+@media(max-width:600px) {
+  body > header,body > header.top {min-height:0; padding:14px 66px;}
+  body > header h1, body > header.top h1 {font-size:clamp(1.55rem,6vw,2.25rem); overflow-wrap:anywhere;}
+  body > header p, body > header.top p {font-size:.94rem;}
+  body > header a.home {right:12px; width:44px; height:44px; border-radius:12px;}
+  body > nav.quick {position:relative; padding:7px 10px;}
+  body > nav.quick a {min-height:44px; padding:8px 11px; font-size:.8rem;}
+  body main [id] {scroll-margin-top:20px;}
+}
+@media(prefers-reduced-motion:reduce) {html {scroll-behavior:auto;} body > nav.quick a,body > header a.home {transition:none;}}
+</style>
+<style id="yellow-home-image">
+/* Yellow house image, centred vertically on the right of every header. */
+body > header a.home {
+  inset:auto 24px auto auto; top:50%; transform:translateY(-50%);
+  display:grid; place-items:center; width:48px; height:48px; padding:0;
+  background:#071a3d; border:1px solid #f6c343; border-radius:12px;
+  box-shadow:0 4px 14px #0003;
+}
+body > header a.home img {display:block; width:28px; height:28px; margin:0;}
+body > header a.home:hover {background:#17376a; border-color:#ffe49b;}
+@media(max-width:600px) {
+  body > header a.home {right:12px; width:44px; height:44px;}
+}
+</style>
+</head>
+<body>
+
+<header class="top" id="top">
+  <a class="home" href="digital-security-centre.html" aria-label="Home: Digital Security Centre" title="Home: Digital Security Centre"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSIjZjZjMzQzIiBkPSJNMTIgMi41IDEuNSAxMS40bDEuOSAyLjJMNSAxMi4yVjIxaDV2LTZoNHY2aDV2LTguOGwxLjYgMS40IDEuOS0yLjJMMTIgMi41WiIvPjwvc3ZnPg==" width="28" height="28" alt="" aria-hidden="true"></a>
+  <p class="ey">DIGITAL SECURITY CENTRE</p>
+  <h1>What To Do If Your Account Is Hacked</h1>
+  <p>A calm, step-by-step emergency plan for email, banking, social media, and password manager accounts.</p>
+</header>
+
+<nav class="quick" aria-label="Quick navigation"><span class="quick-label">ON THIS PAGE</span><div class="quick-links"><a href="digital-security-centre.html">Security Centre</a><a href="#order">Emergency Plan</a><a href="#now">Do This Now</a><a href="#email">1. Email First</a><a href="#bank">2. Banking</a><a href="#social">3. Social Accounts</a><a href="#devices">4. Devices</a><a href="#protect">5. Fortify</a><a href="#check">Checklist</a></div></nav>
+
+<main>
+  <p class="crumb"><a href="digital-security-centre.html">Digital Security Centre</a> / What To Do If Your Account Is Hacked</p>
+
+  <section class="hero">
+    <div>
+      <h2>Act quickly, but do not panic</h2>
+      <p class="lead">Finding out someone broke into your account feels stressful, but panicking makes people click dangerous links. You might have received a password reset notification, spotted a strange device on your profile, or found messages sent to friends that you never wrote. Follow this clear emergency plan step-by-step starting with your <strong>main email account</strong>.</p>
+      <div class="note danger">
+        <strong>Never trust the message that sounded the alarm:</strong> Scammers often send fake emails saying <em>"Your account has been hacked! Click here to fix it!"</em> to steal your login. Close the warning message immediately, open your web browser or official app, and type the genuine website address yourself. Never tap links, enter codes, or ring telephone numbers provided inside suspicious alerts.
+      </div>
+    </div>
+    <aside class="device">
+      <div class="e">🚨🔐</div>
+      <b>Emergency Order</b>
+      <span>Main Email → Password Manager → Banking Apps → Social &amp; Gaming Accounts → Device Scans.</span>
+    </aside>
+  </section>
+
+  <section class="sec" id="order">
+    <h2>Why you must follow the correct emergency order</h2>
+    <p>Think of your digital life like a house. Your <strong>primary email address is the master key to the front door</strong>. If an intruder holds your email, resetting your Instagram, Roblox, or bank password will not help because the password reset links will land straight inside the hacker's hands. Once you kick the intruder out of your email, you can systematically take back everything else.</p>
+  </section>
+
+  <section class="sec" id="now">
+    <h2>Do these five things immediately</h2>
+    <div class="flow">
+      <div>1<br><b>Sever Contact</b><br>Stop replying</div>
+      <div>2<br><b>Lock Email</b><br>Reset password</div>
+      <div>3<br><b>Boot Devices</b><br>End all sessions</div>
+      <div>4<br><b>Call Bank</b><br>Freeze money</div>
+      <div>5<br><b>Warn Friends</b><br>Stop scam spread</div>
+    </div>
+
+    <ol>
+      <li><strong>Stop interacting immediately:</strong> Hang up on the caller, close the chat window, and do not respond to texts or direct messages asking for codes or money.</li>
+      <li><strong>Use a clean, trusted device:</strong> If you suspect your computer has a virus, switch to your smartphone on mobile data or borrow a family laptop to reset your passwords.</li>
+      <li><strong>Take back your primary email:</strong> Change the password immediately and sign out all active sessions so the intruder loses access.</li>
+      <li><strong>Lock your password manager:</strong> If you use Bitwarden, 1Password, or Apple Keychain, update your master password and review stored vaults.</li>
+      <li><strong>Alert your bank:</strong> If debit cards, PayPal, or bank accounts are linked to the breached account, call your bank using the number printed on the back of your card.</li>
+    </ol>
+
+    <div class="note">
+      <strong>The Absolute "Never Share" Rule:</strong> Real customer support staff from Google, Apple, Microsoft, or your bank will <strong>never</strong> ask you for your account password, screen PIN, six-digit authenticator code, or password manager master password. Anyone asking for these numbers is an attacker.
+    </div>
+  </section>
+
+  <!-- 1. EMAIL -->
+  <section class="sec" id="email">
+    <h2><span class="num">1</span>Secure your main email first</h2>
+    <p>Take back control of your email hub so the hacker cannot intercept password reset requests. Follow this exact path:</p>
+
+    <span class="path"><b>Official Email Site (e.g. myaccount.google.com)</b> → <b>Security</b> → <b>Password &amp; Devices</b></span>
+
+    <ol>
+      <li>
+        <strong>Change the password immediately:</strong> Pick a brand-new, long passphrase that you have never used on any other website (e.g. 4 random combined words like <code>PurpleRocketMonkeyGuitar99!</code>). Do not reuse old passwords.
+      </li>
+      <li>
+        <strong>Kick out the intruder (Sign out all sessions):</strong> Under <strong>Security</strong>, locate <strong>Your Devices</strong> or <strong>Active Sessions</strong>. Click <strong>Sign out of all devices</strong> or manually remove any unfamiliar phone, tablet, or city location.
+      </li>
+      <li>
+        <strong>Audit your recovery details:</strong> Check the <strong>Recovery Email</strong> and <strong>Recovery Phone Number</strong> listed on the account. Hackers often change these to their own numbers so they can slip back in. Delete any unrecognized number or email address immediately.
+      </li>
+      <li>
+        <strong>Check for secret email forwarding rules:</strong> In your email settings (e.g. Gmail Settings &gt; Filters and Blocked Addresses / Forwarding), inspect the forwarding tab. Hackers frequently set up hidden rules that quietly forward copies of all your incoming emails to their inbox. Delete any unfamiliar forwarding addresses.
+      </li>
+      <li>
+        <strong>Turn on or reconfigure Two-Factor Authentication (2FA):</strong> Enable an authenticator app (Google Authenticator or Microsoft Authenticator) or passkey. Generate a new set of 10 printable emergency backup codes and write them down in a notebook.
+      </li>
+    </ol>
+    <div class="note">
+      <strong>Why this comes first:</strong> Whoever holds the keys to your email inbox controls the password reset buttons for your banking, school portals, shopping accounts, and gaming accounts.
+    </div>
+  </section>
+
+  <!-- 2. BANKING -->
+  <section class="sec" id="bank">
+    <h2><span class="num">2</span>If banking or payment cards are involved</h2>
+    <p>If the compromised account contains saved payment cards (Amazon, PayPal, Google Play, Apple ID) or if your mobile banking details were entered, take immediate defensive action:</p>
+
+    <ol>
+      <li>
+        <strong>Contact your bank directly:</strong> Pick up your phone, open your official banking app, or look at the back of your plastic debit card for the official fraud phone number. (In the UK, you can dial <strong>159</strong> to reach most major banks directly and safely).
+      </li>
+      <li>
+        <strong>Request temporary card freezes:</strong> Tell the bank representative that you suspect account compromise. Ask them to temporarily freeze your payment cards and review recent transactions.
+      </li>
+      <li>
+        <strong>Audit recent payments and payees:</strong> Check your statement for unauthorized transfers, pending charges, or newly added recipient bank accounts.
+      </li>
+      <li>
+        <strong>Reset banking credentials:</strong> Change your online banking password and passcode using a known clean device. Remove any unfamiliar registered mobile phones from your banking profile.
+      </li>
+    </ol>
+
+    <div class="note danger">
+      <strong>The "Safe Account" Scam Trap:</strong> Real banks will <strong>never</strong> phone you and instruct you to move your savings into a "safe account", "holding vault", or "investigation account" because of fraud. That is an outright lie used by thieves. Never authorize a money transfer requested over a phone call.
+    </div>
+  </section>
+
+  <!-- 3. SOCIAL MEDIA & OTHER ACCOUNTS -->
+  <section class="sec" id="social">
+    <h2><span class="num">3</span>Recover social media, gaming, and shopping accounts</h2>
+    <p>Once your email is secure, systematically reclaim your secondary platforms (Instagram, Discord, TikTok, Roblox, PlayStation, Amazon):</p>
+
+    <div class="grid">
+      <article class="card">
+        <h3>Option A: If you can still sign in</h3>
+        <ol>
+          <li>Open the official app or website and change your account password immediately.</li>
+          <li>Go to <strong>Settings &gt; Security &gt; Login Activity</strong> and click <strong>Log Out of All Other Sessions</strong>.</li>
+          <li>Turn on Two-Factor Authentication using an authenticator app.</li>
+          <li>Check your profile details: ensure your recovery phone number and email were not altered.</li>
+          <li>Review sent messages and recent posts. Delete any scam links the hacker published while in control of your account.</li>
+        </ol>
+      </article>
+
+      <article class="card">
+        <h3>Option B: If the hacker changed your password</h3>
+        <ol>
+          <li>Go directly to the service's official recovery portal (e.g. <code>instagram.com/hacked</code> or <code>roblox.com/support</code>).</li>
+          <li>Click <strong>Forgot Password?</strong> or <strong>My account was compromised</strong>.</li>
+          <li>Select the option to send a verification link to your newly secured primary email address.</li>
+          <li>Complete the identity verification steps (such as video selfie verification or providing past transaction receipts).</li>
+          <li><strong>Never pay a third party:</strong> Ignore people on Instagram or X claiming: <em>"DM this ethical hacker to get your account back!"</em> They are scammers trying to steal your money.</li>
+        </ol>
+      </article>
+    </div>
+
+    <div class="note">
+      <strong>Warn your contacts:</strong> Hackers love to send messages from breached accounts claiming: <em>"Hey, I need emergency money for a taxi!"</em> or <em>"Vote for my team in this contest!"</em> Send a quick warning from a safe account or group chat: <em>"My account was temporarily compromised. Please ignore any messages, links, or money requests sent from it."</em>
+    </div>
+  </section>
+
+  <!-- 4. DEVICES -->
+  <section class="sec" id="devices">
+    <h2><span class="num">4</span>Clean and verify your phone and computer</h2>
+    <p>Make sure the intruder did not leave behind malicious software, remote tools, or unauthorized tracking profiles:</p>
+
+    <div class="grid">
+      <article class="card">
+        <h3>Smartphone checks (Android &amp; iPhone)</h3>
+        <ol>
+          <li>Install the latest operating system updates (iOS / Android) to patch vulnerabilities.</li>
+          <li>Audit your app list: delete any unfamiliar apps, battery savers, or unofficial keyboards you did not download.</li>
+          <li>On iPhone, check <strong>Settings &gt; General &gt; VPN &amp; Device Management</strong> and remove any unfamiliar profile.</li>
+          <li>Confirm that your screen lock PIN and biometric locks (Face ID / Fingerprint) are active.</li>
+        </ol>
+      </article>
+
+      <article class="card">
+        <h3>Computer checks (Windows &amp; Mac)</h3>
+        <ol>
+          <li>Install all pending Windows Updates or macOS updates.</li>
+          <li>Run a full malware scan using <strong>Windows Security</strong> or trusted security tools.</li>
+          <li>Open your web browser settings, open <strong>Extensions</strong>, and delete any toolbar or plugin you do not recognize.</li>
+          <li>Uninstall any remote support software (such as AnyDesk or TeamViewer) that an unsolicited caller instructed you to install.</li>
+        </ol>
+      </article>
+    </div>
+
+    <div class="note">
+      <strong>Authenticator App Tip:</strong> When setting up 2FA on your reclaimed accounts, keep your mobile phone nearby. Open Google Authenticator or Microsoft Authenticator, scan the barcode, and type the rolling 6-digit code into the official site you opened yourself.
+    </div>
+  </section>
+
+  <!-- 5. PREVENT REPEATS -->
+  <section class="sec" id="protect">
+    <h2><span class="num">5</span>Make a repeat attack impossible</h2>
+    <div class="grid">
+      <article class="card">
+        <h3>For all your personal accounts</h3>
+        <ol>
+          <li><strong>Never reuse passwords:</strong> If a hacker breaches a minor gaming forum and you used the same password as your email, they instantly gain access to your whole life.</li>
+          <li><strong>Activate passkeys or 2FA everywhere:</strong> Even if someone steals your written password, they are blocked without your physical device.</li>
+          <li><strong>Turn on login notifications:</strong> Ensure your accounts send an instant alert whenever a new device logs in.</li>
+        </ol>
+      </article>
+
+      <article class="card">
+        <h3>For your password manager</h3>
+        <ol>
+          <li>Change the master password immediately if there is any suspicion of exposure.</li>
+          <li>Sign out all other sessions and active browsers.</li>
+          <li>Ensure the password manager itself is fortified with 2FA or biometric authentication.</li>
+          <li>Begin using the built-in password generator to create complex 16-character passwords for every account.</li>
+        </ol>
+      </article>
+    </div>
+  </section>
+
+  <!-- CHECKLIST -->
+  <section class="sec" id="check">
+    <h2>Your recovery checklist</h2>
+    <div class="check">
+      <div><strong>Step 1:</strong> Reset your primary email password to a new, unique passphrase.</div>
+      <div><strong>Step 2:</strong> Sign out of all active devices and remove unfamiliar forwarding rules.</div>
+      <div><strong>Step 3:</strong> Call your bank to freeze cards if financial data was exposed.</div>
+      <div><strong>Step 4:</strong> Reclaim social and gaming accounts and log out all other sessions.</div>
+      <div><strong>Step 5:</strong> Warn close friends and contacts not to click links sent from your profile.</div>
+      <div><strong>Step 6:</strong> Enable Two-Factor Authentication or passkeys on every account.</div>
+    </div>
+
+    <div class="table">
+      <table>
+        <thead>
+          <tr>
+            <th>What you see happening</th>
+            <th>The correct action to take</th>
+            <th>What you must NEVER do</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Unexpected 2FA prompt or code appears on your phone</td>
+            <td><strong>Tap Deny / Reject immediately and change your account password.</strong></td>
+            <td>Never tap Approve just to clear the pop-up notification.</td>
+          </tr>
+          <tr>
+            <td>Someone on social media offers to "recover your account for a fee"</td>
+            <td><strong>Use only the official recovery page provided by the company.</strong></td>
+            <td>Never pay money, send gift cards, or give remote access to strangers.</td>
+          </tr>
+          <tr>
+            <td>Unfamiliar transaction shows on your bank statement</td>
+            <td><strong>Call your bank immediately using the number on your card.</strong></td>
+            <td>Never wait for an unsolicited caller to phone you back.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <em>Umer Malik: Where Craft Meets Research</em>
+  <a href="#top" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">↑ Back to top</a>
+</footer>
+
+<script id="security-navigation">
+(() => {
+  const nav = document.querySelector('nav.quick');
+  const links = [...nav.querySelectorAll('a[href^="#"]')];
+  const sections = links.map(a => document.getElementById(a.hash.slice(1)));
+  const mark = index => links.forEach((a,i) => i === index ? a.setAttribute('aria-current','location') : a.removeAttribute('aria-current'));
+  let pending = false;
+  const update = () => {
+    const sticky = getComputedStyle(nav).position === 'sticky';
+    const offset = sticky ? nav.offsetHeight + 24 : 24;
+    document.documentElement.style.setProperty('--quick-height',nav.offsetHeight+'px');
+    let index = -1;
+    sections.forEach((section,i) => { if(section && section.getBoundingClientRect().top <= offset) index=i; });
+    mark(index); pending=false;
+  };
+  const schedule = () => { if(!pending) {pending=true; requestAnimationFrame(update);} };
+  addEventListener('scroll',schedule,{passive:true});
+  addEventListener('resize',schedule);
+  addEventListener('hashchange',schedule);
+  if(window.ResizeObserver) new ResizeObserver(schedule).observe(nav);
+  update();
+})();
+</script>
+</body>
+</html>

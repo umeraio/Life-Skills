@@ -1,0 +1,410 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Backups and Recovery | Digital Security Centre</title>
+<style>
+:root{--n:#071d45;--n2:#102d63;--b:#2864e8;--p:#eaf2ff;--g:#ffc83d;--i:#10264e;--r:#bd2944;--ok:#087a55}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:linear-gradient(135deg,#dce9fb,#f4f7fc 42%,#d6e5fb);color:var(--i);font:18px/1.6 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+.top{background:radial-gradient(circle at 15% 0,#244f9a 0,transparent 32%),linear-gradient(120deg,var(--n2),var(--n));color:#fff;padding:28px max(5vw,24px) 22px;position:relative;overflow:hidden}
+.top:after{content:"";position:absolute;right:-90px;bottom:-100px;width:360px;height:220px;border:34px solid #ffffff12;border-radius:50%}
+.home{position:absolute;right:max(5vw,24px);top:28px;z-index:2;color:var(--n);background:var(--g);font-weight:800;padding:10px 17px;border-radius:99px;text-decoration:none;box-shadow:0 6px 18px #0004}
+.ey{color:var(--g);font-weight:900;letter-spacing:.12em;font-size:.8rem;margin:0}
+.top h1{font-size:clamp(2rem,5vw,4.3rem);line-height:1;margin:10px 0 12px;letter-spacing:-.05em}
+.top p{font-size:1.05rem;max-width:670px;margin:0;color:#dbe8ff}
+.quick{background:#0a2048;color:#fff;padding:10px max(3vw,16px);display:flex;flex-direction:column;gap:6px;align-items:center;box-shadow:0 8px 20px #0b234123;position:sticky;top:0;z-index:5}
+.quick-row{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;align-items:center}
+.quick strong{color:var(--g);font-size:.82rem;letter-spacing:.08em;margin-right:4px}
+.quick a{color:#fff;text-decoration:none;border:1px solid #59729f;border-radius:99px;padding:5px 12px;font-weight:750;font-size:.85rem;white-space:nowrap;transition:.2s}
+.quick a:hover,.quick a:focus{background:var(--b);border-color:#8bb2ff;transform:translateY(-2px)}
+main{max-width:1200px;margin:auto;padding:42px 24px 64px}
+.crumb{font-weight:750;font-size:.92rem;color:#315fbc}
+.crumb a{color:#244fa9}
+.hero,.sec{background:#f8fbff;border:1px solid #b8d1ff;border-radius:28px;box-shadow:0 16px 34px #183d7d1a;padding:clamp(24px,4vw,46px);margin-bottom:28px;scroll-margin-top:110px}
+.hero{border-left:13px solid var(--g);display:grid;grid-template-columns:1.2fr .8fr;gap:28px;align-items:center}
+h2{font-size:clamp(1.6rem,3vw,2.5rem);line-height:1.1;margin:0 0 14px;letter-spacing:-.035em}
+.lead{font-size:1.13rem;color:#314f79}
+.device{background:linear-gradient(135deg,#173f91,#2864e8);border-radius:24px;padding:25px;color:#fff;box-shadow:0 12px 26px #1a50aa4a}
+.device .e{font-size:3rem}
+.device b{display:block;font-size:1.2rem;margin:8px 0}
+.note{background:#fff5d9;border-left:7px solid var(--g);border-radius:12px;padding:15px 18px;margin-top:18px}
+.danger{background:#fff0f2;border-left-color:var(--r)}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.card{background:var(--p);border:1px solid #a9c6ff;border-radius:20px;padding:22px;box-shadow:0 7px 18px #183d7d12}
+.card h3{margin:0 0 8px;font-size:1.28rem;line-height:1.2}
+.num{display:inline-grid;place-items:center;background:var(--b);color:#fff;border-radius:50%;width:34px;height:34px;font-size:.92rem;margin-right:8px;vertical-align:middle}
+.path{display:block;background:#0a214a;color:#afffe2;border-radius:12px;padding:12px 14px;font-family:Consolas,monospace;font-size:.9rem;font-weight:700;margin:13px 0}
+.path b{color:var(--g)}
+ol{padding-left:1.35em}
+li{margin:10px 0;line-height:1.6}
+strong{color:#092457}
+.flow{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:22px 0}
+.flow div{position:relative;background:#e8f1ff;border:1px solid #aac8ff;border-radius:16px;padding:15px;text-align:center;font-weight:800}
+.flow div:not(:last-child):after{content:"→";position:absolute;right:-10px;top:50%;transform:translateY(-50%);color:var(--b);font-size:1.5rem;z-index:1}
+.route{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:18px 0}
+.route a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:18px;border:1px solid #2563eb55;border-radius:17px;background:linear-gradient(135deg,#fff,#f4f8fd);color:var(--n);text-align:center;text-decoration:none;font-weight:800;box-shadow:0 10px 22px #071a3d20;transition:.2s}
+.route a:hover{transform:translateY(-4px);border-color:var(--g)}
+.route svg{width:32px;height:32px;fill:currentColor}
+.check{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.check div{background:#e5f7f0;border:1px solid #97dfc4;border-radius:12px;padding:12px 14px}
+.check div:before{content:"✓";font-weight:900;color:var(--ok);padding-right:9px}
+.table{overflow:auto;margin-top:20px}
+.table table{width:100%;border-collapse:separate;border-spacing:0;background:#fff;border:1px solid #b8cdf1;border-radius:16px;overflow:hidden}
+.table th{background:#091f48;color:#fff;text-align:left;padding:14px}
+.table td{padding:14px;border-top:1px solid #d9e3f3;vertical-align:top}
+.table tr:nth-child(even) td{background:#f1f6ff}
+.table td:last-child{font-weight:800;color:#123d94}
+footer{background:#061a3d;color:#e9f1ff;border-top:4px solid var(--g);padding:26px max(5vw,24px);text-align:center}
+footer a{color:#fff;background:#1d4da9;border-radius:99px;padding:9px 15px;text-decoration:none;font-weight:800;margin-left:10px}
+@media(max-width:760px){
+  .home{top:19px}
+  .top{padding-top:82px}
+  .hero{grid-template-columns:1fr}
+  .grid,.check,.route{grid-template-columns:1fr}
+  .flow{grid-template-columns:1fr;gap:20px}
+  .flow div:not(:last-child):after{content:"↓";right:50%;top:auto;bottom:-17px;transform:translateX(50%)}
+  .quick{align-items:flex-start}
+}
+</style>
+<style id="security-shared-style">
+/* Unified Digital Security Centre header and navigation */
+body > header, body > header.top {
+  position:relative; display:flex; flex-direction:column; justify-content:center;
+  min-height:0; padding:18px 90px; align-items:center; text-align:center; color:#fff;
+  background:radial-gradient(ellipse at 15% 0%,#2457ac,transparent 55%),linear-gradient(120deg,#102d63,#071a3d);
+}
+body > header h1, body > header.top h1 {max-width:960px; width:100%; margin:4px auto 6px; font-family:"Segoe UI",Arial,sans-serif; font-size:clamp(1.8rem,4.2vw,3.4rem); line-height:1.14; letter-spacing:-.025em; text-align:center; text-wrap:balance;}
+body > header p, body > header.top p {max-width:760px; margin:0 auto; font-size:1.05rem; line-height:1.6; text-align:center; color:#dfeaff;}
+body > header p.ey, body > header.top p.ey {margin:0 auto 3px; color:#f6c343; font-size:.75rem; letter-spacing:.14em; font-weight:800;}
+body > header::before,body > header::after {pointer-events:none;}
+body > header a.home {position:absolute; right:24px; top:50%; transform:translateY(-50%); width:46px; height:46px; padding:0; display:grid; place-items:center; border:1px solid #f6c343; border-radius:14px; background:#f6c343; color:#071a3d; box-shadow:0 6px 18px #0003; z-index:3; transition:background .18s,box-shadow .18s;}
+body > header a.home svg {width:24px; height:24px; fill:currentColor;}
+body > header a.home:hover {background:#ffda75; box-shadow:0 8px 24px #0005;}
+body > nav.quick {position:sticky; top:0; z-index:10; display:flex; flex-direction:column; align-items:center; gap:5px; padding:7px 16px; overflow:visible; white-space:normal; background:#091f46; border-top:2px solid #f6c343; border-bottom:2px solid #f6c343; box-shadow:0 5px 18px #071a3d20;}
+body > nav.quick .quick-label {color:#f6c343; font:800 .68rem/1.3 "Segoe UI",Arial,sans-serif; letter-spacing:.16em;}
+body > nav.quick .quick-links {display:flex; flex-wrap:wrap; justify-content:center; align-items:center; gap:5px; width:100%; max-width:1180px; margin:0 auto; padding:0;}
+body > nav.quick a {display:inline-flex; align-items:center; justify-content:center; min-height:36px; max-width:100%; margin:0; padding:6px 12px; border:1px solid #7796c266; border-radius:10px; background:#ffffff08; color:#eef4ff; font:600 .83rem/1.35 "Segoe UI",Arial,sans-serif; text-align:center; text-decoration:none; white-space:normal; transition:background .18s,border-color .18s;}
+body > nav.quick a:hover,body > nav.quick a[aria-current="location"] {background:#f6c343; color:#071a3d; border-color:#f6c343; transform:none;}
+body > header a.home:focus-visible,body > nav.quick a:focus-visible {outline:3px solid #fff; outline-offset:4px;}
+body main [id] {scroll-margin-top:calc(var(--quick-height,160px) + 20px);}
+@media(max-width:600px) {
+  body > header,body > header.top {min-height:0; padding:14px 66px;}
+  body > header h1, body > header.top h1 {font-size:clamp(1.55rem,6vw,2.25rem); overflow-wrap:anywhere;}
+  body > header p, body > header.top p {font-size:.94rem;}
+  body > header a.home {right:12px; width:44px; height:44px; border-radius:12px;}
+  body > nav.quick {position:relative; padding:7px 10px;}
+  body > nav.quick a {min-height:44px; padding:8px 11px; font-size:.8rem;}
+  body main [id] {scroll-margin-top:20px;}
+}
+@media(prefers-reduced-motion:reduce) {html {scroll-behavior:auto;} body > nav.quick a,body > header a.home {transition:none;}}
+</style>
+<style id="yellow-home-image">
+/* Yellow house image, centred vertically on the right of every header. */
+body > header a.home {
+  inset:auto 24px auto auto; top:50%; transform:translateY(-50%);
+  display:grid; place-items:center; width:48px; height:48px; padding:0;
+  background:#071a3d; border:1px solid #f6c343; border-radius:12px;
+  box-shadow:0 4px 14px #0003;
+}
+body > header a.home img {display:block; width:28px; height:28px; margin:0;}
+body > header a.home:hover {background:#17376a; border-color:#ffe49b;}
+@media(max-width:600px) {
+  body > header a.home {right:12px; width:44px; height:44px;}
+}
+</style>
+</head>
+<body>
+
+<header class="top" id="top">
+  <a class="home" href="digital-security-centre.html" aria-label="Home: Digital Security Centre" title="Home: Digital Security Centre"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSIjZjZjMzQzIiBkPSJNMTIgMi41IDEuNSAxMS40bDEuOSAyLjJMNSAxMi4yVjIxaDV2LTZoNHY2aDV2LTguOGwxLjYgMS40IDEuOS0yLjJMMTIgMi41WiIvPjwvc3ZnPg==" width="28" height="28" alt="" aria-hidden="true"></a>
+  <p class="ey">DIGITAL SECURITY CENTRE</p>
+  <h1>Backups &amp; Recovery</h1>
+  <p>Keep a safe duplicate of what matters most, and know exactly how to restore your files if a device is lost, damaged, stolen, or infected.</p>
+</header>
+
+<nav class="quick" aria-label="Quick navigation"><span class="quick-label">ON THIS PAGE</span><div class="quick-links"><a href="digital-security-centre.html">Security Centre</a><a href="#rule">The 3-2-1 Rule</a><a href="#choose">Choose Device</a><a href="#iphone">1. iPhone &amp; iPad</a><a href="#android">2. Android</a><a href="#windows">3. Windows PC</a><a href="#mac">4. Mac</a><a href="#recover">Emergency Plan</a><a href="#checklist">Checklist</a></div></nav>
+
+<main>
+  <p class="crumb"><a href="digital-security-centre.html">Digital Security Centre</a> / Backups and Recovery</p>
+
+  <section class="hero">
+    <div>
+      <h2>Your safety net when things go wrong</h2>
+      <p class="lead">A backup is an exact duplicate copy of your important photos, school projects, family videos, and private documents stored somewhere separate from your original device. If your phone gets dropped in water, stolen on a bus, or locked by a cyber attack, a fresh backup ensures you lose nothing permanently.</p>
+      <div class="note">
+        <strong>Choose your device route below:</strong> Select the device you are protecting today. You only need to follow the walkthrough for the specific phone, tablet, or computer in your hands right now.
+      </div>
+    </div>
+    <aside class="device">
+      <div class="e">🗂️🛟</div>
+      <b>The recovery routine</b>
+      <span>Set up auto-backup → check the timestamp → keep one copy disconnected → recover calmly.</span>
+    </aside>
+  </section>
+
+  <!-- 3-2-1 RULE -->
+  <section class="section" id="rule">
+    <h2>The simple 3-2-1 backup rule</h2>
+    <p>Professional cybersecurity engineers and schools rely on one golden rule to make sure important data can never be destroyed. It is easy to remember:</p>
+
+    <div class="flow">
+      <div>
+        <strong style="font-size:2rem;color:var(--b)">3</strong><br>
+        <b>Total Copies</b><br>
+        Keep 1 original file plus 2 backup copies.
+      </div>
+      <div>
+        <strong style="font-size:2rem;color:var(--b)">2</strong><br>
+        <b>Different Media</b><br>
+        Store on 2 types of storage (e.g. phone drive &amp; cloud).
+      </div>
+      <div>
+        <strong style="font-size:2rem;color:var(--b)">1</strong><br>
+        <b>Offsite Copy</b><br>
+        Keep 1 copy away from home in the cloud (iCloud/Google).
+      </div>
+      <div>
+        <strong style="font-size:2rem;color:var(--ok)">✓</strong><br>
+        <b>Test Verification</b><br>
+        Open a backed-up file to prove it works.
+      </div>
+    </div>
+
+    <p>For everyday life, this simply means: your photos live on your phone, a duplicate copy automatically syncs to your Google or Apple cloud, and an occasional copy is kept on an external hard drive or computer.</p>
+
+    <div class="note danger">
+      <strong>Crucial Security Truth:</strong> A file saved in two different folders on the <em>same</em> computer or phone is <strong>not</strong> a backup! If the screen breaks or ransomware infects the machine, both folders disappear together. Keep your backup storage separate.
+    </div>
+  </section>
+
+  <!-- CHOOSE ROUTE -->
+  <section class="section" id="choose">
+    <h2>Choose your device route</h2>
+    <p>Select the phone, tablet, or computer you want to back up right now:</p>
+    <div class="route">
+      <a href="#iphone">
+        <svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.62-.75 1.04-1.8 1.01-2.87-.9.04-2 .6-2.65 1.34-.56.64-1.06 1.7-1.01 2.76 1.01.08 2.03-.49 2.65-1.23z"/></svg>
+        1. iPhone / iPad
+      </a>
+      <a href="#android">
+        <svg viewBox="0 0 24 24"><path d="M17.6 9.48l1.84-3.18a.5.5 0 00-.86-.5l-1.87 3.24a11.45 11.45 0 00-9.42 0L5.42 5.8a.5.5 0 00-.86.5l1.84 3.18A10.8 10.8 0 002 18h20a10.8 10.8 0 00-4.4-8.52zM7 14.5a1.25 1.25 0 111.25-1.25A1.25 1.25 0 017 14.5zm10 0a1.25 1.25 0 111.25-1.25 1.25 1.25 0 01-1.25 1.25z"/></svg>
+        2. Android
+      </a>
+      <a href="#windows">
+        <svg viewBox="0 0 24 24"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.551H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-13.051-1.849"/></svg>
+        3. Windows PC
+      </a>
+      <a href="#mac">
+        <svg viewBox="0 0 24 24"><path d="M20 18c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2H0v2h24v-2h-4zM4 6h16v10H4V6z"/></svg>
+        4. Mac
+      </a>
+    </div>
+  </section>
+
+  <!-- 1. IPHONE / IPAD -->
+  <section class="sec" id="iphone">
+    <h2><span class="num">1</span>iPhone or iPad: iCloud backup</h2>
+    <p>Apple devices include automatic cloud backups that run quietly every night while your phone is plugged in, locked, and connected to Wi-Fi.</p>
+    
+    <span class="path"><b>Settings</b> → <b>[Your Name at the top]</b> → <b>iCloud</b> → <b>iCloud Backup</b></span>
+
+    <ol>
+      <li><strong>Open Settings:</strong> Tap the grey gear icon for <strong>Settings</strong> on your Home Screen.</li>
+      <li><strong>Open your Apple Account:</strong> Tap on your <strong>Name and profile picture</strong> at the very top of the list.</li>
+      <li><strong>Open iCloud Backup:</strong> Tap <strong>iCloud</strong>, then tap <strong>iCloud Backup</strong>.</li>
+      <li><strong>Turn on automatic backups:</strong> Toggle <strong>Back Up This iPhone</strong> (or iPad) to <strong>ON</strong>.</li>
+      <li><strong>Run a manual backup now:</strong> Tap <strong>Back Up Now</strong>. Keep your device connected to Wi-Fi and wait for the blue progress line to reach 100%.</li>
+      <li><strong>Verify the completion time:</strong> Check the text beneath the button. It should state: <em>"Last successful backup: Today at..."</em></li>
+      <li><strong>Audit synced apps:</strong> Go back one screen to <strong>iCloud</strong>, tap <strong>Saved to iCloud &gt; See All</strong>, and confirm that toggles for <strong>Photos</strong>, <strong>Contacts</strong>, <strong>Notes</strong>, and <strong>iCloud Drive</strong> are turned <strong>ON</strong>.</li>
+    </ol>
+
+    <div class="note">
+      <strong>How to recover on a new or repaired Apple device:</strong> When turning on a replacement or factory-reset iPhone, connect to Wi-Fi, tap <strong>Restore from iCloud Backup</strong> on the setup screen, sign in with your Apple ID and password, and choose your latest backup date. Leave the phone plugged in while all your apps and photos download.
+    </div>
+  </section>
+
+  <!-- 2. ANDROID -->
+  <section class="sec" id="android">
+    <h2><span class="num">2</span>Android: Google One backup</h2>
+    <p>Android backs up your apps, contacts, call history, SMS messages, and device settings directly to your Google Account.</p>
+
+    <span class="path"><b>Settings</b> → <b>Google</b> → <b>Backup</b> → <b>Back up now</b></span>
+
+    <ol>
+      <li><strong>Open Android Settings:</strong> Swipe down from the top of your screen and tap the small <strong>gear icon</strong>.</li>
+      <li><strong>Locate Google Services:</strong> Scroll down and tap on <strong>Google</strong> (or <em>Google Services</em>).</li>
+      <li><strong>Open Backup:</strong> Tap the <strong>All Services</strong> tab (if shown), then tap <strong>Backup</strong>.</li>
+      <li><strong>Turn on Google One:</strong> Confirm the toggle for <strong>Backup by Google One</strong> is turned <strong>ON</strong>.</li>
+      <li><strong>Run a fresh backup:</strong> Tap the blue button labeled <strong>Back up now</strong>. Keep your phone connected to Wi-Fi until the progress completes.</li>
+      <li><strong>Back up your photos &amp; videos:</strong> Open the separate <strong>Google Photos</strong> app. Tap your circular profile icon in the top right corner, tap <strong>Photos settings &gt; Backup</strong>, and turn the toggle <strong>ON</strong>.</li>
+    </ol>
+
+    <div class="note">
+      <strong>How to recover on a new Android device:</strong> When setting up a new Android phone, tap <strong>Start</strong>, connect to Wi-Fi, and choose <strong>Can't use old device? &gt; Restore from cloud backup</strong>. Sign into the exact same primary Google Account and select your backup. All your wallpaper, apps, contacts, and photos will reinstall automatically.
+    </div>
+  </section>
+
+  <!-- 3. WINDOWS PC -->
+  <section class="sec" id="windows">
+    <h2><span class="num">3</span>Windows PC: OneDrive and an external drive</h2>
+    <p>Windows 10 and 11 provide continuous cloud synchronization through Microsoft OneDrive alongside offline physical backups.</p>
+
+    <div class="grid">
+      <article class="card">
+        <h3>A. Turn on OneDrive folder backup</h3>
+        <span class="path"><b>Start</b> → <b>OneDrive</b> → <b>Settings</b> → <b>Sync and backup</b></span>
+        <ol>
+          <li>Click the small <strong>cloud icon</strong> in the bottom-right corner of your Windows taskbar (near the clock).</li>
+          <li>Click the <strong>gear icon</strong> and select <strong>Settings</strong>.</li>
+          <li>Click <strong>Sync and backup</strong> on the left, then click <strong>Manage backup</strong>.</li>
+          <li>Toggle on your <strong>Desktop</strong>, <strong>Documents</strong>, and <strong>Pictures</strong> folders.</li>
+          <li>Click <strong>Save changes</strong>. Your files will upload to the cloud automatically and show green checkmark icons.</li>
+        </ol>
+      </article>
+
+      <article class="card">
+        <h3>B. Make a separate external drive copy</h3>
+        <span class="path"><b>Plug in USB Drive</b> → <b>Copy Folders</b> → <b>Safely Eject</b></span>
+        <ol>
+          <li>Plug an external USB portable hard drive or thumb drive into your computer.</li>
+          <li>Open <strong>File Explorer</strong> (the yellow folder icon).</li>
+          <li>Highlight your important work folders inside <strong>Documents</strong> and <strong>Pictures</strong>, right-click, and select <strong>Copy</strong>.</li>
+          <li>Open your external USB drive letter, right-click an empty space, and select <strong>Paste</strong>.</li>
+          <li>Open a few copied files from the external drive to test that they open cleanly.</li>
+          <li>Right-click the USB drive icon and select <strong>Eject</strong> before unplugging the cable.</li>
+        </ol>
+      </article>
+    </div>
+
+    <div class="note">
+      <strong>How to recover files on Windows:</strong> If you accidentally delete a file, check the <strong>Recycle Bin</strong> on your desktop or log in to <strong>onedrive.live.com</strong> to check the cloud Recycle Bin. If your laptop hard drive fails completely, plug your external USB drive into any working computer to access your copied files immediately.
+    </div>
+  </section>
+
+  <!-- 4. MAC -->
+  <section class="sec" id="mac">
+    <h2><span class="num">4</span>Mac: Time Machine and iCloud</h2>
+    <p>Apple macOS provides two complementary backup tools: Time Machine for complete hardware system snapshots and iCloud for instant file synchronization.</p>
+
+    <div class="grid">
+      <article class="card">
+        <h3>A. Set up Time Machine (External drive)</h3>
+        <span class="path"><b>Apple menu </b> → <b>System Settings</b> → <b>General</b> → <b>Time Machine</b></span>
+        <ol>
+          <li>Connect an external USB hard drive to your Mac.</li>
+          <li>Click the Apple logo (<strong></strong>) in the top-left corner &gt; <strong>System Settings &gt; General &gt; Time Machine</strong>.</li>
+          <li>Click <strong>Add Backup Disk</strong>.</li>
+          <li>Click your connected external hard drive, choose <strong>Encrypt Backup</strong>, set a password, and click <strong>Set Up Disk</strong>.</li>
+          <li>Leave the drive plugged in; Time Machine will create automated hourly snapshots of your entire computer.</li>
+        </ol>
+      </article>
+
+      <article class="card">
+        <h3>B. Enable iCloud Drive folder sync</h3>
+        <span class="path"><b>Apple menu </b> → <b>System Settings</b> → <b>[Your Name]</b> → <b>iCloud</b></span>
+        <ol>
+          <li>In <strong>System Settings</strong>, click your <strong>Name</strong> at the top.</li>
+          <li>Click <strong>iCloud</strong>, then click <strong>iCloud Drive</strong>.</li>
+          <li>Turn <strong>ON</strong> the switch for <strong>Desktop &amp; Documents Folders</strong>.</li>
+          <li>Every document or presentation you save on your Mac desktop will automatically back up to iCloud so you can access it from an iPad or iPhone as well.</li>
+          <li>Test by opening <strong>icloud.com</strong> in a browser to confirm your files appear.</li>
+        </ol>
+      </article>
+    </div>
+
+    <div class="note">
+      <strong>How to recover files on a Mac:</strong> To recover an older version of an overwritten file, open the folder, click the Time Machine clock icon in the top menu bar, and click <strong>Browse Time Machine Backups</strong> to step backward in time. If setting up a replacement Mac, use <strong>Migration Assistant</strong> to restore everything from your Time Machine drive in one step.
+    </div>
+  </section>
+
+  <!-- RECOVERY PLAN -->
+  <section class="sec" id="recover">
+    <h2>When something goes wrong: The calm recovery plan</h2>
+    <p>When unexpected digital accidents occur, follow this calm emergency breakdown:</p>
+
+    <div class="table">
+      <table>
+        <thead>
+          <tr>
+            <th>What happened?</th>
+            <th>The correct action to take first</th>
+            <th>What you must NEVER do</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Accidentally deleted a vital file or photo</td>
+            <td><strong>Check your computer Recycle Bin, phone "Recently Deleted" album, or cloud trash folder immediately.</strong></td>
+            <td>Never download shady third-party file recovery programs from untrusted search ads.</td>
+          </tr>
+          <tr>
+            <td>Phone or laptop is lost or stolen</td>
+            <td><strong>Use Apple Find My or Google Find My Device from another computer to lock the screen, then alert your bank.</strong></td>
+            <td>Never remove the device from your account while still searching for it.</td>
+          </tr>
+          <tr>
+            <td>Suspicious ransomware or locked screen</td>
+            <td><strong>Disconnect your device from Wi-Fi immediately, unplug your backup drive, and seek professional help.</strong></td>
+            <td>Never connect your backup drive to an infected machine, and never pay the ransom.</td>
+          </tr>
+          <tr>
+            <td>Computer will not turn on or boot up</td>
+            <td><strong>Borrow a family laptop and log in to your cloud storage (iCloud/OneDrive/Google) to confirm your files are safe.</strong></td>
+            <td>Never factory-reset or wipe a computer before verifying that your cloud backups exist.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="note">
+      <strong>Account Recovery Keys:</strong> Always keep your recovery email addresses, secondary telephone numbers, and two-factor authentication recovery codes up to date. Keep written copies of your master backup codes locked inside a secure drawer away from your phone.
+    </div>
+  </section>
+
+  <!-- MASTER CHECKLIST -->
+  <section class="sec" id="checklist">
+    <h2>Your master backup checklist</h2>
+    <div class="check">
+      <div><strong>Today:</strong> Enable automated cloud backup on your phone (iCloud or Google One).</div>
+      <div><strong>Today:</strong> Run one manual backup to ensure your progress hits 100%.</div>
+      <div><strong>Today:</strong> Confirm the timestamp reads <em>"Last backup: Today"</em>.</div>
+      <div><strong>This month:</strong> Open a backed-up file from your cloud or external drive to test it.</div>
+      <div><strong>Before trips or repairs:</strong> Run an immediate manual backup before handing over your device.</div>
+      <div><strong>Every 6 months:</strong> Plug in an external drive to create a physical offline safety copy.</div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <em>Umer Malik: Where Craft Meets Research</em>
+  <a href="#top" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">↑ Back to top</a>
+</footer>
+
+<script id="security-navigation">
+(() => {
+  const nav = document.querySelector('nav.quick');
+  const links = [...nav.querySelectorAll('a[href^="#"]')];
+  const sections = links.map(a => document.getElementById(a.hash.slice(1)));
+  const mark = index => links.forEach((a,i) => i === index ? a.setAttribute('aria-current','location') : a.removeAttribute('aria-current'));
+  let pending = false;
+  const update = () => {
+    const sticky = getComputedStyle(nav).position === 'sticky';
+    const offset = sticky ? nav.offsetHeight + 24 : 24;
+    document.documentElement.style.setProperty('--quick-height',nav.offsetHeight+'px');
+    let index = -1;
+    sections.forEach((section,i) => { if(section && section.getBoundingClientRect().top <= offset) index=i; });
+    mark(index); pending=false;
+  };
+  const schedule = () => { if(!pending) {pending=true; requestAnimationFrame(update);} };
+  addEventListener('scroll',schedule,{passive:true});
+  addEventListener('resize',schedule);
+  addEventListener('hashchange',schedule);
+  if(window.ResizeObserver) new ResizeObserver(schedule).observe(nav);
+  update();
+})();
+</script>
+</body>
+</html>

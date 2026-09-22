@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cookies and Browser Cleanup</title>
+<style>
+:root{--n:#071a3d;--b:#123c8c;--g:#f6c343;--t:#102033;--m:#455a73}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Segoe UI,Arial,sans-serif;background:radial-gradient(circle at top left,#f5f9ff,#d7e5f8 60%,#c2d6ef);color:var(--t);line-height:1.6}
+header{position:relative;text-align:center;overflow:hidden;color:#fff;padding:36px 20px 30px;background:radial-gradient(circle at 12% 0%,#2e68e8,#123c8c 30%,#071a3d 70%)}
+header:before{content:"";position:absolute;width:270px;height:270px;left:-115px;top:-150px;border:1px solid #ffffff33;border-radius:50%;box-shadow:0 0 0 34px #ffffff0b}
+h1,header p{position:relative;z-index:1}
+h1{margin:0;font-size:clamp(2rem,5vw,3.6rem)}
+header p{max-width:760px;margin:12px auto;color:#e0ebff}
+.home{position:absolute;right:24px;top:20px;z-index:3;padding:9px 15px;border:2px solid var(--g);border-radius:999px;background:#fff;color:var(--n);font-weight:800;text-decoration:none}
+.quick{position:sticky;top:0;z-index:4;padding:8px 14px;background:linear-gradient(90deg,#071a3d,#123c8c,#071a3d);border-bottom:3px solid var(--g);display:flex;flex-direction:column;gap:6px;align-items:center}
+.quick-row{display:flex;flex-wrap:wrap;justify-content:center;gap:6px}
+.quick a{display:inline-block;padding:5px 12px;border:1px solid #cfe1ff55;border-radius:999px;color:#fff;text-decoration:none;font-size:.82rem;font-weight:800;white-space:nowrap}
+.quick a:hover{background:var(--g);color:var(--n)}
+main{width:min(1050px,92%);margin:24px auto}
+.section{padding:30px;margin-bottom:28px;border-top:7px solid var(--g);border-radius:24px;background:#eaf3ff;box-shadow:0 18px 42px #071a3d25;scroll-margin-top:95px}
+.section h2{margin-top:0;color:var(--n)}
+.choice{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.choice a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:18px;border:1px solid #2563eb55;border-radius:17px;background:linear-gradient(135deg,#fff,#f4f8fd);color:var(--n);text-align:center;text-decoration:none;font-weight:800;box-shadow:0 10px 22px #071a3d20}
+.choice a:hover{transform:translateY(-4px);border-color:var(--g)}
+.choice svg{width:32px;height:32px;fill:currentColor}
+.flow{display:flex;gap:12px;align-items:stretch;flex-wrap:wrap;margin:18px 0}
+.flow div{flex:1 1 180px;padding:16px;text-align:center;border:1px solid #2563eb55;border-radius:16px;background:#fff;display:flex;flex-direction:column;justify-content:center}
+.flow svg{width:36px;height:36px;margin:0 auto 10px}
+.flow b{display:block;color:var(--n);margin-bottom:6px;font-size:1.05rem}
+.arrow{font-size:1.5rem;color:var(--b);display:flex;align-items:center;justify-content:center}
+.route{margin:22px 0;padding:25px;border-right:8px solid var(--g);border-radius:19px;background:linear-gradient(135deg,#071a3d,#123c8c);color:#eef6ff;scroll-margin-top:100px}
+.badge{display:inline-block;padding:5px 13px;border-radius:999px;background:var(--g);color:var(--n);font-size:.78rem;font-weight:900;letter-spacing:0.5px}
+.route h3{margin:12px 0 8px;font-size:1.45rem;display:flex;align-items:center;gap:10px}
+.route h3 svg{width:26px;height:26px;fill:currentColor}
+.route p{color:#dce9ff}
+.route strong{color:#ffe190}
+.path{margin:15px 0;padding:12px;border:1px solid #f6c343aa;border-radius:999px;background:#020b1d;color:#afffe2;font-family:Consolas,monospace;font-size:.88rem;text-align:center}
+.route ol{padding-left:22px;margin:16px 0}
+.route li{margin-bottom:14px;line-height:1.6}
+.finish{margin-top:14px;padding:12px 14px;border-left:5px solid #55d77a;border-radius:8px;background:#15803d66;font-weight:700}
+.warn{padding:17px;border-left:8px solid #b91c1c;background:#fff2ef;color:#7f1d1d;border-radius:14px;line-height:1.5}
+.check{padding:22px;border-radius:17px;background:linear-gradient(135deg,#071a3d,#123c8c);color:#fff;margin-top:18px}
+.check h3{color:var(--g);margin-top:0}
+.check ul{padding-left:20px;margin:10px 0}
+.check li{margin-bottom:8px}
+.choice-note{margin:16px 0;padding:15px;border-left:7px solid #f6c343;border-radius:13px;background:#fff8e3;color:#4a3b00}
+.compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:18px 0}
+.compare-card{padding:20px;border:1px solid #2563eb55;border-radius:18px;background:#fff;box-shadow:0 8px 20px #071a3d15}
+.compare-card h3{margin-top:0;color:var(--n);display:flex;align-items:center;gap:10px}
+.compare-card svg{width:26px;height:26px;flex-shrink:0}
+.compare-card p{margin:8px 0}
+footer{text-align:center;margin-top:36px;padding:22px;border-top:4px solid var(--g);background:var(--n);color:#e0eaff;font-weight:700;font-style:italic}
+.back{display:inline-block;margin-left:12px;padding:7px 13px;border-radius:7px;background:var(--b);color:#fff;text-decoration:none;font-style:normal}
+@media(max-width:700px){
+  header{padding:70px 14px 26px}
+  .home{top:14px;right:14px}
+  .choice{grid-template-columns:repeat(2,1fr)}
+  .section,.route{padding:20px}
+  .compare-grid{grid-template-columns:1fr}
+  .arrow{transform:rotate(90deg);margin:4px auto}
+}
+</style>
+<style id="security-shared-style">
+/* Unified Digital Security Centre header and navigation */
+body > header, body > header.top {
+  position:relative; display:flex; flex-direction:column; justify-content:center;
+  min-height:0; padding:18px 90px; align-items:center; text-align:center; color:#fff;
+  background:radial-gradient(ellipse at 15% 0%,#2457ac,transparent 55%),linear-gradient(120deg,#102d63,#071a3d);
+}
+body > header h1, body > header.top h1 {max-width:960px; width:100%; margin:4px auto 6px; font-family:"Segoe UI",Arial,sans-serif; font-size:clamp(1.8rem,4.2vw,3.4rem); line-height:1.14; letter-spacing:-.025em; text-align:center; text-wrap:balance;}
+body > header p, body > header.top p {max-width:760px; margin:0 auto; font-size:1.05rem; line-height:1.6; text-align:center; color:#dfeaff;}
+body > header p.ey, body > header.top p.ey {margin:0 auto 3px; color:#f6c343; font-size:.75rem; letter-spacing:.14em; font-weight:800;}
+body > header::before,body > header::after {pointer-events:none;}
+body > header a.home {position:absolute; right:24px; top:50%; transform:translateY(-50%); width:46px; height:46px; padding:0; display:grid; place-items:center; border:1px solid #f6c343; border-radius:14px; background:#f6c343; color:#071a3d; box-shadow:0 6px 18px #0003; z-index:3; transition:background .18s,box-shadow .18s;}
+body > header a.home svg {width:24px; height:24px; fill:currentColor;}
+body > header a.home:hover {background:#ffda75; box-shadow:0 8px 24px #0005;}
+body > nav.quick {position:sticky; top:0; z-index:10; display:flex; flex-direction:column; align-items:center; gap:5px; padding:7px 16px; overflow:visible; white-space:normal; background:#091f46; border-top:2px solid #f6c343; border-bottom:2px solid #f6c343; box-shadow:0 5px 18px #071a3d20;}
+body > nav.quick .quick-label {color:#f6c343; font:800 .68rem/1.3 "Segoe UI",Arial,sans-serif; letter-spacing:.16em;}
+body > nav.quick .quick-links {display:flex; flex-wrap:wrap; justify-content:center; align-items:center; gap:5px; width:100%; max-width:1180px; margin:0 auto; padding:0;}
+body > nav.quick a {display:inline-flex; align-items:center; justify-content:center; min-height:36px; max-width:100%; margin:0; padding:6px 12px; border:1px solid #7796c266; border-radius:10px; background:#ffffff08; color:#eef4ff; font:600 .83rem/1.35 "Segoe UI",Arial,sans-serif; text-align:center; text-decoration:none; white-space:normal; transition:background .18s,border-color .18s;}
+body > nav.quick a:hover,body > nav.quick a[aria-current="location"] {background:#f6c343; color:#071a3d; border-color:#f6c343; transform:none;}
+body > header a.home:focus-visible,body > nav.quick a:focus-visible {outline:3px solid #fff; outline-offset:4px;}
+body main [id] {scroll-margin-top:calc(var(--quick-height,160px) + 20px);}
+@media(max-width:600px) {
+  body > header,body > header.top {min-height:0; padding:14px 66px;}
+  body > header h1, body > header.top h1 {font-size:clamp(1.55rem,6vw,2.25rem); overflow-wrap:anywhere;}
+  body > header p, body > header.top p {font-size:.94rem;}
+  body > header a.home {right:12px; width:44px; height:44px; border-radius:12px;}
+  body > nav.quick {position:relative; padding:7px 10px;}
+  body > nav.quick a {min-height:44px; padding:8px 11px; font-size:.8rem;}
+  body main [id] {scroll-margin-top:20px;}
+}
+@media(prefers-reduced-motion:reduce) {html {scroll-behavior:auto;} body > nav.quick a,body > header a.home {transition:none;}}
+</style>
+<style id="yellow-home-image">
+/* Yellow house image, centred vertically on the right of every header. */
+body > header a.home {
+  inset:auto 24px auto auto; top:50%; transform:translateY(-50%);
+  display:grid; place-items:center; width:48px; height:48px; padding:0;
+  background:#071a3d; border:1px solid #f6c343; border-radius:12px;
+  box-shadow:0 4px 14px #0003;
+}
+body > header a.home img {display:block; width:28px; height:28px; margin:0;}
+body > header a.home:hover {background:#17376a; border-color:#ffe49b;}
+@media(max-width:600px) {
+  body > header a.home {right:12px; width:44px; height:44px;}
+}
+</style>
+</head>
+<body>
+<header id="top">
+  <a class="home" href="digital-security-centre.html" aria-label="Home: Digital Security Centre" title="Home: Digital Security Centre"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSIjZjZjMzQzIiBkPSJNMTIgMi41IDEuNSAxMS40bDEuOSAyLjJMNSAxMi4yVjIxaDV2LTZoNHY2aDV2LTguOGwxLjYgMS40IDEuOS0yLjJMMTIgMi41WiIvPjwvc3ZnPg==" width="28" height="28" alt="" aria-hidden="true"></a>
+  <h1>Cookies and Browser Cleanup</h1>
+  <p>Learn what cookies do, how websites track you, and how to safely clear your browser history without deleting your saved passwords.</p>
+</header>
+
+<nav class="quick" aria-label="Quick navigation"><span class="quick-label">ON THIS PAGE</span><div class="quick-links"><a href="#what-are">What Are Cookies?</a><a href="#compare">First vs Third-Party</a><a href="#choose">Choose Device</a><a href="#android">1. Android</a><a href="#iphone">2. iPhone / iPad</a><a href="#windows">3. Windows PC</a><a href="#mac">4. Mac</a><a href="#incognito">Incognito Truths</a><a href="#tips">Safety Rules</a></div></nav>
+
+<main>
+  <section class="section" id="what-are">
+    <h2>What are cookies? (Explained simply)</h2>
+    <p>Imagine visiting a coat-check room. You hand over your coat, and the attendant gives you a small numbered ticket. When you return later, you show that ticket, and they hand your exact coat right back. An internet <strong>cookie</strong> is that small ticket[cite: 9]!</p>
+    
+    <div class="choice-note">
+      <strong>Important Fact:</strong> Cookies are not computer viruses, malware, or programs[cite: 9]. They are tiny text files stored by your browser (such as Chrome, Safari, or Edge) to help websites remember useful preferences, shopping items, and logins[cite: 9].
+    </div>
+
+    <div class="flow">
+      <div>
+        <svg viewBox="0 0 24 24" fill="#123c8c"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+        <b>1. You Visit a Site</b>
+        You browse an online store or sign into your school portal[cite: 9].
+      </div>
+      <span class="arrow">→</span>
+      <div>
+        <svg viewBox="0 0 24 24" fill="#123c8c"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+        <b>2. Ticket Saved</b>
+        The website gives your browser a small token remembering your session[cite: 9].
+      </div>
+      <span class="arrow">→</span>
+      <div>
+        <svg viewBox="0 0 24 24" fill="#15803d"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+        <b>3. Welcome Back</b>
+        Next time you open the site, you remain logged in and your cart stays full[cite: 9].
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="compare">
+    <h2>Helpful cookies vs tracking cookies</h2>
+    <p>Not all cookies do the same job. Here is how to understand the difference between cookies that assist your session and cookies that track your habits[cite: 9]:</p>
+
+    <div class="compare-grid">
+      <div class="compare-card">
+        <h3>
+          <svg viewBox="0 0 24 24" fill="#15803d"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+          First-Party Cookies (Helpful)
+        </h3>
+        <p><strong>Created by:</strong> The actual website you are visiting (like YouTube or Amazon)[cite: 9].</p>
+        <p><strong>What they do:</strong> Keep you signed into your profile, remember your preferred language or dark mode theme, and keep items inside your basket as you browse different pages[cite: 9].</p>
+      </div>
+
+      <div class="compare-card">
+        <h3>
+          <svg viewBox="0 0 24 24" fill="#b91c1c"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+          Third-Party Cookies (Tracking)
+        </h3>
+        <p><strong>Created by:</strong> Outside advertising agencies and tracking networks[cite: 9].</p>
+        <p><strong>What they do:</strong> Follow you from one site to another to see what shoes, games, or tech gadgets you look at, using your browsing history to show targeted adverts across the web[cite: 9].</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="choose">
+    <h2>Choose your device cleanup guide</h2>
+    <p>Select your device below. Follow only the route for your specific browser and operating system[cite: 9]:</p>
+    
+    <div class="choice-note">
+      <strong>Important Warning Before You Clean:</strong> Clearing cookies will log you out of most websites[cite: 9]! Make sure you know your passwords or have access to your password manager and two-factor authentication app before clearing[cite: 9].
+    </div>
+
+    <div class="choice">
+      <a href="#android">
+        <svg viewBox="0 0 24 24"><path d="M17.6 9.48l1.84-3.18a.5.5 0 00-.86-.5l-1.87 3.24a11.45 11.45 0 00-9.42 0L5.42 5.8a.5.5 0 00-.86.5l1.84 3.18A10.8 10.8 0 002 18h20a10.8 10.8 0 00-4.4-8.52zM7 14.5a1.25 1.25 0 111.25-1.25A1.25 1.25 0 017 14.5zm10 0a1.25 1.25 0 111.25-1.25 1.25 1.25 0 01-1.25 1.25z"/></svg>
+        1. Android
+      </a>
+      <a href="#iphone">
+        <svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.62-.75 1.04-1.8 1.01-2.87-.9.04-2 .6-2.65 1.34-.56.64-1.06 1.7-1.01 2.76 1.01.08 2.03-.49 2.65-1.23z"/></svg>
+        2. Apple iPhone
+      </a>
+      <a href="#windows">
+        <svg viewBox="0 0 24 24"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.551H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-13.051-1.849"/></svg>
+        3. Windows PC
+      </a>
+      <a href="#mac">
+        <svg viewBox="0 0 24 24"><path d="M20 18c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2H0v2h24v-2h-4zM4 6h16v10H4V6z"/></svg>
+        4. Mac
+      </a>
+    </div>
+  </section>
+
+  <section class="section">
+    <!-- 1. ANDROID ROUTE -->
+    <article class="route" id="android">
+      <span class="badge">1. ANDROID / GOOGLE CHROME</span>
+      <h3>
+        <svg viewBox="0 0 24 24"><path d="M17.6 9.48l1.84-3.18a.5.5 0 00-.86-.5l-1.87 3.24a11.45 11.45 0 00-9.42 0L5.42 5.8a.5.5 0 00-.86.5l1.84 3.18A10.8 10.8 0 002 18h20a10.8 10.8 0 00-4.4-8.52zM7 14.5a1.25 1.25 0 111.25-1.25A1.25 1.25 0 017 14.5zm10 0a1.25 1.25 0 111.25-1.25 1.25 1.25 0 01-1.25 1.25z"/></svg>
+        How to Clear Cookies on Android Phones
+      </h3>
+      <p>Follow these exact steps inside the Google Chrome app on your Android device[cite: 9]:</p>
+      
+      <div class="path">Chrome → 3 Dots Menu (⋮) → Settings → Privacy and security → Delete browsing data[cite: 9]</div>
+
+      <ol>
+        <li><strong>Open Google Chrome:</strong> Tap the round Chrome icon on your phone home screen[cite: 9].</li>
+        <li><strong>Tap the three-dots menu:</strong> Look in the top-right corner of the screen and tap the three vertical dots (<strong>⋮</strong>)[cite: 9].</li>
+        <li><strong>Open Settings:</strong> Scroll down the menu and tap <strong>Settings</strong>[cite: 9].</li>
+        <li><strong>Open Privacy:</strong> Tap <strong>Privacy and security</strong>, then tap <strong>Delete browsing data</strong>[cite: 9].</li>
+        <li><strong>Select the time range:</strong> Tap the dropdown menu next to <em>Time range</em> and choose <strong>All time</strong> (or <em>Last 7 days</em> if you only want recent data cleared)[cite: 9].</li>
+        <li><strong>Select what to delete:</strong><br>
+          • Check the box for <strong>Cookies and site data</strong>[cite: 9].<br>
+          • Check the box for <strong>Cached images and files</strong> (this frees up device storage)[cite: 9].<br>
+          • <strong>CRITICAL:</strong> Leave <em>"Saved passwords"</em> and <em>"Autofill data"</em> <strong>UNCHECKED</strong> so you do not accidentally wipe your saved credentials!
+        </li>
+        <li><strong>Confirm cleanup:</strong> Tap the blue <strong>Delete data</strong> button in the bottom corner[cite: 9].</li>
+      </ol>
+      <div class="finish">✓ Done: Unwanted tracking cookies and temporary image caches have been cleared from Chrome[cite: 9].</div>
+    </article>
+
+    <!-- 2. IPHONE / IPAD ROUTE -->
+    <article class="route" id="iphone">
+      <span class="badge">2. APPLE IPHONE / IPAD (SAFARI)</span>
+      <h3>
+        <svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.62-.75 1.04-1.8 1.01-2.87-.9.04-2 .6-2.65 1.34-.56.64-1.06 1.7-1.01 2.76 1.01.08 2.03-.49 2.65-1.23z"/></svg>
+        How to Clear Cookies on iPhone or iPad
+      </h3>
+      <p>Apple manages Safari browser storage directly through your main iPhone Settings app[cite: 9]:</p>
+
+      <div class="path">iPhone Settings → Apps → Safari → Clear History and Website Data[cite: 9]</div>
+
+      <ol>
+        <li><strong>Open iPhone Settings:</strong> Tap the grey gear icon for <strong>Settings</strong> on your Home Screen[cite: 9].</li>
+        <li><strong>Find Safari settings:</strong> Scroll down and tap on <strong>Apps &gt; Safari</strong> (on iOS 17 or older, simply scroll down to <strong>Safari</strong>)[cite: 9].</li>
+        <li><strong>Locate the clear button:</strong> Scroll down the Safari settings page and tap <strong>Clear History and Website Data</strong>[cite: 9].</li>
+        <li><strong>Choose your timeframe:</strong> Under <em>Clear Timeframe</em>, select <strong>All history</strong> (or <em>Today and yesterday</em>). Leave <strong>Close All Tabs</strong> toggled on to start completely fresh.</li>
+        <li><strong>Confirm the reset:</strong> Tap the red button labeled <strong>Clear History</strong>[cite: 9].</li>
+        <li><strong>Alternative (Clear specific sites only):</strong> If you do not want to be signed out of everything, scroll to the bottom of Safari settings, tap <strong>Advanced &gt; Website Data</strong>, swipe left on individual websites you do not trust, and tap <strong>Delete</strong>[cite: 9].</li>
+      </ol>
+      <div class="finish">✓ Done: Safari website tracking cookies, caches, and visited links have been removed[cite: 9].</div>
+    </article>
+
+    <!-- 3. WINDOWS PC ROUTE -->
+    <article class="route" id="windows">
+      <span class="badge">3. WINDOWS PC (CHROME &amp; EDGE)</span>
+      <h3>
+        <svg viewBox="0 0 24 24"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.551H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-13.051-1.849"/></svg>
+        How to Clear Cookies on Windows PC
+      </h3>
+      <p>Follow these instructions for Google Chrome or Microsoft Edge on your computer[cite: 9]:</p>
+
+      <div class="path">Browser → Press Ctrl + Shift + Delete → Select Timeframe → Clear Data[cite: 9]</div>
+
+      <ol>
+        <li><strong>Use the fast keyboard shortcut:</strong> Open your browser (Chrome or Edge) and press <strong>Ctrl + Shift + Delete</strong> together on your keyboard. This opens the cleanup dashboard instantly!</li>
+        <li><strong>Or use the menu:</strong> Click the three dots (<strong>⋮</strong> or <strong>…</strong>) in the top-right corner &gt; click <strong>Settings &gt; Privacy, search, and services</strong> (or <em>Privacy and security</em>) &gt; click <strong>Clear browsing data</strong>[cite: 9].</li>
+        <li><strong>Set Time range:</strong> Click the dropdown menu and pick <strong>All time</strong>[cite: 9].</li>
+        <li><strong>Select data boxes carefully:</strong><br>
+          • Check <strong>Cookies and other site data</strong>[cite: 9].<br>
+          • Check <strong>Cached images and files</strong>.<br>
+          • <strong>CRITICAL:</strong> Ensure <em>"Passwords and other sign-in data"</em> is <strong>UNCHECKED</strong>!</li>
+        <li><strong>Finalize cleanup:</strong> Click the blue button that says <strong>Clear data</strong> (or <strong>Clear now</strong>)[cite: 9].</li>
+      </ol>
+      <div class="finish">✓ Done: Tracking tokens are erased from your Windows computer browser[cite: 9].</div>
+    </article>
+
+    <!-- 4. MAC ROUTE -->
+    <article class="route" id="mac">
+      <span class="badge">4. MAC (SAFARI &amp; CHROME)</span>
+      <h3>
+        <svg viewBox="0 0 24 24"><path d="M20 18c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2H0v2h24v-2h-4zM4 6h16v10H4V6z"/></svg>
+        How to Clear Cookies on Mac (macOS)
+      </h3>
+      <p>Follow these steps inside Apple Safari on your Mac desktop or MacBook[cite: 9]:</p>
+
+      <div class="path">Safari Menu Bar → Settings → Privacy → Manage Website Data → Remove All[cite: 9]</div>
+
+      <ol>
+        <li><strong>Open Safari:</strong> Launch Safari from your Dock or Launchpad[cite: 9].</li>
+        <li><strong>Open Safari Settings:</strong> Click the word <strong>Safari</strong> in the top-left Apple menu bar next to the Apple logo, then click <strong>Settings</strong> (or <em>Preferences</em>)[cite: 9].</li>
+        <li><strong>Go to Privacy:</strong> Click the <strong>Privacy</strong> tab at the top of the settings window[cite: 9].</li>
+        <li><strong>Manage site data:</strong> Click the button that says <strong>Manage Website Data…</strong>[cite: 9]</li>
+        <li><strong>Remove cookies:</strong> A list of all websites storing data will appear[cite: 9]. Click <strong>Remove All</strong> to clear everything, or select specific advertising companies and click <strong>Remove</strong>[cite: 9].</li>
+        <li><strong>Confirm:</strong> Click <strong>Remove Now</strong>, then click <strong>Done</strong>[cite: 9].</li>
+      </ol>
+      <div class="finish">✓ Done: Your Mac browser is clean and free of leftover tracking files[cite: 9].</div>
+    </article>
+  </section>
+
+  <!-- INCOGNITO TRUTHS -->
+  <section class="section" id="incognito">
+    <h2>The truth about Incognito / Private Browsing</h2>
+    <p>Many people believe opening an Incognito or Private Browsing window makes them a ghost who cannot be seen by anyone. That is a myth[cite: 9]! Here is what private mode actually does:</p>
+
+    <div class="compare-grid">
+      <div class="compare-card">
+        <h3>
+          <svg viewBox="0 0 24 24" fill="#15803d"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+          What Private Mode DOES do
+        </h3>
+        <p>1. Automatically deletes all cookies, browsing history, and temporary files the exact moment you close the private window[cite: 9].</p>
+        <p>2. Prevents family members or friends who use the same computer from seeing what websites you visited[cite: 9].</p>
+        <p>3. Allows you to sign into two different email accounts at the exact same time without logging out of the first one.</p>
+      </div>
+
+      <div class="compare-card">
+        <h3>
+          <svg viewBox="0 0 24 24" fill="#b91c1c"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+          What Private Mode DOES NOT do
+        </h3>
+        <p>1. It does <strong>not</strong> hide your internet activity from your school network, employer, or internet service provider (BT, Virgin, Sky)[cite: 9].</p>
+        <p>2. It does <strong>not</strong> stop websites from knowing your approximate city or location.</p>
+        <p>3. It does <strong>not</strong> protect you if you download infected files or enter passwords into fake scam links.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SAFETY TIPS -->
+  <section class="section" id="tips">
+    <div class="warn">
+      <strong>Double Check Before Deleting: Never wipe your passwords!</strong> When clearing browsing history, always look closely at the checkboxes[cite: 9]. If you tick <em>"Saved Passwords"</em>, your browser will delete all your memorized logins[cite: 9]! Use a dedicated password manager (like Bitwarden, Google Password Manager, or Apple Keychain) so your credentials remain protected even after a browser cleanup[cite: 9].
+    </div>
+
+    <div class="check">
+      <h3>Browser cleanup checklist</h3>
+      <ul>
+        <li>Clear cookies once a month to remove accumulated tracking networks[cite: 9].</li>
+        <li>Never clear "Saved passwords" or "Autofill form data" during routine cleanups[cite: 9].</li>
+        <li>Be prepared to sign back into common accounts with your two-factor authenticator app after clearing[cite: 9].</li>
+        <li>Use Private / Incognito browsing when booking flights, shopping for surprise presents, or using shared computers[cite: 9].</li>
+        <li>Turn on "Block Third-Party Cookies" inside your browser settings to stop advertising trackers automatically.</li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<footer>
+  ***Umer Malik: Where Craft Meets Research*** <a class="back" href="#top">↑ Back to top</a>
+</footer>
+<script id="security-navigation">
+(() => {
+  const nav = document.querySelector('nav.quick');
+  const links = [...nav.querySelectorAll('a[href^="#"]')];
+  const sections = links.map(a => document.getElementById(a.hash.slice(1)));
+  const mark = index => links.forEach((a,i) => i === index ? a.setAttribute('aria-current','location') : a.removeAttribute('aria-current'));
+  let pending = false;
+  const update = () => {
+    const sticky = getComputedStyle(nav).position === 'sticky';
+    const offset = sticky ? nav.offsetHeight + 24 : 24;
+    document.documentElement.style.setProperty('--quick-height',nav.offsetHeight+'px');
+    let index = -1;
+    sections.forEach((section,i) => { if(section && section.getBoundingClientRect().top <= offset) index=i; });
+    mark(index); pending=false;
+  };
+  const schedule = () => { if(!pending) {pending=true; requestAnimationFrame(update);} };
+  addEventListener('scroll',schedule,{passive:true});
+  addEventListener('resize',schedule);
+  addEventListener('hashchange',schedule);
+  if(window.ResizeObserver) new ResizeObserver(schedule).observe(nav);
+  update();
+})();
+</script>
+</body>
+</html>

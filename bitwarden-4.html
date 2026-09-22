@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Set Up Bitwarden Safely</title>
+<style>
+:root{--n:#071a3d;--b:#123c8c;--g:#f6c343;--t:#102033;--m:#455a73}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Segoe UI,Arial,sans-serif;background:radial-gradient(circle at top left,#f5f9ff,#d7e5f8 60%,#c2d6ef);color:var(--t);line-height:1.6}
+header{position:relative;text-align:center;overflow:hidden;color:#fff;padding:36px 20px 30px;background:radial-gradient(circle at 12% 0%,#2e68e8,#123c8c 30%,#071a3d 70%)}
+header:before{content:"";position:absolute;width:270px;height:270px;left:-115px;top:-150px;border:1px solid #ffffff33;border-radius:50%;box-shadow:0 0 0 34px #ffffff0b}
+h1,header p{position:relative;z-index:1}
+h1{margin:0;font-size:clamp(2rem,5vw,3.6rem)}
+header p{max-width:760px;margin:12px auto;color:#e0ebff}
+.home{position:absolute;right:24px;top:20px;z-index:3;padding:9px 15px;border:2px solid var(--g);border-radius:999px;background:#fff;color:var(--n);font-weight:800;text-decoration:none}
+.quick{position:sticky;top:0;z-index:4;padding:8px 14px;background:linear-gradient(90deg,#071a3d,#123c8c,#071a3d);border-bottom:3px solid var(--g);display:flex;flex-direction:column;gap:6px;align-items:center}
+.quick-row{display:flex;flex-wrap:wrap;justify-content:center;gap:6px}
+.quick a{display:inline-block;padding:5px 12px;border:1px solid #cfe1ff55;border-radius:999px;color:#fff;text-decoration:none;font-size:.82rem;font-weight:800;white-space:nowrap}
+.quick a:hover{background:var(--g);color:var(--n)}
+main{width:min(1050px,92%);margin:24px auto}
+.section{padding:30px;margin-bottom:28px;border-top:7px solid var(--g);border-radius:24px;background:#eaf3ff;box-shadow:0 18px 42px #071a3d25;scroll-margin-top:95px}
+.section h2{margin-top:0;color:var(--n)}
+.flow{display:flex;gap:12px;align-items:stretch;flex-wrap:wrap;margin:18px 0}
+.flow div{flex:1 1 180px;padding:16px;text-align:center;border:1px solid #2563eb55;border-radius:16px;background:#fff;display:flex;flex-direction:column;justify-content:center}
+.flow svg{width:36px;height:36px;margin:0 auto 10px}
+.flow b{display:block;color:var(--n);margin-bottom:6px;font-size:1.05rem}
+.arrow{font-size:1.5rem;color:var(--b);display:flex;align-items:center;justify-content:center}
+.step{margin:22px 0;padding:25px;border-right:8px solid var(--g);border-radius:19px;background:linear-gradient(135deg,#071a3d,#123c8c);color:#eef6ff;scroll-margin-top:100px}
+.badge{display:inline-block;padding:5px 13px;border-radius:999px;background:var(--g);color:var(--n);font-size:.78rem;font-weight:900;letter-spacing:0.5px}
+.step h3{margin:12px 0 8px;font-size:1.45rem;display:flex;align-items:center;gap:10px}
+.step h3 svg{width:26px;height:26px;fill:currentColor}
+.step p{color:#dce9ff}
+.step strong{color:#ffe190}
+.path{margin:15px 0;padding:12px;border:1px solid #f6c343aa;border-radius:999px;background:#020b1d;color:#afffe2;font-family:Consolas,monospace;font-size:.88rem;text-align:center}
+.step ol{padding-left:22px;margin:16px 0}
+.step li{margin-bottom:14px;line-height:1.6}
+.finish{margin-top:14px;padding:12px 14px;border-left:5px solid #55d77a;border-radius:8px;background:#15803d66;font-weight:700}
+.warn{padding:17px;border-left:8px solid #b91c1c;background:#fff2ef;color:#7f1d1d;border-radius:14px;line-height:1.5}
+.choice{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:18px 0}
+.choice div{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:18px;border:1px solid #2563eb55;border-radius:17px;background:linear-gradient(135deg,#fff,#f4f8fd);color:var(--n);text-align:center;font-weight:800;box-shadow:0 10px 22px #071a3d20}
+.choice svg{width:32px;height:32px;fill:currentColor}
+.check{padding:22px;border-radius:17px;background:linear-gradient(135deg,#071a3d,#123c8c);color:#fff;margin-top:18px}
+.check h3{color:var(--g);margin-top:0}
+.check ul{padding-left:20px;margin:10px 0}
+.check li{margin-bottom:8px}
+.choice-note{margin:16px 0;padding:15px;border-left:7px solid #f6c343;border-radius:13px;background:#fff8e3;color:#4a3b00}
+.compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:18px 0}
+.compare-card{padding:20px;border:1px solid #2563eb55;border-radius:18px;background:#fff;box-shadow:0 8px 20px #071a3d15}
+.compare-card h3{margin-top:0;color:var(--n);display:flex;align-items:center;gap:10px}
+.compare-card svg{width:26px;height:26px;flex-shrink:0}
+.compare-card p{margin:8px 0}
+footer{text-align:center;margin-top:36px;padding:22px;border-top:4px solid var(--g);background:var(--n);color:#e0eaff;font-weight:700;font-style:italic}
+.back{display:inline-block;margin-left:12px;padding:7px 13px;border-radius:7px;background:var(--b);color:#fff;text-decoration:none;font-style:normal}
+@media(max-width:700px){
+  header{padding:70px 14px 26px}
+  .home{top:14px;right:14px}
+  .choice{grid-template-columns:repeat(2,1fr)}
+  .section,.step{padding:20px}
+  .compare-grid{grid-template-columns:1fr}
+  .arrow{transform:rotate(90deg);margin:4px auto}
+}
+</style>
+<style id="security-shared-style">
+/* Unified Digital Security Centre header and navigation */
+body > header, body > header.top {
+  position:relative; display:flex; flex-direction:column; justify-content:center;
+  min-height:0; padding:18px 90px; align-items:center; text-align:center; color:#fff;
+  background:radial-gradient(ellipse at 15% 0%,#2457ac,transparent 55%),linear-gradient(120deg,#102d63,#071a3d);
+}
+body > header h1, body > header.top h1 {max-width:960px; width:100%; margin:4px auto 6px; font-family:"Segoe UI",Arial,sans-serif; font-size:clamp(1.8rem,4.2vw,3.4rem); line-height:1.14; letter-spacing:-.025em; text-align:center; text-wrap:balance;}
+body > header p, body > header.top p {max-width:760px; margin:0 auto; font-size:1.05rem; line-height:1.6; text-align:center; color:#dfeaff;}
+body > header p.ey, body > header.top p.ey {margin:0 auto 3px; color:#f6c343; font-size:.75rem; letter-spacing:.14em; font-weight:800;}
+body > header::before,body > header::after {pointer-events:none;}
+body > header a.home {position:absolute; right:24px; top:50%; transform:translateY(-50%); width:46px; height:46px; padding:0; display:grid; place-items:center; border:1px solid #f6c343; border-radius:14px; background:#f6c343; color:#071a3d; box-shadow:0 6px 18px #0003; z-index:3; transition:background .18s,box-shadow .18s;}
+body > header a.home svg {width:24px; height:24px; fill:currentColor;}
+body > header a.home:hover {background:#ffda75; box-shadow:0 8px 24px #0005;}
+body > nav.quick {position:sticky; top:0; z-index:10; display:flex; flex-direction:column; align-items:center; gap:5px; padding:7px 16px; overflow:visible; white-space:normal; background:#091f46; border-top:2px solid #f6c343; border-bottom:2px solid #f6c343; box-shadow:0 5px 18px #071a3d20;}
+body > nav.quick .quick-label {color:#f6c343; font:800 .68rem/1.3 "Segoe UI",Arial,sans-serif; letter-spacing:.16em;}
+body > nav.quick .quick-links {display:flex; flex-wrap:wrap; justify-content:center; align-items:center; gap:5px; width:100%; max-width:1180px; margin:0 auto; padding:0;}
+body > nav.quick a {display:inline-flex; align-items:center; justify-content:center; min-height:36px; max-width:100%; margin:0; padding:6px 12px; border:1px solid #7796c266; border-radius:10px; background:#ffffff08; color:#eef4ff; font:600 .83rem/1.35 "Segoe UI",Arial,sans-serif; text-align:center; text-decoration:none; white-space:normal; transition:background .18s,border-color .18s;}
+body > nav.quick a:hover,body > nav.quick a[aria-current="location"] {background:#f6c343; color:#071a3d; border-color:#f6c343; transform:none;}
+body > header a.home:focus-visible,body > nav.quick a:focus-visible {outline:3px solid #fff; outline-offset:4px;}
+body main [id] {scroll-margin-top:calc(var(--quick-height,160px) + 20px);}
+@media(max-width:600px) {
+  body > header,body > header.top {min-height:0; padding:14px 66px;}
+  body > header h1, body > header.top h1 {font-size:clamp(1.55rem,6vw,2.25rem); overflow-wrap:anywhere;}
+  body > header p, body > header.top p {font-size:.94rem;}
+  body > header a.home {right:12px; width:44px; height:44px; border-radius:12px;}
+  body > nav.quick {position:relative; padding:7px 10px;}
+  body > nav.quick a {min-height:44px; padding:8px 11px; font-size:.8rem;}
+  body main [id] {scroll-margin-top:20px;}
+}
+@media(prefers-reduced-motion:reduce) {html {scroll-behavior:auto;} body > nav.quick a,body > header a.home {transition:none;}}
+</style>
+<style id="yellow-home-image">
+/* Yellow house image, centred vertically on the right of every header. */
+body > header a.home {
+  inset:auto 24px auto auto; top:50%; transform:translateY(-50%);
+  display:grid; place-items:center; width:48px; height:48px; padding:0;
+  background:#071a3d; border:1px solid #f6c343; border-radius:12px;
+  box-shadow:0 4px 14px #0003;
+}
+body > header a.home img {display:block; width:28px; height:28px; margin:0;}
+body > header a.home:hover {background:#17376a; border-color:#ffe49b;}
+@media(max-width:600px) {
+  body > header a.home {right:12px; width:44px; height:44px;}
+}
+</style>
+</head>
+<body>
+<header id="top">
+  <a class="home" href="digital-security-centre.html" aria-label="Home: Digital Security Centre" title="Home: Digital Security Centre"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSIjZjZjMzQzIiBkPSJNMTIgMi41IDEuNSAxMS40bDEuOSAyLjJMNSAxMi4yVjIxaDV2LTZoNHY2aDV2LTguOGwxLjYgMS40IDEuOS0yLjJMMTIgMi41WiIvPjwvc3ZnPg==" width="28" height="28" alt="" aria-hidden="true"></a>
+  <h1>Set Up Bitwarden Safely</h1>
+  <p>Create an encrypted digital password vault, protect it with two-factor authentication, and generate long, unbreakable passwords for every website.</p>
+</header>
+
+<nav class="quick" aria-label="Quick navigation"><span class="quick-label">ON THIS PAGE</span><div class="quick-links"><a href="#before">What Bitwarden Does</a><a href="#passphrase">Master Password Secrets</a><a href="#account">Step 1: Create Vault</a><a href="#devices">Step 2: Install Apps</a><a href="#save">Step 3: Save Passwords</a><a href="#2fa">Step 4: Protect with 2FA</a><a href="#autofill">Step 5: Smart Autofill</a><a href="#checklist">Safety Checklist</a></div></nav>
+
+<main>
+  <section class="section" id="before">
+    <h2>What Bitwarden does (Explained simply)</h2>
+    <p>Imagine having a heavy iron safe that memorizes thousands of complex keys for you. You only have to remember <strong>one single master password</strong> to open the safe door. Once inside, Bitwarden fills in your logins on every website automatically.</p>
+    
+    <div class="choice-note">
+      <strong>Zero-Knowledge Encryption:</strong> Bitwarden scrambles your passwords into secret code on your device before sending anything to the cloud. Bitwarden staff cannot read your vault, see your passwords, or reset your master password if you forget it.
+    </div>
+
+    <div class="flow">
+      <div>
+        <svg viewBox="0 0 24 24" fill="#123c8c"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+        <b>1. Create One Master Key</b>
+        Memorize one long master passphrase.
+      </div>
+      <span class="arrow">→</span>
+      <div>
+        <svg viewBox="0 0 24 24" fill="#123c8c"><path d="M4 6h16v10H4V6zm16 12c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2H0v2h24v-2h-4z"/></svg>
+        <b>2. Connect Devices</b>
+        Add your laptop browser extension and mobile app.
+      </div>
+      <span class="arrow">→</span>
+      <div>
+        <svg viewBox="0 0 24 24" fill="#123c8c"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5v-9l6 4.5-6 4.5z"/></svg>
+        <b>3. Generate Random Passwords</b>
+        Different 16-character keys for every website.
+      </div>
+      <span class="arrow">→</span>
+      <div>
+        <svg viewBox="0 0 24 24" fill="#15803d"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+        <b>4. Fortify with 2FA</b>
+        Protect your vault door with an authenticator app.
+      </div>
+    </div>
+  </section>
+
+  <!-- MASTER PASSWORD SECTION -->
+  <section class="section" id="passphrase">
+    <h2>How to create an unbreakable master passphrase</h2>
+    <p>Your master password is the most important secret you will ever create. Do not make it a short word with confusing symbols like <code>Tr0ub4dor&amp;3</code> that you will easily forget.</p>
+
+    <div class="compare-grid">
+      <div class="compare-card">
+        <h3>
+          <svg viewBox="0 0 24 24" fill="#b91c1c"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+          Weak &amp; Forgettable Passwords
+        </h3>
+        <p>• <code>P@ssw0rd2024!</code> (Very weak; computer hacking tools crack this in 2 seconds).</p>
+        <p>• Your pet's name or birthday (Hackers find this easily on social media).</p>
+        <p>• A password you already use for Roblox, Gmail, or your school portal.</p>
+      </div>
+
+      <div class="compare-card">
+        <h3>
+          <svg viewBox="0 0 24 24" fill="#15803d"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+          Strong "Passphrase" Formula
+        </h3>
+        <p>Combine <strong>3 or 4 random, memorable words</strong> into a phrase with spaces and numbers:</p>
+        <p>• <code>Velvet Elephant Guitar Planet 42!</code></p>
+        <p>• <code>Blue Tiger Runs Fast 99?</code></p>
+        <p>Easy for human brains to remember, but impossible for supercomputers to guess.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- STEP 1: CREATE ACCOUNT -->
+  <section class="section" id="account">
+    <article class="step">
+      <span class="badge">STEP 1</span>
+      <h3>
+        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg>
+        Create your Bitwarden vault online
+      </h3>
+      <p>Use your laptop or desktop browser to set up your master vault account cleanly:</p>
+      <div class="path">Open browser → Type bitwarden.com yourself → Click Get Started → Create account</div>
+
+      <ol>
+        <li><strong>Open your web browser cleanly:</strong> Launch Google Chrome, Microsoft Edge, Firefox, or Safari. Type <strong>bitwarden.com</strong> directly into the address bar to prevent phishing clones.</li>
+        <li><strong>Click Get Started:</strong> Click the blue <strong>Get Started</strong> button in the top corner.</li>
+        <li><strong>Enter your primary email address:</strong> Use your most secure personal email. Ensure you have two-step verification enabled on this email account.</li>
+        <li><strong>Create your Master Password:</strong> Enter the strong 4-word passphrase you designed. Retype it in the confirmation box.</li>
+        <li><strong>Add a Master Password Hint (Be careful!):</strong> Write a subtle clue that only you understand (e.g. <em>"Animal, instrument, astronomical object, number"</em>). Never write the actual password or words in your hint!</li>
+        <li><strong>Write it down offline:</strong> Take a real pen and a notebook. Write down your master passphrase and keep that piece of paper in a secure, private drawer in your bedroom.</li>
+        <li><strong>Verify your email address:</strong> Bitwarden will send a confirmation email. Open your inbox, find the verification link, and click it to confirm your identity.</li>
+      </ol>
+      <div class="finish">✓ Done: Your vault is created on Bitwarden's zero-knowledge cloud servers.</div>
+    </article>
+  </section>
+
+  <!-- STEP 2: DEVICES -->
+  <section class="section" id="devices">
+    <h2>Step 2: Install Bitwarden on your daily devices</h2>
+    <p>Install Bitwarden only on your personal devices. Never install your personal password vault on shared school library computers or public internet cafe machines.</p>
+
+    <div class="choice">
+      <div>
+        <svg viewBox="0 0 24 24"><path d="M17.6 9.48l1.84-3.18a.5.5 0 00-.86-.5l-1.87 3.24a11.45 11.45 0 00-9.42 0L5.42 5.8a.5.5 0 00-.86.5l1.84 3.18A10.8 10.8 0 002 18h20a10.8 10.8 0 00-4.4-8.52zM7 14.5a1.25 1.25 0 111.25-1.25A1.25 1.25 0 017 14.5zm10 0a1.25 1.25 0 111.25-1.25 1.25 1.25 0 01-1.25 1.25z"/></svg>
+        Android Phone<br><small>Google Play Store</small>
+      </div>
+      <div>
+        <svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.62-.75 1.04-1.8 1.01-2.87-.9.04-2 .6-2.65 1.34-.56.64-1.06 1.7-1.01 2.76 1.01.08 2.03-.49 2.65-1.23z"/></svg>
+        iPhone / iPad<br><small>Apple App Store</small>
+      </div>
+      <div>
+        <svg viewBox="0 0 24 24"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.551H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-13.051-1.849"/></svg>
+        Windows PC<br><small>Chrome / Edge Extension</small>
+      </div>
+      <div>
+        <svg viewBox="0 0 24 24"><path d="M20 18c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2H0v2h24v-2h-4zM4 6h16v10H4V6z"/></svg>
+        Mac Desktop<br><small>Safari / Chrome Extension</small>
+      </div>
+    </div>
+
+    <article class="step">
+      <span class="badge">INSTALL EXTENSION</span>
+      <h3>
+        <svg viewBox="0 0 24 24"><path d="M20.5 11H19V7c0-1.1-.9-2-2-2h-4V3.5C13 2.12 11.88 1 10.5 1S8 2.12 8 3.5V5H4c-1.1 0-1.99.9-1.99 2v3.8H3.5c1.49 0 2.7 1.21 2.7 2.7s-1.21 2.7-2.7 2.7H2V20c0 1.1.9 2 2 2h3.8v-1.5c0-1.49 1.21-2.7 2.7-2.7 1.49 0 2.7 1.21 2.7 2.7V22H17c1.1 0 2-.9 2-2v-4h1.5c1.38 0 2.5-1.12 2.5-2.5s-1.12-2.5-2.5-2.5z"/></svg>
+        Install the browser extension on your computer
+      </h3>
+      <div class="path">Chrome Web Store / Edge Add-ons → Search "Bitwarden" → Add to Browser</div>
+
+      <ol>
+        <li>Open your browser's official store (Chrome Web Store, Edge Add-ons, or Firefox Add-ons).</li>
+        <li>Search for <strong>Bitwarden Password Manager</strong>. Check that the verified publisher is <strong>Bitwarden Inc.</strong></li>
+        <li>Click <strong>Add to Chrome</strong> (or <strong>Get</strong>) and accept installation.</li>
+        <li>Click the puzzle piece icon in your top browser bar and click the <strong>Pin icon</strong> next to Bitwarden so the blue shield icon stays permanently visible.</li>
+        <li>Click the blue shield icon and log in with your email and master passphrase.</li>
+        <li>Under Bitwarden <strong>Settings &gt; Security</strong>, set <strong>Vault timeout</strong> to <em>15 Minutes</em> or <em>On Browser Restart</em>, and choose <strong>Lock</strong> (not Log out). Turn on <strong>Unlock with PIN</strong> or <strong>Unlock with biometrics</strong> (Windows Hello / Touch ID).</li>
+      </ol>
+      <div class="finish">✓ Done: The extension is pinned to your toolbar and ready to autofill passwords.</div>
+    </article>
+  </section>
+
+  <!-- STEP 3: SAVE PASSWORDS -->
+  <section class="section" id="save">
+    <article class="step">
+      <span class="badge">STEP 3</span>
+      <h3>
+        <svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+        Save existing logins and generate new passwords
+      </h3>
+      <p>Start moving your accounts into Bitwarden one by one:</p>
+      <div class="path">Click Bitwarden Shield → Tap (+) Add Item → Choose Login → Enter Details → Save</div>
+
+      <ol>
+        <li><strong>Add an existing login:</strong> Click the Bitwarden extension shield icon, click the plus sign (<strong>+</strong>) in the top-right corner, select <strong>Type: Login</strong>, type the name of the service (e.g. <em>Amazon</em>), your username/email, and your current password, then click <strong>Save</strong>.</li>
+        <li><strong>How to generate unhackable new passwords:</strong> Whenever you sign up for a new website, click the <strong>Generator tab</strong> at the bottom of Bitwarden.</li>
+        <li><strong>Set the slider:</strong> Slide the length bar to <strong>16 or 20 characters</strong>. Turn on uppercase letters, lowercase letters, numbers, and special symbols (<code>!@#$%^&amp;*</code>).</li>
+        <li><strong>Let Bitwarden generate:</strong> Bitwarden produces a code like <code>9x#K2$vP9!mL7q@Z</code>. Click <strong>Copy</strong>, paste it into the website registration box, and click <strong>Save</strong> inside Bitwarden immediately.</li>
+        <li><strong>Never reuse passwords:</strong> If a hacker steals a password from a gaming forum, they cannot use it on your banking or email because every single site has a totally unique 16-character key!</li>
+      </ol>
+      <div class="finish">✓ Done: Your logins are securely stored in your personal vault.</div>
+    </article>
+  </section>
+
+  <!-- STEP 4: SECURE WITH 2FA -->
+  <section class="section" id="2fa">
+    <article class="step">
+      <span class="badge">STEP 4</span>
+      <h3>
+        <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+        Enable Two-Factor Authentication (2FA) on Bitwarden itself
+      </h3>
+      <p>Because your vault holds all your passwords, you must lock its front door with two-factor authentication:</p>
+      <div class="path">bitwarden.com → Sign in to Web Vault → Settings → Security → Two-step login</div>
+
+      <ol>
+        <li>Open your browser and sign into the <strong>Bitwarden Web Vault</strong> at <strong>vault.bitwarden.com</strong>.</li>
+        <li>Click your circular profile icon in the top right corner and click <strong>Account Settings</strong>.</li>
+        <li>Click the <strong>Security</strong> tab on the left menu, then click <strong>Two-step login</strong> along the top.</li>
+        <li>Under <em>Providers</em>, find <strong>Authenticator App</strong> and click the blue <strong>Manage</strong> button.</li>
+        <li>Type your master password to verify identity. A black-and-white square QR barcode will appear on your screen.</li>
+        <li>Pick up your smartphone, open <strong>Google Authenticator</strong> or <strong>Microsoft Authenticator</strong>, tap <strong>+</strong>, and scan the QR barcode displayed on your computer monitor.</li>
+        <li>Read the six-digit number currently showing for Bitwarden on your phone, type it into the confirmation box on your computer, and click <strong>Enable</strong>.</li>
+        <li><strong>Save your recovery code:</strong> Bitwarden will show an emergency Recovery Code. Write this down on the same paper where you wrote your master password. If your phone breaks, this code lets you into your vault.</li>
+      </ol>
+      <div class="finish">✓ Done: Your vault is double-locked. Even if someone guesses your master password, they are blocked without your phone!</div>
+    </article>
+  </section>
+
+  <!-- STEP 5: AUTOFILL -->
+  <section class="section" id="autofill">
+    <h2>Step 5: How to use Autofill like a pro</h2>
+    <p>You never have to copy and paste passwords manually. Bitwarden can type them for you with one click:</p>
+
+    <div class="flow">
+      <div>
+        <svg viewBox="0 0 24 24" fill="#123c8c"><path d="M20 18c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2H0v2h24v-2h-4zM4 6h16v10H4V6z"/></svg>
+        <b>On Computers: Ctrl + Shift + L</b>
+        When viewing a login page, press <strong>Ctrl + Shift + L</strong> (or <strong>Cmd + Shift + L</strong> on Mac). Bitwarden types your username and password instantly!
+      </div>
+      <span class="arrow">→</span>
+      <div>
+        <svg viewBox="0 0 24 24" fill="#123c8c"><path d="M17 1.01L7 1c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-1.99-2-1.99zM17 19H7V5h10v14zm-5-3c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3z"/></svg>
+        <b>On Mobile Phones: System Autofill</b>
+        Open phone <strong>Settings &gt; Passwords &amp; Autofill</strong>. Select <strong>Bitwarden</strong> as your default autofill service and unlock with Face ID or fingerprint.
+      </div>
+    </div>
+  </section>
+
+  <!-- CHECKLIST & RULES -->
+  <section class="section" id="checklist">
+    <div class="warn">
+      <strong>The Golden Security Rule: Never share your vault keys!</strong> Bitwarden customer support, school IT staff, and bank managers will <strong>never</strong> ask you for your master password, your emergency recovery code, or your 6-digit authenticator codes. Anyone asking for these numbers is an attacker trying to steal your vault.
+    </div>
+
+    <div class="check">
+      <h3>Essential Bitwarden safety checklist</h3>
+      <ul>
+        <li>Create a memorable 4-word master passphrase and keep it written down on paper offline.</li>
+        <li>Enable Two-Factor Authentication (2FA) on your Bitwarden account using an authenticator app.</li>
+        <li>Save your Bitwarden emergency recovery code in a safe place.</li>
+        <li>Install the official browser extension and pin it to your toolbar.</li>
+        <li>Set up biometric unlock (Touch ID, Windows Hello, Face ID) for quick everyday access.</li>
+        <li>Use Bitwarden's password generator to make every new password 16+ characters long.</li>
+        <li>Never store your master password in an unencrypted notes app or email draft.</li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<footer>
+  ***Umer Malik: Where Craft Meets Research*** <a class="back" href="#top">↑ Back to top</a>
+</footer>
+<script id="security-navigation">
+(() => {
+  const nav = document.querySelector('nav.quick');
+  const links = [...nav.querySelectorAll('a[href^="#"]')];
+  const sections = links.map(a => document.getElementById(a.hash.slice(1)));
+  const mark = index => links.forEach((a,i) => i === index ? a.setAttribute('aria-current','location') : a.removeAttribute('aria-current'));
+  let pending = false;
+  const update = () => {
+    const sticky = getComputedStyle(nav).position === 'sticky';
+    const offset = sticky ? nav.offsetHeight + 24 : 24;
+    document.documentElement.style.setProperty('--quick-height',nav.offsetHeight+'px');
+    let index = -1;
+    sections.forEach((section,i) => { if(section && section.getBoundingClientRect().top <= offset) index=i; });
+    mark(index); pending=false;
+  };
+  const schedule = () => { if(!pending) {pending=true; requestAnimationFrame(update);} };
+  addEventListener('scroll',schedule,{passive:true});
+  addEventListener('resize',schedule);
+  addEventListener('hashchange',schedule);
+  if(window.ResizeObserver) new ResizeObserver(schedule).observe(nav);
+  update();
+})();
+</script>
+</body>
+</html>

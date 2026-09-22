@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Secure Your Android Phone | Digital Security Centre</title>
+<style>
+:root{--n:#071d45;--n2:#102d63;--b:#2864e8;--p:#eaf2ff;--g:#ffc83d;--i:#10264e;--r:#bd2944;--ok:#087a55}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:linear-gradient(135deg,#dce9fb,#f4f7fc 42%,#d6e5fb);color:var(--i);font:18px/1.6 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+.top{background:radial-gradient(circle at 15% 0,#244f9a 0,transparent 32%),linear-gradient(120deg,var(--n2),var(--n));color:#fff;padding:28px max(5vw,24px) 22px;position:relative;overflow:hidden}
+.top:after{content:"";position:absolute;right:-90px;bottom:-100px;width:360px;height:220px;border:34px solid #ffffff12;border-radius:50%}
+.home{position:absolute;right:max(5vw,24px);top:28px;z-index:2;color:var(--n);background:var(--g);font-weight:800;padding:10px 17px;border-radius:99px;text-decoration:none;box-shadow:0 6px 18px #0004}
+.ey{color:var(--g);font-weight:900;letter-spacing:.12em;font-size:.8rem;margin:0}
+.top h1{font-size:clamp(2rem,5vw,4.3rem);line-height:1;margin:10px 0 12px;letter-spacing:-.05em}
+.top p{font-size:1.05rem;max-width:650px;margin:0;color:#dbe8ff}
+.quick{background:#0a2048;color:#fff;padding:10px max(3vw,16px);display:flex;flex-direction:column;gap:6px;align-items:center;box-shadow:0 8px 20px #0b234123;position:sticky;top:0;z-index:5}
+.quick-row{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;align-items:center}
+.quick strong{color:var(--g);font-size:.82rem;letter-spacing:.08em;margin-right:4px}
+.quick a{color:#fff;text-decoration:none;border:1px solid #59729f;border-radius:99px;padding:5px 12px;font-weight:750;font-size:.85rem;white-space:nowrap;transition:.2s}
+.quick a:hover,.quick a:focus{background:var(--b);border-color:#8bb2ff;transform:translateY(-2px)}
+main{max-width:1200px;margin:auto;padding:42px 24px 64px}
+.crumb{font-weight:750;font-size:.92rem;color:#315fbc}
+.crumb a{color:#244fa9}
+.hero,.sec{background:#f8fbff;border:1px solid #b8d1ff;border-radius:28px;box-shadow:0 16px 34px #183d7d1a;padding:clamp(24px,4vw,46px);margin-bottom:28px;scroll-margin-top:110px}
+.hero{border-left:13px solid var(--g);display:grid;grid-template-columns:1.2fr .8fr;gap:28px;align-items:center}
+h2{font-size:clamp(1.6rem,3vw,2.5rem);line-height:1.1;margin:0 0 14px;letter-spacing:-.035em}
+.lead{font-size:1.13rem;color:#314f79}
+.device{background:linear-gradient(135deg,#173f91,#2864e8);border-radius:24px;padding:25px;color:#fff;box-shadow:0 12px 26px #1a50aa4a}
+.device .e{font-size:3rem}
+.device b{display:block;font-size:1.2rem;margin:8px 0}
+.note{background:#fff5d9;border-left:7px solid var(--g);border-radius:12px;padding:15px 18px;margin-top:18px}
+.danger{background:#fff0f2;border-left-color:var(--r)}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.card{background:var(--p);border:1px solid #a9c6ff;border-radius:20px;padding:22px;box-shadow:0 7px 18px #183d7d12}
+.card h3{margin:0 0 8px;font-size:1.28rem;line-height:1.2}
+.num{display:inline-grid;place-items:center;background:var(--b);color:#fff;border-radius:50%;width:34px;height:34px;font-size:.92rem;margin-right:8px;vertical-align:middle}
+.path{display:block;background:#0a214a;color:#afffe2;border-radius:12px;padding:12px 14px;font-family:Consolas,monospace;font-size:.9rem;font-weight:700;margin:13px 0}
+.path b{color:var(--g)}
+ol{padding-left:1.35em}
+li{margin:10px 0;line-height:1.6}
+strong{color:#092457}
+.flow{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:22px 0}
+.flow div{position:relative;background:#e8f1ff;border:1px solid #aac8ff;border-radius:16px;padding:15px;text-align:center;font-weight:800}
+.flow div:not(:last-child):after{content:"→";position:absolute;right:-10px;top:50%;transform:translateY(-50%);color:var(--b);font-size:1.5rem;z-index:1}
+.check{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.check div{background:#e5f7f0;border:1px solid #97dfc4;border-radius:12px;padding:12px 14px}
+.check div:before{content:"✓";font-weight:900;color:var(--ok);padding-right:9px}
+.table{overflow:auto;margin-top:20px}
+.table table{width:100%;border-collapse:separate;border-spacing:0;background:#fff;border:1px solid #b8cdf1;border-radius:16px;overflow:hidden}
+.table th{background:#091f48;color:#fff;text-align:left;padding:14px}
+.table td{padding:14px;border-top:1px solid #d9e3f3;vertical-align:top}
+.table tr:nth-child(even) td{background:#f1f6ff}
+.table td:last-child{font-weight:800;color:#123d94}
+footer{background:#061a3d;color:#e9f1ff;border-top:4px solid var(--g);padding:26px max(5vw,24px);text-align:center}
+footer a{color:#fff;background:#1d4da9;border-radius:99px;padding:9px 15px;text-decoration:none;font-weight:800;margin-left:10px}
+@media(max-width:760px){
+  .home{top:19px}
+  .top{padding-top:82px}
+  .hero{grid-template-columns:1fr}
+  .grid,.check{grid-template-columns:1fr}
+  .flow{grid-template-columns:1fr;gap:20px}
+  .flow div:not(:last-child):after{content:"↓";right:50%;top:auto;bottom:-17px;transform:translateX(50%)}
+  .quick{align-items:flex-start}
+}
+</style>
+<style id="security-shared-style">
+/* Unified Digital Security Centre header and navigation */
+body > header, body > header.top {
+  position:relative; display:flex; flex-direction:column; justify-content:center;
+  min-height:0; padding:18px 90px; align-items:center; text-align:center; color:#fff;
+  background:radial-gradient(ellipse at 15% 0%,#2457ac,transparent 55%),linear-gradient(120deg,#102d63,#071a3d);
+}
+body > header h1, body > header.top h1 {max-width:960px; width:100%; margin:4px auto 6px; font-family:"Segoe UI",Arial,sans-serif; font-size:clamp(1.8rem,4.2vw,3.4rem); line-height:1.14; letter-spacing:-.025em; text-align:center; text-wrap:balance;}
+body > header p, body > header.top p {max-width:760px; margin:0 auto; font-size:1.05rem; line-height:1.6; text-align:center; color:#dfeaff;}
+body > header p.ey, body > header.top p.ey {margin:0 auto 3px; color:#f6c343; font-size:.75rem; letter-spacing:.14em; font-weight:800;}
+body > header::before,body > header::after {pointer-events:none;}
+body > header a.home {position:absolute; right:24px; top:50%; transform:translateY(-50%); width:46px; height:46px; padding:0; display:grid; place-items:center; border:1px solid #f6c343; border-radius:14px; background:#f6c343; color:#071a3d; box-shadow:0 6px 18px #0003; z-index:3; transition:background .18s,box-shadow .18s;}
+body > header a.home svg {width:24px; height:24px; fill:currentColor;}
+body > header a.home:hover {background:#ffda75; box-shadow:0 8px 24px #0005;}
+body > nav.quick {position:sticky; top:0; z-index:10; display:flex; flex-direction:column; align-items:center; gap:5px; padding:7px 16px; overflow:visible; white-space:normal; background:#091f46; border-top:2px solid #f6c343; border-bottom:2px solid #f6c343; box-shadow:0 5px 18px #071a3d20;}
+body > nav.quick .quick-label {color:#f6c343; font:800 .68rem/1.3 "Segoe UI",Arial,sans-serif; letter-spacing:.16em;}
+body > nav.quick .quick-links {display:flex; flex-wrap:wrap; justify-content:center; align-items:center; gap:5px; width:100%; max-width:1180px; margin:0 auto; padding:0;}
+body > nav.quick a {display:inline-flex; align-items:center; justify-content:center; min-height:36px; max-width:100%; margin:0; padding:6px 12px; border:1px solid #7796c266; border-radius:10px; background:#ffffff08; color:#eef4ff; font:600 .83rem/1.35 "Segoe UI",Arial,sans-serif; text-align:center; text-decoration:none; white-space:normal; transition:background .18s,border-color .18s;}
+body > nav.quick a:hover,body > nav.quick a[aria-current="location"] {background:#f6c343; color:#071a3d; border-color:#f6c343; transform:none;}
+body > header a.home:focus-visible,body > nav.quick a:focus-visible {outline:3px solid #fff; outline-offset:4px;}
+body main [id] {scroll-margin-top:calc(var(--quick-height,160px) + 20px);}
+@media(max-width:600px) {
+  body > header,body > header.top {min-height:0; padding:14px 66px;}
+  body > header h1, body > header.top h1 {font-size:clamp(1.55rem,6vw,2.25rem); overflow-wrap:anywhere;}
+  body > header p, body > header.top p {font-size:.94rem;}
+  body > header a.home {right:12px; width:44px; height:44px; border-radius:12px;}
+  body > nav.quick {position:relative; padding:7px 10px;}
+  body > nav.quick a {min-height:44px; padding:8px 11px; font-size:.8rem;}
+  body main [id] {scroll-margin-top:20px;}
+}
+@media(prefers-reduced-motion:reduce) {html {scroll-behavior:auto;} body > nav.quick a,body > header a.home {transition:none;}}
+</style>
+<style id="yellow-home-image">
+/* Yellow house image, centred vertically on the right of every header. */
+body > header a.home {
+  inset:auto 24px auto auto; top:50%; transform:translateY(-50%);
+  display:grid; place-items:center; width:48px; height:48px; padding:0;
+  background:#071a3d; border:1px solid #f6c343; border-radius:12px;
+  box-shadow:0 4px 14px #0003;
+}
+body > header a.home img {display:block; width:28px; height:28px; margin:0;}
+body > header a.home:hover {background:#17376a; border-color:#ffe49b;}
+@media(max-width:600px) {
+  body > header a.home {right:12px; width:44px; height:44px;}
+}
+</style>
+</head>
+<body>
+
+<header class="top" id="top">
+  <a class="home" href="digital-security-centre.html" aria-label="Home: Digital Security Centre" title="Home: Digital Security Centre"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSIjZjZjMzQzIiBkPSJNMTIgMi41IDEuNSAxMS40bDEuOSAyLjJMNSAxMi4yVjIxaDV2LTZoNHY2aDV2LTguOGwxLjYgMS40IDEuOS0yLjJMMTIgMi41WiIvPjwvc3ZnPg==" width="28" height="28" alt="" aria-hidden="true"></a>
+  <p class="ey">DIGITAL SECURITY CENTRE</p>
+  <h1>Secure Your Android Phone</h1>
+  <p>Simple, clear steps to protect your Android phone or tablet: strong screen lock, fingerprint setup, sensitive app locks, Google Account security, Find My Device, and cloud backups.</p>
+</header>
+
+<nav class="quick" aria-label="Quick navigation"><span class="quick-label">ON THIS PAGE</span><div class="quick-links"><a href="digital-security-centre.html">Security Centre</a><a href="#layers">5 Layers</a><a href="#lock">1. Screen Lock &amp; Biometrics</a><a href="#apps">2. App Protection</a><a href="#google">3. Google Account</a><a href="#find">4. Find My Device</a><a href="#privacy">5. Updates &amp; Privacy</a><a href="#backup">6. Backups</a><a href="#check">Master Checklist</a></div></nav>
+
+<main>
+  <p class="crumb"><a href="digital-security-centre.html">Digital Security Centre</a> / Secure Your Android Phone</p>
+
+  <section class="hero">
+    <div>
+      <h2>Follow this Android route only</h2>
+      <p class="lead">These steps are written specifically for Android phones and tablets, including Samsung Galaxy, Google Pixel, Motorola, and Xiaomi devices. Menu labels can vary slightly between manufacturers. If you cannot locate a specific menu option immediately, tap the magnifying glass search bar at the very top of your Settings app and type the bold words.</p>
+      <div class="note">
+        <strong>The Security Priority:</strong> Create a strong screen lock PIN, register your fingerprints with the dual-finger technique, protect sensitive banking and email apps with a secondary vault, and ensure your primary Google Account has Find My Device and cloud backups active.
+      </div>
+    </div>
+    <aside class="device">
+      <div class="e">🤖🛡️</div>
+      <b>Your safe-phone routine</b>
+      <span>Update system → lock screen → protect apps → enable tracking → automate backups.</span>
+    </aside>
+  </section>
+
+  <section class="sec" id="layers">
+    <h2>Your five safety layers</h2>
+    <div class="flow">
+      <div>🔄<br><b>1. Updates</b><br>Patches system bugs</div>
+      <div>🔐<br><b>2. Screen Lock</b><br>PIN or password</div>
+      <div>👆<br><b>3. Biometrics</b><br>Multi-fingerprint scan</div>
+      <div>📍<br><b>4. Find Device</b><br>Lost GPS tracking</div>
+      <div>☁️<br><b>5. Backup</b><br>Google One cloud</div>
+    </div>
+    <p>Your smartphone is often used to approve account sign-ins, read two-factor authentication codes, and send bank payments. If someone bypasses your lock screen, they can gain access to your email, personal photos, and linked financial accounts.</p>
+  </section>
+
+  <!-- 1. LOCK & BIOMETRICS -->
+  <section class="sec" id="lock">
+    <h2><span class="num">1</span>Set a strong screen lock and fingerprint scanner</h2>
+    <p>Never rely on a simple swipe or an easy pattern that leaves visible grease marks across your screen glass. A secure numeric PIN or alphanumeric password is your master defense.</p>
+
+    <div class="grid">
+      <article class="card">
+        <h3>A. Configure your screen lock PIN or password</h3>
+        <span class="path"><b>Settings</b> → <b>Security &amp; privacy</b> → <b>Device unlock</b> → <b>Screen lock</b></span>
+        <ol>
+          <li>Open your phone <strong>Settings</strong> (the gear icon).</li>
+          <li>Tap on <strong>Security &amp; privacy</strong> (or <strong>Lock screen</strong> on Samsung devices).</li>
+          <li>Tap <strong>Screen lock</strong> (or <strong>Screen lock type</strong> on Samsung).</li>
+          <li>Choose <strong>PIN</strong> or <strong>Password</strong>. Never choose <em>Swipe</em> or <em>None</em>.</li>
+          <li>Enter at least a <strong>6-digit PIN</strong> (or a memorable passphrase). Never use 123456, 000000, your birth year, or codes friends have seen you enter.</li>
+          <li>Set <strong>Automatically lock</strong> to <strong>Immediately</strong> or <strong>30 seconds</strong> after the screen turns off so the phone secures itself as soon as you put it down.</li>
+        </ol>
+      </article>
+
+      <article class="card">
+        <h3>B. Register fingerprints with the dual-finger technique</h3>
+        <span class="path"><b>Settings</b> → <b>Security &amp; privacy</b> → <b>Biometrics</b> → <b>Fingerprints</b></span>
+        <ol>
+          <li>Type your new 6-digit PIN to open the biometrics menu.</li>
+          <li>Tap <strong>Add fingerprint</strong>.</li>
+          <li>Place your thumb on the scanner. Lift and press repeatedly as prompted.</li>
+          <li><strong>Pro Trick:</strong> On <em>Fingerprint 1</em>, alternate between your <strong>Left Thumb</strong> and <strong>Right Thumb</strong> on each tap until the meter hits 100%. This saves both thumbs inside a single slot!</li>
+          <li>Tap <strong>Add fingerprint</strong> again for <em>Fingerprint 2</em>, and alternate between your <strong>Left Index</strong> and <strong>Right Index</strong> fingers.</li>
+          <li>Use your remaining slots to capture the side edges and tips of your fingers so unlocks work from any angle.</li>
+        </ol>
+      </article>
+    </div>
+
+    <div class="note">
+      <strong>Samsung Galaxy Navigation:</strong> On Samsung devices, go to <strong>Settings &gt; Security and privacy &gt; Lock screen &gt; Screen lock type</strong> to set your PIN, then go to <strong>Settings &gt; Security and privacy &gt; Biometrics &gt; Fingerprints</strong> to register your fingers. If you use a tempered glass screen protector, open <strong>Settings &gt; Display</strong> and switch on <strong>Touch sensitivity</strong>.
+    </div>
+  </section>
+
+  <!-- 2. APPS -->
+  <section class="sec" id="apps">
+    <h2><span class="num">2</span>Add an extra layer of lock protection to sensitive apps</h2>
+    <p>Even if you hand your unlocked phone to a friend or classmate to show them a video, they should never be able to open your banking apps, private emails, or password vault.</p>
+
+    <div class="grid">
+      <article class="card">
+        <h3>Option A: Android Private Space (Android 15+)</h3>
+        <p>Built into modern Android versions, Private Space creates an isolated, encrypted digital compartment for private apps.</p>
+        <span class="path"><b>Settings</b> → <b>Security &amp; privacy</b> → <b>Private space</b></span>
+        <ol>
+          <li>Unlock with your screen PIN or fingerprint.</li>
+          <li>Tap <strong>Set up</strong>, and choose to lock Private Space with a separate, dedicated PIN if offered.</li>
+          <li>Sign into your primary Google Account inside Private Space and install your banking, email, and password manager apps.</li>
+          <li>In your app drawer, scroll down to <strong>Private Space</strong> and tap <strong>Lock</strong> whenever you finish using your apps.</li>
+        </ol>
+      </article>
+
+      <article class="card">
+        <h3>Option B: Samsung Secure Folder</h3>
+        <p>Samsung Galaxy phones include Knox-encrypted Secure Folder with its own independent biometric lock.</p>
+        <span class="path"><b>Settings</b> → <b>Security and privacy</b> → <b>Secure Folder</b></span>
+        <ol>
+          <li>Tap on <strong>Secure Folder</strong> and sign into your Samsung Account.</li>
+          <li>Select your lock type (PIN or Password) and turn <strong>Fingerprints</strong> to <strong>ON</strong>.</li>
+          <li>Open Secure Folder and tap the plus button (<strong>+</strong>) to add or download separate copies of your banking apps and email.</li>
+          <li>Tap the three dots menu in Secure Folder and set <em>Auto-lock Secure Folder</em> to <strong>Each time I leave the app</strong>.</li>
+        </ol>
+      </article>
+    </div>
+
+    <div class="note">
+      <strong>Turn on internal app locks:</strong> Open your banking app, password manager (e.g. Bitwarden), and WhatsApp. Go to <strong>Settings &gt; Privacy &gt; App lock</strong> or <strong>Biometric login</strong> and toggle it <strong>ON</strong>. This ensures the app requests your fingerprint every single time it opens.
+    </div>
+
+    <div class="note danger">
+      <strong>Avoid third-party "App Lockers" from search ads:</strong> Never download random "AppLock" or "Clean Master" apps from internet ads or unverified publishers. Many of these tools collect user data, display spam ads, or stop functioning after updates. Always stick to built-in Android Private Space, Samsung Secure Folder, or the app's official internal settings.
+    </div>
+  </section>
+
+  <!-- 3. GOOGLE ACCOUNT -->
+  <section class="sec" id="google">
+    <h2><span class="num">3</span>Protect your primary Google Account</h2>
+    <p>Your Google Account manages your Android phone's security, tracks its location, and stores your cloud backups. Ensure it is guarded with two-step verification:</p>
+
+    <span class="path"><b>Settings</b> → <b>Google</b> → <b>Manage your Google Account</b> → <b>Security</b></span>
+
+    <ol>
+      <li>Open your phone <strong>Settings</strong>, scroll down, and tap <strong>Google</strong>.</li>
+      <li>Confirm your <strong>primary Gmail address</strong> is shown at the top. Tap the blue <strong>Manage your Google Account</strong> button.</li>
+      <li>Swipe across to the <strong>Security</strong> tab.</li>
+      <li>Verify that <strong>2-Step Verification</strong> is turned <strong>ON</strong>. Set up an <strong>Authenticator App</strong> (like Google Authenticator) or a <strong>Passkey</strong> linked to your fingerprint sensor.</li>
+      <li>Review your <strong>Recovery phone</strong> and <strong>Recovery email</strong>. Confirm that these details are up to date and belong to you.</li>
+      <li>Scroll down to <strong>Your devices</strong>. Tap <strong>Manage all devices</strong> and immediately sign out of any old phones, tablets, or unfamiliar computers you do not recognize.</li>
+      <li>Tap <strong>Backup codes</strong>, generate 10 emergency recovery codes, and write them down on paper in a safe place at home.</li>
+    </ol>
+
+    <div class="note">
+      <strong>Authenticator App Tip:</strong> When setting up 2FA for online accounts on a computer, open Google Authenticator on your phone, tap <strong>+</strong>, scan the computer screen, and enter the temporary 6-digit code. Never dictate or share these codes with anyone over a phone call.
+    </div>
+  </section>
+
+  <!-- 4. FIND MY DEVICE -->
+  <section class="sec" id="find">
+    <h2><span class="num">4</span>Turn on Find My Device tracking</h2>
+    <p>If your phone is lost at school, left on public transport, or stolen, Google's Find My Device network helps you locate it on a live map, ring it at full volume, or wipe it remotely.</p>
+
+    <span class="path"><b>Settings</b> → <b>Google</b> → <b>All services</b> → <b>Find My Device</b></span>
+
+    <ol>
+      <li>Tap <strong>Find My Device</strong> and ensure the main toggle switch for <strong>Use Find My Device</strong> is turned <strong>ON</strong>.</li>
+      <li>Under <em>Find your offline devices</em>, select <strong>With network in all areas</strong> so your phone can be located by the encrypted crowd-sourced Android network even when it has no mobile signal or Wi-Fi.</li>
+      <li>Keep your phone's main <strong>Location (GPS)</strong> setting turned on for accurate tracking.</li>
+      <li>Test access: Open <strong>android.com/find</strong> on a family laptop or tablet and confirm you can see your phone's battery level and live map location.</li>
+    </ol>
+
+    <div class="note">
+      <strong>If your phone is stolen:</strong> Go to <strong>android.com/find</strong> from another device immediately. Click <strong>Secure Device</strong> to lock the screen with your PIN and display an emergency contact number. If you cannot recover it safely, click <strong>Erase Device</strong>. Never confront a thief or track a stolen phone alone; share the live map location directly with the police.
+    </div>
+  </section>
+
+  <!-- 5. UPDATES & PRIVACY -->
+  <section class="sec" id="privacy">
+    <h2><span class="num">5</span>Install security updates and audit app permissions</h2>
+    <p>Keep your device operating system updated and verify that simple utility apps or games are not secretly accessing your private sensors.</p>
+
+    <span class="path"><b>Settings</b> → <b>System</b> → <b>Software updates</b> (or <b>Software update</b> on Samsung)</span>
+
+    <ol>
+      <li>Tap <strong>System update</strong> (or <em>Download and install</em>) and install any pending updates. Leave your phone plugged in and on Wi-Fi.</li>
+      <li>Go to <strong>Settings &gt; Security &amp; privacy &gt; Updates &gt; Google Play system update</strong> and install any pending Google Play security components.</li>
+    </ol>
+
+    <span class="path"><b>Settings</b> → <b>Security &amp; privacy</b> → <b>Permission manager</b></span>
+
+    <ol>
+      <li>Tap <strong>Permission manager</strong>.</li>
+      <li>Tap <strong>Location</strong>, <strong>Camera</strong>, and <strong>Microphone</strong> one by one.</li>
+      <li>Review the list of apps. For each app, choose <strong>Allow only while using the app</strong> or <strong>Don't allow</strong>. A calculator, torch, or offline game should never have permission to use your camera or microphone!</li>
+      <li>Open the <strong>Google Play Store</strong>, tap your profile picture, and tap <strong>Play Protect</strong>. Ensure Play Protect scanning is active to inspect apps before they install.</li>
+      <li>Never enable <em>"Install unknown apps"</em> or download unofficial APK files from internet browsers or pop-up ads.</li>
+    </ol>
+  </section>
+
+  <!-- 6. BACKUP -->
+  <section class="sec" id="backup">
+    <h2><span class="num">6</span>Back up your contacts, photos, and messages</h2>
+    <p>Google One provides automated cloud backups of your text messages, call history, contacts, apps, and system settings every day.</p>
+
+    <span class="path"><b>Settings</b> → <b>Google</b> → <b>Backup</b> → <b>Back up now</b></span>
+
+    <ol>
+      <li>In phone <strong>Settings</strong>, tap on <strong>Google &gt; Backup</strong>.</li>
+      <li>Ensure the switch for <strong>Backup by Google One</strong> is turned <strong>ON</strong>.</li>
+      <li>Tap the blue <strong>Back up now</strong> button to make a complete snapshot of your device before travelling, updating, or performing repairs.</li>
+      <li>Wait for the progress line to finish and verify that <em>Last backup</em> shows today's date and time.</li>
+      <li><strong>Back up photos and videos:</strong> Open the separate <strong>Google Photos</strong> app. Tap your profile picture in the top-right corner, select <strong>Photos settings &gt; Backup</strong>, and toggle it <strong>ON</strong>.</li>
+    </ol>
+
+    <div class="note">
+      <strong>Extra safety:</strong> Important school coursework, assignments, and family video files can also be copied onto a computer or external USB drive by plugging your phone into a laptop with a USB charging cable.
+    </div>
+  </section>
+
+  <!-- MASTER CHECKLIST -->
+  <section class="sec" id="check">
+    <h2>Your master Android security checklist</h2>
+    <div class="check">
+      <div><strong>Once today:</strong> Set a strong 6-digit PIN and register your fingerprints.</div>
+      <div><strong>Once today:</strong> Enable Private Space, Secure Folder, or app-level biometric locks.</div>
+      <div><strong>Once today:</strong> Turn on Find My Device and Google One cloud backup.</div>
+      <div><strong>Every week:</strong> Check for Android system updates and Google Play system updates.</div>
+      <div><strong>Every month:</strong> Audit Permission Manager to turn off unused camera and mic access.</div>
+      <div><strong>Every few months:</strong> Review Google Account active devices and sign out old hardware.</div>
+    </div>
+
+    <div class="table">
+      <table>
+        <thead>
+          <tr>
+            <th>Situation</th>
+            <th>The correct action to take first</th>
+            <th>What you must NEVER do</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Unexpected phone call or text from your "bank"</td>
+            <td><strong>Hang up immediately and open the official banking app yourself.</strong></td>
+            <td>Never give verification codes, PINs, or card numbers to a caller.</td>
+          </tr>
+          <tr>
+            <td>Your Android phone goes missing</td>
+            <td><strong>Go to android.com/find from a laptop and click "Secure Device".</strong></td>
+            <td>Never delete the phone from your Google Account while searching for it.</td>
+          </tr>
+          <tr>
+            <td>A new game requests contacts, camera, and location</td>
+            <td><strong>Read each prompt carefully and deny unnecessary permissions.</strong></td>
+            <td>Never tap "Allow" automatically without reading.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <em>Umer Malik: Where Craft Meets Research</em>
+  <a href="#top" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">↑ Back to top</a>
+</footer>
+
+<script id="security-navigation">
+(() => {
+  const nav = document.querySelector('nav.quick');
+  const links = [...nav.querySelectorAll('a[href^="#"]')];
+  const sections = links.map(a => document.getElementById(a.hash.slice(1)));
+  const mark = index => links.forEach((a,i) => i === index ? a.setAttribute('aria-current','location') : a.removeAttribute('aria-current'));
+  let pending = false;
+  const update = () => {
+    const sticky = getComputedStyle(nav).position === 'sticky';
+    const offset = sticky ? nav.offsetHeight + 24 : 24;
+    document.documentElement.style.setProperty('--quick-height',nav.offsetHeight+'px');
+    let index = -1;
+    sections.forEach((section,i) => { if(section && section.getBoundingClientRect().top <= offset) index=i; });
+    mark(index); pending=false;
+  };
+  const schedule = () => { if(!pending) {pending=true; requestAnimationFrame(update);} };
+  addEventListener('scroll',schedule,{passive:true});
+  addEventListener('resize',schedule);
+  addEventListener('hashchange',schedule);
+  if(window.ResizeObserver) new ResizeObserver(schedule).observe(nav);
+  update();
+})();
+</script>
+</body>
+</html>

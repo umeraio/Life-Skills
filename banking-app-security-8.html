@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Banking App Security | Digital Security Centre</title>
+<style>
+:root{--n:#071d45;--n2:#102d63;--b:#2864e8;--p:#eaf2ff;--g:#ffc83d;--i:#10264e;--r:#bd2944;--ok:#087a55}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:linear-gradient(135deg,#dce9fb,#f4f7fc 42%,#d6e5fb);color:var(--i);font:18px/1.6 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+.top{background:radial-gradient(circle at 15% 0,#244f9a 0,transparent 32%),linear-gradient(120deg,var(--n2),var(--n));color:#fff;padding:28px max(5vw,24px) 22px;position:relative;overflow:hidden}
+.top:after{content:"";position:absolute;right:-90px;bottom:-100px;width:360px;height:220px;border:34px solid #ffffff12;border-radius:50%}
+.home{position:absolute;right:max(5vw,24px);top:28px;z-index:2;color:var(--n);background:var(--g);font-weight:800;padding:10px 17px;border-radius:99px;text-decoration:none;box-shadow:0 6px 18px #0004}
+.ey{color:var(--g);font-weight:900;letter-spacing:.12em;font-size:.8rem;margin:0}
+.top h1{font-size:clamp(2rem,5vw,4.3rem);line-height:1;margin:10px 0 12px;letter-spacing:-.05em}
+.top p{font-size:1.05rem;max-width:670px;margin:0;color:#dbe8ff}
+.quick{background:#0a2048;color:#fff;padding:10px max(3vw,16px);display:flex;flex-direction:column;gap:6px;align-items:center;box-shadow:0 8px 20px #0b234123;position:sticky;top:0;z-index:5}
+.quick-row{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;align-items:center}
+.quick strong{color:var(--g);font-size:.82rem;letter-spacing:.08em;margin-right:4px}
+.quick a{color:#fff;text-decoration:none;border:1px solid #59729f;border-radius:99px;padding:5px 12px;font-weight:750;font-size:.85rem;white-space:nowrap;transition:.2s}
+.quick a:hover,.quick a:focus{background:var(--b);border-color:#8bb2ff;transform:translateY(-2px)}
+main{max-width:1200px;margin:auto;padding:42px 24px 64px}
+.crumb{font-weight:750;font-size:.92rem;color:#315fbc}
+.crumb a{color:#244fa9}
+.hero,.sec{background:#f8fbff;border:1px solid #b8d1ff;border-radius:28px;box-shadow:0 16px 34px #183d7d1a;padding:clamp(24px,4vw,46px);margin-bottom:28px;scroll-margin-top:110px}
+.hero{border-left:13px solid var(--g);display:grid;grid-template-columns:1.2fr .8fr;gap:28px;align-items:center}
+h2{font-size:clamp(1.6rem,3vw,2.5rem);line-height:1.1;margin:0 0 14px;letter-spacing:-.035em}
+.lead{font-size:1.13rem;color:#314f79}
+.device{background:linear-gradient(135deg,#173f91,#2864e8);border-radius:24px;padding:25px;color:#fff;box-shadow:0 12px 26px #1a50aa4a}
+.device .e{font-size:3rem}
+.device b{display:block;font-size:1.2rem;margin:8px 0}
+.note{background:#fff5d9;border-left:7px solid var(--g);border-radius:12px;padding:15px 18px;margin-top:18px}
+.danger{background:#fff0f2;border-left-color:var(--r)}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.card{background:var(--p);border:1px solid #a9c6ff;border-radius:20px;padding:22px;box-shadow:0 7px 18px #183d7d12}
+.card h3{margin:0 0 8px;font-size:1.28rem;line-height:1.2}
+.num{display:inline-grid;place-items:center;background:var(--b);color:#fff;border-radius:50%;width:34px;height:34px;font-size:.92rem;margin-right:8px;vertical-align:middle}
+.path{display:block;background:#0a214a;color:#afffe2;border-radius:12px;padding:12px 14px;font-family:Consolas,monospace;font-size:.9rem;font-weight:700;margin:13px 0}
+.path b{color:var(--g)}
+ol{padding-left:1.35em}
+li{margin:10px 0;line-height:1.6}
+strong{color:#092457}
+.flow{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:22px 0}
+.flow div{position:relative;background:#e8f1ff;border:1px solid #aac8ff;border-radius:16px;padding:15px;text-align:center;font-weight:800}
+.flow div:not(:last-child):after{content:"→";position:absolute;right:-10px;top:50%;transform:translateY(-50%);color:var(--b);font-size:1.5rem;z-index:1}
+.check{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.check div{background:#e5f7f0;border:1px solid #97dfc4;border-radius:12px;padding:12px 14px}
+.check div:before{content:"✓";font-weight:900;color:var(--ok);padding-right:9px}
+.table{overflow:auto;margin-top:20px}
+.table table{width:100%;border-collapse:separate;border-spacing:0;background:#fff;border:1px solid #b8cdf1;border-radius:16px;overflow:hidden}
+.table th{background:#091f48;color:#fff;text-align:left;padding:14px}
+.table td{padding:14px;border-top:1px solid #d9e3f3;vertical-align:top}
+.table tr:nth-child(even) td{background:#f1f6ff}
+.table td:last-child{font-weight:800;color:#123d94}
+details{background:#edf4ff;border:1px solid #b6d0ff;border-radius:15px;padding:14px 17px;margin:14px 0}
+summary{font-weight:850;cursor:pointer}
+footer{background:#061a3d;color:#e9f1ff;border-top:4px solid var(--g);padding:26px max(5vw,24px);text-align:center}
+footer a{color:#fff;background:#1d4da9;border-radius:99px;padding:9px 15px;text-decoration:none;font-weight:800;margin-left:10px}
+@media(max-width:760px){
+  .home{top:19px}
+  .top{padding-top:82px}
+  .hero{grid-template-columns:1fr}
+  .grid,.check{grid-template-columns:1fr}
+  .flow{grid-template-columns:1fr;gap:20px}
+  .flow div:not(:last-child):after{content:"↓";right:50%;top:auto;bottom:-17px;transform:translateX(50%)}
+  .quick{align-items:flex-start}
+}
+</style>
+<style id="security-shared-style">
+/* Unified Digital Security Centre header and navigation */
+body > header, body > header.top {
+  position:relative; display:flex; flex-direction:column; justify-content:center;
+  min-height:0; padding:18px 90px; align-items:center; text-align:center; color:#fff;
+  background:radial-gradient(ellipse at 15% 0%,#2457ac,transparent 55%),linear-gradient(120deg,#102d63,#071a3d);
+}
+body > header h1, body > header.top h1 {max-width:960px; width:100%; margin:4px auto 6px; font-family:"Segoe UI",Arial,sans-serif; font-size:clamp(1.8rem,4.2vw,3.4rem); line-height:1.14; letter-spacing:-.025em; text-align:center; text-wrap:balance;}
+body > header p, body > header.top p {max-width:760px; margin:0 auto; font-size:1.05rem; line-height:1.6; text-align:center; color:#dfeaff;}
+body > header p.ey, body > header.top p.ey {margin:0 auto 3px; color:#f6c343; font-size:.75rem; letter-spacing:.14em; font-weight:800;}
+body > header::before,body > header::after {pointer-events:none;}
+body > header a.home {position:absolute; right:24px; top:50%; transform:translateY(-50%); width:46px; height:46px; padding:0; display:grid; place-items:center; border:1px solid #f6c343; border-radius:14px; background:#f6c343; color:#071a3d; box-shadow:0 6px 18px #0003; z-index:3; transition:background .18s,box-shadow .18s;}
+body > header a.home svg {width:24px; height:24px; fill:currentColor;}
+body > header a.home:hover {background:#ffda75; box-shadow:0 8px 24px #0005;}
+body > nav.quick {position:sticky; top:0; z-index:10; display:flex; flex-direction:column; align-items:center; gap:5px; padding:7px 16px; overflow:visible; white-space:normal; background:#091f46; border-top:2px solid #f6c343; border-bottom:2px solid #f6c343; box-shadow:0 5px 18px #071a3d20;}
+body > nav.quick .quick-label {color:#f6c343; font:800 .68rem/1.3 "Segoe UI",Arial,sans-serif; letter-spacing:.16em;}
+body > nav.quick .quick-links {display:flex; flex-wrap:wrap; justify-content:center; align-items:center; gap:5px; width:100%; max-width:1180px; margin:0 auto; padding:0;}
+body > nav.quick a {display:inline-flex; align-items:center; justify-content:center; min-height:36px; max-width:100%; margin:0; padding:6px 12px; border:1px solid #7796c266; border-radius:10px; background:#ffffff08; color:#eef4ff; font:600 .83rem/1.35 "Segoe UI",Arial,sans-serif; text-align:center; text-decoration:none; white-space:normal; transition:background .18s,border-color .18s;}
+body > nav.quick a:hover,body > nav.quick a[aria-current="location"] {background:#f6c343; color:#071a3d; border-color:#f6c343; transform:none;}
+body > header a.home:focus-visible,body > nav.quick a:focus-visible {outline:3px solid #fff; outline-offset:4px;}
+body main [id] {scroll-margin-top:calc(var(--quick-height,160px) + 20px);}
+@media(max-width:600px) {
+  body > header,body > header.top {min-height:0; padding:14px 66px;}
+  body > header h1, body > header.top h1 {font-size:clamp(1.55rem,6vw,2.25rem); overflow-wrap:anywhere;}
+  body > header p, body > header.top p {font-size:.94rem;}
+  body > header a.home {right:12px; width:44px; height:44px; border-radius:12px;}
+  body > nav.quick {position:relative; padding:7px 10px;}
+  body > nav.quick a {min-height:44px; padding:8px 11px; font-size:.8rem;}
+  body main [id] {scroll-margin-top:20px;}
+}
+@media(prefers-reduced-motion:reduce) {html {scroll-behavior:auto;} body > nav.quick a,body > header a.home {transition:none;}}
+</style>
+<style id="yellow-home-image">
+/* Yellow house image, centred vertically on the right of every header. */
+body > header a.home {
+  inset:auto 24px auto auto; top:50%; transform:translateY(-50%);
+  display:grid; place-items:center; width:48px; height:48px; padding:0;
+  background:#071a3d; border:1px solid #f6c343; border-radius:12px;
+  box-shadow:0 4px 14px #0003;
+}
+body > header a.home img {display:block; width:28px; height:28px; margin:0;}
+body > header a.home:hover {background:#17376a; border-color:#ffe49b;}
+@media(max-width:600px) {
+  body > header a.home {right:12px; width:44px; height:44px;}
+}
+</style>
+</head>
+<body>
+
+<header class="top" id="top">
+  <a class="home" href="digital-security-centre.html" aria-label="Home: Digital Security Centre" title="Home: Digital Security Centre"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSIjZjZjMzQzIiBkPSJNMTIgMi41IDEuNSAxMS40bDEuOSAyLjJMNSAxMi4yVjIxaDV2LTZoNHY2aDV2LTguOGwxLjYgMS40IDEuOS0yLjJMMTIgMi41WiIvPjwvc3ZnPg==" width="28" height="28" alt="" aria-hidden="true"></a>
+  <p class="ey">DIGITAL SECURITY CENTRE</p>
+  <h1>Banking App Security</h1>
+  <p>One universal, easy-to-follow guide for every bank on your phone. Protect your savings, verify payments, enable real-time alerts, and guard against fraud.</p>
+</header>
+
+<nav class="quick" aria-label="Quick navigation"><span class="quick-label">ON THIS PAGE</span><div class="quick-links"><a href="digital-security-centre.html">Security Centre</a><a href="#before">Criminal Tactics</a><a href="#setup">1. App Setup</a><a href="#alerts">2. Instant Alerts</a><a href="#payments">3. Safe Payments</a><a href="#scams">4. Spot Bank Scams</a><a href="#lost">5. Lost Phone Plan</a><a href="#check">Master Checklist</a></div></nav>
+
+<main>
+  <p class="crumb"><a href="digital-security-centre.html">Digital Security Centre</a> / Banking App Security</p>
+
+  <section class="hero">
+    <div>
+      <h2>Use this example for every bank</h2>
+      <p class="lead">In this guide, we use the name <strong>MyBank</strong> as our example. It represents whichever bank or building society you use (such as Barclays, HSBC, Lloyds, NatWest, Santander, Monzo, or Nationwide). Menu names can differ slightly, but look for <strong>Profile</strong>, <strong>Security</strong>, <strong>Settings</strong>, <strong>Privacy</strong>, or <strong>Manage Devices</strong>.</p>
+      <div class="note">
+        <strong>Start with your phone's foundation:</strong> Your banking app is only as safe as the smartphone holding it. Before anything else, ensure your phone has a strong 6-digit screen lock PIN, active Face ID or fingerprint scan, the latest system updates, and tracking enabled via Find My (iPhone) or Find My Device (Android).
+      </div>
+    </div>
+    <aside class="device">
+      <div class="e">🏦🔐</div>
+      <b>Banking Safety Flow</b>
+      <span>Official Store App → Biometric Lock → Real-Time Alerts → Double-Checked Payees → Instant Fraud Action.</span>
+    </aside>
+  </section>
+
+  <!-- CRIMINAL PLAYBOOK -->
+  <section class="sec" id="before">
+    <h2>How criminals attempt to steal money</h2>
+    <p>Bank robbers do not break through physical vault doors anymore; they use social engineering to trick you into opening the door for them. Understanding their exact playbook keeps you completely safe:</p>
+
+    <div class="flow">
+      <div>📞<br><b>1. Incoming Call</b><br>Pretends to be bank fraud team</div>
+      <div>🔗<br><b>2. Fake Link</b><br>Sends an urgent SMS link</div>
+      <div>🔑<br><b>3. Asks For Code</b><br>Wants your temporary 2FA</div>
+      <div>✅<br><b>4. Tricked Approval</b><br>Asks you to tap approve</div>
+      <div>💸<br><b>5. Money Gone</b><br>Authorised push payment</div>
+    </div>
+
+    <p>Legitimate bank staff will never phone you asking for your online password, full secret passcode, one-time SMS verification code, or screen-sharing access. Scammers can spoof caller ID numbers to match the real phone number of your local branch. Always hang up immediately and phone your bank back using the telephone number printed on the back of your debit card.</p>
+
+    <div class="note danger">
+      <strong>The Golden Security Rule:</strong> Never approve a login prompt, new payee request, or payment transfer notification on your phone that you did not initiate yourself. Never, under any circumstances, transfer money to a so-called "safe account". Real banks do not have safe accounts.
+    </div>
+  </section>
+
+  <!-- 1. APP SETUP -->
+  <section class="sec" id="setup">
+    <h2><span class="num">1</span>Secure the app — repeat for every banking service</h2>
+    <p>Follow these setup rules whether you have one current account or multiple finance apps:</p>
+
+    <div class="grid">
+      <article class="card">
+        <h3>A. Safe download &amp; sign-in</h3>
+        <ol>
+          <li>Open the official <strong>Apple App Store</strong> (iPhone/iPad) or <strong>Google Play Store</strong> (Android).</li>
+          <li>Type your bank's exact name into the search bar and verify that the listed developer is the official corporate bank.</li>
+          <li>Never tap download links inside text messages, emails, or internet pop-up ads.</li>
+          <li>Complete initial registration over your secure home Wi-Fi or mobile data network. Never set up a banking app on unencrypted public Wi-Fi (such as cafes, airports, or trains).</li>
+        </ol>
+      </article>
+
+      <article class="card">
+        <h3>B. Turn on biometrics &amp; app locks</h3>
+        <ol>
+          <li>Open your banking app.</li>
+          <li>Tap on <strong>Profile</strong>, <strong>More</strong>, or the <strong>Settings gear icon</strong>.</li>
+          <li>Select <strong>Security</strong>, <strong>Login Settings</strong>, or <strong>Biometrics</strong>.</li>
+          <li>Toggle <strong>ON</strong> options for <strong>Face ID</strong>, <strong>Touch ID</strong>, or <strong>Fingerprint Login</strong>.</li>
+          <li>Ensure the app is configured to lock immediately every single time you switch to another screen or minimize the app.</li>
+        </ol>
+      </article>
+    </div>
+
+    <div class="note">
+      <strong>Double-Layer Phone Lock:</strong><br>
+      • <em>On iPhone (iOS 18+):</em> Go to your Home Screen, touch and hold your banking app icon for 1 second, and tap <strong>Require Face ID</strong>. This means your face is needed before the app icon will even launch!<br>
+      • <em>On Android:</em> Open your phone's <strong>Settings &gt; Security &amp; privacy</strong> and enable <strong>Private Space</strong>, or use <strong>Samsung Secure Folder</strong> to store a secondary locked copy of your financial apps.
+    </div>
+  </section>
+
+  <!-- 2. ALERTS & DEVICES -->
+  <section class="sec" id="alerts">
+    <h2><span class="num">2</span>Turn on real-time alerts and purge old devices</h2>
+    <p>Instant push notifications act as a security siren. If someone attempts to spend even £1 from your account, your phone will alert you instantly.</p>
+
+    <span class="path"><b>MyBank</b> → <b>Profile / Settings</b> → <b>Notifications / Alerts</b></span>
+
+    <ol>
+      <li><strong>Turn on instant transaction alerts:</strong> Enable push notifications for every payment, contactless tap, and direct debit.</li>
+      <li><strong>Turn on ATM cash withdrawal alerts:</strong> If offered, switch on instant notifications whenever cash is withdrawn from an ATM.</li>
+      <li><strong>Turn on payee &amp; login alerts:</strong> Ensure you receive an alert whenever a new payee is added, your password is changed, or a new device signs in.</li>
+      <li><strong>Audit contact details:</strong> Check that the registered mobile number and recovery email listed in your bank profile are completely up to date and belong to you.</li>
+    </ol>
+
+    <span class="path"><b>MyBank</b> → <b>Profile / Settings</b> → <b>Security</b> → <b>Manage Devices / Linked Hardware</b></span>
+
+    <ol>
+      <li>Open the registered devices dashboard in your banking app.</li>
+      <li>Review every phone, tablet, and computer authorized to access your money.</li>
+      <li>If you see an old mobile you traded in, a family tablet, or an unfamiliar model name, tap <strong>Remove Device</strong> or <strong>Deregister</strong> immediately.</li>
+      <li>If you spot an active session you do not recognize, immediately freeze your account and ring the bank fraud team.</li>
+    </ol>
+  </section>
+
+  <!-- 3. PAYMENTS -->
+  <section class="sec" id="payments">
+    <h2><span class="num">3</span>Make payments safely and avoid fraud traps</h2>
+    <p>Bank transfers happen in seconds and cannot be cancelled like credit cards. Treat sending money like handing physical cash out of your wallet.</p>
+
+    <div class="grid">
+      <article class="card">
+        <h3>A. Before pressing "Send Money"</h3>
+        <ol>
+          <li><strong>Pause and verify:</strong> Ask yourself: <em>"Why am I sending this money?"</em> Is someone rushing me?</li>
+          <li><strong>Check every number twice:</strong> Look at the 6-digit sort code, the 8-digit account number, and the full legal name of the person.</li>
+          <li><strong>Confirmation of Payee check:</strong> When you enter the name, UK banks will check if the account name matches. If the app warns <em>"Name does not match"</em>, stop immediately and investigate!</li>
+          <li><strong>Never use contact numbers from messages:</strong> If a friend or tradesperson texts you new bank details, call their known phone number to verify verbally before sending a single penny.</li>
+        </ol>
+      </article>
+
+      <article class="card">
+        <h3>B. Before tapping "Approve" in the app</h3>
+        <ol>
+          <li><strong>Read the prompt screen carefully:</strong> When a pop-up appears asking you to approve a transaction, do not just tap confirm.</li>
+          <li><strong>Inspect the exact amount and payee:</strong> Does the price match what you are actually buying?</li>
+          <li><strong>Only approve what you started:</strong> If you are browsing Instagram or cooking dinner and a bank notification pops up asking to approve a login or transfer, <strong>tap Cancel / Reject</strong>! An attacker is trying to push a payment through.</li>
+        </ol>
+      </article>
+    </div>
+
+    <div class="note">
+      <strong>The "Hi Mum / Hi Dad" WhatsApp Scam:</strong> A text arrives from an unknown number saying: <em>"Hi Mum, my phone broke so I'm texting from a friend's phone. I urgently need to pay my rent, please transfer £450 to this account."</em> <strong>Never send money!</strong> Call your family member on their original number or speak to them in person first.
+    </div>
+  </section>
+
+  <!-- 4. SPOTTING SCAMS -->
+  <section class="sec" id="scams">
+    <h2><span class="num">4</span>How to recognise banking scam scripts</h2>
+    <p>Scammers read from psychological scripts designed to panic you into bypassing your own bank's security warnings. Here is how to translate what they say:</p>
+
+    <div class="table">
+      <table>
+        <thead>
+          <tr>
+            <th>What the scammer says</th>
+            <th>What is actually happening</th>
+            <th>Your immediate action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>"Your account has been hacked! You must move your funds to our safe holding account right now."</td>
+            <td>They are tricking you into voluntarily transferring your life savings directly to an account they control.</td>
+            <td><strong>Hang up immediately. Banks never have safe accounts. Call 159 or the number on your card.</strong></td>
+          </tr>
+          <tr>
+            <td>"I have just sent an authorization code to your phone. Read it aloud so I can cancel the fraud."</td>
+            <td>The scammer is trying to reset your password or set up Apple/Google Pay with your card details.</td>
+            <td><strong>Never read the code aloud. The text literally says "Never share this code with anyone".</strong></td>
+          </tr>
+          <tr>
+            <td>"Download AnyDesk or TeamViewer onto your phone so our technical team can remove the virus."</td>
+            <td>They want complete remote control over your phone screen to open your banking app and drain funds.</td>
+            <td><strong>Do not install it. Refuse remote access and disconnect the call.</strong></td>
+          </tr>
+          <tr>
+            <td>"A notification just popped up on your banking app. Approve it to decline the fraudulent transaction."</td>
+            <td>The prompt is an actual payment request. Tapping approve sends your money straight to the scammer.</td>
+            <td><strong>Tap Reject / Deny immediately and report the attempt.</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- 5. LOST PHONE -->
+  <section class="sec" id="lost">
+    <h2><span class="num">5</span>Emergency steps if your phone is lost, stolen, or broken</h2>
+    <p>If your mobile phone goes missing, act swiftly to prevent thieves from attempting to access your banking apps:</p>
+
+    <ol>
+      <li>
+        <strong>Lock your phone remotely:</strong> Borrow a family member's phone or computer immediately.<br>
+        • <em>For iPhone:</em> Go to <strong>icloud.com/find</strong> and mark your iPhone as <strong>Lost</strong>. This suspends Apple Pay cards and locks your screen with a passcode.<br>
+        • <em>For Android:</em> Go to <strong>google.com/android/find</strong> and click <strong>Secure Device</strong> to lock your phone remotely.
+      </li>
+      <li>
+        <strong>Call your mobile network provider:</strong> Inform your network (EE, O2, Vodafone, Three, etc.) that your phone is missing. Ask them to <strong>block your SIM card and suspend the IMEI</strong> so thieves cannot receive SMS verification codes.
+      </li>
+      <li>
+        <strong>Phone your bank fraud team:</strong> Look up your bank's fraud telephone line from another device and call them. Ask them to <strong>suspend mobile banking access</strong> on that specific device and temporarily freeze your payment cards.
+      </li>
+      <li>
+        <strong>Reset your banking credentials:</strong> Sign into online banking from a known clean computer or tablet and change your password and secret passcode.
+      </li>
+      <li>
+        <strong>Audit recent transactions:</strong> Review your recent account activity for any unfamiliar payments and immediately report unauthorized debits so your bank can file a fraud claim.
+      </li>
+    </ol>
+
+    <div class="note">
+      <strong>Fast action matters:</strong> Reporting a missing device within minutes allows your bank to freeze transactions before unauthorized transfers can clear.
+    </div>
+  </section>
+
+  <!-- MASTER CHECKLIST -->
+  <section class="sec" id="check">
+    <h2>Your master banking-app checklist</h2>
+    <div class="check">
+      <div><strong>Every banking app:</strong> Turn on biometric Face ID, Touch ID, or fingerprint login.</div>
+      <div><strong>Every banking app:</strong> Enable real-time push notifications for all payments and logins.</div>
+      <div><strong>Every new payment:</strong> Confirm sort codes and account names independently.</div>
+      <div><strong>Every unexpected phone call:</strong> Hang up and call the number on your plastic bank card.</div>
+      <div><strong>Every few months:</strong> Purge old, unused phones from your linked devices list.</div>
+      <div><strong>Immediately if lost:</strong> Remotely lock the phone and call your bank's fraud department.</div>
+    </div>
+
+    <details>
+      <summary>The One Sentence You Must Remember</summary>
+      <p style="font-size:1.15rem;margin-top:10px">
+        <strong>"My bank will never phone me to ask for a verification code, will never tell me to move money to a safe account, and will never ask me to approve a notification I did not initiate myself."</strong>
+      </p>
+    </details>
+  </section>
+</main>
+
+<footer>
+  <em>Umer Malik: Where Craft Meets Research</em>
+  <a href="#top" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">↑ Back to top</a>
+</footer>
+
+<script id="security-navigation">
+(() => {
+  const nav = document.querySelector('nav.quick');
+  const links = [...nav.querySelectorAll('a[href^="#"]')];
+  const sections = links.map(a => document.getElementById(a.hash.slice(1)));
+  const mark = index => links.forEach((a,i) => i === index ? a.setAttribute('aria-current','location') : a.removeAttribute('aria-current'));
+  let pending = false;
+  const update = () => {
+    const sticky = getComputedStyle(nav).position === 'sticky';
+    const offset = sticky ? nav.offsetHeight + 24 : 24;
+    document.documentElement.style.setProperty('--quick-height',nav.offsetHeight+'px');
+    let index = -1;
+    sections.forEach((section,i) => { if(section && section.getBoundingClientRect().top <= offset) index=i; });
+    mark(index); pending=false;
+  };
+  const schedule = () => { if(!pending) {pending=true; requestAnimationFrame(update);} };
+  addEventListener('scroll',schedule,{passive:true});
+  addEventListener('resize',schedule);
+  addEventListener('hashchange',schedule);
+  if(window.ResizeObserver) new ResizeObserver(schedule).observe(nav);
+  update();
+})();
+</script>
+</body>
+</html>

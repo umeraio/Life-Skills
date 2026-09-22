@@ -1,0 +1,397 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Secure Your Email Account</title>
+<style>
+:root{--n:#071a3d;--b:#123c8c;--g:#f6c343;--t:#102033;--m:#455a73}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Segoe UI,Arial,sans-serif;background:radial-gradient(circle at top left,#f5f9ff,#d7e5f8 60%,#c2d6ef);color:var(--t);line-height:1.6}
+header{position:relative;text-align:center;overflow:hidden;color:#fff;padding:36px 20px 30px;background:radial-gradient(circle at 12% 0%,#2e68e8,#123c8c 30%,#071a3d 70%)}
+header:before{content:"";position:absolute;width:270px;height:270px;left:-115px;top:-150px;border:1px solid #ffffff33;border-radius:50%;box-shadow:0 0 0 34px #ffffff0b}
+h1,header p{position:relative;z-index:1}
+h1{margin:0;font-size:clamp(2rem,5vw,3.6rem)}
+header p{max-width:760px;margin:12px auto;color:#e0ebff}
+.home{position:absolute;right:24px;top:20px;z-index:3;padding:9px 15px;border:2px solid var(--g);border-radius:999px;background:#fff;color:var(--n);font-weight:800;text-decoration:none}
+.quick{position:sticky;top:0;z-index:4;padding:8px 14px;background:linear-gradient(90deg,#071a3d,#123c8c,#071a3d);border-bottom:3px solid var(--g);display:flex;flex-direction:column;gap:6px;align-items:center}
+.quick-row{display:flex;flex-wrap:wrap;justify-content:center;gap:6px}
+.quick a{display:inline-block;padding:5px 12px;border:1px solid #cfe1ff55;border-radius:999px;color:#fff;text-decoration:none;font-size:.82rem;font-weight:800;white-space:nowrap}
+.quick a:hover{background:var(--g);color:var(--n)}
+main{width:min(1050px,92%);margin:24px auto}
+.section{padding:30px;margin-bottom:28px;border-top:7px solid var(--g);border-radius:24px;background:#eaf3ff;box-shadow:0 18px 42px #071a3d25;scroll-margin-top:95px}
+.section h2{margin-top:0;color:var(--n)}
+.choice{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.choice a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:18px;border:1px solid #2563eb55;border-radius:17px;background:linear-gradient(135deg,#fff,#f4f8fd);color:var(--n);text-align:center;text-decoration:none;font-weight:800;box-shadow:0 10px 22px #071a3d20}
+.choice a:hover{transform:translateY(-4px);border-color:var(--g)}
+.choice svg{width:32px;height:32px;fill:currentColor}
+.flow{display:flex;gap:12px;align-items:stretch;flex-wrap:wrap;margin:18px 0}
+.flow div{flex:1 1 180px;padding:16px;text-align:center;border:1px solid #2563eb55;border-radius:16px;background:#fff;display:flex;flex-direction:column;justify-content:center}
+.flow svg{width:36px;height:36px;margin:0 auto 10px}
+.flow b{display:block;color:var(--n);margin-bottom:6px;font-size:1.05rem}
+.arrow{font-size:1.5rem;color:var(--b);display:flex;align-items:center;justify-content:center}
+.route{margin:22px 0;padding:25px;border-right:8px solid var(--g);border-radius:19px;background:linear-gradient(135deg,#071a3d,#123c8c);color:#eef6ff;scroll-margin-top:100px}
+.badge{display:inline-block;padding:5px 13px;border-radius:999px;background:var(--g);color:var(--n);font-size:.78rem;font-weight:900;letter-spacing:0.5px}
+.route h3{margin:12px 0 8px;font-size:1.45rem;display:flex;align-items:center;gap:10px}
+.route h3 svg{width:26px;height:26px;fill:currentColor}
+.route p{color:#dce9ff}
+.route strong{color:#ffe190}
+.path{margin:15px 0;padding:12px;border:1px solid #f6c343aa;border-radius:999px;background:#020b1d;color:#afffe2;font-family:Consolas,monospace;font-size:.88rem;text-align:center}
+.route ol{padding-left:22px;margin:16px 0}
+.route li{margin-bottom:14px;line-height:1.6}
+.finish{margin-top:14px;padding:12px 14px;border-left:5px solid #55d77a;border-radius:8px;background:#15803d66;font-weight:700}
+.warn{padding:17px;border-left:8px solid #b91c1c;background:#fff2ef;color:#7f1d1d;border-radius:14px;line-height:1.5}
+.check{padding:22px;border-radius:17px;background:linear-gradient(135deg,#071a3d,#123c8c);color:#fff;margin-top:18px}
+.check h3{color:var(--g);margin-top:0}
+.check ul{padding-left:20px;margin:10px 0}
+.check li{margin-bottom:8px}
+footer{text-align:center;margin-top:36px;padding:22px;border-top:4px solid var(--g);background:var(--n);color:#e0eaff;font-weight:700;font-style:italic}
+.back{display:inline-block;margin-left:12px;padding:7px 13px;border-radius:7px;background:var(--b);color:#fff;text-decoration:none;font-style:normal}
+.choice-note{margin:16px 0;padding:15px;border-left:7px solid #f6c343;border-radius:13px;background:#fff8e3;color:#4a3b00}
+.compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:18px 0}
+.compare-card{padding:20px;border:1px solid #2563eb55;border-radius:18px;background:#fff;box-shadow:0 8px 20px #071a3d15}
+.compare-card h3{margin-top:0;color:var(--n);display:flex;align-items:center;gap:10px}
+.compare-card svg{width:26px;height:26px;flex-shrink:0}
+.compare-card p{margin:8px 0}
+@media(max-width:700px){
+  header{padding:70px 14px 26px}
+  .home{top:14px;right:14px}
+  .choice{grid-template-columns:repeat(2,1fr)}
+  .section,.route{padding:20px}
+  .compare-grid{grid-template-columns:1fr}
+  .arrow{transform:rotate(90deg);margin:4px auto}
+}
+</style>
+<style id="security-shared-style">
+/* Unified Digital Security Centre header and navigation */
+body > header, body > header.top {
+  position:relative; display:flex; flex-direction:column; justify-content:center;
+  min-height:0; padding:18px 90px; align-items:center; text-align:center; color:#fff;
+  background:radial-gradient(ellipse at 15% 0%,#2457ac,transparent 55%),linear-gradient(120deg,#102d63,#071a3d);
+}
+body > header h1, body > header.top h1 {max-width:960px; width:100%; margin:4px auto 6px; font-family:"Segoe UI",Arial,sans-serif; font-size:clamp(1.8rem,4.2vw,3.4rem); line-height:1.14; letter-spacing:-.025em; text-align:center; text-wrap:balance;}
+body > header p, body > header.top p {max-width:760px; margin:0 auto; font-size:1.05rem; line-height:1.6; text-align:center; color:#dfeaff;}
+body > header p.ey, body > header.top p.ey {margin:0 auto 3px; color:#f6c343; font-size:.75rem; letter-spacing:.14em; font-weight:800;}
+body > header::before,body > header::after {pointer-events:none;}
+body > header a.home {position:absolute; right:24px; top:50%; transform:translateY(-50%); width:46px; height:46px; padding:0; display:grid; place-items:center; border:1px solid #f6c343; border-radius:14px; background:#f6c343; color:#071a3d; box-shadow:0 6px 18px #0003; z-index:3; transition:background .18s,box-shadow .18s;}
+body > header a.home svg {width:24px; height:24px; fill:currentColor;}
+body > header a.home:hover {background:#ffda75; box-shadow:0 8px 24px #0005;}
+body > nav.quick {position:sticky; top:0; z-index:10; display:flex; flex-direction:column; align-items:center; gap:5px; padding:7px 16px; overflow:visible; white-space:normal; background:#091f46; border-top:2px solid #f6c343; border-bottom:2px solid #f6c343; box-shadow:0 5px 18px #071a3d20;}
+body > nav.quick .quick-label {color:#f6c343; font:800 .68rem/1.3 "Segoe UI",Arial,sans-serif; letter-spacing:.16em;}
+body > nav.quick .quick-links {display:flex; flex-wrap:wrap; justify-content:center; align-items:center; gap:5px; width:100%; max-width:1180px; margin:0 auto; padding:0;}
+body > nav.quick a {display:inline-flex; align-items:center; justify-content:center; min-height:36px; max-width:100%; margin:0; padding:6px 12px; border:1px solid #7796c266; border-radius:10px; background:#ffffff08; color:#eef4ff; font:600 .83rem/1.35 "Segoe UI",Arial,sans-serif; text-align:center; text-decoration:none; white-space:normal; transition:background .18s,border-color .18s;}
+body > nav.quick a:hover,body > nav.quick a[aria-current="location"] {background:#f6c343; color:#071a3d; border-color:#f6c343; transform:none;}
+body > header a.home:focus-visible,body > nav.quick a:focus-visible {outline:3px solid #fff; outline-offset:4px;}
+body main [id] {scroll-margin-top:calc(var(--quick-height,160px) + 20px);}
+@media(max-width:600px) {
+  body > header,body > header.top {min-height:0; padding:14px 66px;}
+  body > header h1, body > header.top h1 {font-size:clamp(1.55rem,6vw,2.25rem); overflow-wrap:anywhere;}
+  body > header p, body > header.top p {font-size:.94rem;}
+  body > header a.home {right:12px; width:44px; height:44px; border-radius:12px;}
+  body > nav.quick {position:relative; padding:7px 10px;}
+  body > nav.quick a {min-height:44px; padding:8px 11px; font-size:.8rem;}
+  body main [id] {scroll-margin-top:20px;}
+}
+@media(prefers-reduced-motion:reduce) {html {scroll-behavior:auto;} body > nav.quick a,body > header a.home {transition:none;}}
+</style>
+<style id="yellow-home-image">
+/* Yellow house image, centred vertically on the right of every header. */
+body > header a.home {
+  inset:auto 24px auto auto; top:50%; transform:translateY(-50%);
+  display:grid; place-items:center; width:48px; height:48px; padding:0;
+  background:#071a3d; border:1px solid #f6c343; border-radius:12px;
+  box-shadow:0 4px 14px #0003;
+}
+body > header a.home img {display:block; width:28px; height:28px; margin:0;}
+body > header a.home:hover {background:#17376a; border-color:#ffe49b;}
+@media(max-width:600px) {
+  body > header a.home {right:12px; width:44px; height:44px;}
+}
+</style>
+</head>
+<body>
+<header id="top">
+  <a class="home" href="digital-security-centre.html" aria-label="Home: Digital Security Centre" title="Home: Digital Security Centre"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSIjZjZjMzQzIiBkPSJNMTIgMi41IDEuNSAxMS40bDEuOSAyLjJMNSAxMi4yVjIxaDV2LTZoNHY2aDV2LTguOGwxLjYgMS40IDEuOS0yLjJMMTIgMi41WiIvPjwvc3ZnPg==" width="28" height="28" alt="" aria-hidden="true"></a>
+  <h1>Secure Your Email Account</h1>
+  <p>Email is the master key to your entire digital life. Fortify it first before securing your social media, school portals, or shopping accounts.</p>
+</header>
+
+<nav class="quick" aria-label="Quick navigation"><span class="quick-label">ON THIS PAGE</span><div class="quick-links"><a href="#why">Why Email Matters</a><a href="#choose">Choose Device</a><a href="#iphone">1. iPhone / iPad</a><a href="#android">2. Android</a><a href="#windows">3. Windows PC</a><a href="#mac">4. Mac</a><a href="#forwarding">Hidden Forwarding Traps</a><a href="#review">Checklist &amp; Rules</a></div></nav>
+
+<main>
+  <section class="section" id="why">
+    <h2>Why email security comes before everything else</h2>
+    <p>Every single online service you use (Amazon, TikTok, Roblox, PayPal, PlayStation, and school portals) connects directly back to your email inbox. If someone hacks an individual social account, they can only cause trouble on that single app. But if they break into your <strong>main email</strong>, they can click <em>"Forgot Password?"</em> on every website you own and take over your entire life in minutes.</p>
+
+    <div class="flow">
+      <div>
+        <svg viewBox="0 0 24 24" fill="#b91c1c"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+        <b>1. Unique Passphrase</b>
+        A long 4-word password you do not use anywhere else.
+      </div>
+      <span class="arrow">+</span>
+      <div>
+        <svg viewBox="0 0 24 24" fill="#123c8c"><path d="M17 1.01L7 1c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-1.99-2-1.99zM17 19H7V5h10v14zm-5-3c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3z"/></svg>
+        <b>2. Live 2FA / Passkey</b>
+        Verification codes from an authenticator app, not text messages.
+      </div>
+      <span class="arrow">+</span>
+      <div>
+        <svg viewBox="0 0 24 24" fill="#15803d"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+        <b>3. Clean Recovery Hub</b>
+        Only your personal phone and emergency offline backup numbers.
+      </div>
+    </div>
+
+    <div class="choice-note">
+      <strong>Rule for All Providers:</strong> Whether you use <strong>Gmail</strong>, <strong>Microsoft Outlook / Hotmail</strong>, or <strong>Apple iCloud Mail</strong>, the step-by-step principles are identical: establish a unique passphrase, turn on 2-step verification, remove unfamiliar devices, and ensure nobody has added a secret forwarding rule.
+    </div>
+  </section>
+
+  <section class="section" id="choose">
+    <h2>Choose your device walkthrough</h2>
+    <p>Select the device you are currently using to secure your email profile:</p>
+    <div class="choice">
+      <a href="#iphone">
+        <svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.62-.75 1.04-1.8 1.01-2.87-.9.04-2 .6-2.65 1.34-.56.64-1.06 1.7-1.01 2.76 1.01.08 2.03-.49 2.65-1.23z"/></svg>
+        1. iPhone / iPad
+      </a>
+      <a href="#android">
+        <svg viewBox="0 0 24 24"><path d="M17.6 9.48l1.84-3.18a.5.5 0 00-.86-.5l-1.87 3.24a11.45 11.45 0 00-9.42 0L5.42 5.8a.5.5 0 00-.86.5l1.84 3.18A10.8 10.8 0 002 18h20a10.8 10.8 0 00-4.4-8.52zM7 14.5a1.25 1.25 0 111.25-1.25A1.25 1.25 0 017 14.5zm10 0a1.25 1.25 0 111.25-1.25 1.25 1.25 0 01-1.25 1.25z"/></svg>
+        2. Android
+      </a>
+      <a href="#windows">
+        <svg viewBox="0 0 24 24"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.551H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-13.051-1.849"/></svg>
+        3. Windows PC
+      </a>
+      <a href="#mac">
+        <svg viewBox="0 0 24 24"><path d="M20 18c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2H0v2h24v-2h-4zM4 6h16v10H4V6z"/></svg>
+        4. Mac
+      </a>
+    </div>
+  </section>
+
+  <section class="section">
+    <!-- 1. IPHONE / IPAD ROUTE -->
+    <article class="route" id="iphone">
+      <span class="badge">1. APPLE IPHONE &amp; IPAD ROUTE</span>
+      <h3>
+        <svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.62-.75 1.04-1.8 1.01-2.87-.9.04-2 .6-2.65 1.34-.56.64-1.06 1.7-1.01 2.76 1.01.08 2.03-.49 2.65-1.23z"/></svg>
+        How to Secure Your Email on iPhone or iPad
+      </h3>
+      <p>Follow these exact steps to lock down your email account from an iOS or iPadOS device:</p>
+      
+      <div class="path">Email App / Settings → Account Profile → Security → Update Password &amp; 2FA</div>
+
+      <ol>
+        <li>
+          <strong>Open your official email application:</strong><br>
+          • <em>For Gmail:</em> Open the Gmail app, tap your circular profile picture in the top-right corner, and tap <strong>Manage your Google Account</strong>. Then tap the <strong>Security</strong> tab.<br>
+          • <em>For Outlook:</em> Open Outlook, tap your profile icon at top-left, tap the <strong>Settings gear &gt; tap your email address &gt; Account settings</strong>.<br>
+          • <em>For Apple iCloud Mail:</em> Open iPhone <strong>Settings &gt; tap your Name at the very top &gt; Sign-In &amp; Security</strong>.
+        </li>
+        <li>
+          <strong>Create a brand-new, unique password:</strong> Tap on <strong>Password</strong>. Enter your current credentials, then type a completely fresh passphrase consisting of 4 random words (for example: <code>OceanBicycleRocketPencil88!</code>). Never reuse a password from your school login or gaming accounts.
+        </li>
+        <li>
+          <strong>Turn on Two-Factor Authentication (2FA) or Passkeys:</strong> Tap on <strong>2-Step Verification</strong> or <strong>Two-Factor Authentication</strong>. Select <strong>Authenticator App</strong> (e.g. Google Authenticator) or <strong>Passkey</strong>. Avoid relying on simple SMS text messages whenever possible.
+        </li>
+        <li>
+          <strong>Verify your recovery phone and recovery email:</strong> Look closely at the numbers and fallback emails displayed. Confirm that every character belongs to you or a trusted parent. If you see an outdated phone number you no longer own, delete it immediately.
+        </li>
+        <li>
+          <strong>Review signed-in devices and sign out strangers:</strong> Scroll down to <strong>Your Devices</strong>. Inspect the list. If you see an old phone you traded in, a friend's iPad, or a location in another country, tap that device and select <strong>Sign Out</strong> (or <strong>Remove from Account</strong>).
+        </li>
+        <li>
+          <strong>Lock your email app with Face ID:</strong> Return to your iPhone Home Screen. Press and hold your finger on the Gmail or Outlook app icon for 1 second. When the menu pops up, tap <strong>Require Face ID</strong>. Now nobody who borrows your phone can open your mail without your face!
+        </li>
+      </ol>
+      <div class="finish">✓ Done: Your email is secured with a fresh passphrase, two-factor authentication, verified recovery contacts, and Face ID app lock.</div>
+    </article>
+
+    <!-- 2. ANDROID ROUTE -->
+    <article class="route" id="android">
+      <span class="badge">2. ANDROID STEP-BY-STEP ROUTE</span>
+      <h3>
+        <svg viewBox="0 0 24 24"><path d="M17.6 9.48l1.84-3.18a.5.5 0 00-.86-.5l-1.87 3.24a11.45 11.45 0 00-9.42 0L5.42 5.8a.5.5 0 00-.86.5l1.84 3.18A10.8 10.8 0 002 18h20a10.8 10.8 0 00-4.4-8.52zM7 14.5a1.25 1.25 0 111.25-1.25A1.25 1.25 0 017 14.5zm10 0a1.25 1.25 0 111.25-1.25 1.25 1.25 0 01-1.25 1.25z"/></svg>
+        How to Secure Your Email on Android
+      </h3>
+      <p>Android devices integrate directly with your primary Google Account and Gmail:</p>
+
+      <div class="path">Gmail App → Profile Picture → Manage your Google Account → Security Tab</div>
+
+      <ol>
+        <li>
+          <strong>Open your account control panel:</strong> Launch the official <strong>Gmail</strong> app on your Android phone. Tap your circular profile picture or initials in the top right corner. Tap the blue button labeled <strong>Manage your Google Account</strong>.
+        </li>
+        <li>
+          <strong>Navigate to Security:</strong> Swipe across the horizontal menu bar at the top (Home, Personal info, Data &amp; privacy) and tap on <strong>Security</strong>.
+        </li>
+        <li>
+          <strong>Change your password:</strong> Scroll down to <strong>How you sign in to Google</strong> and tap <strong>Password</strong>. Enter your current code, then type your strong new passphrase. Tap <strong>Change Password</strong>.
+        </li>
+        <li>
+          <strong>Set up 2-Step Verification and Passkeys:</strong> Tap directly on <strong>2-Step Verification</strong>. Confirm that <strong>Authenticator app</strong> is added. If you have not already, tap <strong>Passkeys</strong> to bind your phone's fingerprint scanner directly to your account.
+        </li>
+        <li>
+          <strong>Save offline emergency backup codes:</strong> Scroll down to <strong>Backup codes</strong>, tap <strong>Get backup codes</strong>, and write the 10 emergency numbers down on paper with a pen. Keep them inside a safe drawer in your bedroom.
+        </li>
+        <li>
+          <strong>Review connected hardware:</strong> Scroll down to <strong>Your devices</strong> and tap <strong>Manage all devices</strong>. Look through every listed phone, tablet, and computer. If you see an unrecognized device or a machine from an old school, tap it and select <strong>Sign Out</strong>.
+        </li>
+        <li>
+          <strong>Ensure Android operating system is up to date:</strong> Go to phone <strong>Settings &gt; System &gt; System update</strong>. Because Android generates account verification prompts, keeping the operating system updated prevents security bypasses.
+        </li>
+      </ol>
+      <div class="finish">✓ Done: Your Android email hub is fortified with multi-factor authentication, verified devices, and offline recovery keys.</div>
+    </article>
+
+    <!-- 3. WINDOWS PC ROUTE -->
+    <article class="route" id="windows">
+      <span class="badge">3. WINDOWS PC ROUTE</span>
+      <h3>
+        <svg viewBox="0 0 24 24"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.551H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-13.051-1.849"/></svg>
+        How to Secure Your Email on Windows PC
+      </h3>
+      <p>Using a desktop web browser (Microsoft Edge or Google Chrome) makes reviewing settings and connected devices fast and clear:</p>
+
+      <div class="path">Browser → Type official address → Profile Avatar → Manage Account → Security</div>
+
+      <ol>
+        <li>
+          <strong>Open your web browser cleanly:</strong> Launch Chrome or Edge. Do not click search engine links that say "Ad". Type the official address yourself: <strong>myaccount.google.com</strong> for Gmail, <strong>account.microsoft.com</strong> for Outlook/Hotmail, or <strong>icloud.com</strong> for Apple Mail.
+        </li>
+        <li>
+          <strong>Sign in safely:</strong> Enter your email and current password. If using a shared family laptop, never check the box that says <em>"Remember me on this computer"</em>.
+        </li>
+        <li>
+          <strong>Open Security settings:</strong> Click your profile picture in the top-right corner and select <strong>Manage your Google Account</strong> (or <strong>Security Dashboard</strong>).
+        </li>
+        <li>
+          <strong>Change your password:</strong> Set a strong, unique password. If your web browser asks <em>"Save password for this site?"</em> on a public or shared computer, always click <strong>Never</strong>.
+        </li>
+        <li>
+          <strong>Configure 2-Step Verification:</strong> Select <strong>Authenticator App</strong>. A square black-and-white QR code will appear on your Windows monitor. Pick up your mobile phone, open Google Authenticator, tap <strong>+</strong>, scan the computer screen, and type the 6-digit confirmation number into Windows.
+        </li>
+        <li>
+          <strong>Purge stale sessions:</strong> Look under <strong>Your Devices</strong>. Click <strong>Sign out of all sessions</strong> to disconnect any background connections that may have been left open on other computers.
+        </li>
+      </ol>
+      <div class="finish">✓ Done: The Windows computer is authorized and your email is protected against unauthorized web logins.</div>
+    </article>
+
+    <!-- 4. MAC ROUTE -->
+    <article class="route" id="mac">
+      <span class="badge">4. MAC (MACOS) ROUTE</span>
+      <h3>
+        <svg viewBox="0 0 24 24"><path d="M20 18c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2H0v2h24v-2h-4zM4 6h16v10H4V6z"/></svg>
+        How to Secure Your Email on a Mac
+      </h3>
+      <p>Follow these steps using Safari or your preferred macOS browser:</p>
+
+      <div class="path">Safari → Official Email Web Portal → Account Profile → Security Dashboard</div>
+
+      <ol>
+        <li>
+          <strong>Open Safari:</strong> Launch Safari from your Dock. Type your provider's web address directly into the address bar (e.g. <strong>mail.google.com</strong> or <strong>outlook.live.com</strong>).
+        </li>
+        <li>
+          <strong>Access the account security menu:</strong> Click your circular profile icon at the top right of the mailbox and click <strong>Manage Account &gt; Security</strong>.
+        </li>
+        <li>
+          <strong>Update your master passphrase:</strong> Change your password to a long, memorable 4-word phrase. Store it safely in your encrypted Apple Keychain or Bitwarden password manager.
+        </li>
+        <li>
+          <strong>Enable Passkeys or Authenticator:</strong> Click <strong>Passkeys</strong> or <strong>Two-Step Verification</strong>. You can use your phone to scan the QR code, or use Touch ID on your Mac keyboard to create a local biometric passkey.
+        </li>
+        <li>
+          <strong>Review recovery channels:</strong> Ensure your recovery phone number and backup email address are completely accurate.
+        </li>
+        <li>
+          <strong>Audit authorized third-party apps:</strong> Look for a section titled <strong>Third-party apps with account access</strong>. Revoke permission from old games, third-party mail tools, or websites you no longer use.
+        </li>
+      </ol>
+      <div class="finish">✓ Done: Your Mac email portal is guarded with strong credentials and biometric access controls.</div>
+    </article>
+  </section>
+
+  <!-- FORWARDING TRAP WARNING -->
+  <section class="section" id="forwarding">
+    <h2>The hidden hacker trap: Auto-forwarding rules</h2>
+    <p>A sneaky tactic used by cyber criminals is setting up <strong>secret email forwarding</strong>. If an intruder managed to break into your account in the past for even two minutes, they might have created an automatic rule that quietly sends a copy of every single email you receive straight to their own private inbox without you ever knowing!</p>
+
+    <div class="compare-grid">
+      <div class="compare-card">
+        <h3>
+          <svg viewBox="0 0 24 24" fill="#b91c1c"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+          How to check Gmail
+        </h3>
+        <p>1. Open Gmail on a laptop or desktop computer.</p>
+        <p>2. Click the <strong>gear icon</strong> in top-right &gt; click <strong>See all settings</strong>.</p>
+        <p>3. Click the <strong>Forwarding and POP/IMAP</strong> tab.</p>
+        <p>4. Check the top line. If it says <em>"Forwarding a copy of incoming mail to..."</em> with an email address you do not recognize, click <strong>Remove</strong> immediately!</p>
+      </div>
+
+      <div class="compare-card">
+        <h3>
+          <svg viewBox="0 0 24 24" fill="#b91c1c"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+          How to check Outlook
+        </h3>
+        <p>1. Open Outlook.com in a web browser.</p>
+        <p>2. Click the <strong>gear icon (Settings)</strong> in the top-right corner.</p>
+        <p>3. Click <strong>Mail &gt; Forwarding</strong> (and also inspect <strong>Rules</strong>).</p>
+        <p>4. Ensure <strong>Enable forwarding</strong> is turned <strong>OFF</strong>, and delete any suspicious forwarding filter rules.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHECKLIST & RULES -->
+  <section class="section" id="review">
+    <div class="warn">
+      <strong>Zero-Tolerance Alert: Never approve an unexpected login prompt!</strong> If you are sitting on the sofa watching TV and your phone suddenly beeps with a notification asking: <em>"Did you just try to sign in from Leeds?"</em> or <em>"Is this you signing in on Windows?"</em>, tap <strong>NO / DENY</strong> immediately! An attacker has your password and is trying to get you to let them in. Change your password right away.
+    </div>
+
+    <div class="check">
+      <h3>Essential email security checklist</h3>
+      <ul>
+        <li>Use a long, unique passphrase (never reused on gaming, shopping, or social accounts).</li>
+        <li>Turn on Two-Factor Authentication using an authenticator app (Google or Microsoft) or a passkey.</li>
+        <li>Print or handwrite your 10 emergency recovery codes and store them safely offline.</li>
+        <li>Confirm your secondary recovery phone number and backup email are active.</li>
+        <li>Regularly review "Your Devices" and sign out of unknown computers, phones, or old sessions.</li>
+        <li>Inspect your mailbox forwarding settings to ensure no hidden rules copy your messages.</li>
+        <li>Lock your mobile email app with Face ID, Touch ID, or fingerprint lock.</li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<footer>
+  ***Umer Malik: Where Craft Meets Research*** <a class="back" href="#top">↑ Back to top</a>
+</footer>
+<script id="security-navigation">
+(() => {
+  const nav = document.querySelector('nav.quick');
+  const links = [...nav.querySelectorAll('a[href^="#"]')];
+  const sections = links.map(a => document.getElementById(a.hash.slice(1)));
+  const mark = index => links.forEach((a,i) => i === index ? a.setAttribute('aria-current','location') : a.removeAttribute('aria-current'));
+  let pending = false;
+  const update = () => {
+    const sticky = getComputedStyle(nav).position === 'sticky';
+    const offset = sticky ? nav.offsetHeight + 24 : 24;
+    document.documentElement.style.setProperty('--quick-height',nav.offsetHeight+'px');
+    let index = -1;
+    sections.forEach((section,i) => { if(section && section.getBoundingClientRect().top <= offset) index=i; });
+    mark(index); pending=false;
+  };
+  const schedule = () => { if(!pending) {pending=true; requestAnimationFrame(update);} };
+  addEventListener('scroll',schedule,{passive:true});
+  addEventListener('resize',schedule);
+  addEventListener('hashchange',schedule);
+  if(window.ResizeObserver) new ResizeObserver(schedule).observe(nav);
+  update();
+})();
+</script>
+</body>
+</html>
