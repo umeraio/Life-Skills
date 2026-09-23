@@ -1,0 +1,630 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>How to Secure Social Media Accounts</title>
+<style>
+:root{--n:#071a3d;--b:#123c8c;--g:#f6c343;--t:#102033;--m:#455a73}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Segoe UI,Arial,sans-serif;background:radial-gradient(circle at top left,#f5f9ff,#d7e5f8 60%,#c2d6ef);color:var(--t);line-height:1.6}
+header{position:relative;text-align:center;overflow:hidden;color:#fff;padding:36px 20px 30px;background:radial-gradient(circle at 12% 0%,#2e68e8,#123c8c 30%,#071a3d 70%)}
+header:before{content:"";position:absolute;width:270px;height:270px;left:-115px;top:-150px;border:1px solid #ffffff33;border-radius:50%;box-shadow:0 0 0 34px #ffffff0b}
+h1,header p{position:relative;z-index:1}
+h1{margin:0;font-size:clamp(2rem,5vw,3.6rem)}
+header p{max-width:760px;margin:12px auto;color:#e0ebff}
+.home{position:absolute;right:24px;top:20px;z-index:3;padding:9px 15px;border:2px solid var(--g);border-radius:999px;background:#fff;color:var(--n);font-weight:800;text-decoration:none}
+.quick{position:sticky;top:0;z-index:4;padding:8px 14px;background:linear-gradient(90deg,#071a3d,#123c8c,#071a3d);border-bottom:3px solid var(--g);display:flex;flex-direction:column;gap:6px;align-items:center}
+.quick-row{display:flex;flex-wrap:wrap;justify-content:center;gap:6px}
+.quick a{display:inline-block;padding:5px 12px;border:1px solid #cfe1ff55;border-radius:999px;color:#fff;text-decoration:none;font-size:.82rem;font-weight:800;white-space:nowrap}
+.quick a:hover{background:var(--g);color:var(--n)}
+main{width:min(1050px,92%);margin:24px auto}
+.section{padding:30px;margin-bottom:28px;border-top:7px solid var(--g);border-radius:24px;background:#eaf3ff;box-shadow:0 18px 42px #071a3d25;scroll-margin-top:95px}
+.section h2{margin-top:0;color:var(--n)}
+.choice{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.choice a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:18px;border:1px solid #2563eb55;border-radius:17px;background:linear-gradient(135deg,#fff,#f4f8fd);color:var(--n);text-align:center;text-decoration:none;font-weight:800;box-shadow:0 10px 22px #071a3d20}
+.choice a:hover{transform:translateY(-4px);border-color:var(--g)}
+.choice svg{width:32px;height:32px;fill:currentColor}
+.flow{display:flex;gap:12px;align-items:stretch;flex-wrap:wrap;margin:18px 0}
+.flow div{flex:1 1 180px;padding:16px;text-align:center;border:1px solid #2563eb55;border-radius:16px;background:#fff;display:flex;flex-direction:column;justify-content:center}
+.flow svg{width:36px;height:36px;margin:0 auto 10px}
+.flow b{display:block;color:var(--n);margin-bottom:6px;font-size:1.05rem}
+.arrow{font-size:1.5rem;color:var(--b);display:flex;align-items:center;justify-content:center}
+.route{margin:22px 0;padding:25px;border-right:8px solid var(--g);border-radius:19px;background:linear-gradient(135deg,#071a3d,#123c8c);color:#eef6ff;scroll-margin-top:100px}
+.badge{display:inline-block;padding:5px 13px;border-radius:999px;background:var(--g);color:var(--n);font-size:.78rem;font-weight:900;letter-spacing:0.5px}
+.route h3{margin:12px 0 8px;font-size:1.45rem;display:flex;align-items:center;gap:10px}
+.route h3 svg{width:26px;height:26px;fill:currentColor}
+.route p{color:#dce9ff}
+.route strong{color:#ffe190}
+.path{margin:15px 0;padding:12px;border:1px solid #f6c343aa;border-radius:9px;background:#020b1d;color:#afffe2;font-family:Consolas,monospace;font-size:.9rem}
+.route ol{padding-left:22px;margin:16px 0}
+.route li{margin-bottom:16px;line-height:1.6}
+.finish{margin-top:14px;padding:12px 14px;border-left:5px solid #55d77a;border-radius:8px;background:#15803d66;font-weight:700}
+.warn{padding:17px;border-left:8px solid #b91c1c;background:#fff2ef;color:#7f1d1d;border-radius:14px;line-height:1.5}
+.check{padding:22px;border-radius:17px;background:linear-gradient(135deg,#071a3d,#123c8c);color:#fff;margin-top:18px}
+.check h3{color:var(--g);margin-top:0}
+.check ul{padding-left:20px;margin:10px 0}
+.check li{margin-bottom:8px}
+footer{text-align:center;margin-top:36px;padding:22px;border-top:4px solid var(--g);background:var(--n);color:#e0eaff;font-weight:700}
+.footer-text{font-style:italic}
+.back{display:inline-block;margin-left:12px;padding:7px 13px;border-radius:7px;background:var(--b);color:#fff;text-decoration:none;font-style:normal}
+.choice-note{margin:16px 0;padding:15px;border-left:7px solid #f6c343;border-radius:13px;background:#fff8e3;color:#4a3b00}
+.compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:18px 0}
+.compare-card{padding:20px;border:1px solid #2563eb55;border-radius:18px;background:#fff;box-shadow:0 8px 20px #071a3d15}
+.compare-card h3{margin-top:0;color:var(--n);display:flex;align-items:center;gap:10px}
+.compare-card svg{width:26px;height:26px;flex-shrink:0}
+.compare-card p{margin:8px 0}
+.setup-card{background:#ffffff;border:1px solid #2563eb44;border-radius:18px;padding:20px;margin:16px 0;box-shadow:0 8px 20px #071a3d10}
+.setup-card h3{margin-top:0;color:var(--n);display:flex;align-items:center;gap:10px}
+.setup-card ol{padding-left:20px;margin:12px 0}
+.setup-card li{margin-bottom:10px;line-height:1.55}
+.platform-group{display:grid;grid-template-columns:1fr;gap:14px;margin-top:15px}
+.device-box{background:#04132c;border:1px solid #244b82;border-radius:14px;padding:16px;margin:10px 0}
+.device-box h4{margin:0 0 10px;color:var(--g);display:flex;align-items:center;gap:8px;font-size:1.1rem}
+.device-box ol{padding-left:20px;margin:8px 0}
+.device-box li{margin-bottom:8px}
+@media(max-width:700px){
+  header{padding:70px 14px 26px}
+  .home{top:14px;right:14px}
+  .choice{grid-template-columns:repeat(2,1fr)}
+  .section,.route{padding:20px}
+  .compare-grid{grid-template-columns:1fr}
+  .arrow{transform:rotate(90deg);margin:4px auto}
+}
+</style>
+<style id="security-shared-style">
+body > header, body > header.top {
+  position:relative; display:flex; flex-direction:column; justify-content:center;
+  min-height:0; padding:10px 80px; align-items:center; text-align:center; color:#fff;
+  background:radial-gradient(ellipse at 15% 0%,#2457ac,transparent 55%),linear-gradient(120deg,#102d63,#071a3d);
+}
+body > header h1, body > header.top h1 {max-width:960px; width:100%; margin:2px auto 4px; font-family:"Segoe UI",Arial,sans-serif; font-size:clamp(1.8rem,3.5vw,2.75rem); line-height:1.14; letter-spacing:-.025em; text-align:center; text-wrap:balance;}
+body > header p, body > header.top p {max-width:760px; margin:0 auto; font-size:1rem; line-height:1.4; text-align:center; color:#dfeaff;}
+body > header p.ey, body > header.top p.ey {margin:0 auto 3px; color:#f6c343; font-size:.75rem; letter-spacing:.14em; font-weight:800;}
+body > header::before,body > header::after {pointer-events:none;}
+body > header a.home {position:absolute; right:24px; top:50%; transform:translateY(-50%); width:46px; height:46px; padding:0; display:grid; place-items:center; border:1px solid #f6c343; border-radius:14px; background:#f6c343; color:#071a3d; box-shadow:0 6px 18px #0003; z-index:3; transition:background .18s,box-shadow .18s;}
+body > header a.home svg {width:24px; height:24px; fill:currentColor;}
+body > header a.home:hover {background:#ffda75; box-shadow:0 8px 24px #0005;}
+body > nav.quick {position:sticky; top:0; z-index:10; display:flex; flex-flow:row wrap; justify-content:center; align-items:center; gap:6px; padding:5px 16px; overflow:visible; white-space:normal; background:#091f46; border-top:4px solid #f6c343; border-bottom:4px solid #f6c343; box-shadow:0 5px 18px #071a3d20;}
+body > nav.quick .quick-label {color:#f6c343; font:800 .68rem/1.3 "Segoe UI",Arial,sans-serif; letter-spacing:.16em;}
+body > nav.quick .quick-links {display:flex; flex-wrap:wrap; justify-content:center; align-items:center; gap:5px; width:auto; max-width:1180px; margin:0 auto; padding:0;}
+body > nav.quick a {display:inline-flex; align-items:center; justify-content:center; min-height:36px; max-width:100%; margin:0; padding:6px 12px; border:1px solid #7796c266; border-radius:10px; background:#ffffff08; color:#eef4ff; font:600 .83rem/1.35 "Segoe UI",Arial,sans-serif; text-align:center; text-decoration:none; white-space:normal; transition:background .18s,border-color .18s;}
+body > nav.quick a:hover,body > nav.quick a[aria-current="location"] {background:#f6c343; color:#071a3d; border-color:#f6c343; transform:none;}
+body > header a.home:focus-visible,body > nav.quick a:focus-visible {outline:3px solid #fff; outline-offset:4px;}
+body main [id] {scroll-margin-top:calc(var(--quick-height,160px) + 20px);}
+@media(max-width:600px) {
+  body > header,body > header.top {min-height:0; padding:10px 66px;}
+  body > header h1, body > header.top h1 {font-size:clamp(1.55rem,6vw,2.25rem); overflow-wrap:anywhere;}
+  body > header p, body > header.top p {font-size:.94rem;}
+  body > header a.home {right:12px; width:44px; height:44px; border-radius:12px;}
+  body > nav.quick {position:relative; padding:7px 10px;}
+  body > nav.quick a {min-height:44px; padding:8px 11px; font-size:.8rem;}
+  body main [id] {scroll-margin-top:20px;}
+}
+@media(prefers-reduced-motion:reduce) {html {scroll-behavior:auto;} body > nav.quick a,body > header a.home {transition:none;}}
+</style>
+<style id="yellow-home-image">
+body > header a.home {
+  inset:auto 24px auto auto; top:50%; transform:translateY(-50%);
+  display:grid; place-items:center; width:48px; height:48px; padding:0;
+  background:#071a3d; border:1px solid #f6c343; border-radius:12px;
+  box-shadow:0 4px 14px #0003;
+}
+body > header a.home img {display:block; width:28px; height:28px; margin:0;}
+body > header a.home:hover {background:#17376a; border-color:#ffe49b;}
+@media(max-width:600px) {
+  body > header a.home {right:12px; width:44px; height:44px;}
+}
+</style>
+<style id="compact-content-spacing">
+body > main {margin-top:12px; padding-top:0;}
+body > main > .crumb {margin-top:0; margin-bottom:12px;}
+</style>
+</head>
+<body>
+<header id="top">
+  <a class="home" href="digital-security-centre.html" aria-label="Home: Digital Security Centre" title="Home: Digital Security Centre"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSIjZjZjMzQzIiBkPSJNMTIgMi41IDEuNSAxMS40bDEuOSAyLjJMNSAxMi4yVjIxaDV2LTZoNHY2aDV2LTguOGwxLjYgMS40IDEuOS0yLjJMMTIgMi41WiIvPjwvc3ZnPg==" width="28" height="28" alt="" aria-hidden="true"></a>
+  <p class="ey">ACCOUNT PROTECTION PLAYBOOK</p>
+  <h1>Securing Social Media Accounts</h1>
+  <p>Learn how to lock down your accounts using 2FA, Passkeys, active session checks, and privacy barriers across your phone, tablet, and computer.</p>
+</header>
+
+<nav class="quick" aria-label="Quick navigation">
+  <span class="quick-label">JUMP TO PLATFORM</span>
+  <div class="quick-links">
+    <a href="#foundations">The Golden Rules</a>
+    <a href="#instagram">Instagram</a>
+    <a href="#whatsapp">WhatsApp</a>
+    <a href="#facebook">Facebook</a>
+    <a href="#x-twitter">X (Twitter)</a>
+    <a href="#tiktok">TikTok</a>
+    <a href="#linkedin">LinkedIn</a>
+    <a href="#snapchat">Snapchat</a>
+    <a href="#youtube">YouTube</a>
+    <a href="#audit">Safety Audit</a>
+  </div>
+</nav>
+
+<main>
+  <section class="section" id="foundations">
+    <h2>The 4 Shields of Social Media Defence</h2>
+    <p>Securing an account is like locking your front door. If you only have a password, you have left the spare key under the doormat. Here are the 4 tools you will turn on for every app below:</p>
+    <div class="flow">
+      <div>
+        <svg viewBox="0 0 24 24" fill="#123c8c"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+        <b>1. Two-Factor Authentication</b>
+        Requires a code from an Authenticator App (Google or Microsoft Authenticator) every time a new device attempts sign-in.
+      </div>
+      <span class="arrow">+</span>
+      <div>
+        <svg viewBox="0 0 24 24" fill="#15803d"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+        <b>2. Passkeys</b>
+        Unlocks your account with your phone fingerprint, Face ID, or PIN. Impossible to steal via fake phishing links.
+      </div>
+      <span class="arrow">+</span>
+      <div>
+        <svg viewBox="0 0 24 24" fill="#123c8c"><path d="M4 6h16v12H4zM2 4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h20c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2H2zm10 13a3 3 0 110-6 3 3 0 010 6z"/></svg>
+        <b>3. Active Sessions Check</b>
+        Shows every phone, tablet, and PC signed into your profile. Lets you tap <em>"Log Out"</em> on unknown intruders.
+      </div>
+      <span class="arrow">+</span>
+      <div>
+        <svg viewBox="0 0 24 24" fill="#15803d"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg>
+        <b>4. Privacy Barriers</b>
+        Hides your private photos, phone number, location, and friend list from strangers and automated web bots.
+      </div>
+    </div>
+  </section>
+
+  <!-- PLATFORM GRID PICKER -->
+  <section class="section" id="platforms">
+    <h2>Choose an app to configure</h2>
+    <div class="choice">
+      <a href="#instagram">
+        <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.79-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        1. Instagram
+      </a>
+      <a href="#whatsapp">
+        <svg viewBox="0 0 24 24"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2zm5.78 14.18c-.24.68-1.4 1.25-1.92 1.33-.5.08-1.14.12-3.67-.93-3.23-1.34-5.32-4.63-5.48-4.85-.16-.21-1.31-1.74-1.31-3.32 0-1.58.83-2.35 1.12-2.67.29-.32.64-.4 86-.4.21 0 .43.01.62.02.2.01.46-.08.72.54.27.64.91 2.22.99 2.38.08.16.13.35.03.56-.1.21-.16.34-.31.52-.16.18-.33.4-.48.54-.16.15-.32.32-.14.63.19.32.83 1.36 1.78 2.2 1.22 1.09 2.26 1.43 2.58 1.59.32.16.51.13.7-.08.19-.22.82-.95 1.04-1.28.22-.32.44-.27.74-.16.3.11 1.91.9 2.24 1.06.33.16.55.24.63.38.08.13.08.78-.16 1.46z"/></svg>
+        2. WhatsApp
+      </a>
+      <a href="#facebook">
+        <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        3. Facebook
+      </a>
+      <a href="#x-twitter">
+        <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        4. X (Twitter)
+      </a>
+      <a href="#tiktok">
+        <svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.24 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+        5. TikTok
+      </a>
+      <a href="#linkedin">
+        <svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+        6. LinkedIn
+      </a>
+      <a href="#snapchat">
+        <svg viewBox="0 0 24 24"><path d="M12.001 0C5.373 0 0 5.373 0 12c0 2.277.636 4.407 1.745 6.223L.5 23.5l5.474-1.189C7.712 23.385 9.778 24 12.001 24c6.627 0 12-5.373 12-12S18.628 0 12.001 0zm0 18.75c-3.728 0-6.75-3.022-6.75-6.75s3.022-6.75 6.75-6.75 6.75 3.022 6.75 6.75-3.022 6.75-6.75 6.75z"/></svg>
+        7. Snapchat
+      </a>
+      <a href="#youtube">
+        <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+        8. YouTube
+      </a>
+    </div>
+  </section>
+
+  <!-- 1. INSTAGRAM -->
+  <section class="section" id="instagram">
+    <h2>1. Securing Instagram</h2>
+    <p>Instagram is targeted via password resets and impersonation scams. Meta manages security through its combined Accounts Centre.</p>
+    
+    <div class="route">
+      <span class="badge">STEP-BY-STEP PLATFORM ACTIONS</span>
+      <h3>Lock Down Two-Factor, Passkeys &amp; Privacy</h3>
+      <div class="path">Profile → ☰ Menu → Accounts Centre → Password and security → Two-factor authentication &amp; Passkeys</div>
+      
+      <div class="platform-group">
+        <div class="device-box">
+          <h4>📱 On Android &amp; Samsung</h4>
+          <ol>
+            <li><strong>Enable App 2FA:</strong> Open Instagram, tap your profile icon (bottom right), tap the <strong>☰ Menu</strong> (top right), then tap <strong>Accounts Centre &gt; Password and security &gt; Two-factor authentication</strong>. Select your account and choose <strong>Authentication app</strong> (e.g. Google Authenticator). Follow the screen prompt to bind the key.</li>
+            <li><strong>Add a Passkey:</strong> In that exact same <strong>Password and security</strong> menu, tap <strong>Passkeys</strong>. Tap <strong>Create passkey</strong> and touch your phone's fingerprint sensor or enter your screen lock PIN.</li>
+            <li><strong>Review Where You're Logged In:</strong> Tap <strong>Where you're logged in</strong>. Review the list of active devices. If you see an unrecognised device, tap it and select <strong>Log Out</strong> immediately.</li>
+            <li><strong>Lock Down Privacy:</strong> Return to <strong>Settings and activity &gt; Account privacy</strong> and switch <strong>Private Account</strong> to ON so unknown users cannot see your posts.</li>
+          </ol>
+        </div>
+
+        <div class="device-box">
+          <h4>🍏 On Apple iPhone &amp; iPad</h4>
+          <ol>
+            <li><strong>Turn on 2FA &amp; Passkeys:</strong> Open Instagram &gt; Profile icon &gt; <strong>☰ Menu &gt; Accounts Centre &gt; Password and security</strong>. Tap <strong>Two-factor authentication</strong>, select <strong>Authentication App</strong>, and verify. Next, tap <strong>Passkeys</strong> and approve using Face ID or Touch ID to save it to your iCloud Keychain.</li>
+            <li><strong>Check Connected Sessions:</strong> Under <strong>Password and security &gt; Where you're logged in</strong>, tap your account to audit active iPhones, iPads, and PCs. Remove any session you do not recognise.</li>
+            <li><strong>Direct Message Controls:</strong> Go to <strong>Settings and activity &gt; Messages and story replies &gt; Message controls</strong>. Under "Others on Instagram", select <strong>Don't receive requests</strong> to stop strange message requests from reaching your inbox.</li>
+          </ol>
+        </div>
+
+        <div class="device-box">
+          <h4>💻 On Windows PC &amp; Mac (Web Browser)</h4>
+          <ol>
+            <li>Open your web browser, go to <strong>instagram.com</strong>, and sign in.</li>
+            <li>Click <strong>More (☰)</strong> at the bottom left, then click <strong>Settings &gt; Accounts Centre &gt; Password and security</strong>.</li>
+            <li>Click <strong>Two-factor authentication</strong> to add an authenticator app code. You can also generate and copy a set of <strong>Backup Codes</strong> to save in a secure place.</li>
+            <li>Review <strong>Where you're logged in</strong> to ensure no obsolete desktop browser cookies remain active.</li>
+          </ol>
+        </div>
+      </div>
+      <div class="finish">✓ Verified: Your Instagram is shielded with non-SMS two-factor and biometric passkeys.</div>
+    </div>
+  </section>
+
+  <!-- 2. WHATSAPP -->
+  <section class="section" id="whatsapp">
+    <h2>2. Securing WhatsApp</h2>
+    <p>WhatsApp attaches to your phone number. Hijackers attempt to call you, steal your SMS registration code, and lock you out. Activating WhatsApp Passkeys and Two-Step Verification stops this cold.</p>
+
+    <div class="route">
+      <span class="badge">STEP-BY-STEP PLATFORM ACTIONS</span>
+      <h3>Activate Two-Step PIN, Passkeys &amp; Chat Privacy</h3>
+      <div class="path">WhatsApp → Settings → Account → Two-step verification &amp; Passkeys</div>
+
+      <div class="platform-group">
+        <div class="device-box">
+          <h4>📱 On Android &amp; Samsung</h4>
+          <ol>
+            <li><strong>Set a Two-Step PIN:</strong> Open WhatsApp, tap the <strong>three vertical dots (⋮)</strong> at top right &gt; <strong>Settings &gt; Account &gt; Two-step verification</strong>. Tap <strong>Turn on</strong> and create a memorable 6-digit PIN. Add your primary recovery email.</li>
+            <li><strong>Turn on Passkeys:</strong> Tap <strong>Settings &gt; Account &gt; Passkeys</strong>. Tap <strong>Create a passkey</strong> and approve with your fingerprint or device screen lock. This allows you to verify your identity if you reinstall without SMS.</li>
+            <li><strong>Audit Linked Devices:</strong> Tap <strong>⋮ &gt; Linked devices</strong>. Review all active web and computer sessions. If there is a device you do not recognise, tap it and select <strong>Log Out</strong> immediately.</li>
+            <li><strong>Enable App Lock:</strong> Go to <strong>Settings &gt; Privacy &gt; App lock</strong> (or Fingerprint lock) and toggle it <strong>ON</strong> so the app cannot be opened without your fingerprint if you lend your phone to someone.</li>
+          </ol>
+        </div>
+
+        <div class="device-box">
+          <h4>🍏 On Apple iPhone &amp; iPad</h4>
+          <ol>
+            <li><strong>Turn on Two-Step Verification:</strong> Open WhatsApp &gt; tap the <strong>Settings gear (⚙)</strong> bottom right &gt; <strong>Account &gt; Two-Step Verification</strong>. Tap <strong>Turn On</strong>, enter your 6-digit security PIN, and set an email.</li>
+            <li><strong>Configure Passkey:</strong> Tap <strong>Account &gt; Passkeys</strong>. Tap <strong>Create Passkey</strong> and save it using Face ID or Touch ID into your Apple iCloud Keychain.</li>
+            <li><strong>Audit Linked Devices:</strong> Tap <strong>Settings &gt; Linked Devices</strong>. Review active sessions (such as Mac or PC browsers). Tap any old browser and hit <strong>Log Out</strong>.</li>
+            <li><strong>Turn on Screen Lock:</strong> In <strong>Settings &gt; Privacy &gt; Screen Lock</strong>, turn <strong>Require Face ID</strong> to Immediately.</li>
+          </ol>
+        </div>
+
+        <div class="device-box">
+          <h4>💻 On Windows PC &amp; Mac (Desktop App / WhatsApp Web)</h4>
+          <ol>
+            <li>WhatsApp Desktop cannot be set up on its own: it requires pairing with your physical mobile phone via a camera scan.</li>
+            <li><strong>Lock the Desktop Screen:</strong> In the WhatsApp Windows/Mac app, open <strong>Settings &gt; Privacy &gt; App Lock</strong>. Set a desktop password so nobody walking past your computer can read your messages.</li>
+            <li>Always log out of WhatsApp Web when using public, school, or shared work workstations.</li>
+          </ol>
+        </div>
+      </div>
+      <div class="finish">✓ Verified: Your WhatsApp phone number cannot be hijacked via SMS swap or voicemail hacking.</div>
+    </div>
+  </section>
+
+  <!-- 3. FACEBOOK -->
+  <section class="section" id="facebook">
+    <h2>3. Securing Facebook</h2>
+    <p>Facebook profiles contain years of private photos, friends lists, and app connections. Here is how to configure Meta security controls properly.</p>
+
+    <div class="route">
+      <span class="badge">STEP-BY-STEP PLATFORM ACTIONS</span>
+      <h3>Turn on Security Keys, App 2FA &amp; Session Cleanup</h3>
+      <div class="path">Menu → Settings &amp; Privacy → Accounts Centre → Password and security</div>
+
+      <div class="platform-group">
+        <div class="device-box">
+          <h4>📱 On Android &amp; Samsung</h4>
+          <ol>
+            <li>Open the Facebook app, tap your <strong>Profile/Menu (☰)</strong>, scroll down, and tap <strong>Settings &amp; privacy &gt; Settings</strong>.</li>
+            <li>Tap <strong>Accounts Centre &gt; Password and security &gt; Two-factor authentication</strong>. Select your Facebook profile and choose <strong>Authentication app</strong>. Complete verification in your authenticator app.</li>
+            <li>Under <strong>Password and security</strong>, tap <strong>Passkeys</strong> to add biometric sign-in to your device.</li>
+            <li>Tap <strong>Where you're logged in</strong>, inspect the list of active sessions, and tap <strong>Select all &gt; Log out</strong> if you see anything unexpected.</li>
+            <li>Under <strong>Settings &gt; Audience and visibility</strong>, check <strong>Profile and tagging</strong> and set <em>"Review posts you're tagged in before the post appears on your profile"</em> to ON.</li>
+          </ol>
+        </div>
+
+        <div class="device-box">
+          <h4>🍏 On Apple iPhone &amp; iPad</h4>
+          <ol>
+            <li>Tap <strong>Menu (☰) &gt; Settings &amp; privacy &gt; Settings &gt; Accounts Centre &gt; Password and security</strong>.</li>
+            <li>Configure <strong>Two-factor authentication</strong> with an Authenticator app (avoid relying on SMS).</li>
+            <li>Set up <strong>Passkeys</strong> using Face ID or Touch ID to prevent password-stealing malware from logging into your account.</li>
+            <li>Check <strong>Where you're logged in</strong> to terminate old iPad or Safari sessions.</li>
+            <li>Turn on <strong>Login alerts</strong> under <em>Security checks</em> so Facebook notifies you by email whenever an unfamiliar device logs in.</li>
+          </ol>
+        </div>
+
+        <div class="device-box">
+          <h4>💻 On Windows PC &amp; Mac (Web Browser)</h4>
+          <ol>
+            <li>Open <strong>facebook.com</strong> and click your round profile picture in the top right corner.</li>
+            <li>Click <strong>Settings &amp; privacy &gt; Settings &gt; Accounts Centre &gt; Password and security</strong>.</li>
+            <li>Set up <strong>Two-factor authentication</strong> and generate <strong>Recovery codes</strong>. Save these recovery codes inside your password vault.</li>
+            <li>Click <strong>Apps and websites</strong> in the main settings bar to audit third-party games and quizzes that have access to your Facebook profile. Click <strong>Remove</strong> on anything you no longer use.</li>
+          </ol>
+        </div>
+      </div>
+      <div class="finish">✓ Verified: Your Facebook account is secured against credential stuffing and session theft.</div>
+    </div>
+  </section>
+
+  <!-- 4. X (TWITTER) -->
+  <section class="section" id="x-twitter">
+    <h2>4. Securing X (formerly Twitter)</h2>
+    <p>X is widely targeted by automated botnets and phishing links. Free tier accounts must use an Authenticator App or Passkeys for Two-Factor Authentication, which is significantly more secure than SMS.</p>
+
+    <div class="route">
+      <span class="badge">STEP-BY-STEP PLATFORM ACTIONS</span>
+      <h3>Configure Authenticator 2FA, Passkeys &amp; DM Safety</h3>
+      <div class="path">Profile → Settings and privacy → Security and account access → Security → Two-factor authentication</div>
+
+      <div class="platform-group">
+        <div class="device-box">
+          <h4>📱 On Android &amp; Samsung</h4>
+          <ol>
+            <li>Open X, tap your profile avatar (top left), scroll down to <strong>Settings and Support &gt; Settings and privacy</strong>.</li>
+            <li>Tap <strong>Security and account access &gt; Security &gt; Two-factor authentication</strong>.</li>
+            <li>Turn ON <strong>Authentication app</strong>. Scan or copy the key into Google/Microsoft Authenticator, type the generated 6-digit token, and save your one-time <strong>Backup Code</strong>.</li>
+            <li>Tap <strong>Passkey</strong> and follow the prompt to register your phone's biometric screen lock.</li>
+            <li>Tap <strong>Security &gt; Additional password protection</strong> and turn it ON to prevent unauthorized password resets.</li>
+          </ol>
+        </div>
+
+        <div class="device-box">
+          <h4>🍏 On Apple iPhone &amp; iPad</h4>
+          <ol>
+            <li>Tap your profile avatar &gt; <strong>Settings and privacy &gt; Security and account access &gt; Security</strong>.</li>
+            <li>Tap <strong>Two-factor authentication</strong> and toggle <strong>Authentication app</strong> ON. Verify with your code generator.</li>
+            <li>Toggle <strong>Passkey</strong> to ON and tap <strong>Add Passkey</strong> using Apple Face ID or Touch ID.</li>
+            <li>Back out to <strong>Privacy and safety &gt; Direct Messages</strong>. Switch <em>"Allow message requests from everyone"</em> OFF to prevent spam and phishing links from arriving in your DMs.</li>
+          </ol>
+        </div>
+
+        <div class="device-box">
+          <h4>💻 On Windows PC &amp; Mac (Web Browser)</h4>
+          <ol>
+            <li>Sign in at <strong>x.com</strong>. On the left side navigation, click <strong>More &gt; Settings and privacy</strong>.</li>
+            <li>Navigate to <strong>Security and account access &gt; Apps and sessions &gt; Sessions</strong>. Click <strong>Log out of all other sessions</strong> to kick out old browser windows.</li>
+            <li>Under <strong>Security and account access &gt; Security</strong>, configure a physical FIDO2 <strong>Security Key</strong> (like a YubiKey) if you require high-assurance hardware protection.</li>
+          </ol>
+        </div>
+      </div>
+      <div class="finish">✓ Verified: Your X profile is guarded by hardware-grade 2FA and passkey barriers.</div>
+    </div>
+  </section>
+
+  <!-- 5. TIKTOK -->
+  <section class="section" id="tiktok">
+    <h2>5. Securing TikTok</h2>
+    <p>TikTok accounts can be lost to credential takeovers. Setting up 2-Step Verification and biometric passkeys keeps your videos and profile safe.</p>
+
+    <div class="route">
+      <span class="badge">STEP-BY-STEP PLATFORM ACTIONS</span>
+      <h3>Turn on 2-Step Verification, Passkeys &amp; Device Auditing</h3>
+      <div class="path">Profile → ☰ Menu → Settings and privacy → Security &amp; permissions (or Account)</div>
+
+      <div class="platform-group">
+        <div class="device-box">
+          <h4>📱 On Android &amp; Samsung</h4>
+          <ol>
+            <li>Open TikTok, tap <strong>Profile</strong> (bottom right), tap the <strong>☰ Menu</strong> (top right), and choose <strong>Settings and privacy</strong>.</li>
+            <li>Tap <strong>Security &amp; permissions &gt; 2-step verification</strong>. Select at least two methods: choose <strong>Authenticator</strong> and <strong>Email</strong> (do not rely on SMS alone). Tap <strong>Turn on</strong> and confirm.</li>
+            <li>Tap <strong>Account &gt; Passkey</strong>. Tap <strong>Set up</strong> to link your phone's Google Password Manager. Now you can log in with a single touch of your fingerprint sensor.</li>
+            <li>Under <strong>Security &amp; permissions &gt; Manage devices</strong>, inspect all phones and tablets. Tap the trash can icon on any device that is not yours.</li>
+            <li>Under <strong>Privacy</strong>, toggle <strong>Private account</strong> ON if you only want approved friends to see your posts.</li>
+          </ol>
+        </div>
+
+        <div class="device-box">
+          <h4>🍏 On Apple iPhone &amp; iPad</h4>
+          <ol>
+            <li>Open TikTok &gt; <strong>Profile &gt; ☰ Menu &gt; Settings and privacy</strong>.</li>
+            <li>Tap <strong>Security &amp; permissions &gt; 2-step verification</strong>. Enable <strong>Authenticator app</strong> and save your generated secret token.</li>
+            <li>Tap <strong>Account &gt; Passkey</strong>. Tap <strong>Set up</strong> and authorise with Apple Face ID or Touch ID. The passkey is saved safely to your iCloud Keychain.</li>
+            <li>Under <strong>Security &amp; permissions &gt; Security alerts</strong>, verify that no unusual login alerts have been flagged.</li>
+          </ol>
+        </div>
+
+        <div class="device-box">
+          <h4>💻 On Windows PC &amp; Mac (Web Browser)</h4>
+          <ol>
+            <li>Visit <strong>tiktok.com</strong> in your browser and sign in.</li>
+            <li>Hover over your profile picture at the top right and click <strong>Settings</strong>.</li>
+            <li>Under <strong>Account &gt; Login &amp; Security</strong>, check that your linked email address and mobile number are verified and current.</li>
+            <li>Audit connected third-party apps under <strong>Manage app permissions</strong> and disconnect old video tools or web games.</li>
+          </ol>
+        </div>
+      </div>
+      <div class="finish">✓ Verified: TikTok is protected against unapproved sign-ins and session cloning.</div>
+    </div>
+  </section>
+
+  <!-- 6. LINKEDIN -->
+  <section class="section" id="linkedin">
+    <h2>6. Securing LinkedIn</h2>
+    <p>Criminals frequently target LinkedIn to commit business impersonation and employment scams. Protecting your profile with passkeys and app 2FA safeguards your professional identity.</p>
+
+    <div class="route">
+      <span class="badge">STEP-BY-STEP PLATFORM ACTIONS</span>
+      <h3>Configure Passkeys, Two-Step Verification &amp; Session Management</h3>
+      <div class="path">Profile → Settings &amp; Privacy → Sign in &amp; security → Two-step verification &amp; Passkeys</div>
+
+      <div class="platform-group">
+        <div class="device-box">
+          <h4>📱 On Android &amp; Samsung</h4>
+          <ol>
+            <li>Open the LinkedIn app, tap your profile picture (top left), and tap <strong>Settings &gt; Sign in &amp; security</strong>.</li>
+            <li>Tap <strong>Two-step verification</strong>. Select <strong>Authenticator App</strong> (Recommended) and verify it with your authenticator token.</li>
+            <li>Tap <strong>Passkeys</strong>. Tap <strong>Add a passkey</strong> and approve with your phone's biometric fingerprint or screen lock.</li>
+            <li>Tap <strong>Where you're signed in</strong>. Tap <strong>End session</strong> on any older phone, tablet, or PC location.</li>
+          </ol>
+        </div>
+
+        <div class="device-box">
+          <h4>🍏 On Apple iPhone &amp; iPad</h4>
+          <ol>
+            <li>Tap your profile avatar &gt; <strong>Settings &gt; Sign in &amp; security</strong>.</li>
+            <li>Tap <strong>Two-step verification</strong>, choose <strong>Authenticator App</strong>, and verify your 6-digit code.</li>
+            <li>Tap <strong>Passkeys</strong> and register your iPhone using Face ID.</li>
+            <li>Under <strong>Visibility &gt; Profile discovery using email address</strong>, set it to <strong>Nobody</strong> or <strong>1st-degree connections</strong> so scammers cannot scrape your email address.</li>
+          </ol>
+        </div>
+
+        <div class="device-box">
+          <h4>💻 On Windows PC &amp; Mac (Web Browser)</h4>
+          <ol>
+            <li>Sign in at <strong>linkedin.com</strong>, click the <strong>Me</strong> icon at top right, and click <strong>Settings &amp; Privacy</strong>.</li>
+            <li>Click <strong>Sign in &amp; security</strong> in the left column.</li>
+            <li>Click <strong>Passkeys</strong> and click <strong>Create a passkey</strong> to bind your Windows Hello PIN/fingerprint or Mac Touch ID directly to LinkedIn.</li>
+            <li>Click <strong>Where you're signed in</strong> and terminate any unrecognized desktop or mobile sessions.</li>
+          </ol>
+        </div>
+      </div>
+      <div class="finish">✓ Verified: Your LinkedIn account and professional connections are secured.</div>
+    </div>
+  </section>
+
+  <!-- 7. SNAPCHAT -->
+  <section class="section" id="snapchat">
+    <h2>7. Securing Snapchat</h2>
+    <p>Snapchat is heavily used on mobile phones. Locking down Two-Factor Authentication, Passkeys, and Ghost Mode keeps your account and your real-time physical location private.</p>
+
+    <div class="route">
+      <span class="badge">STEP-BY-STEP PLATFORM ACTIONS</span>
+      <h3>Turn on 2FA, Passkeys &amp; Ghost Mode</h3>
+      <div class="path">Profile → ⚙ Settings → Two-Factor Authentication &amp; Passkeys</div>
+
+      <div class="platform-group">
+        <div class="device-box">
+          <h4>📱 On Android &amp; Samsung</h4>
+          <ol>
+            <li>Open Snapchat, tap your Bitmoji avatar (top left), and tap the <strong>Settings gear (⚙)</strong> at top right.</li>
+            <li>Tap <strong>Two-Factor Authentication</strong>. Tap <strong>Continue</strong> and select <strong>Authentication App</strong>. Complete setup and save the generated <strong>Recovery Code</strong>.</li>
+            <li>Scroll down in Settings and tap <strong>Passkeys</strong>. Tap <strong>Add Passkey</strong> and register your biometric fingerprint.</li>
+            <li>Tap <strong>Saved Login Info</strong>. Tap on any old devices to remove them.</li>
+            <li>Scroll down to <strong>Privacy Controls &gt; See My Location</strong> and enable <strong>Ghost Mode</strong> so nobody can see your physical location on the Snap Map.</li>
+          </ol>
+        </div>
+
+        <div class="device-box">
+          <h4>🍏 On Apple iPhone &amp; iPad</h4>
+          <ol>
+            <li>Tap your Bitmoji &gt; <strong>Settings gear (⚙) &gt; Two-Factor Authentication</strong>. Turn on Authenticator App verification.</li>
+            <li>Tap <strong>Passkeys</strong>, select <strong>Add Passkey</strong>, and authenticate using Face ID or Touch ID.</li>
+            <li>Under <strong>Privacy Controls</strong>, tap <strong>Contact Me</strong> and change it from <em>"Everyone"</em> to <strong>Friends</strong>.</li>
+            <li>Tap <strong>See My Location</strong> and switch <strong>Ghost Mode</strong> to ON.</li>
+          </ol>
+        </div>
+
+        <div class="device-box">
+          <h4>💻 On Windows PC &amp; Mac (Snapchat for Web)</h4>
+          <ol>
+            <li>Visit <strong>web.snapchat.com</strong> in your browser.</li>
+            <li>Sign in using your password and Authenticator 2FA code (or confirm on your mobile app).</li>
+            <li>Click your Bitmoji icon in the web panel &gt; <strong>Account Settings</strong>.</li>
+            <li>Always click <strong>Log Out</strong> when finished on a computer so your private snaps and web chat cannot be accessed by anyone else using that PC.</li>
+          </ol>
+        </div>
+      </div>
+      <div class="finish">✓ Verified: Your Snapchat account and GPS location are protected.</div>
+    </div>
+  </section>
+
+  <!-- 8. YOUTUBE -->
+  <section class="section" id="youtube">
+    <h2>8. Securing YouTube (Google Account)</h2>
+    <p>YouTube is powered by your core Google Account. Protecting your YouTube channel requires locking down the master Google Security dashboard using synchronized Passkeys and 2-Step Verification.</p>
+
+    <div class="route">
+      <span class="badge">STEP-BY-STEP PLATFORM ACTIONS</span>
+      <h3>Configure Google 2-Step, Passkeys &amp; Channel Permissions</h3>
+      <div class="path">myaccount.google.com → Security → 2-Step Verification → Passkeys</div>
+
+      <div class="platform-group">
+        <div class="device-box">
+          <h4>📱 On Android &amp; Samsung</h4>
+          <ol>
+            <li>Open phone <strong>Settings &gt; Google &gt; Manage your Google Account</strong>.</li>
+            <li>Swipe across to the <strong>Security</strong> tab.</li>
+            <li>Under <em>How you sign in to Google</em>, tap <strong>2-Step Verification</strong> and verify that an Authenticator App or Google Prompt is active.</li>
+            <li>Tap <strong>Passkeys and security keys</strong>. Tap <strong>Create a passkey</strong> and approve with your fingerprint.</li>
+            <li>Under <strong>Your devices</strong>, tap <strong>Manage all devices</strong>. Review all TVs, computers, and phones signed into YouTube. Tap any unknown device and hit <strong>Sign out</strong>.</li>
+          </ol>
+        </div>
+
+        <div class="device-box">
+          <h4>🍏 On Apple iPhone &amp; iPad</h4>
+          <ol>
+            <li>Open the YouTube app, tap your profile avatar (bottom right), and tap <strong>Manage your Google Account</strong>.</li>
+            <li>Tap the <strong>Security</strong> tab at the top.</li>
+            <li>Tap <strong>Passkeys and security keys &gt; + Create a passkey</strong>. Tap <strong>Continue</strong> to save it to your Apple iCloud Keychain via Face ID or Touch ID.</li>
+            <li>Tap <strong>2-Step Verification</strong> and generate a fresh set of 10 <strong>Backup Codes</strong>. Print or safely write them down.</li>
+          </ol>
+        </div>
+
+        <div class="device-box">
+          <h4>💻 On Windows PC &amp; Mac (YouTube Studio &amp; Web)</h4>
+          <ol>
+            <li>Open <strong>myaccount.google.com/security</strong> in Chrome, Edge, or Safari.</li>
+            <li>Click <strong>Passkeys and security keys &gt; Create a passkey</strong>. Select <strong>Windows Hello</strong> or <strong>Touch ID</strong> to allow passwordless signing in on that computer.</li>
+            <li>For YouTube Creators: Open <strong>studio.youtube.com &gt; Settings &gt; Permissions</strong>. Verify that only trusted email addresses hold Manager or Editor access to your YouTube channel.</li>
+            <li>Click <strong>Third-party apps with account access</strong> and remove any video plugins or upload tools you no longer trust.</li>
+          </ol>
+        </div>
+      </div>
+      <div class="finish">✓ Verified: Your YouTube channel and master Google Account are fully secured.</div>
+    </div>
+  </section>
+
+  <!-- SAFETY AUDIT CHECKLIST -->
+  <section class="section" id="audit">
+    <div class="warn">
+      <strong>Crucial Social Media Rule:</strong> Social media support teams will <strong>NEVER</strong> send you a Direct Message (DM) asking for your password, a 6-digit SMS code, or claiming your account will be deleted in 24 hours. Any message like this is a phishing scam.
+    </div>
+
+    <div class="check">
+      <h3>The Complete Social Media Safety Checklist</h3>
+      <ul>
+        <li>Turn on <strong>Two-Factor Authentication (2FA)</strong> using an authenticator app across all 8 platforms.</li>
+        <li>Enable <strong>Passkeys</strong> on your phone or laptop so you can log in with biometrics instead of passwords.</li>
+        <li>Save your <strong>One-Time Recovery Codes</strong> inside a secure vault like Bitwarden.</li>
+        <li>Audit <strong>Active Sessions</strong> monthly and log out of obsolete phones, tablets, or web browsers.</li>
+        <li>Set accounts to <strong>Private</strong> where appropriate, and keep location sharing (like Snap Map) disabled.</li>
+        <li>Ensure your recovery email and telephone number are always up to date.</li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <span class="footer-text">Umer Malik: Where Craft Meets Research</span> <a class="back" href="#top">↑ Back to top</a>
+</footer>
+
+<script id="security-navigation">
+(() => {
+  const nav = document.querySelector('nav.quick');
+  const links = [...nav.querySelectorAll('a[href^="#"]')];
+  const sections = links.map(a => document.getElementById(a.hash.slice(1)));
+  const mark = index => links.forEach((a,i) => i === index ? a.setAttribute('aria-current','location') : a.removeAttribute('aria-current'));
+  let pending = false;
+  const update = () => {
+    const sticky = getComputedStyle(nav).position === 'sticky';
+    const offset = sticky ? nav.offsetHeight + 24 : 24;
+    document.documentElement.style.setProperty('--quick-height',nav.offsetHeight+'px');
+    let index = -1;
+    sections.forEach((section,i) => { if(section && section.getBoundingClientRect().top <= offset) index=i; });
+    mark(index); pending=false;
+  };
+  const schedule = () => { if(!pending) {pending=true; requestAnimationFrame(update);} };
+  addEventListener('scroll',schedule,{passive:true});
+  addEventListener('resize',schedule);
+  addEventListener('hashchange',schedule);
+  if(window.ResizeObserver) new ResizeObserver(schedule).observe(nav);
+  update();
+})();
+</script>
+</body>
+</html>
