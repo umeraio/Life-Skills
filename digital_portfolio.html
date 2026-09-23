@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en-GB">
 <head>
@@ -48,19 +47,6 @@
             text-align: center;
             border-bottom: 5px solid var(--accent-gold);
             position: relative;
-        }
-
-        .event-badge {
-            background-color: var(--accent-gold);
-            color: var(--primary-blue);
-            font-weight: 800;
-            padding: 6px 16px;
-            border-radius: 20px;
-            display: inline-block;
-            margin-bottom: 15px;
-            text-transform: uppercase;
-            font-size: 0.85rem;
-            letter-spacing: 1px;
         }
 
         header h1 {
@@ -564,27 +550,28 @@
             color: var(--primary-blue);
         }
     
-        .home-top-btn{
-            position:absolute;
-            top:20px;
-            right:25px;
-            width:64px;
-            height:64px;
-            display:flex;
-            align-items:center;
-            justify-content:center;
-            text-decoration:none;
-            border-radius:50%;
-            background:linear-gradient(135deg,#ffffff,#fff8e1);
-            border:3px solid #7c4dff;
-            box-shadow:0 0 0 4px rgba(244,197,66,0.55),0 14px 32px rgba(124,77,255,0.28);
-            transition:all .25s ease;
-            font-size:30px;
-            z-index:1000;
+        .home-top-btn {
+            position: absolute;
+            top: 50%;
+            right: 25px;
+            transform: translateY(-50%);
+            width: 64px;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ffffff, #fff8e1);
+            border: 3px solid #7c4dff;
+            box-shadow: 0 0 0 4px rgba(244, 197, 66, 0.55), 0 14px 32px rgba(124, 77, 255, 0.28);
+            transition: all .25s ease;
+            font-size: 30px;
+            z-index: 1000;
         }
-        .home-top-btn:hover{
-            transform:translateY(-3px) scale(1.08);
-            box-shadow:0 0 0 6px rgba(244,197,66,0.65),0 22px 48px rgba(124,77,255,0.35);
+        .home-top-btn:hover {
+            transform: translateY(-50%) scale(1.08);
+            box-shadow: 0 0 0 6px rgba(244, 197, 66, 0.65), 0 22px 48px rgba(124, 77, 255, 0.35);
         }
 
         .hero-actions {
@@ -734,19 +721,6 @@
         .slide-deck-intro p {
             color: #D9E6FF;
             max-width: 760px;
-        }
-
-        .deck-count {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(246, 195, 67, 0.16);
-            color: var(--accent-gold);
-            border: 1px solid rgba(246, 195, 67, 0.35);
-            border-radius: 999px;
-            padding: 9px 14px;
-            font-weight: 800;
-            white-space: nowrap;
         }
 
         .slide-gallery {
@@ -926,14 +900,6 @@
                 overflow: hidden;
             }
 
-            .event-badge {
-                max-width: 280px;
-                white-space: normal;
-                line-height: 1.25;
-                padding: 6px 12px;
-                font-size: 0.74rem;
-            }
-
             header h1 {
                 font-size: 1.55rem;
                 line-height: 1.2;
@@ -949,8 +915,9 @@
             .home-top-btn {
                 width: 48px;
                 height: 48px;
-                top: 16px;
+                top: 50%;
                 right: 14px;
+                transform: translateY(-50%);
                 font-size: 23px;
                 border-width: 2px;
             }
@@ -1051,16 +1018,12 @@
                 max-height: calc(100vh - 112px);
             }
         }
-
-</style>
+    </style>
 </head>
 <body>
 
     <header>
-
         <a class="home-top-btn" href="https://umeraio.github.io/Life-Skills/" title="Home">🏠</a>
-
-        <span class="event-badge">Careers Fair Digital Portfolio Workshop</span>
         <h1>Building Your Professional Digital Portfolio</h1>
         <p>Create a complete online professional profile with a strong CV, tailored cover letter, LinkedIn profile, project evidence, short introduction video, personal website and live GitHub Pages link.</p>
         <div class="hero-actions">
@@ -1540,7 +1503,6 @@
             </div>
             <p>Your cover letter should connect your CV to the specific job you are applying for. It explains why you are interested, which requirements you match, and what value you can bring to the employer.</p>
             
-            
             <div class="ex-card strong" style="margin: 18px 0;">
                 <div class="ex-title"><i class="fa-solid fa-circle-info" style="color:var(--success-green);"></i> Important Reminder</div>
                 <p>Do not use the same cover letter for every job. Upload your CV and the new job description, then create a fresh cover letter that matches the employer's requirements.</p>
@@ -1759,8 +1721,97 @@
             </div>
             <p>Once your HTML website is ready, GitHub Pages can publish it online for free. This gives you one live link you can add to your CV, LinkedIn profile, cover letter and job applications.</p>
             
+            <!-- DETAILED BEGINNER GUIDE INSERTION (FOR 12-YEAR-OLDS, WINDOWS & MAC) -->
+            <div class="section-guide" style="border-left-color: var(--accent-gold); margin-top: 25px;">
+                <h4 style="font-size: 1.25rem;"><i class="fa-solid fa-graduation-cap"></i> Step-by-Step Beginner Guide (Windows & Mac)</h4>
+                <p>Follow these steps carefully to create your free account, set up your project repository with an open source licence, upload your HTML file, and get your live website link.</p>
+
+                <!-- Sub-step 1 -->
+                <div style="background: #ffffff; border-radius: 16px; padding: 20px; margin: 18px 0; border: 1px solid rgba(37, 99, 235, 0.16); box-shadow: 0 8px 20px rgba(7, 26, 61, 0.06);">
+                    <h5 style="color: var(--primary-blue); font-size: 1.15rem; margin-bottom: 10px; display: flex; align-items: center; gap: 8px;">
+                        <span style="background: var(--accent-gold); color: var(--primary-blue); border-radius: 50%; width: 28px; height: 28px; display: inline-flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.95rem;">1</span>
+                        Create a Free GitHub Account
+                    </h5>
+                    <ol style="margin-left: 32px; line-height: 1.85;">
+                        <li>Open your preferred web browser (Google Chrome, Microsoft Edge, or Safari) and go to <strong>github.com</strong>.</li>
+                        <li>Click the green <strong>Sign up</strong> button in the top right corner.</li>
+                        <li>Enter your email address and click <strong>Continue</strong>.</li>
+                        <li>Choose a strong password that you will remember, then click <strong>Continue</strong>.</li>
+                        <li>Choose a unique <strong>username</strong> (e.g. <code>myname-portfolio</code>). This will form your web address link. Click <strong>Continue</strong>.</li>
+                        <li>Type <code>n</code> if asked whether you want to receive email product announcements.</li>
+                        <li>Click <strong>Verify</strong> and complete the brief visual puzzle to confirm you are a person.</li>
+                        <li>Check your email inbox for the verification launch code from GitHub, paste the digits into the boxes, and complete sign-up.</li>
+                    </ol>
+                </div>
+
+                <!-- Sub-step 2 -->
+                <div style="background: #ffffff; border-radius: 16px; padding: 20px; margin: 18px 0; border: 1px solid rgba(37, 99, 235, 0.16); box-shadow: 0 8px 20px rgba(7, 26, 61, 0.06);">
+                    <h5 style="color: var(--primary-blue); font-size: 1.15rem; margin-bottom: 10px; display: flex; align-items: center; gap: 8px;">
+                        <span style="background: var(--accent-gold); color: var(--primary-blue); border-radius: 50%; width: 28px; height: 28px; display: inline-flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.95rem;">2</span>
+                        Create a New Repository (Project Space)
+                    </h5>
+                    <ol style="margin-left: 32px; line-height: 1.85;">
+                        <li>Sign in to <strong>github.com</strong>.</li>
+                        <li>Click the <strong>+</strong> (plus sign) icon in the top right corner of the page (next to your avatar) and select <strong>New repository</strong>.</li>
+                        <li>Under <strong>Repository name</strong>, type a simple name using lowercase letters and hyphens (for example: <code>my-website</code>).</li>
+                        <li>Ensure the privacy radio button is set to <strong>Public</strong> so GitHub Pages can publish your site for free.</li>
+                        <li>Under the section titled <strong>Initialize this repository with:</strong>
+                            <ul style="margin-left: 20px; list-style-type: square; margin-top: 6px;">
+                                <li>Tick the box for <strong>Add a README file</strong>.</li>
+                                <li>Tick the box for <strong>Choose a license</strong>, click the dropdown menu, and select <strong>MIT License</strong>.</li>
+                            </ul>
+                        </li>
+                        <li>Click the green <strong>Create repository</strong> button at the bottom of the page.</li>
+                    </ol>
+                </div>
+
+                <!-- Sub-step 3 -->
+                <div style="background: #ffffff; border-radius: 16px; padding: 20px; margin: 18px 0; border: 1px solid rgba(37, 99, 235, 0.16); box-shadow: 0 8px 20px rgba(7, 26, 61, 0.06);">
+                    <h5 style="color: var(--primary-blue); font-size: 1.15rem; margin-bottom: 10px; display: flex; align-items: center; gap: 8px;">
+                        <span style="background: var(--accent-gold); color: var(--primary-blue); border-radius: 50%; width: 28px; height: 28px; display: inline-flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.95rem;">3</span>
+                        Upload Your index.html File (Windows & Mac)
+                    </h5>
+                    <div class="info-card" style="margin: 10px 0 14px 0;">
+                        <strong>Crucial Web Rule:</strong> Your file must be named strictly <code>index.html</code> (in all lowercase, without spaces). GitHub Pages looks for this exact filename to serve as your home page.
+                    </div>
+                    <ol style="margin-left: 32px; line-height: 1.85;">
+                        <li>On your repository main page, click the <strong>Add file</strong> button near the top right of the file list and select <strong>Upload files</strong>.</li>
+                        <li>Add your file using either method:
+                            <ul style="margin-left: 20px; list-style-type: disc; margin-top: 6px;">
+                                <li><strong>Drag and Drop:</strong> Open <em>File Explorer</em> on Windows (or <em>Finder</em> on Mac), locate your <code>index.html</code> file, and drag it directly into the grey browser upload area.</li>
+                                <li><strong>Browse Files:</strong> Click the blue <strong>choose your files</strong> link, select <code>index.html</code> from your computer, and click <strong>Open</strong>.</li>
+                            </ul>
+                        </li>
+                        <li>Scroll down to the <strong>Commit changes</strong> box at the bottom.</li>
+                        <li>Ensure <em>Commit directly to the main branch</em> is selected, and click the green <strong>Commit changes</strong> button.</li>
+                    </ol>
+                </div>
+
+                <!-- Sub-step 4 -->
+                <div style="background: #ffffff; border-radius: 16px; padding: 20px; margin: 18px 0; border: 1px solid rgba(37, 99, 235, 0.16); box-shadow: 0 8px 20px rgba(7, 26, 61, 0.06);">
+                    <h5 style="color: var(--primary-blue); font-size: 1.15rem; margin-bottom: 10px; display: flex; align-items: center; gap: 8px;">
+                        <span style="background: var(--accent-gold); color: var(--primary-blue); border-radius: 50%; width: 28px; height: 28px; display: inline-flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.95rem;">4</span>
+                        Publish Your Website Online with GitHub Pages
+                    </h5>
+                    <ol style="margin-left: 32px; line-height: 1.85;">
+                        <li>Click the <strong>Settings</strong> tab located in the repository menu bar at the top (far right).</li>
+                        <li>In the left sidebar menu, look under the <em>Code and automation</em> group and click <strong>Pages</strong>.</li>
+                        <li>Under <strong>Build and deployment</strong>, verify that <em>Source</em> is set to <strong>Deploy from a branch</strong>.</li>
+                        <li>Under <strong>Branch</strong>:
+                            <ul style="margin-left: 20px; list-style-type: square; margin-top: 6px;">
+                                <li>Click the dropdown showing <code>None</code> and choose <strong>main</strong>.</li>
+                                <li>Leave the directory folder dropdown set to <strong>/(root)</strong>.</li>
+                                <li>Click the <strong>Save</strong> button.</li>
+                            </ul>
+                        </li>
+                        <li>Wait approximately 1 to 2 minutes for GitHub to build the files, then refresh your page.</li>
+                        <li>A banner will appear at the top: <em>"Your site is live at https://[your-username].github.io/[repository-name]/"</em>. Click that link to test and share your website!</li>
+                    </ol>
+                </div>
+            </div>
+
             <div class="section-guide">
-                <h4>How to publish your HTML website with GitHub Pages</h4>
+                <h4>Quick Summary Checklist</h4>
                 <ul class="mini-steps">
                     <li>Create or sign in to a GitHub account.</li>
                     <li>Create a new public repository with a simple name, such as <code>my-portfolio</code>.</li>
@@ -1932,7 +1983,7 @@
     </div>
 
     <footer>
-        <p class="footer-text">Crafted & Researched by Umer Malik</p>
+        <p class="footer-text"><em><strong>Umer Malik: Where Craft Meets Research</strong></em></p>
     </footer>
 
     <script>
